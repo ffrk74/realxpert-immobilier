@@ -1267,11 +1267,23 @@ class Component extends DCLogic {
 
     const panelOpen = !!this.state.panelOpen;
     const openPanel = (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ panelOpen: true, loginOpen: false, navOpen: false }); };
-    const closePanel = () => this.setState({ panelOpen: false });
+    // Fermeture : le panneau repart vers la droite et le voile s'éclaircit, puis il se ferme.
+    const fermerEnGlissant = (cle) => {
+      if (this._fermeture) return;
+      const sheet = document.querySelector('[data-r="sheet"]');
+      const voile = document.querySelector('[data-r="voile"]');
+      const reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!sheet || !sheet.animate || reduit) { this.setState({ [cle]: false }); return; }
+      this._fermeture = true;
+      const fin = () => { this._fermeture = false; this.setState({ [cle]: false }); };
+      if (voile) voile.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, easing: 'ease', fill: 'forwards' });
+      sheet.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(100%)' }], { duration: 320, easing: 'cubic-bezier(.55,0,.8,.3)', fill: 'forwards' }).finished.then(fin, fin);
+    };
+    const closePanel = () => fermerEnGlissant('panelOpen');
 
     const loginOpen = !!this.state.loginOpen;
     const openLogin = (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ loginOpen: true, panelOpen: false, navOpen: false }); };
-    const closeLogin = () => this.setState({ loginOpen: false });
+    const closeLogin = () => fermerEnGlissant('loginOpen');
 
     const testiData = [
       { name: 'Matthias Zaugg', role: 'Propriétaire, vendeur · Canton de Zurich', photo: 'uploads/temoignage-1.png',
