@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RealXpert</title>
+<script>
+  // Page d'accueil : chaque visiteur arrive sur l'accueil RealXpert dans sa langue
+  // (français par défaut ; allemand, anglais, italien selon le navigateur).
+  (function () {
+    var langue = ((navigator.languages && navigator.languages[0]) || navigator.language || 'fr').slice(0, 2).toLowerCase();
+    var page = { de: 'RealXpert-DE.dc.html', en: 'RealXpert-EN.dc.html', it: 'RealXpert-IT.dc.html' }[langue] || 'RealXpert - FR.dc.html';
+    location.replace(encodeURI(page) + location.hash);
+  })();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=RealXpert%20-%20FR.dc.html"></noscript>
+</head>
+<body></body>
+</html>

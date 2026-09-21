@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rx-panel{display:none;}
+.rx-panel:target{display:flex;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',system-ui,sans-serif; color:#0c1f2c; }
+  a { text-decoration:none; }
+  summary::-webkit-details-marker { display:none; }
+  img { max-width:100%; }
+  @media (max-width: 900px) {
+    [data-r="sheet"] { width: 100% !important; max-width: 460px !important; }
+    [data-r="sheet"] h2 { font-size: 23px !important; line-height: 1.2 !important; }
+    [data-r="sheet"] input[type="text"], [data-r="sheet"] input[type="email"], [data-r="sheet"] input[type="tel"], [data-r="sheet"] input[type="password"] { font-size: 16px !important; padding: 14px 15px !important; }
+    [data-r="sheet"] button, [data-r="sheet"] [aria-label="Fermer"], [data-r="sheet"] [aria-label="Close"], [data-r="sheet"] [aria-label="Schliessen"], [data-r="sheet"] [aria-label="Chiudi"] { min-height: 44px; }
+    [data-r="sheet"] [aria-label] svg { width: 26px; height: 26px; }
+    [data-r="sheet"] a[href="#top"] { display: inline-flex !important; align-items: center; min-height: 40px; }
+  }
+  @media (max-width: 520px) {
+    [data-r="sheet"] { max-width: 100% !important; }
+    [data-r="sheet"] h2 { font-size: 21.5px !important; }
+    [data-r="sheet"] [data-r="pad"] { padding: 22px 18px 34px !important; }
+  }
+  @media (max-width: 1180px) {
+    [data-r="navdesk"] { display: none !important; }
+    [data-r="burger"] { display: block !important; }
+    [data-r="langmob"] { display: block !important; margin-left: auto !important; }
+    [data-r="hdr"] { padding: 14px 18px !important; }
+    [data-r="logo"] { height: 46px !important; }
+  }
+  @media (min-width: 901px) and (max-width: 1180px) {
+    [data-r="sheet"] h2 { font-size: 26px !important; line-height: 1.15 !important; }
+    [data-r="sheet"] h3 { font-size: 17px !important; }
+    [data-r="sheet"] p { font-size: 15px !important; }
+    [data-r="sheet"] [aria-label] { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+    section { padding-left: 26px !important; padding-right: 26px !important; }
+    h1 { font-size: 40px !important; }
+  }
+  @media (max-width: 900px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-r="legalhero"] { padding-top: 50px !important; padding-bottom: 42px !important; }
+    [data-r="legalbody"] { padding-bottom: 64px !important; }
+    footer { padding: 46px 20px 30px !important; }
+    h1 { font-size: 30px !important; line-height: 1.2 !important; }
+    section h2 { font-size: 22px !important; line-height: 1.3 !important; margin-top: 40px !important; margin-bottom: 16px !important; }
+    section h3 { font-size: 17.5px !important; margin-top: 26px !important; }
+    section p { font-size: 16px !important; line-height: 1.72 !important; }
+    [data-r="g3f"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+    [data-r="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+  @media (max-width: 520px) {
+    h1 { font-size: 26px !important; }
+    section h2 { font-size: 20.5px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden; background:#ffffff;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="background:#ffffff; border-bottom:1px solid #e8edf3;">
+    <div data-r="hdr" style="max-width:1600px; margin:0 auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="RealXpert-EN.dc.html#top" style="display:block;">
+        <img src="uploads/logo-realxpert-color-trim.png" alt="RealXpert — Your Swiss real estate expert" data-r="logo" style="display:block; height:60px; width:auto;" />
+      </a>
+      <nav data-r="navdesk" style="display:flex; flex:1; align-items:center; justify-content:space-between; gap:24px; margin-left:20px;">
+        <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:38px;">
+          <a href="RealXpert-EN.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Our solution</a>
+          <a href="Vendre - EN.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Sell</a>
+          <a href="Acheter - EN.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Buy</a>
+          <a href="A%20propos%20-%20EN.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">About</a>
+          <a href="Nos%20partenaires%20-%20EN.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Our partners</a>
+          <a href="Nous%20contacter%20-%20EN.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Contact</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:18px;">
+          <details style="position:relative;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer;">EN ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:10px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:86px; z-index:60;">
+            <a href="Conditions generales - FR.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">FR</a>
+            <a href="Conditions generales - DE.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">DE</a>
+            <a href="Conditions generales - IT.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">IT</a>
+            </div>
+          </details>
+          <div style="display:flex; flex-direction:column; align-items:stretch; gap:7px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:700; font-size:15.5px; padding:9px 20px; border-radius:10px; white-space:nowrap; text-align:center;">Try for free</a>
+            <a href="#rx-login" style="font-size:15px; font-weight:600; color:#0c1f2c; opacity:0.9; display:inline-flex; align-items:center; justify-content:center; gap:7px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              My account
+            </a>
+          </div>
+        </div>
+      </nav>
+      <details data-r="langmob" style="display:none; position:relative; flex:0 0 auto; margin-right:14px;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer; min-height:44px; white-space:nowrap;">EN ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:6px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:110px; z-index:80;">
+            <a href="Conditions generales - FR.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">FR</a>
+            <a href="Conditions generales - DE.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">DE</a>
+            <a href="Conditions generales - IT.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">IT</a>
+            </div>
+          </details>
+      <details data-r="burger" style="display:none; position:relative; flex:0 0 auto;">
+        <summary aria-label="Menu" style="list-style:none; display:flex; align-items:center; justify-content:center; width:46px; height:46px; border:none; background:transparent; color:#0c1f2c; cursor:pointer;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+        </summary>
+        <div style="position:absolute; top:calc(100% + 12px); right:0; width:min(80vw,320px); background:#ffffff; border:1px solid #e2e8ee; border-radius:14px; box-shadow:0 26px 50px -18px rgba(10,25,45,0.35); padding:8px 18px 18px; z-index:70;">
+          <a href="RealXpert-EN.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Our solution</a>
+          <a href="Vendre - EN.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Sell</a>
+          <a href="Acheter - EN.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Buy</a>
+          <a href="A%20propos%20-%20EN.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">About</a>
+          <a href="Nos%20partenaires%20-%20EN.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Our partners</a>
+          <a href="Nous%20contacter%20-%20EN.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Contact</a>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:800; font-size:16px; padding:14px 20px; border-radius:12px; text-align:center;">Try for free</a>
+            <a href="#rx-login" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:15.5px; font-weight:700; color:#0c1f2c; padding:12px; border:1px solid #dce3ea; border-radius:12px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              My account
+            </a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <section data-r="legalhero" style="background:#f4f8fc; padding:70px 32px 62px; border-bottom:1px solid #e6eef7;">
+    <div style="max-width:840px; margin:0 auto;">
+      <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Legal information</span>
+      <h1 style="font-size:48px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; color:#0c1f2c; margin:12px 0 0;">General Terms and Conditions</h1>
+    </div>
+  </section>
+
+  <section data-r="legalbody" style="background:#ffffff; padding:24px 32px 96px;">
+    <div style="max-width:840px; margin:0 auto;">
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">1. Purpose and acceptance of the General Terms and Conditions</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">1.1 Purpose</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">These General Terms and Conditions govern access to and use of the realxpert.ch website and the RealXpert services, operated by Urech &amp; Partners Sàrl.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">They apply to any person who accesses or uses the RealXpert services.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">1.2 Acceptance of the General Terms and Conditions</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">By creating an account, using the RealXpert services or purchasing paid access, you acknowledge that you have read these General Terms and Conditions and accept them.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">If you do not accept these General Terms and Conditions, you must not use the RealXpert services.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">2. RealXpert services</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">2.1 Nature of the services</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert offers information, analysis, support and decision-support services in connection with property projects.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The purpose of the services is to help the user better understand their situation, assess the various options available to them and make informed decisions concerning their property project.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">2.2 Scope of the information, analyses and recommendations</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The information, analyses, opinions and recommendations provided by RealXpert constitute decision support. They are established on the basis of the information available and, depending on the services used, the elements provided by the user.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">They constitute no guarantee as to the outcome of a decision, a step, a negotiation, a transaction or, more generally, a property project.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user remains solely responsible for the decisions they make, the steps they take and the manner in which they use or implement the information, analyses, opinions and recommendations provided by RealXpert.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In particular, RealXpert is not responsible for the choice made by the user among the various options available to them, for the manner in which a recommendation is applied, for information subsequently disclosed to third parties, or for the acts, decisions, omissions or services of the latter.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert does not guarantee that any information, analysis, opinion or recommendation will make it possible to obtain a given outcome. The outcome of a property project may in particular depend on circumstances outside RealXpert, on developments in the market or in regulation, on the decisions of third parties as well as on the manner in which the user implements the recommendations provided to them.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Where the information provided by the user or available at the time of the analysis is inaccurate, incomplete, out of date or subsequently changes, the information, analyses or recommendations provided by RealXpert may no longer be suited to the situation.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Certain situations may require additional verification or the involvement of a qualified professional. It is for the user to carry out the necessary verifications before making a decision or taking a step.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">2.3 Use of artificial intelligence</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Certain RealXpert features rely on artificial intelligence technologies.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Despite the care taken over the quality of the services, the information, analyses, opinions or recommendations provided may contain errors or inaccuracies, be incomplete or require additional verification, in particular where they rely on information that is inaccurate, incomplete or liable to change.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user is responsible for the accuracy and relevance of the information they provide to RealXpert and must exercise their own judgement before making a decision on the basis of the elements provided to them.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">3. User account</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.1 Creation of the account</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Creating an account may be necessary in order to access all or part of the RealXpert services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user must provide the information necessary for the creation and management of their account.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The identification and contact data linked to the account is processed separately from the information provided by the user in the context of their exchanges with the RealXpert services. The terms governing the processing of personal data are set out in RealXpert’s Privacy Policy.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The account is personal and may not be shared or made available to a third party.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.2 Information provided by the user</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user undertakes to provide information that is accurate, sufficiently complete and, where relevant, up to date. They must not provide false information or impersonate a third party.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The information, analyses, opinions and recommendations provided by RealXpert rely in particular on the elements provided by the user. Their relevance may therefore be affected where these elements are inaccurate, incomplete, out of date, ambiguous or where relevant information is omitted.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user is responsible for the information and content they provide to RealXpert as well as for its accuracy and its updating where their situation changes.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert cannot be held responsible for the consequences arising from information that is inaccurate, incomplete, out of date, ambiguous or omitted by the user, to the extent that this has affected the information, analyses, opinions or recommendations provided.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">It is for the user to verify the information they provide where it is liable to have an impact on the analysis of their situation or on the recommendations provided to them.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.3 Security and use of the account</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user is responsible for the confidentiality of their credentials and must take the reasonable measures necessary to prevent any unauthorised use of their account.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">They must not allow a third party to use their account or attempt to access another user’s account.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In the event of suspected unauthorised access to or use of their account, the user must inform RealXpert as soon as possible.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may take the measures reasonably necessary to protect the account, the user or the service in the event of suspected fraudulent, abusive or unauthorised use.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">4. Access to the services and financial terms</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.1 Access to the services</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Certain RealXpert features may be accessible free of charge, while others require the purchase of paid access.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The terms of access to the services may vary depending on the offers proposed by RealXpert.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may change its offers, their content and their terms of access. The conditions applicable to a purchase are those presented to the user at the time of that purchase.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.2 Offers and prices</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The available offers, their content, their price as well as their main conditions of use are presented to the user before the purchase.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">It is for the user to read this information before confirming their purchase.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The applicable prices are those indicated at the time of the order. No recurring payment is made, unless an offer expressly provides for it and the user accepts it beforehand.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.3 Payment</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Purchases are settled by means of the payment methods offered at the time of the order.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">By confirming their purchase and proceeding with payment, the user accepts the selected offer, its price and the conditions applicable to it.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The purchase is confirmed electronically.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In the event of refusal, failure, cancellation or impossibility of processing the payment, RealXpert may not activate the corresponding access or may suspend its activation until the payment is regularised.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.4 Activation and use of the purchased access</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">After confirmation of the payment, the user benefits from the access corresponding to the offer purchased, in accordance with the terms presented to them at the time of the purchase.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The purchased access is personal and intended for the use of the RealXpert services by the account holder. It may not be transferred, resold or assigned to a third party.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The content and terms of use of the access are those indicated to the user at the time of the purchase.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The full or partial use of the purchased access gives rise to no conversion into cash and no refund of the used or unused portion, subject to the applicable mandatory legal provisions.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.5 Cancellation and refund</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Save where a mandatory legal provision provides otherwise, any purchase is final upon its confirmation and may not be cancelled or refunded.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In particular, no full or partial refund is granted where the user decides to stop using the RealXpert services, ceases to use them or does not fully use the access they have purchased.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The unused portion of an access may not be converted into cash, refunded or made the subject of financial compensation.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">It remains available to be used in accordance with the conditions applicable to the offer purchased.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Any mandatory rights that the user enjoys under the applicable legislation remain reserved.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">5. Introductions to professionals</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">5.1 Introductions</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">As part of its services, RealXpert may offer or facilitate putting the user in touch with professionals able to support them in their property project.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user remains free to accept or refuse an introduction and to choose the professional they wish to call upon.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The purpose of the introduction is to facilitate the user’s steps and to enable them to pursue their project with the support of a professional suited to their needs.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">5.2 Independence of the professionals</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The professionals with whom the user is put in touch act independently and provide their services under their own responsibility.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Where a user decides to grant a mandate, order a service or conclude any other contract with a professional, the corresponding contractual relationship is established directly between the user and the professional concerned. RealXpert is not a party to that contract.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The professional remains responsible for the advice and services they provide as well as for the performance of the assignment entrusted to them. RealXpert cannot guarantee the outcome of a service performed by a professional or be held responsible for the acts or omissions attributable to them, subject to the applicable mandatory legal provisions.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">5.3 RealXpert’s remuneration</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may receive remuneration from certain professionals or partners in connection with an introduction or a service performed following it.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">This remuneration is paid by the professional or partner concerned and entails no additional cost for the user in respect of the introduction.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">6. Permitted use of the service</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">6.1 Personal use</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert is intended for personal use in connection with the user’s property project.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user may use the information, analyses, opinions and recommendations provided to them in order to understand their situation, prepare their steps and make the decisions relating to their property project.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Use of the services must comply with their intended purpose, these General Terms and Conditions as well as the applicable legislation.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">6.2 Prohibited uses</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user must not use RealXpert in a fraudulent, abusive or unlawful manner or contrary to its intended purpose.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Subject to the rights mandatorily recognised by law, it is in particular prohibited:</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to access or attempt to access without authorisation the accounts, systems, data or features of RealXpert;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to circumvent or attempt to circumvent the conditions, restrictions or limits on access to or use of the services;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to disrupt, compromise or impair the operation, availability or security of the services;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to use automated processes to extract, collect or systematically exploit the content or data accessible through RealXpert;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to reproduce, copy, aggregate, distribute or build a database from a substantial or systematically extracted part of the RealXpert content;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to use the services or their content in order to reproduce, develop, train, feed or operate a competing service, system or solution;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">to resell, assign, license or commercially make available to third parties all or part of the RealXpert services or content without prior authorisation.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In the event of fraudulent, abusive or unlawful use, or use contrary to these General Terms and Conditions, RealXpert may take the measures reasonably necessary to protect its services and its rights, in particular restricting or suspending the access of the user concerned.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">7. Intellectual property</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">7.1 Rights in RealXpert</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert, its website, its visual identity, its trademarks, its texts, content, interfaces, features, software and, more generally, the elements that make up its services are protected by the applicable intellectual property rights.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">These elements remain the property of RealXpert, of Urech &amp; Partners Sàrl or, where applicable, of their respective holders.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Access to the RealXpert services confers on the user no ownership right in them and constitutes no assignment of intellectual property rights.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">7.2 Use of the content</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user may use the information, analyses, opinions and recommendations provided to them by RealXpert for the purposes of their own property project.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Save with RealXpert’s prior authorisation or where a mandatory legal provision provides otherwise, this use does not allow the user to reproduce, distribute, publish, market or systematically or substantially exploit the RealXpert content.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">It is in particular prohibited to use this content in order to build or feed a database, to resell it or exploit it commercially, or to use it in order to reproduce, develop, feed or operate a competing service, system or solution.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">No provision of these General Terms and Conditions may be interpreted as granting the user a right in the trademarks, distinctive signs, software or other protected elements of RealXpert beyond the right to use the services provided for by these General Terms and Conditions.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">7.3 Content provided by the user</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user retains the rights they hold in the information, documents and other content they provide to RealXpert.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">They warrant that they hold the rights or authorisations necessary to provide this content and to permit its use in connection with the RealXpert services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user authorises RealXpert to process and use this content to the extent necessary for the provision, operation and security of the services, in accordance with these General Terms and Conditions and the Privacy Policy.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">8. Quality of the service and liability</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">8.1 Quality and availability of the services</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert endeavours to provide services that are reliable, relevant and available under normal conditions of use.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert does not, however, guarantee that the services will be accessible at all times, without interruption, error or malfunction. Access to them may in particular be temporarily restricted or interrupted by reason of maintenance operations, updates, technical constraints, problems affecting third-party services or circumstances beyond RealXpert’s control.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may change, correct or update its services where this is necessary for their operation, their security or their improvement.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">8.2 Information, analyses and recommendations</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert takes reasonable care over the quality of the information, analyses, opinions and recommendations provided in connection with its services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">These nevertheless rely on the information available at the time they are established, in particular that provided by the user as well as, depending on the services concerned, information liable to change over time.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Property market conditions, prices, financing conditions, taxation, regulation, professional practices as well as other elements liable to influence a property project may change.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert therefore guarantees neither the absolute accuracy, nor the completeness, nor the permanent currency of each item of information, analysis, opinion or recommendation, nor that a recommendation will remain suitable if the situation or the information on which it relies changes.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Where a situation requires a particular professional assessment, an official verification or advice falling within a regulated or specialised profession, it is for the user to obtain the necessary additional verifications or advice.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">8.3 The user’s decisions and steps</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The RealXpert services constitute decision support. The final decision always belongs to the user.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user remains responsible for the use they make of the information, analyses, opinions and recommendations received, for the decisions they make, for the steps they take as well as for the manner in which they implement them.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In particular, RealXpert guarantees no given outcome concerning a sale, a purchase, a price, a negotiation, a financing, an investment, an administrative or tax step, the conclusion of a contract or, more generally, the outcome of a property project.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert cannot be held responsible for the consequences arising in particular from:</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">a decision made by the user on the basis of the services;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">the manner in which a recommendation was understood, used or implemented;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">information that is inaccurate, incomplete, out of date or omitted by the user;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">a change occurring after the provision of an item of information, an analysis or a recommendation;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">an act, a decision, an omission or a service attributable to a third party.</li>
+        </ul>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">8.4 Limitation of liability</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">To the fullest extent permitted by the applicable legislation, Urech &amp; Partners Sàrl cannot be held responsible for indirect or consequential damage arising from the use of or the inability to use the RealXpert services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">This includes in particular, to the extent permitted by law, indirect financial losses, loss of opportunity, loss of profit or other economic consequences not resulting directly from a breach attributable to RealXpert.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In particular, RealXpert cannot be held responsible for a property or financial outcome that was not obtained, for a transaction that was not concluded or that was concluded on conditions different from those hoped for, or for the consequences of a decision or a service falling to the user or to a third party.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert is not responsible for interruptions, malfunctions or unavailability arising from circumstances beyond its reasonable control, in particular where they are linked to infrastructure, networks or services provided by third parties.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The limitations provided for by these General Terms and Conditions apply only to the extent permitted by the applicable legislation and do not limit rights or liabilities that cannot lawfully be excluded or limited.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">9. Suspension and termination of the service</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">9.1 Suspension or restriction of an account</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may restrict or temporarily suspend access to all or part of its services where there are reasonable grounds to consider that the user:</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">uses the services in a fraudulent, abusive or unlawful manner;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">does not comply with these General Terms and Conditions;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">attempts to circumvent the conditions or limitations on access to the services;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">compromises or risks compromising the security, integrity or proper functioning of the services;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">uses the services in a manner liable to infringe the rights of RealXpert, of another user or of a third party.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may also take the necessary measures where a suspension or restriction is required for reasons of security, maintenance or in order to comply with a legal obligation.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The measures taken must, so far as reasonably possible, be proportionate to the nature and seriousness of the situation.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Where a restriction or suspension results from a breach of these General Terms and Conditions attributable to the user, it does not in itself give rise to a right to a refund of a purchased access, subject to the applicable mandatory legal provisions.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">9.2 Deletion of the account</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The user may request the deletion of their account in accordance with the arrangements offered by RealXpert.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Deletion of the account brings to an end access to the services associated with it.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Where the user requests the deletion of their account while they still hold unused paid access, that deletion does not give rise to a right to a refund of the remaining portion of that access.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The processing and any retention of certain data after deletion of the account are governed by the Privacy Policy and by the applicable legal obligations.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">9.3 Change to or discontinuation of the services</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert may change, modify, replace or discontinue all or part of its features or services, in particular in order to improve them, adapt them to technical, commercial or regulatory developments or ensure their security and proper functioning.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">These changes may in particular concern the features offered as well as the terms of access to and use of the services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Where a modification or discontinuation substantially affects paid access already purchased and still usable, RealXpert takes reasonable measures in order to enable the user to benefit from the purchased access or, where this is no longer possible, from an appropriate solution taking account of the remaining portion of that access.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The mandatory rights that the user enjoys under the applicable legislation remain reserved.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">10. Personal data</h2>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The processing of personal data in connection with the use of the RealXpert services is governed by RealXpert’s Privacy Policy, which sets out in particular the terms governing the collection, use, retention and protection of personal data as well as the rights of the persons concerned.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">11. Final provisions</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">11.1 Amendment of the General Terms and Conditions</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert reserves the right to amend or replace these General Terms and Conditions at any time, in particular in order to take account of changes to its services, its practices or the applicable legislation.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">The applicable version is the one in force at the time the services are used, subject to the conditions applicable to access already purchased.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">In the event of a significant change, RealXpert may inform users by any appropriate means.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Continued use of the services after the amended General Terms and Conditions come into force constitutes acceptance of them. If the user does not accept the new General Terms and Conditions, they must cease using the RealXpert services.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">11.2 Severability</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">If a provision of these General Terms and Conditions should be declared invalid, unlawful or unenforceable, in whole or in part, the other provisions remain fully applicable.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">11.3 Applicable law and jurisdiction</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">These General Terms and Conditions as well as the use of the RealXpert services are governed by Swiss law.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Any dispute relating to these General Terms and Conditions or to the use of the RealXpert services falls within the competent courts in Switzerland, subject to the mandatory places of jurisdiction provided for by the applicable legislation, in particular in matters of consumer protection.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">11.4 Contact</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">For any question relating to these General Terms and Conditions, the user can contact:</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px;">Urech &amp; Partners Sàrl<br>Email: contact@realxpert.ch</p>
+        <p style="font-size:15px; font-weight:700; color:#5a6b78; margin:44px 0 0; padding-top:24px; border-top:1px solid #e8eef4;">Last updated: 3 September 2026</p>
+    </div>
+  </section>
+
+  <footer style="background:#16305c; color:#a9bfd8; padding:60px 32px 36px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div data-r="g3f" style="display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:56px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.12);">
+
+        <div>
+          <div style="font-size:18px; font-weight:800; color:#fff; margin-bottom:12px;">Subscribe to the newsletter</div>
+          <p style="font-size:14px; line-height:1.6; margin:0 0 20px; max-width:400px;">Receive the latest Swiss real estate market trends and practical advice to sell or buy at the best price.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; max-width:440px;">
+            <input type="email" placeholder="Your email address" style="flex:1; min-width:200px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); border-radius:10px; padding:13px 16px; font-family:inherit; font-size:14.5px; color:#fff; outline:none;" />
+            <button style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:10px; cursor:pointer; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Subscribe now</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:#fff; margin-bottom:18px;">RealXpert</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="A propos - EN.dc.html" style="color:#a9bfd8; font-size:14px;">Discover RealXpert</a>
+            <a href="Vendre - EN.dc.html" style="color:#a9bfd8; font-size:14px;">Sell</a>
+            <a href="Acheter - EN.dc.html" style="color:#a9bfd8; font-size:14px;">Buy</a>
+            <a href="A propos - EN.dc.html" style="color:#a9bfd8; font-size:14px;">About us</a>
+            <a href="Nos partenaires - EN.dc.html" style="color:#a9bfd8; font-size:14px;">Our partners</a>
+            <a href="Nous contacter - EN.dc.html" style="color:#a9bfd8; font-size:14px;">Contact</a>
+            <a href="Politique de confidentialite - EN.dc.html#top" style="color:#a9bfd8; font-size:14px;">Privacy policy</a>
+            <a href="#" style="color:#a9bfd8; font-size:14px;">Terms & conditions</a>
+          </div>
+        </div>
+
+        <div>
+          <img src="uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.png" alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />
+          <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Customer service</div>
+          <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Open Monday to Friday<br>8:30 am to 6:30 pm · Throughout Switzerland</p>
+          <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
+          <a href="Nous contacter - EN.dc.html" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Contact us →</a>
+        </div>
+
+      </div>
+      <p style="font-size:13px; margin:24px 0 0; color:#7690b0;">2026 © RealXpert — Swiss real estate expertise. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="rx-signup" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Close" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Continue for free with RealXpert</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Don’t make decisions that could cost you tens of thousands of francs on your own.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Free to start</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>No commitment</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>First personalised advice</div></div><div style="height:1px; background:#e2e8ee; margin:24px 0 18px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Just 30 seconds to find your project again anytime and check every important decision before you commit.</p><div style="display:flex; flex-direction:column; gap:13px;"><div style="display:flex; gap:11px;"><input type="text" placeholder="First name" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="text" placeholder="Last name" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"></div><input type="email" placeholder="Email" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="tel" placeholder="Phone" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Password" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-top:2px;"><input type="checkbox" style="flex:0 0 auto; width:17px; height:17px; margin:2px 0 0; accent-color:#1d4fb0; cursor:pointer;"><span style="font-size:14px; line-height:1.5; color:#5a6b78;">I would like to receive RealXpert advice to better succeed in my property project.</span></label><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Get my first advice →</button><p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:14px 0 0; text-align:center;">By continuing, you accept our <a href="Conditions generales - EN.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Terms and Conditions</a> and acknowledge that you have read our <a href="Politique de confidentialite - EN.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Privacy Policy</a>.</p></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Already have an account? <a href="#rx-login" style="color:#1d4fb0; font-weight:700;">Log in</a></p></div></div></div>
+  <div id="rx-login" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Close" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Continue your property project</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Log back in to pick up your project and make sure you’re making the right choices.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Find your project right where you left it</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Check every important decision before you commit</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Make the right decisions at the right time</div></div><div style="height:1px; background:#eef2f6; margin:28px 0 16px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Enter your credentials to continue your project</p><div style="display:flex; flex-direction:column; gap:13px;"><input type="email" placeholder="Email" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Password" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><div style="display:flex; justify-content:flex-end; margin-top:-4px;"><a href="#top" style="font-size:13.5px; color:#1d4fb0; font-weight:600;">Forgot your password?</a></div><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Continue my project →</button></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">No account yet? <a href="#rx-signup" style="color:#1d4fb0; font-weight:700;">Start for free</a></p></div></div></div>
+</div>
+</x-dc>
+</body>
+</html>

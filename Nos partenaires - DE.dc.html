@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rx-panel{display:none;}
+.rx-panel:target{display:flex;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',system-ui,sans-serif; color:#0c1f2c; }
+  a { text-decoration:none; }
+  summary::-webkit-details-marker { display:none; }
+  img { max-width:100%; }
+  @media (max-width: 900px) {
+    [data-r="sheet"] { width: 100% !important; max-width: 460px !important; }
+    [data-r="sheet"] h2 { font-size: 23px !important; line-height: 1.2 !important; }
+    [data-r="sheet"] input[type="text"], [data-r="sheet"] input[type="email"], [data-r="sheet"] input[type="tel"], [data-r="sheet"] input[type="password"] { font-size: 16px !important; padding: 14px 15px !important; }
+    [data-r="sheet"] button, [data-r="sheet"] [aria-label="Fermer"], [data-r="sheet"] [aria-label="Close"], [data-r="sheet"] [aria-label="Schliessen"], [data-r="sheet"] [aria-label="Chiudi"] { min-height: 44px; }
+    [data-r="sheet"] [aria-label] svg { width: 26px; height: 26px; }
+    [data-r="sheet"] a[href="#top"] { display: inline-flex !important; align-items: center; min-height: 40px; }
+  }
+  @media (max-width: 520px) {
+    [data-r="sheet"] { max-width: 100% !important; }
+    [data-r="sheet"] h2 { font-size: 21.5px !important; }
+    [data-r="sheet"] [data-r="pad"] { padding: 22px 18px 34px !important; }
+  }
+  @media (max-width: 1180px) {
+    [data-r="navdesk"] { display: none !important; }
+    [data-r="burger"] { display: block !important; }
+    [data-r="langmob"] { display: block !important; margin-left: auto !important; }
+    [data-r="hdr"] { padding: 14px 18px !important; }
+    [data-r="logo"] { height: 46px !important; }
+  }
+  @media (min-width: 901px) and (max-width: 1180px) {
+    [data-r="sheet"] h2 { font-size: 26px !important; line-height: 1.15 !important; }
+    [data-r="sheet"] h3 { font-size: 17px !important; }
+    [data-r="sheet"] p { font-size: 15px !important; }
+    [data-r="sheet"] [aria-label] { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+    section { padding-left: 26px !important; padding-right: 26px !important; padding-top: 70px !important; padding-bottom: 70px !important; }
+    h1 { font-size: 40px !important; line-height: 1.2 !important; }
+    h2 { font-size: 30px !important; line-height: 1.22 !important; }
+    section p { font-size: 17px !important; }
+    [data-r="pad"] { padding-left: 24px !important; padding-right: 24px !important; }
+  }
+  @media (max-width: 900px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 58px !important; padding-bottom: 58px !important; }
+    footer { padding: 46px 20px 30px !important; }
+    h1 { font-size: 30px !important; line-height: 1.24 !important; }
+    h2 { font-size: 25px !important; line-height: 1.26 !important; }
+    section p { font-size: 16.5px !important; line-height: 1.68 !important; }
+    [data-r="hero"] { min-height: 0 !important; padding: 76px 20px !important; }
+    [data-r="blockwrap"] { gap: 48px !important; }
+    [data-r="vblock"] { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 22px !important; }
+    [data-r="v-head"] { order: 1 !important; }
+    [data-r="v-img"] { order: 2 !important; }
+    [data-r="v-text"] { order: 3 !important; }
+    [data-r="v-head"] h2 { margin-bottom: 0 !important; }
+    [data-logos] { gap: 12px !important; }
+    [data-logos] > div { padding: 20px !important; font-size: 19px !important; }
+    [data-r="g3f"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+    [data-r="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+  @media (max-width: 520px) {
+    h1 { font-size: 26px !important; }
+    h2 { font-size: 22.5px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden; background:#ffffff;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="background:#ffffff; border-bottom:1px solid #e8edf3;">
+    <div data-r="hdr" style="max-width:1600px; margin:0 auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="RealXpert-DE.dc.html#top" style="display:block;">
+        <img src="uploads/logo-realxpert-color-trim.png" alt="RealXpert — Ihr Schweizer Immobilienexperte" data-r="logo" style="display:block; height:60px; width:auto;" />
+      </a>
+      <nav data-r="navdesk" style="display:flex; flex:1; align-items:center; justify-content:space-between; gap:24px; margin-left:20px;">
+        <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:38px;">
+          <a href="RealXpert-DE.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Unsere Lösung</a>
+          <a href="Vendre - DE.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Verkaufen</a>
+          <a href="Acheter - DE.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Kaufen</a>
+          <a href="A%20propos%20-%20DE.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Über uns</a>
+          <a href="Nos%20partenaires%20-%20DE.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Unsere Partner</a>
+          <a href="Nous%20contacter%20-%20DE.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Kontakt</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:18px;">
+          <details style="position:relative;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer;">DE ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:10px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:86px; z-index:60;">
+            <a href="Nos partenaires - FR.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">FR</a>
+            <a href="Nos partenaires - EN.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">EN</a>
+            <a href="Nos partenaires - IT.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">IT</a>
+            </div>
+          </details>
+          <div style="display:flex; flex-direction:column; align-items:stretch; gap:7px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:700; font-size:15.5px; padding:9px 20px; border-radius:10px; white-space:nowrap; text-align:center;">Kostenlos testen</a>
+            <a href="#rx-login" style="font-size:15px; font-weight:600; color:#0c1f2c; opacity:0.9; display:inline-flex; align-items:center; justify-content:center; gap:7px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Mein Konto
+            </a>
+          </div>
+        </div>
+      </nav>
+      <details data-r="langmob" style="display:none; position:relative; flex:0 0 auto; margin-right:14px;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer; min-height:44px; white-space:nowrap;">DE ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:6px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:110px; z-index:80;">
+            <a href="Nos partenaires - FR.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">FR</a>
+            <a href="Nos partenaires - EN.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">EN</a>
+            <a href="Nos partenaires - IT.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">IT</a>
+            </div>
+          </details>
+      <details data-r="burger" style="display:none; position:relative; flex:0 0 auto;">
+        <summary aria-label="Menu" style="list-style:none; display:flex; align-items:center; justify-content:center; width:46px; height:46px; border:none; background:transparent; color:#0c1f2c; cursor:pointer;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+        </summary>
+        <div style="position:absolute; top:calc(100% + 12px); right:0; width:min(80vw,320px); background:#ffffff; border:1px solid #e2e8ee; border-radius:14px; box-shadow:0 26px 50px -18px rgba(10,25,45,0.35); padding:8px 18px 18px; z-index:70;">
+          <a href="RealXpert-DE.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Unsere Lösung</a>
+          <a href="Vendre - DE.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Verkaufen</a>
+          <a href="Acheter - DE.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Kaufen</a>
+          <a href="A%20propos%20-%20DE.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Über uns</a>
+          <a href="Nos%20partenaires%20-%20DE.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Unsere Partner</a>
+          <a href="Nous%20contacter%20-%20DE.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Kontakt</a>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:800; font-size:16px; padding:14px 20px; border-radius:12px; text-align:center;">Kostenlos testen</a>
+            <a href="#rx-login" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:15.5px; font-weight:700; color:#0c1f2c; padding:12px; border:1px solid #dce3ea; border-radius:12px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Mein Konto
+            </a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section data-r="hero" style="position:relative; background-image:url('uploads/Image slider - Nos partenaires.png'); background-size:cover; background-position:center; min-height:70vh; display:flex; align-items:center; justify-content:center; padding:90px 32px;">
+    <div style="position:absolute; inset:0; background:rgba(20,45,90,0.34);"></div>
+    <div style="position:relative; max-width:1040px; margin:0 auto; text-align:center;">
+      <h1 style="font-size:50px; font-weight:800; line-height:1.24; letter-spacing:-0.02em; margin:0; color:#ffffff; text-shadow:0 2px 20px rgba(10,30,60,0.4);">Ein Ökosystem aus Fachwissen, Daten und Technologie im Dienste Ihrer Immobilienentscheidungen</h1>
+    </div>
+  </section>
+
+  <!-- ============ BLOCS PARTENAIRES ============ -->
+  <section style="background:#ffffff; padding:88px 32px;">
+    <div data-r="blockwrap" style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:72px;">
+
+      <!-- Bloc 1 : texte gauche / logos droite -->
+      <div data-r="vblock" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:0 56px; align-items:center;">
+        <div data-r="v-head" style="grid-column:1; grid-row:1;">
+          <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Immobiliendaten</span>
+          <h2 style="font-size:32px; font-weight:800; line-height:1.22; letter-spacing:-0.02em; margin:12px 0 18px; color:#0c1f2c;">Spezialisierte und anerkannte Unternehmen für Immobiliendaten in der Schweiz</h2>
+        </div>
+        <div data-r="v-text" style="grid-column:1; grid-row:2;">
+          <p style="font-size:17px; line-height:1.8; color:#33475c; margin:0;">Die Qualität von RealXpert beruht auf der Zusammenarbeit mit Partnern, die in ihren jeweiligen Bereichen anerkannt sind. Um zuverlässige, präzise und aktuelle Analysen zu liefern, stützen wir uns insbesondere auf führende Anbieter des Schweizer Marktes für Immobiliendaten wie Wüest Partner, CIFI / IAZI und PriceHubble.</p>
+        </div>
+        <div data-r="v-img" data-logos="1" style="grid-column:2; grid-row:1 / span 2; display:flex; flex-direction:column; gap:18px;">
+          <div style="display:flex; align-items:center; justify-content:center; background:#f4f8fc; border:1px solid #e2e8ee; border-radius:14px; padding:26px; font-size:22px; font-weight:800; color:#0c1f2c; box-shadow:0 14px 34px -26px rgba(20,70,120,0.4);">PriceHubble</div>
+          <div style="display:flex; align-items:center; justify-content:center; background:#f4f8fc; border:1px solid #e2e8ee; border-radius:14px; padding:26px; font-size:22px; font-weight:800; color:#0c1f2c; box-shadow:0 14px 34px -26px rgba(20,70,120,0.4);">Wüest Partner</div>
+          <div style="display:flex; align-items:center; justify-content:center; background:#f4f8fc; border:1px solid #e2e8ee; border-radius:14px; padding:26px; font-size:22px; font-weight:800; color:#0c1f2c; box-shadow:0 14px 34px -26px rgba(20,70,120,0.4);">CIFI / IAZI</div>
+        </div>
+      </div>
+
+      <!-- Bloc 2 : image gauche / texte droite -->
+      <div data-r="vblock" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:0 56px; align-items:center;">
+        <div data-r="v-img" style="grid-column:1; grid-row:1 / span 2; border-radius:16px; overflow:hidden; box-shadow:0 34px 70px -38px rgba(20,50,90,0.45);">
+          <img src="uploads/Nos partenaires - Image 2.png" alt="Zwei Immobilienfachleute in einer Besprechung mit Blick auf die Stadt" style="width:100%; height:auto; object-fit:cover; display:block;" />
+        </div>
+        <div data-r="v-head" style="grid-column:2; grid-row:1;">
+          <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Fachleute der Branche</span>
+          <h2 style="font-size:32px; font-weight:800; line-height:1.22; letter-spacing:-0.02em; margin:12px 0 18px; color:#0c1f2c;">Ein mit anerkannten Immobilienfachleuten entwickeltes Fachwissen</h2>
+        </div>
+        <div data-r="v-text" style="grid-column:2; grid-row:2;">
+          <p style="font-size:17px; line-height:1.8; color:#33475c; margin:0;">Unser Fachwissen wurde zudem in Zusammenarbeit mit zahlreichen Immobilienfachleuten entwickelt, die in den renommiertesten Organisationen und Verbänden der Schweizer Immobilienbranche tätig sind. Ihre Praxiserfahrung trägt dazu bei, die Relevanz und Qualität der auf der Plattform bereitgestellten Analysen zu gewährleisten.</p>
+        </div>
+      </div>
+
+      <!-- Bloc 3 : texte gauche / image droite -->
+      <div data-r="vblock" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:0 56px; align-items:center;">
+        <div data-r="v-head" style="grid-column:1; grid-row:1;">
+          <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Ausgewählte Experten</span>
+          <h2 style="font-size:32px; font-weight:800; line-height:1.22; letter-spacing:-0.02em; margin:12px 0 18px; color:#0c1f2c;">Immobilienexperten, ausgewählt nach der Realität jedes Projekts</h2>
+        </div>
+        <div data-r="v-text" style="grid-column:1; grid-row:2;">
+          <p style="font-size:17px; line-height:1.8; color:#33475c; margin:0;">Dank unserer fortschrittlichen Technologie zur Analyse von Immobilienagenturen und zur Auswahl von Maklern ermitteln wir die qualifiziertesten Experten jeder Region und arbeiten mit ihnen zusammen, um Sie mit höchster Präzision bei Ihrem Immobilienprojekt zu begleiten.</p>
+        </div>
+        <div data-r="v-img" style="grid-column:2; grid-row:1 / span 2; border-radius:16px; overflow:hidden; box-shadow:0 34px 70px -38px rgba(20,50,90,0.45);">
+          <img src="uploads/Nos partenaires - Image 3.png" alt="Neue und im Bau befindliche Wohngebäude am Seeufer" style="width:100%; height:auto; object-fit:cover; display:block;" />
+        </div>
+      </div>
+
+      <!-- Bloc 4 : image gauche / texte droite -->
+      <div data-r="vblock" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:0 56px; align-items:center;">
+        <div data-r="v-img" style="grid-column:1; grid-row:1 / span 2; border-radius:16px; overflow:hidden; box-shadow:0 34px 70px -38px rgba(20,50,90,0.45);">
+          <img src="uploads/Nos partenaires - Image 4.png" alt="Entwicklerteam, das an Immobiliendaten und -modellen arbeitet" style="width:100%; height:auto; object-fit:cover; display:block;" />
+        </div>
+        <div data-r="v-head" style="grid-column:2; grid-row:1;">
+          <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Künstliche Intelligenz</span>
+          <h2 style="font-size:32px; font-weight:800; line-height:1.22; letter-spacing:-0.02em; margin:12px 0 18px; color:#0c1f2c;">Ein auf künstliche Intelligenz im Immobilienbereich spezialisiertes Team</h2>
+        </div>
+        <div data-r="v-text" style="grid-column:2; grid-row:2;">
+          <p style="font-size:17px; line-height:1.8; color:#33475c; margin:0;">Schliesslich stützt sich RealXpert auf ein Team von Entwicklern, die auf künstliche Intelligenz spezialisiert sind und deren Auftrag es ist, eine der fortschrittlichsten digitalen Immobilienkompetenzen der Schweiz zu schaffen, um jedem Nutzer zu helfen, die besten Entscheidungen zum richtigen Zeitpunkt zu treffen, wo auch immer er sich in seinem Immobilienweg befindet.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#16305c; color:#a9bfd8; padding:60px 32px 36px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div data-r="g3f" style="display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:56px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.12);">
+
+        <div>
+          <div style="font-size:18px; font-weight:800; color:#fff; margin-bottom:12px;">Newsletter abonnieren</div>
+          <p style="font-size:14px; line-height:1.6; margin:0 0 20px; max-width:400px;">Erhalten Sie die neuesten Trends des Schweizer Immobilienmarkts und praktische Tipps, um zum besten Preis zu verkaufen oder zu kaufen.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; max-width:440px;">
+            <input type="email" placeholder="Ihre E-Mail-Adresse" style="flex:1; min-width:200px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); border-radius:10px; padding:13px 16px; font-family:inherit; font-size:14.5px; color:#fff; outline:none;" />
+            <button style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:10px; cursor:pointer; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Jetzt abonnieren</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:#fff; margin-bottom:18px;">RealXpert</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="A propos - DE.dc.html" style="color:#a9bfd8; font-size:14px;">RealXpert entdecken</a>
+            <a href="Vendre - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Verkaufen</a>
+            <a href="Acheter - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Kaufen</a>
+            <a href="A propos - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Über uns</a>
+            <a href="Nos partenaires - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Unsere Partner</a>
+            <a href="Nous contacter - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Kontakt</a>
+            <a href="Politique de confidentialite - DE.dc.html#top" style="color:#a9bfd8; font-size:14px;">Datenschutzerklärung</a>
+            <a href="Conditions generales - DE.dc.html#top" style="color:#a9bfd8; font-size:14px;">Allgemeine Geschäftsbedingungen</a>
+          </div>
+        </div>
+
+        <div>
+          <img src="uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.png" alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />
+          <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Kundenservice</div>
+          <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Geöffnet Montag bis Freitag<br>von 8:30 bis 18:30 Uhr · In der ganzen Schweiz</p>
+          <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
+          <a href="Nous contacter - DE.dc.html" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Kontakt aufnehmen →</a>
+        </div>
+
+      </div>
+      <p style="font-size:13px; margin:24px 0 0; color:#7690b0;">2026 © RealXpert — Schweizer Immobilienexpertise. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+
+  <div id="rx-signup" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Schließen" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Kostenlos weitermachen mit RealXpert</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Treffen Sie Entscheidungen, die Sie Zehntausende Franken kosten können, nicht mehr allein.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Kostenlos starten</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Unverbindlich</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Erste persönliche Beratung</div></div><div style="height:1px; background:#e2e8ee; margin:24px 0 18px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Nur noch 30 Sekunden, um Ihr Projekt jederzeit wiederzufinden und jede wichtige Entscheidung zu prüfen, bevor Sie sich festlegen.</p><div style="display:flex; flex-direction:column; gap:13px;"><div style="display:flex; gap:11px;"><input type="text" placeholder="Vorname" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="text" placeholder="Nachname" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"></div><input type="email" placeholder="E-Mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="tel" placeholder="Telefon" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Passwort" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-top:2px;"><input type="checkbox" style="flex:0 0 auto; width:17px; height:17px; margin:2px 0 0; accent-color:#1d4fb0; cursor:pointer;"><span style="font-size:14px; line-height:1.5; color:#5a6b78;">Ich möchte die RealXpert-Ratschläge erhalten, um mein Immobilienprojekt besser umzusetzen.</span></label><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Meine erste Beratung erhalten →</button><p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:14px 0 0; text-align:center;">Indem Sie fortfahren, akzeptieren Sie unsere <a href="Conditions generales - DE.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Allgemeinen Geschäftsbedingungen</a> und bestätigen, unsere <a href="Politique de confidentialite - DE.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Datenschutzerklärung</a> zur Kenntnis genommen zu haben.</p></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Sie haben bereits ein Konto? <a href="#rx-login" style="color:#1d4fb0; font-weight:700;">Anmelden</a></p></div></div></div>
+  <div id="rx-login" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Schließen" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Setzen Sie Ihr Immobilienprojekt fort</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Melden Sie sich erneut an, um Ihr Projekt fortzusetzen und sicherzustellen, dass Sie die richtigen Entscheidungen treffen.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Finden Sie Ihr Projekt genau dort wieder, wo Sie aufgehört haben</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Prüfen Sie jede wichtige Entscheidung, bevor Sie sich festlegen</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Treffen Sie die richtigen Entscheidungen zum richtigen Zeitpunkt</div></div><div style="height:1px; background:#eef2f6; margin:28px 0 16px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Geben Sie Ihre Zugangsdaten ein, um Ihr Projekt fortzusetzen</p><div style="display:flex; flex-direction:column; gap:13px;"><input type="email" placeholder="E-Mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Passwort" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><div style="display:flex; justify-content:flex-end; margin-top:-4px;"><a href="#top" style="font-size:13.5px; color:#1d4fb0; font-weight:600;">Passwort vergessen?</a></div><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Mein Projekt fortsetzen →</button></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Noch kein Konto? <a href="#rx-signup" style="color:#1d4fb0; font-weight:700;">Kostenlos starten</a></p></div></div></div>
+</div>
+</x-dc>
+</body>
+</html>

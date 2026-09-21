@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rx-panel{display:none;}
+.rx-panel:target{display:flex;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',system-ui,sans-serif; color:#0c1f2c; }
+  a { text-decoration:none; }
+  summary::-webkit-details-marker { display:none; }
+  img { max-width:100%; }
+  @media (max-width: 900px) {
+    [data-r="sheet"] { width: 100% !important; max-width: 460px !important; }
+    [data-r="sheet"] h2 { font-size: 23px !important; line-height: 1.2 !important; }
+    [data-r="sheet"] input[type="text"], [data-r="sheet"] input[type="email"], [data-r="sheet"] input[type="tel"], [data-r="sheet"] input[type="password"] { font-size: 16px !important; padding: 14px 15px !important; }
+    [data-r="sheet"] button, [data-r="sheet"] [aria-label="Fermer"], [data-r="sheet"] [aria-label="Close"], [data-r="sheet"] [aria-label="Schliessen"], [data-r="sheet"] [aria-label="Chiudi"] { min-height: 44px; }
+    [data-r="sheet"] [aria-label] svg { width: 26px; height: 26px; }
+    [data-r="sheet"] a[href="#top"] { display: inline-flex !important; align-items: center; min-height: 40px; }
+  }
+  @media (max-width: 520px) {
+    [data-r="sheet"] { max-width: 100% !important; }
+    [data-r="sheet"] h2 { font-size: 21.5px !important; }
+    [data-r="sheet"] [data-r="pad"] { padding: 22px 18px 34px !important; }
+  }
+  @media (max-width: 1180px) {
+    [data-r="navdesk"] { display: none !important; }
+    [data-r="burger"] { display: block !important; }
+    [data-r="langmob"] { display: block !important; margin-left: auto !important; }
+    [data-r="hdr"] { padding: 14px 18px !important; }
+    [data-r="logo"] { height: 46px !important; }
+  }
+  @media (min-width: 901px) and (max-width: 1180px) {
+    [data-r="sheet"] h2 { font-size: 26px !important; line-height: 1.15 !important; }
+    [data-r="sheet"] h3 { font-size: 17px !important; }
+    [data-r="sheet"] p { font-size: 15px !important; }
+    [data-r="sheet"] [aria-label] { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+    section { padding-left: 26px !important; padding-right: 26px !important; }
+    h1 { font-size: 40px !important; }
+  }
+  @media (max-width: 900px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-r="legalhero"] { padding-top: 50px !important; padding-bottom: 42px !important; }
+    [data-r="legalbody"] { padding-bottom: 64px !important; }
+    footer { padding: 46px 20px 30px !important; }
+    h1 { font-size: 30px !important; line-height: 1.2 !important; }
+    section h2 { font-size: 22px !important; line-height: 1.3 !important; margin-top: 40px !important; margin-bottom: 16px !important; }
+    section h3 { font-size: 17.5px !important; margin-top: 26px !important; }
+    section p { font-size: 16px !important; line-height: 1.72 !important; }
+    section ul { padding-left: 20px !important; }
+    section li { font-size: 16px !important; line-height: 1.68 !important; }
+    [data-r="g3f"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+    [data-r="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+  @media (max-width: 520px) {
+    h1 { font-size: 25px !important; }
+    section h2 { font-size: 20.5px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden; background:#ffffff;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="background:#ffffff; border-bottom:1px solid #e8edf3;">
+    <div data-r="hdr" style="max-width:1600px; margin:0 auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="RealXpert - FR.dc.html#top" style="display:block;">
+        <img src="uploads/logo-realxpert-color-trim.png" alt="RealXpert — Votre expert immobilier suisse" data-r="logo" style="display:block; height:60px; width:auto;" />
+      </a>
+      <nav data-r="navdesk" style="display:flex; flex:1; align-items:center; justify-content:space-between; gap:24px; margin-left:20px;">
+        <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:38px;">
+          <a href="RealXpert%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Notre solution</a>
+          <a href="Vendre - FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Vendre</a>
+          <a href="Acheter%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Acheter</a>
+          <a href="A%20propos%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">À propos</a>
+          <a href="Nos%20partenaires%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Nos partenaires</a>
+          <a href="Nous%20contacter%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Contact</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:18px;">
+          <details style="position:relative;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer;">FR ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:10px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:86px; z-index:60;">
+            <a href="Politique de confidentialite - DE.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">DE</a>
+            <a href="Politique de confidentialite - EN.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">EN</a>
+            <a href="Politique de confidentialite - IT.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">IT</a>
+            </div>
+          </details>
+          <div style="display:flex; flex-direction:column; align-items:stretch; gap:7px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:700; font-size:15.5px; padding:9px 20px; border-radius:10px; white-space:nowrap; text-align:center;">Essayer gratuitement</a>
+            <a href="#rx-login" style="font-size:15px; font-weight:600; color:#0c1f2c; opacity:0.9; display:inline-flex; align-items:center; justify-content:center; gap:7px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Mon compte
+            </a>
+          </div>
+        </div>
+      </nav>
+      <details data-r="langmob" style="display:none; position:relative; flex:0 0 auto; margin-right:14px;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer; min-height:44px; white-space:nowrap;">FR ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:6px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:110px; z-index:80;">
+            <a href="Politique de confidentialite - DE.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">DE</a>
+            <a href="Politique de confidentialite - EN.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">EN</a>
+            <a href="Politique de confidentialite - IT.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">IT</a>
+            </div>
+          </details>
+      <details data-r="burger" style="display:none; position:relative; flex:0 0 auto;">
+        <summary aria-label="Menu" style="list-style:none; display:flex; align-items:center; justify-content:center; width:46px; height:46px; border:none; background:transparent; color:#0c1f2c; cursor:pointer;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+        </summary>
+        <div style="position:absolute; top:calc(100% + 12px); right:0; width:min(80vw,320px); background:#ffffff; border:1px solid #e2e8ee; border-radius:14px; box-shadow:0 26px 50px -18px rgba(10,25,45,0.35); padding:8px 18px 18px; z-index:70;">
+          <a href="RealXpert - FR.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Notre solution</a>
+          <a href="Vendre - FR.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Vendre</a>
+          <a href="Acheter - FR.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Acheter</a>
+          <a href="A propos - FR.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">À propos</a>
+          <a href="Nos partenaires - FR.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Nos partenaires</a>
+          <a href="Nous contacter - FR.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Contact</a>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:800; font-size:16px; padding:14px 20px; border-radius:12px; text-align:center;">Essayer gratuitement</a>
+            <a href="#rx-login" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:15.5px; font-weight:700; color:#0c1f2c; padding:12px; border:1px solid #dce3ea; border-radius:12px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Mon compte
+            </a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <!-- ============ INTITULÉ ============ -->
+  <section data-r="legalhero" style="background:#f4f8fc; padding:70px 32px 62px; border-bottom:1px solid #e6eef7;">
+    <div style="max-width:840px; margin:0 auto;">
+      <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Informations légales</span>
+      <h1 style="font-size:48px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; color:#0c1f2c; margin:12px 0 0;">Politique de confidentialité</h1>
+    </div>
+  </section>
+
+  <!-- ============ CONTENU ============ -->
+  <section data-r="legalbody" style="background:#ffffff; padding:24px 32px 96px;">
+    <div style="max-width:840px; margin:0 auto;">
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">1. Qui sommes-nous ?</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">1.1 Responsable du traitement</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Le site realxpert.ch et les services RealXpert sont exploités par Urech &amp; Partners Sàrl, responsable du traitement de vos données personnelles.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Pour toute question relative à la protection de vos données personnelles, vous pouvez nous contacter à l’adresse contact@realxpert.ch.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">1.2 Objet de la politique de confidentialité</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">La présente politique de confidentialité explique comment RealXpert collecte et traite vos données personnelles dans le cadre de l’utilisation de ses services.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">2. Quelles données traitons-nous ?</h2>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Pour vous fournir les services RealXpert, nous traitons les données personnelles que vous nous communiquez ainsi que certaines données générées lors de votre utilisation de nos services.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">2.1 Données que vous nous communiquez</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque vous créez un compte ou utilisez RealXpert, nous pouvons notamment traiter :</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">vos données d’identification et de contact, telles que votre nom, prénom, adresse e-mail et numéro de téléphone ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">les informations que vous communiquez concernant votre projet immobilier, votre situation, vos besoins et vos objectifs ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">les informations personnelles, financières ou patrimoniales nécessaires aux services que vous choisissez d’utiliser ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">le contenu de vos conversations et de vos échanges avec RealXpert ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">les documents ou autres contenus que vous choisissez éventuellement de nous transmettre.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Vos données d’identification et de contact liées à votre compte — notamment votre nom, prénom, adresse e-mail et numéro de téléphone — sont conservées séparément des informations traitées par l’intelligence artificielle et ne lui sont pas directement associées.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert utilise uniquement les informations que vous choisissez de lui communiquer et ne recherche pas de données personnelles vous concernant auprès de sources externes.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Nous vous invitons à ne communiquer que les informations nécessaires à l’utilisation des services concernés.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">2.2 Données collectées lors de votre utilisation</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque vous utilisez RealXpert, certaines données peuvent être collectées automatiquement, notamment :</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">des données techniques et de connexion ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">des informations relatives à l’utilisation de nos services ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">des informations collectées au moyen de cookies ou de technologies similaires.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Ces données sont notamment utilisées pour permettre le fonctionnement, la sécurité et l’amélioration de nos services.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">3. Pourquoi utilisons-nous vos données ?</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.1 Fournir les services RealXpert</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Nous utilisons les informations que vous nous communiquez afin de vous fournir les services RealXpert, notamment pour :</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">comprendre et accompagner votre projet immobilier ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">vous fournir les informations, analyses et recommandations demandées ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">adapter les services à votre situation et à vos besoins ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">gérer votre compte et votre accès aux services ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">assurer le suivi de vos demandes.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque vous achetez un accès supplémentaire aux services RealXpert, les données nécessaires peuvent également être traitées afin de gérer votre achat et l’accès aux services concernés.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.2 Utilisation de l’intelligence artificielle</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Certaines fonctionnalités de RealXpert reposent sur des technologies d’intelligence artificielle.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Dans ce cadre, les informations que vous communiquez et qui sont nécessaires à la fourniture du service peuvent être traitées afin de vous fournir les réponses, informations, analyses et recommandations demandées dans le cadre de votre projet immobilier.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Comme indiqué précédemment, vos données d’identification et de contact liées à votre compte sont conservées séparément des informations traitées par l’intelligence artificielle et ne lui sont pas directement associées.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.3 Fonctionnement et amélioration de RealXpert</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Nous pouvons également traiter certaines données lorsque cela est nécessaire pour :</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">assurer le fonctionnement et la sécurité de RealXpert ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">fournir une assistance aux utilisateurs ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">maintenir et améliorer nos services ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">communiquer avec vous concernant votre compte ou les services utilisés ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">respecter nos obligations légales.</li>
+        </ul>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.4 Communications et accompagnement de votre projet</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert peut utiliser vos coordonnées pour communiquer avec vous dans le cadre de votre utilisation de ses services et de votre projet immobilier.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Nous pouvons notamment vous contacter afin de répondre à vos demandes, vous accompagner dans votre projet, assurer le suivi des services utilisés, vous informer sur les possibilités d’accompagnement proposées par RealXpert et, lorsque cela est pertinent, vous proposer des services ou des professionnels susceptibles de répondre à vos besoins.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Nous pouvons également vous adresser des conseils, informations, actualités, recommandations et communications concernant RealXpert, ses services ou votre projet immobilier, dans les conditions prévues par la législation applicable.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque votre consentement est requis pour certaines communications, celles-ci vous sont adressées sur la base de celui-ci. Vous pouvez retirer votre consentement ou vous opposer aux communications concernées à tout moment, notamment au moyen du lien de désinscription lorsqu’il est disponible ou en nous contactant à l’adresse contact@realxpert.ch.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Les communications nécessaires à la gestion de votre compte, à la fourniture des services, au suivi d’une demande ou à la relation avec RealXpert peuvent continuer à vous être adressées lorsqu’elles sont nécessaires à ces finalités.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">3.5 Bases juridiques</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque la législation applicable l’exige, nous traitons vos données sur la base juridique correspondant à la finalité concernée.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Selon les circonstances, le traitement peut notamment être nécessaire à la fourniture d’un service que vous demandez, au respect d’une obligation légale ou à nos intérêts légitimes, notamment pour assurer le fonctionnement, la sécurité et l’amélioration de nos services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque votre consentement est requis, le traitement concerné repose sur celui-ci.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">4. Avec qui vos données peuvent-elles être partagées ?</h2>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert ne communique vos données personnelles à des tiers que lorsque cela est nécessaire à la fourniture de ses services, à votre accompagnement ou au respect de ses obligations légales.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.1 Prestataires de services</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert fait appel à des prestataires externes pour assurer certaines fonctions nécessaires à la fourniture et au fonctionnement de ses services.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Selon les services utilisés, certaines données peuvent notamment être traitées par des prestataires intervenant dans :</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">l’hébergement et les services techniques ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">les services d’intelligence artificielle ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">le traitement des paiements ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">l’envoi de communications ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">la sécurité, l’analyse et l’amélioration des services.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Seules les données nécessaires à la réalisation des services concernés sont communiquées ou rendues accessibles à ces prestataires.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.2 Experts et partenaires</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Dans le cadre de votre projet immobilier, RealXpert peut vous proposer une mise en relation avec des professionnels susceptibles de vous accompagner, notamment des experts et professionnels de l’immobilier.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque vous souhaitez bénéficier d’une telle mise en relation ou d’un service nécessitant l’intervention d’un professionnel, les informations nécessaires à votre accompagnement peuvent lui être communiquées.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.3 Obligations légales</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert peut également communiquer des données personnelles lorsque cela est nécessaire pour respecter une obligation légale, répondre à une demande d’une autorité compétente ou protéger ses droits conformément à la législation applicable.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">4.4 Évolution de l’entreprise</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">En cas de réorganisation, fusion, acquisition, cession ou transfert de tout ou partie de l’activité de RealXpert, les données personnelles concernées peuvent être transférées au nouveau responsable ou à l’entité concernée, dans le respect de la législation applicable en matière de protection des données.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">5. Où et combien de temps vos données sont-elles conservées ?</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">5.1 Stockage et traitement des données</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Les données personnelles conservées directement par RealXpert sont hébergées en Suisse.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Selon les services utilisés et les prestataires nécessaires à leur fourniture, certaines données peuvent également être traitées en Suisse, dans des pays de l’Union européenne ou aux États-Unis.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque des données sont traitées à l’étranger, RealXpert veille à ce que leur traitement respecte les exigences de la législation applicable en matière de protection des données et, lorsque cela est nécessaire, repose sur les garanties appropriées prévues par celle-ci.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">5.2 Durée de conservation</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Nous conservons vos données personnelles aussi longtemps qu’elles sont nécessaires à la fourniture des services RealXpert et aux finalités pour lesquelles elles ont été collectées.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">La durée de conservation dépend notamment de la nature des données, des services utilisés, de la durée de votre relation avec RealXpert et des éventuelles obligations légales applicables.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque les données ne sont plus nécessaires, elles sont supprimées ou anonymisées, sous réserve des données que nous devons conserver plus longtemps en raison d’une obligation légale ou d’un autre motif légitime.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">5.3 Sécurité des données</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert met en œuvre des mesures techniques et organisationnelles appropriées afin de protéger vos données personnelles contre la perte, l’accès non autorisé, la modification, la divulgation ou toute autre utilisation non autorisée.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">6. Cookies et technologies similaires</h2>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert peut utiliser des cookies et des technologies similaires afin d’assurer le fonctionnement et la sécurité de ses services, de mémoriser certaines préférences et de mieux comprendre leur utilisation afin de les améliorer.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Lorsque cela est requis, vous pouvez accepter, refuser ou modifier vos préférences concernant les cookies non nécessaires au fonctionnement du service.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Vous pouvez également gérer certains cookies directement depuis les paramètres de votre navigateur.</p>
+        <h2 style="font-size:26px; font-weight:800; line-height:1.25; letter-spacing:-0.015em; color:#0c1f2c; margin:56px 0 20px; padding-top:26px; border-top:1px solid #e8eef4;">7. Vos droits et nous contacter</h2>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">7.1 Vos droits</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Vous pouvez, dans les conditions prévues par la législation applicable, notamment demander :</p>
+        <ul style="margin:0 0 18px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">l’accès aux données personnelles vous concernant ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">la rectification de données inexactes ou incomplètes ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">la suppression de vos données personnelles ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">la remise ou la transmission de certaines de vos données lorsque ce droit est applicable ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">la limitation de certains traitements ou vous y opposer lorsque ces droits sont applicables ;</li>
+          <li style="font-size:16.5px; line-height:1.7; color:#3d4f60; text-wrap:pretty;">le retrait de votre consentement lorsqu’un traitement repose sur celui-ci.</li>
+        </ul>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Vous pouvez également déposer une réclamation auprès de l’autorité compétente en matière de protection des données lorsque les conditions légales sont réunies.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">7.2 Exercer vos droits et nous contacter</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Pour toute question relative à vos données personnelles ou pour exercer vos droits, vous pouvez contacter :</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px;">Urech &amp; Partners Sàrl<br>contact@realxpert.ch</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">Afin de protéger vos données, nous pouvons vous demander de confirmer votre identité lorsque cela est nécessaire avant de donner suite à votre demande.</p>
+        <h3 style="font-size:18.5px; font-weight:800; line-height:1.35; color:#1d4fb0; margin:32px 0 12px;">7.3 Modification de la politique de confidentialité</h3>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">RealXpert peut modifier la présente politique de confidentialité afin de tenir compte notamment de l’évolution de ses services ou des exigences légales applicables.</p>
+        <p style="font-size:16.5px; line-height:1.78; color:#3d4f60; margin:0 0 18px; text-wrap:pretty;">La version en vigueur est celle publiée sur RealXpert.</p>
+        <p style="font-size:15px; font-weight:700; color:#5a6b78; margin:44px 0 0; padding-top:24px; border-top:1px solid #e8eef4;">Dernière mise à jour : 03.09.2026</p>
+    </div>
+  </section>
+
+  <footer style="background:#16305c; color:#a9bfd8; padding:60px 32px 36px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div data-r="g3f" style="display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:56px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.12);">
+
+        <div>
+          <div style="font-size:18px; font-weight:800; color:#fff; margin-bottom:12px;">S'abonner à la newsletter</div>
+          <p style="font-size:14px; line-height:1.6; margin:0 0 20px; max-width:400px;">Recevez les dernières tendances du marché immobilier suisse et des conseils pratiques pour vendre ou acheter au meilleur prix.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; max-width:440px;">
+            <input type="email" placeholder="Votre adresse e-mail" style="flex:1; min-width:200px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); border-radius:10px; padding:13px 16px; font-family:inherit; font-size:14.5px; color:#fff; outline:none;" />
+            <button style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:10px; cursor:pointer; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">S'abonner maintenant</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:#fff; margin-bottom:18px;">RealXpert</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="A propos - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Découvrir RealXpert</a>
+            <a href="Vendre - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Vendre</a>
+            <a href="Acheter - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Acheter</a>
+            <a href="A propos - FR.dc.html" style="color:#a9bfd8; font-size:14px;">À propos de nous</a>
+            <a href="Nos partenaires - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Nos partenaires</a>
+            <a href="Nous contacter - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Contact</a>
+            <a href="Politique de confidentialite - FR.dc.html#top" style="color:#a9bfd8; font-size:14px;">Politique de confidentialité</a>
+            <a href="Conditions generales - FR.dc.html#top" style="color:#a9bfd8; font-size:14px;">Conditions générales</a>
+          </div>
+        </div>
+
+        <div>
+          <img src="uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.png" alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />
+          <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Service clientèle</div>
+          <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Ouvert du lundi au vendredi<br>de 8h30 à 18h30 · Dans toute la Suisse</p>
+          <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
+          <a href="Nous contacter - FR.dc.html" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Nous contacter →</a>
+        </div>
+
+      </div>
+      <p style="font-size:13px; margin:24px 0 0; color:#7690b0;">2026 © RealXpert — Expertise immobilière suisse. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <div id="rx-signup" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Fermer" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Continuez gratuitement avec RealXpert</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Ne prenez plus seul les décisions qui peuvent vous coûter des dizaines de milliers de francs.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Gratuit pour commencer</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Sans engagement</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Premiers conseils personnalisés</div></div><div style="height:1px; background:#e2e8ee; margin:24px 0 18px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Encore 30 secondes pour retrouver votre projet à tout moment et vérifier chaque décision importante avant de vous engager.</p><div style="display:flex; flex-direction:column; gap:13px;"><div style="display:flex; gap:11px;"><input type="text" placeholder="Prénom" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="text" placeholder="Nom" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"></div><input type="email" placeholder="E-mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="tel" placeholder="Téléphone" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Mot de passe" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-top:2px;"><input type="checkbox" style="flex:0 0 auto; width:17px; height:17px; margin:2px 0 0; accent-color:#1d4fb0; cursor:pointer;"><span style="font-size:14px; line-height:1.5; color:#5a6b78;">Je souhaite recevoir les conseils RealXpert pour mieux réussir mon projet immobilier.</span></label><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Obtenir mes premiers conseils →</button><p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:14px 0 0; text-align:center;">En continuant, vous acceptez nos <a href="Conditions generales - FR.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Conditions générales</a> et reconnaissez avoir pris connaissance de notre <a href="Politique de confidentialite - FR.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Politique de confidentialité</a>.</p></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Déjà un compte ? <a href="#rx-login" style="color:#1d4fb0; font-weight:700;">Se connecter</a></p></div></div></div>
+  <div id="rx-login" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Fermer" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Poursuivez votre projet immobilier</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Reconnectez-vous pour retrouver votre projet et vous assurer de faire les bons choix.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Retrouvez votre projet là où vous l’avez laissé</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Vérifiez chaque décision importante avant de vous engager</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Prenez les bonnes décisions au bon moment</div></div><div style="height:1px; background:#eef2f6; margin:28px 0 16px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Saisissez vos identifiants pour poursuivre votre projet</p><div style="display:flex; flex-direction:column; gap:13px;"><input type="email" placeholder="E-mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Mot de passe" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><div style="display:flex; justify-content:flex-end; margin-top:-4px;"><a href="#top" style="font-size:13.5px; color:#1d4fb0; font-weight:600;">Mot de passe oublié ?</a></div><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Poursuivre mon projet →</button></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Pas encore de compte ? <a href="#rx-signup" style="color:#1d4fb0; font-weight:700;">Commencer gratuitement</a></p></div></div></div>
+</div>
+</x-dc>
+</body>
+</html>

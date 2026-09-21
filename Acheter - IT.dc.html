@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rx-panel{display:none;}
+.rx-panel:target{display:flex;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',system-ui,sans-serif; color:#0c1f2c; }
+  a { text-decoration:none; }
+  .rx-btn { transition:transform .15s ease, box-shadow .15s ease, filter .15s ease; }
+  details.tmoin { display:flex; flex-direction:column; }
+  details.tmoin > summary { order:2; margin-top:16px; list-style:none; }
+  details.tmoin > summary::-webkit-details-marker { display:none; }
+  details.tmoin > .tmoin-body { order:1; }
+  details.tmoin > summary .lbl-open { display:none; }
+  details.tmoin[open] > summary .lbl-closed { display:none; }
+  details.tmoin[open] > summary .lbl-open { display:inline-block; }
+  .rx-btn:hover { transform:translateY(-2px); filter:brightness(1.06); }
+  .rx-btn:active { transform:translateY(1px) scale(0.98); filter:brightness(0.96); }
+  summary::-webkit-details-marker { display:none; }
+  img { max-width:100%; }
+  @media (max-width: 900px) {
+    [data-r="sheet"] { width: 100% !important; max-width: 460px !important; }
+    [data-r="sheet"] h2 { font-size: 23px !important; line-height: 1.2 !important; }
+    [data-r="sheet"] input[type="text"], [data-r="sheet"] input[type="email"], [data-r="sheet"] input[type="tel"], [data-r="sheet"] input[type="password"] { font-size: 16px !important; padding: 14px 15px !important; }
+    [data-r="sheet"] button, [data-r="sheet"] [aria-label="Fermer"], [data-r="sheet"] [aria-label="Close"], [data-r="sheet"] [aria-label="Schliessen"], [data-r="sheet"] [aria-label="Chiudi"] { min-height: 44px; }
+    [data-r="sheet"] [aria-label] svg { width: 26px; height: 26px; }
+    [data-r="sheet"] a[href="#top"] { display: inline-flex !important; align-items: center; min-height: 40px; }
+  }
+  @media (max-width: 520px) {
+    [data-r="sheet"] { max-width: 100% !important; }
+    [data-r="sheet"] h2 { font-size: 21.5px !important; }
+    [data-r="sheet"] [data-r="pad"] { padding: 22px 18px 34px !important; }
+  }
+  @media (max-width: 1180px) {
+    [data-r="navdesk"] { display: none !important; }
+    [data-r="burger"] { display: block !important; }
+    [data-r="langmob"] { display: block !important; margin-left: auto !important; }
+    [data-r="qmark"] { display: none !important; }
+    [data-r="hdr"] { padding: 14px 18px !important; }
+    [data-r="logo"] { height: 46px !important; }
+  }
+  @media (min-width: 901px) and (max-width: 1180px) {
+    [data-r="sheet"] h2 { font-size: 26px !important; line-height: 1.15 !important; }
+    [data-r="sheet"] h3 { font-size: 17px !important; }
+    [data-r="sheet"] p { font-size: 15px !important; }
+    [data-r="sheet"] [aria-label] { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+    [data-r="pad"] { padding-left: 24px !important; padding-right: 24px !important; }
+    [data-r="g3"] { gap: 20px !important; }
+    section { padding-left: 26px !important; padding-right: 26px !important; padding-top: 70px !important; padding-bottom: 70px !important; }
+    h1 { font-size: 38px !important; line-height: 1.16 !important; }
+    h2 { font-size: 34px !important; line-height: 1.18 !important; }
+    h3 { font-size: 21px !important; }
+    section p { font-size: 17px !important; }
+    [data-r="hero"] { padding-top: 60px !important; padding-bottom: 60px !important; min-height: 0 !important; }
+    [data-r="big"] { font-size: 40px !important; }
+    [data-r="huge"] { font-size: 50px !important; }
+  }
+  @media (max-width: 900px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 58px !important; padding-bottom: 58px !important; }
+    footer { padding: 46px 20px 30px !important; }
+    h1 { font-size: 30px !important; line-height: 1.18 !important; }
+    h2 { font-size: 26px !important; line-height: 1.22 !important; }
+    h3 { font-size: 20px !important; line-height: 1.32 !important; }
+    section p { font-size: 16.5px !important; line-height: 1.65 !important; }
+    [data-r="hero"] { padding: 46px 18px 46px !important; min-height: 0 !important; }
+    [data-r="heroinner"] { padding-left: 0 !important; }
+    [data-r="herocta"] { flex-direction: column !important; flex-wrap: wrap !important; gap: 12px !important; }
+    [data-r="herocta"] > a { width: 100% !important; text-align: center !important; white-space: normal !important; font-size: 15.5px !important; padding: 15px 18px !important; }
+    [data-r="herotrust"] { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; padding: 16px 18px !important; width: 100% !important; }
+    [data-r="tdiv"] { display: none !important; }
+    [data-r="g3"], [data-r="g3f"], [data-r="g3s"] { grid-template-columns: 1fr !important; gap: 26px !important; }
+    [data-r="splitimg"] { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 24px !important; }
+    [data-r="si-head"] { order: 1 !important; }
+    [data-r="si-img"] { order: 2 !important; }
+    [data-r="si-text"] { order: 3 !important; }
+    [data-r="si-head"] h2 { margin-bottom: 0 !important; }
+    [data-r="g3s"] > div { border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.12) !important; padding: 26px 6px !important; }
+    [data-r="hide"] { display: none !important; }
+    [data-r="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-r="padall"] { padding: 26px 20px !important; }
+    [data-r="calc"] { padding: 26px 18px !important; }
+    [data-r="steprow"] { gap: 13px !important; }
+    [data-r="big"] { font-size: 33px !important; }
+    [data-r="huge"] { font-size: 40px !important; }
+    [data-r="mid"] { font-size: 17.5px !important; }
+    [data-r="ctabtn"] { width: 100% !important; text-align: center !important; white-space: normal !important; font-size: 16px !important; padding: 16px 18px !important; }
+  }
+  @media (max-width: 520px) {
+    h1 { font-size: 26px !important; }
+    h2 { font-size: 23px !important; }
+    [data-r="huge"] { font-size: 34px !important; }
+    [data-r="big"] { font-size: 29px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden; background:#ffffff;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="background:#ffffff; border-bottom:1px solid #e8edf3;">
+    <div data-r="hdr" style="max-width:1600px; margin:0 auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="RealXpert-IT.dc.html#top" style="display:block;">
+        <img src="uploads/logo-realxpert-color-trim.png" alt="RealXpert — Il vostro esperto immobiliare svizzero" data-r="logo" style="display:block; height:60px; width:auto;" />
+      </a>
+      <nav data-r="navdesk" style="display:flex; flex:1; align-items:center; justify-content:space-between; gap:24px; margin-left:20px;">
+        <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:38px;">
+          <a href="RealXpert-IT.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">La nostra soluzione</a>
+          <a href="Vendre - IT.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Vendere</a>
+          <a href="Acheter - IT.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Comprare</a>
+          <a href="A propos - IT.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Chi siamo</a>
+          <a href="Nos partenaires - IT.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">I nostri partner</a>
+          <a href="Nous contacter - IT.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Contatto</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:18px;">
+          <details style="position:relative;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer;">IT ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:10px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:86px; z-index:60;">
+            <a href="Acheter - FR.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">FR</a>
+            <a href="Acheter - DE.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">DE</a>
+            <a href="Acheter - EN.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">EN</a>
+            </div>
+          </details>
+          <div style="display:flex; flex-direction:column; align-items:stretch; gap:7px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:700; font-size:15.5px; padding:9px 20px; border-radius:10px; white-space:nowrap; text-align:center;">Prova gratis</a>
+            <a href="#rx-login" style="font-size:15px; font-weight:600; color:#0c1f2c; opacity:0.9; display:inline-flex; align-items:center; justify-content:center; gap:7px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Il mio account
+            </a>
+          </div>
+        </div>
+      </nav>
+      <details data-r="langmob" style="display:none; position:relative; flex:0 0 auto; margin-right:14px;">
+            <summary style="list-style:none; display:inline-flex; align-items:center; gap:6px; font-size:16.5px; font-weight:700; color:#0c1f2c; cursor:pointer; min-height:44px; white-space:nowrap;">IT ▾</summary>
+            <div style="position:absolute; top:100%; right:0; margin-top:6px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.5); min-width:110px; z-index:80;">
+            <a href="Acheter - FR.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">FR</a>
+            <a href="Acheter - DE.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">DE</a>
+            <a href="Acheter - EN.dc.html#top" style="display:block; padding:9px 16px; border-radius:8px; font-size:14.5px; text-decoration:none; font-weight:600; color:#33475f; background:transparent; transition:background .12s ease, transform .08s ease;" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">EN</a>
+            </div>
+          </details>
+      <details data-r="burger" style="display:none; position:relative; flex:0 0 auto;">
+        <summary aria-label="Menu" style="list-style:none; display:flex; align-items:center; justify-content:center; width:46px; height:46px; border:none; background:transparent; color:#0c1f2c; cursor:pointer;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+        </summary>
+        <div style="position:absolute; top:calc(100% + 12px); right:0; width:min(80vw,320px); background:#ffffff; border:1px solid #e2e8ee; border-radius:14px; box-shadow:0 26px 50px -18px rgba(10,25,45,0.35); padding:8px 18px 18px; z-index:70;">
+          <a href="RealXpert-IT.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">La nostra soluzione</a>
+          <a href="Vendre - IT.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Vendere</a>
+          <a href="Acheter - IT.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Comprare</a>
+          <a href="A propos - IT.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Chi siamo</a>
+          <a href="Nos partenaires - IT.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">I nostri partner</a>
+          <a href="Nous contacter - IT.dc.html#top" style="display:block; font-size:16.5px; font-weight:700; color:#0c1f2c; padding:14px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Contatto</a>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <a href="#rx-signup" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:800; font-size:16px; padding:14px 20px; border-radius:12px; text-align:center;">Prova gratis</a>
+            <a href="#rx-login" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:15.5px; font-weight:700; color:#0c1f2c; padding:12px; border:1px solid #dce3ea; border-radius:12px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Il mio account
+            </a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <!-- ============ HERO ACHETER ============ -->
+  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/LA BONNE.png'); background-size:cover; background-position:center; border-bottom:5px solid transparent; border-image:linear-gradient(90deg,#ff5a3c,#e01f3d) 1; padding:90px 32px 80px; min-height:82vh; display:flex; align-items:flex-start;">
+    <div data-r="heroinner" style="max-width:1320px; margin:0 auto; width:100%; padding-left:12px;">
+      <div style="max-width:680px;">
+        <span style="display:inline-block; font-size:13px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#ffffff; background:linear-gradient(135deg,#ff5a3c,#e01f3d); padding:7px 15px; border-radius:100px; margin-bottom:20px;">Comprare</span>
+        <h1 style="font-size:46px; font-weight:800; line-height:1.14; letter-spacing:-0.02em; margin:0 0 22px; color:#ffffff; text-shadow:0 2px 24px rgba(8,20,40,0.55);">Comprate il vostro immobile al miglior prezzo, senza pagare decine di migliaia di franchi di troppo</h1>
+        <p style="font-size:17.5px; line-height:1.7; color:#ffffff; font-weight:600; margin:0 0 32px; max-width:620px; text-shadow:0 1px 10px rgba(8,20,40,0.5);">Un acquisto impegna diverse centinaia di migliaia, se non diversi milioni di franchi, e ogni decisione su prezzo, verifiche, offerta o trattativa influenza ciò che pagherete davvero. Con RealXpert sapete cosa verificare, fin dove trattare e quando rinunciare, per evitare che una decisione sbagliata vi costi decine di migliaia di franchi.</p>
+        <div data-r="herocta" style="display:flex; flex-wrap:nowrap; gap:14px; margin-bottom:22px;">
+          <a href="RealXpert-IT.dc.html#top" class="rx-btn" data-r="ctabtn" style="display:inline-block; white-space:nowrap; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; font-weight:800; font-size:16.5px; padding:17px 32px; border-radius:12px; box-shadow:0 18px 38px -10px rgba(224,31,61,0.75); text-shadow:0 1px 2px rgba(0,0,0,0.25);">Verificare prima di comprare →</a>
+          <a href="#risque-local" class="rx-btn" style="display:inline-block; white-space:nowrap; background:rgba(255,255,255,0.16); border:2px solid #ffffff; color:#fff; font-weight:800; font-size:16.5px; padding:16px 28px; border-radius:12px; backdrop-filter:blur(4px);">Vedere quanto può costarmi un errore</a>
+        </div>
+        <div data-r="herotrust" style="display:inline-flex; flex-wrap:wrap; align-items:center; gap:10px 22px; background:#ffffff; border:1px solid #e2e8ee; padding:14px 24px; border-radius:14px; box-shadow:0 16px 34px -14px rgba(8,20,40,0.45);">
+          <span style="display:inline-flex; align-items:center; gap:9px; font-size:15px; font-weight:700; color:#0c2740;"><span style="width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;">✓</span>Senza impegno</span>
+          <span data-r="tdiv" style="width:1px; height:20px; background:#e2e8ee;"></span>
+          <span style="display:inline-flex; align-items:center; gap:9px; font-size:15px; font-weight:700; color:#0c2740;"><span style="width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;">✓</span>Accesso immediato</span>
+          <span data-r="tdiv" style="width:1px; height:20px; background:#e2e8ee;"></span>
+          <span style="display:inline-flex; align-items:center; gap:9px; font-size:15px; font-weight:700; color:#0c2740;"><span style="width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;">✓</span>Primi consigli gratuiti</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RISQUE / CALCULATEUR ============ -->
+  <section id="risque-local" style="background:#ffffff; padding:84px 32px;">
+    <div style="max-width:1000px; margin:0 auto; text-align:center;">
+      <h2 style="font-size:44px; font-weight:800; line-height:1.16; letter-spacing:-0.025em; margin:0 0 20px; color:#0c1f2c;">Il vero rischio è pagare troppo senza sapere che avreste potuto ottenere di meglio</h2>
+      <p style="font-size:19px; font-weight:700; color:#c22f24; margin:0 0 20px;">Ciò che pagate davvero dipende spesso dalle decisioni prese prima dell’acquisto</p>
+      <p style="font-size:16.5px; line-height:1.75; color:#42556a; margin:0 auto 14px; max-width:820px;">In un acquisto immobiliare non serve necessariamente commettere un enorme errore per pagare molto più del necessario. Un’offerta fatta troppo in fretta per paura di perdere l’immobile, lavori sottovalutati, un valore mal stimato o una trattativa interrotta troppo presto possono bastare a rappresentare <strong style="color:#0c1f2c;">CHF 30'000, CHF 70'000 o più</strong> su una transazione importante.</p>
+      <p style="font-size:16.5px; line-height:1.75; color:#42556a; margin:0 auto 40px; max-width:820px;">La cosa più difficile è che, una volta firmato l’acquisto, non saprete sempre che avreste potuto ottenere condizioni migliori. RealXpert vi aiuta a verificare gli elementi giusti prima di agire, a capire cosa può davvero influenzare il prezzo e a decidere finché è ancora possibile confrontare, trattare, adeguare la vostra offerta o rinunciare.</p>
+
+      <div data-r="calc" style="background:linear-gradient(120deg,#e8574a 0%,#d23b38 55%,#bd2f30 100%); border-radius:24px; box-shadow:0 30px 60px -26px rgba(180,55,50,0.55); padding:42px 46px; margin:0 auto 26px; max-width:820px;">
+        <div data-r="mid" style="font-size:20px; font-weight:800; color:#ffffff;">Qual è il prezzo dell’immobile che intendete comprare?</div>
+        <div data-r="big" style="font-size:46px; font-weight:800; color:#ffffff; line-height:1; margin:12px 0 26px;">{{ buyValFmt }}</div>
+        <input type="range" id="rx-buyrange" min="400000" max="9000000" step="50000" onInput="{{ setBuy }}" style="width:100%; max-width:620px; accent-color:#ffffff; cursor:pointer;" />
+        <div style="height:1px; background:rgba(255,255,255,0.28); margin:34px 0 30px;"></div>
+        <div data-r="mid" style="font-size:19px; font-weight:800; color:#ffe4de;">Se pagate solo il 5% di troppo, questo rappresenta</div>
+        <div data-r="huge" style="font-size:62px; font-weight:800; color:#ffffff; line-height:1; letter-spacing:-0.02em; margin-top:12px;">CHF {{ buyGainFmt }}</div>
+      </div>
+
+      <p style="font-size:20px; line-height:1.5; color:#0c1f2c; font-weight:700; max-width:760px; margin:0 auto 34px;">A seconda dell’immobile, del mercato e della situazione del venditore, il margine di trattativa può essere inesistente, raggiungere diversi punti percentuali o talvolta superare il 10%.</p>
+      <a href="RealXpert-IT.dc.html#top" class="rx-btn" data-r="ctabtn" style="display:inline-block; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; font-weight:800; font-size:16.5px; padding:17px 34px; border-radius:12px; box-shadow:0 18px 38px -12px rgba(224,31,61,0.7);">Sapere fin dove trattare →</a>
+    </div>
+  </section>
+
+  <!-- ============ DÉCISIONS CLÉS ============ -->
+  <section style="background:#eceef0; padding:84px 32px;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 52px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#c22f24;">I momenti che contano</span>
+        <h2 style="font-size:42px; font-weight:800; line-height:1.16; letter-spacing:-0.025em; margin:14px 0 0; color:#0c1f2c;">Le decisioni che possono cambiare ciò che pagherete davvero</h2>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+          <div data-r="pad" style="background:#fff; border:1px solid #e6e9ec; border-radius:18px; padding:34px 38px; box-shadow:0 18px 44px -32px rgba(20,40,70,0.4);">
+            <div data-r="steprow" style="display:flex; align-items:flex-start; gap:18px;">
+              <span style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex:0 0 auto;">{{ s.n }}</span>
+              <div style="flex:1; min-width:0;">
+                <h3 style="font-size:21px; font-weight:800; line-height:1.3; margin:6px 0 4px; color:#0c1f2c;">{{ s.title }}</h3>
+                <sc-if value="{{ s.tagline }}" hint-placeholder-val="">
+                  <p style="font-size:15.5px; font-weight:700; color:#c22f24; margin:0 0 10px;">{{ s.tagline }}</p>
+                </sc-if>
+                <div style="display:flex; flex-direction:column; gap:11px; margin-top:8px;">
+                  <sc-for list="{{ s.paras }}" as="p" hint-placeholder-count="2">
+                    <p style="font-size:16px; line-height:1.7; color:#48535e; margin:0;">{{ p }}</p>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="text-align:center; margin-top:40px;">
+        <a href="RealXpert-IT.dc.html#top" class="rx-btn" data-r="ctabtn" style="display:inline-block; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; font-weight:800; font-size:16.5px; padding:17px 34px; border-radius:12px; box-shadow:0 18px 38px -12px rgba(224,31,61,0.7);">Analizzare la mia situazione d’acquisto →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEUL FACE À LA DÉCISION ============ -->
+  <section style="background:#ffffff; padding:88px 32px;">
+    <div data-r="splitimg" style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.05fr 0.95fr; grid-template-rows:auto auto; gap:0 60px; align-items:center;">
+      <div data-r="si-head" style="grid-column:1; grid-row:1;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#c22f24;">Il vostro punto di riferimento</span>
+        <h2 style="font-size:38px; font-weight:800; line-height:1.18; letter-spacing:-0.025em; margin:14px 0 20px; color:#0c1f2c;">Al momento di decidere, siete spesso soli davanti alla scelta</h2>
+      </div>
+      <div data-r="si-text" style="grid-column:1; grid-row:2;">
+        <p style="font-size:16.5px; line-height:1.7; color:#48535e; margin:0 0 18px;">Durante il vostro acquisto riceverete informazioni e pareri da molte persone.</p>
+        <div style="display:flex; flex-direction:column; gap:12px; margin:0 0 20px;">
+          <div style="display:flex; align-items:flex-start; gap:12px;"><span style="width:7px; height:7px; border-radius:50%; background:#e01f3d; flex:0 0 auto; margin-top:9px;"></span><span style="font-size:16px; line-height:1.6; color:#48535e;">L’<strong style="color:#0c1f2c;">agente</strong> conosce l’immobile e rappresenta la vendita.</span></div>
+          <div style="display:flex; align-items:flex-start; gap:12px;"><span style="width:7px; height:7px; border-radius:50%; background:#e01f3d; flex:0 0 auto; margin-top:9px;"></span><span style="font-size:16px; line-height:1.6; color:#48535e;">La <strong style="color:#0c1f2c;">banca</strong> analizza il vostro finanziamento.</span></div>
+          <div style="display:flex; align-items:flex-start; gap:12px;"><span style="width:7px; height:7px; border-radius:50%; background:#e01f3d; flex:0 0 auto; margin-top:9px;"></span><span style="font-size:16px; line-height:1.6; color:#48535e;">Il <strong style="color:#0c1f2c;">venditore</strong> difende naturalmente i propri interessi.</span></div>
+          <div style="display:flex; align-items:flex-start; gap:12px;"><span style="width:7px; height:7px; border-radius:50%; background:#e01f3d; flex:0 0 auto; margin-top:9px;"></span><span style="font-size:16px; line-height:1.6; color:#48535e;">Le <strong style="color:#0c1f2c;">persone care</strong> vi danno il loro parere.</span></div>
+        </div>
+        <p style="font-size:16.5px; line-height:1.7; color:#48535e; margin:0 0 16px;">Ma quando bisogna decidere se l’immobile è davvero adatto, se il suo prezzo è coerente, quanto offrire, fin dove trattare o se sia meglio rinunciare, <strong style="color:#0c1f2c;">siete voi a dover decidere</strong>. I pareri esterni possono aiutare, ma non bastano sempre a sapere qual è la decisione giusta per la vostra situazione.</p>
+        <p style="font-size:16.5px; line-height:1.7; color:#48535e; margin:0 0 24px;">Una cattiva valutazione del prezzo, un’offerta troppo alta o una decisione presa sotto pressione può farvi perdere molto denaro senza che ve ne rendiate conto immediatamente.</p>
+        <div data-r="pad" style="background:#f5f6f7; border-left:4px solid #e01f3d; border-radius:6px; padding:22px 26px;">
+          <p style="font-size:16.5px; line-height:1.7; color:#0c1f2c; font-weight:600; margin:0;">RealXpert diventa il vostro punto di riferimento per tutto l’acquisto: uno spazio neutrale per verificare ciò che conta davvero, confrontare le vostre opzioni e prendere le vostre decisioni con gli elementi giusti prima di impegnarvi.</p>
+        </div>
+      </div>
+      <div data-r="si-img" style="grid-column:2; grid-row:1 / span 2; border-radius:18px; overflow:hidden; box-shadow:0 34px 74px -38px rgba(20,40,70,0.5); aspect-ratio:16/13;">
+        <img src="uploads/5739C7A9-B6D4-4B72-A492-C3D2F39150D2.PNG" alt="Acquirente solo davanti alla propria decisione" style="width:100%; height:100%; object-fit:cover; display:block;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SITUATION ÉVOLUE ============ -->
+  <section style="background:#eceef0; padding:88px 32px;">
+    <div style="max-width:860px; margin:0 auto; text-align:center;">
+      <span style="font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#c22f24;">Un accompagnamento continuo</span>
+      <h2 style="font-size:42px; font-weight:800; line-height:1.16; letter-spacing:-0.025em; margin:14px 0 28px; color:#0c1f2c;">La vostra situazione evolve, RealXpert la segue con voi</h2>
+      <p style="font-size:18.5px; line-height:1.7; color:#2c3742; margin:0 auto 22px; max-width:720px;">Compare un nuovo immobile, è prevista una visita, va fatta un’offerta o il venditore torna con una controproposta: <strong style="color:#0c1f2c;">ogni nuovo elemento può cambiare la decisione da prendere.</strong></p>
+      <p style="font-size:17px; line-height:1.75; color:#5a6570; margin:0 auto 28px; max-width:680px;">RealXpert tiene conto del vostro budget, dei vostri criteri, degli immobili analizzati e delle decisioni già prese per mantenere un ragionamento coerente fino all’acquisto.</p>
+      <div data-r="pad" style="background:#fff; border-left:4px solid #e01f3d; border-radius:8px; padding:24px 30px; max-width:720px; margin:0 auto 34px; text-align:left; box-shadow:0 18px 44px -32px rgba(20,40,70,0.4);">
+        <p style="font-size:17px; line-height:1.65; color:#0c1f2c; font-weight:600; margin:0;"><strong style="color:#e01f3d;">Non appena sorge un dubbio, verificate prima di impegnarvi.</strong> Finché nulla è firmato, potete ancora confrontare, trattare, adeguare o rinunciare.</p>
+      </div>
+      <a href="RealXpert-IT.dc.html#top" class="rx-btn" data-r="ctabtn" style="display:inline-block; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; font-weight:800; font-size:16.5px; padding:17px 34px; border-radius:12px; box-shadow:0 18px 38px -12px rgba(224,31,61,0.7);">Accompagnarmi nel mio acquisto →</a>
+    </div>
+  </section>
+
+  <!-- ============ TÉMOIGNAGES ============ -->
+  <section style="background:#ffffff; padding:96px 32px;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 60px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#c22f24;">Testimonianze</span>
+        <h2 style="font-size:44px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:14px 0 20px; color:#0c1f2c;">Quando le scelte giuste permettono di evitare di pagare troppo</h2>
+        <p style="font-size:18px; line-height:1.7; color:#42556a; margin:0;">Scoprite come degli acquirenti hanno usato RealXpert nei momenti delle decisioni importanti per difendere meglio i propri interessi ed evitare errori che avrebbero potuto costare loro decine di migliaia di franchi.</p>
+      </div>
+
+      <div data-r="g3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:start;">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <div data-r="pad" style="position:relative; background:#fff; border:1.5px solid #f0cfca; border-radius:22px; padding:44px 38px 34px; box-shadow:0 30px 70px -42px rgba(90,20,20,0.4), 0 0 0 6px rgba(224,31,61,0.05); display:flex; flex-direction:column;">
+            <div data-r="qmark" style="position:absolute; top:28px; right:34px; font-family:Georgia,serif; font-size:88px; line-height:0.6; color:#faeceb;">”</div>
+            <span style="display:inline-flex; align-self:flex-start; align-items:center; gap:7px; font-size:11.5px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#ff5a3c,#e01f3d); padding:6px 13px; border-radius:100px; margin-bottom:22px;">{{ t.tag }}</span>
+            <h3 style="position:relative; font-size:21px; font-weight:800; line-height:1.35; letter-spacing:-0.01em; color:#0c1f2c; margin:0 0 18px;">{{ t.headline }}</h3>
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <sc-for list="{{ t.visible }}" as="p" hint-placeholder-count="1">
+                <p style="font-size:15px; line-height:1.78; color:#3a4d5c; margin:0;">{{ p }}</p>
+              </sc-for>
+            </div>
+            <span onClick="{{ t.toggle }}" style="align-self:flex-start; margin-top:16px; font-size:14.5px; font-weight:800; color:#c22f24; cursor:pointer; border-bottom:2px solid #f0cfca; padding-bottom:2px;">{{ t.moreLabel }}</span>
+            <div style="margin-top:30px; padding-top:24px; border-top:1px solid #f4eae9; display:flex; align-items:center; gap:15px;">
+              <span style="width:56px; height:56px; border-radius:50%; overflow:hidden; flex:0 0 auto; background:#f3e3e0; display:block; box-shadow:0 8px 20px -8px rgba(90,20,20,0.4);">
+                <img src="{{ t.photo }}" alt="{{ t.name }}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;" />
+              </span>
+              <div>
+                <div style="font-size:16px; font-weight:800; color:#0c1f2c;">{{ t.name }}</div>
+                <div style="font-size:13px; color:#7a8b9a; margin-top:2px;">{{ t.role }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHIFFRES / DONNÉES ============ -->
+  <section style="background:#0a1f44; padding:84px 32px;">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="text-align:center; max-width:860px; margin:0 auto 56px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#8fb4f0;">Dati concreti</span>
+        <h2 style="font-size:44px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:12px 0 18px; color:#ffffff;">Le giuste informazioni al momento giusto fanno tutta la differenza</h2>
+        <p style="font-size:18px; line-height:1.7; color:#a9bfd8; margin:0;">RealXpert combina competenza immobiliare svizzera, dati specializzati e modelli di analisi per ricollocare ogni domanda nel contesto del vostro progetto, dell’immobile analizzato e del suo mercato locale.</p>
+      </div>
+      <div data-r="g3s" style="display:grid; grid-template-columns:repeat(3,1fr);">
+        <div style="text-align:center; padding:34px 24px; border-right:1px solid rgba(255,255,255,0.12); border-bottom:1px solid rgba(255,255,255,0.12);">
+          <div data-r="big" style="font-size:48px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">26</div>
+          <div style="font-size:15px; font-weight:600; line-height:1.45; color:#9cb6dc; margin-top:14px;">cantons</div>
+        </div>
+        <div style="text-align:center; padding:34px 24px; border-right:1px solid rgba(255,255,255,0.12); border-bottom:1px solid rgba(255,255,255,0.12);">
+          <div data-r="big" style="font-size:48px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">+ 4 000</div>
+          <div style="font-size:15px; font-weight:600; line-height:1.45; color:#9cb6dc; margin-top:14px;">località analizzate</div>
+        </div>
+        <div style="text-align:center; padding:34px 24px; border-bottom:1px solid rgba(255,255,255,0.12);">
+          <div data-r="big" style="font-size:48px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">+ 100'000</div>
+          <div style="font-size:15px; font-weight:600; line-height:1.45; color:#9cb6dc; margin-top:14px;">dati immobiliari locali</div>
+        </div>
+        <div style="text-align:center; padding:34px 24px; border-right:1px solid rgba(255,255,255,0.12);">
+          <div data-r="big" style="font-size:48px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">+ 5 000</div>
+          <div style="font-size:15px; font-weight:600; line-height:1.45; color:#9cb6dc; margin-top:14px;">punti di competenza integrati</div>
+        </div>
+        <div style="text-align:center; padding:34px 24px; border-right:1px solid rgba(255,255,255,0.12);">
+          <div data-r="big" style="font-size:48px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">+ 70</div>
+          <div style="font-size:15px; font-weight:600; line-height:1.45; color:#9cb6dc; margin-top:14px;">criteri analizzati per immobile</div>
+        </div>
+        <div style="text-align:center; padding:34px 24px;">
+          <div data-r="big" style="font-size:48px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">+ 200</div>
+          <div style="font-size:15px; font-weight:600; line-height:1.45; color:#9cb6dc; margin-top:14px;">modelli di analisi</div>
+        </div>
+        <div style="text-align:center; padding:34px 24px;"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ CTA FINAL ============ -->
+  <section style="background:#ffffff; padding:88px 32px;">
+    <div style="max-width:820px; margin:0 auto; text-align:center;">
+      <span style="font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#c22f24;">Iniziate ora</span>
+      <h2 style="font-size:40px; font-weight:800; line-height:1.16; letter-spacing:-0.025em; margin:14px 0 20px; color:#0c1f2c;">Prima di comprare, assicuratevi di non pagare troppo</h2>
+      <p style="font-size:18px; line-height:1.7; color:#48535e; margin:0 auto 12px; max-width:680px;">Budget da chiarire, immobile da analizzare, visita da preparare, prezzo da verificare o offerta da fare: spiegate semplicemente a che punto siete.</p>
+      <p style="font-size:16.5px; line-height:1.6; color:#7a8896; font-style:italic; margin:0 auto 34px; max-width:680px;">Es.: Quanto offrire per questo immobile senza rischiare di pagarlo troppo?</p>
+      <a href="RealXpert-IT.dc.html#top" class="rx-btn" data-r="ctabtn" style="display:inline-block; background:linear-gradient(135deg,#ff5a3c,#e01f3d); color:#fff; font-weight:800; font-size:17px; padding:18px 40px; border-radius:12px; box-shadow:0 18px 38px -12px rgba(224,31,61,0.7);">Verificare prima di comprare →</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#16305c; color:#a9bfd8; padding:60px 32px 36px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div data-r="g3f" style="display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:56px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.12);">
+
+        <div>
+          <div style="font-size:18px; font-weight:800; color:#fff; margin-bottom:12px;">Iscriviti alla newsletter</div>
+          <p style="font-size:14px; line-height:1.6; margin:0 0 20px; max-width:400px;">Ricevete le ultime tendenze del mercato immobiliare svizzero e consigli pratici per vendere o comprare al miglior prezzo.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; max-width:440px;">
+            <input type="email" placeholder="Il vostro indirizzo e-mail" style="flex:1; min-width:200px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); border-radius:10px; padding:13px 16px; font-family:inherit; font-size:14.5px; color:#fff; outline:none;" />
+            <button style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:10px; cursor:pointer; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Iscriviti ora</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:#fff; margin-bottom:18px;">RealXpert</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="A propos - IT.dc.html" style="color:#a9bfd8; font-size:14px;">Scoprire RealXpert</a>
+            <a href="Vendre - IT.dc.html" style="color:#a9bfd8; font-size:14px;">Vendere</a>
+            <a href="Acheter - IT.dc.html" style="color:#a9bfd8; font-size:14px;">Comprare</a>
+            <a href="A propos - IT.dc.html" style="color:#a9bfd8; font-size:14px;">Chi siamo</a>
+            <a href="Nos partenaires - IT.dc.html" style="color:#a9bfd8; font-size:14px;">I nostri partner</a>
+            <a href="Nous contacter - IT.dc.html" style="color:#a9bfd8; font-size:14px;">Contatto</a>
+            <a href="Politique de confidentialite - IT.dc.html#top" style="color:#a9bfd8; font-size:14px;">Informativa sulla privacy</a>
+            <a href="Conditions generales - IT.dc.html#top" style="color:#a9bfd8; font-size:14px;">Condizioni generali</a>
+          </div>
+        </div>
+
+        <div>
+          <img src="uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.png" alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />
+          <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Servizio clienti</div>
+          <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Aperto dal lunedì al venerdì<br>dalle 8:30 alle 18:30 · In tutta la Svizzera</p>
+          <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
+          <a href="Nous contacter - IT.dc.html" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Contattaci →</a>
+        </div>
+
+      </div>
+      <p style="font-size:13px; margin:24px 0 0; color:#7690b0;">2026 © RealXpert — Competenza immobiliare svizzera. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+
+  <div id="rx-signup" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Chiudi" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Continuate gratuitamente con RealXpert</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Non prendete più da soli le decisioni che possono costarvi decine di migliaia di franchi.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Gratuito per iniziare</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Senza impegno</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Primi consigli personalizzati</div></div><div style="height:1px; background:#e2e8ee; margin:24px 0 18px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Ancora 30 secondi per ritrovare il vostro progetto in qualsiasi momento e verificare ogni decisione importante prima di impegnarvi.</p><div style="display:flex; flex-direction:column; gap:13px;"><div style="display:flex; gap:11px;"><input type="text" placeholder="Nome" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="text" placeholder="Cognome" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"></div><input type="email" placeholder="E-mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="tel" placeholder="Telefono" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Password" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-top:2px;"><input type="checkbox" style="flex:0 0 auto; width:17px; height:17px; margin:2px 0 0; accent-color:#1d4fb0; cursor:pointer;"><span style="font-size:14px; line-height:1.5; color:#5a6b78;">Desidero ricevere i consigli RealXpert per riuscire meglio nel mio progetto immobiliare.</span></label><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Ottenere i miei primi consigli →</button><p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:14px 0 0; text-align:center;">Continuando, accettate le nostre <a href="Conditions generales - IT.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Condizioni generali</a> e riconoscete di aver preso conoscenza della nostra <a href="Politique de confidentialite - IT.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Politica sulla riservatezza</a>.</p></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Avete già un account? <a href="#rx-login" style="color:#1d4fb0; font-weight:700;">Accedi</a></p></div></div></div>
+  <div id="rx-login" class="rx-panel" style="position:fixed; inset:0; z-index:200; justify-content:flex-end;"><a href="#rx-close" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); display:block;"></a><div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;"><div data-r="pad" style="padding:30px 34px 40px;"><div style="display:flex; justify-content:flex-end; margin-bottom:6px;"><a href="#rx-close" aria-label="Chiudi" style="background:none; color:#8a97a3; padding:6px; line-height:0; border-radius:8px; display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a></div><h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Proseguite il vostro progetto immobiliare</h2><p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Riconnettetevi per ritrovare il vostro progetto e assicurarvi di fare le scelte giuste.</p><div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;"><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Ritrovate il vostro progetto dove l’avete lasciato</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Verificate ogni decisione importante prima di impegnarvi</div><div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Prendete le decisioni giuste al momento giusto</div></div><div style="height:1px; background:#eef2f6; margin:28px 0 16px;"></div><p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Inserite le vostre credenziali per proseguire il vostro progetto</p><div style="display:flex; flex-direction:column; gap:13px;"><input type="email" placeholder="E-mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><input type="password" placeholder="Password" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;"><div style="display:flex; justify-content:flex-end; margin-top:-4px;"><a href="#top" style="font-size:13.5px; color:#1d4fb0; font-weight:600;">Password dimenticata?</a></div><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;">Proseguire il mio progetto →</button></div><p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Non avete ancora un account? <a href="#rx-signup" style="color:#1d4fb0; font-weight:700;">Iniziare gratuitamente</a></p></div></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { buyVal: 1000000, testiOpen: {} };
+  componentDidMount() {
+    const r = document.getElementById('rx-buyrange');
+    if (r) r.value = this.state.buyVal;
+  }
+  renderVals() {
+    const fmt = (n) => Math.round(n).toLocaleString('de-CH');
+    const buyVal = this.state.buyVal;
+    const steps = [
+      { n: '1', title: 'Potete comprare questo immobile a buone condizioni?', tagline: '',
+        paras: [
+          'Prima di cercare, bisogna conoscere la vostra reale capacità d\u2019acquisto e definire ciò che conta davvero: budget, mezzi propri, finanziamento, posizione, superficie, stato dell\u2019immobile, vincoli.',
+          'Una ricerca mal impostata fa perdere tempo o spinge verso un progetto poco adatto. RealXpert vi aiuta a partire su basi realistiche prima di legarvi emotivamente a immobili fuori portata.',
+        ] },
+      { n: '2', title: 'Questo immobile vale davvero il prezzo richiesto?', tagline: 'Il prezzo esposto non è necessariamente il prezzo giusto.',
+        paras: [
+          'Un immobile può essere ben posizionato, un po\u2019 troppo caro o fortemente sopravvalutato. Nel momento del colpo di fulmine, la paura che un altro acquirente vi passi davanti può falsare il vostro giudizio.',
+          'RealXpert ricolloca l\u2019immobile nel suo contesto, chiarisce ciò che ne influenza davvero il valore e vi aiuta a giudicare se il prezzo è coerente. Prima di sapere quanto offrire, sappiate quanto siete davvero disposti a pagare.',
+        ] },
+      { n: '3', title: 'Sapete davvero cosa verificare prima di comprare?', tagline: '',
+        paras: [
+          'Una visita serve a capire se l\u2019immobile vi piace, ma anche a comprendere cosa state per comprare: stato, lavori potenziali, oneri, contesto, disturbi, condominio, documenti, vincoli.',
+          'Questi elementi sono molto meno visibili di una bella cucina. RealXpert vi aiuta a preparare le vostre verifiche e le domande giuste. Il rischio non è solo pagare troppo, ma scoprire troppo tardi ciò che avrebbe cambiato il prezzo o la vostra decisione.',
+        ] },
+      { n: '4', title: 'Quanto dovete offrire?', tagline: 'È spesso qui che si giocano diverse decine di migliaia di franchi.',
+        paras: [
+          'Volete l\u2019immobile, l\u2019agente parla di altri interessati, bisogna fare un\u2019offerta. L\u2019immobile vale il suo prezzo? Ci sono davvero altri acquirenti? Il venditore ha fretta? Quanto offrire, fin dove trattare, quale limite non superare?',
+          'Offrire CHF 1\u2019500\u2019000 quando un accordo era possibile sensibilmente più in basso può rappresentare decine di migliaia di franchi. RealXpert vi aiuta a definire la vostra strategia d\u2019offerta, fissare il vostro limite e mantenere il distacco prima che la pressione o il colpo di fulmine vi facciano pagare più del necessario.',
+        ] },
+      { n: '5', title: 'La vostra offerta evolve: trattare, offrire di più o rinunciare?', tagline: '',
+        paras: [
+          'Un\u2019offerta rifiutata non significa che tutto è finito: il venditore può controproporre, chiedere di più o mettere gli acquirenti in concorrenza. Si cade allora facilmente in un meccanismo pericoloso: «ancora CHF 10\u2019000\u2026 poi ancora CHF 10\u2019000\u2026».',
+          'RealXpert vi aiuta a prendere le distanze, rivalutare la situazione e decidere se aumentare, mantenere la vostra posizione o fermarvi. L\u2019obiettivo non è ottenere l\u2019immobile a ogni costo, ma a un prezzo che giudicherete ancora buono una volta passata l\u2019emozione.',
+        ] },
+    ];
+    const testiData = [
+      { name: 'Alexandra Meylan', role: 'Proprietaria, acquirente · Canton Lucerna', photo: 'uploads/3BAE9803-F468-4D4F-A7FF-AE61920EB84E.PNG',
+        tag: 'Acquisto · Colpo di fulmine', headline: 'Un colpo di fulmine che avrebbe potuto costarci oltre CHF 100\u2019000', paras: [
+          'Dopo diversi mesi di ricerca, avevamo finalmente trovato una casa che ci piaceva davvero. Era ben situata, corrispondeva a molti dei nostri criteri e ci immaginavamo già a viverci. Sapevamo che ci sarebbero stati alcuni lavori e il prezzo ci sembrava un po\u2019 alto, ma dopo la visita e gli scambi con l\u2019agente eravamo comunque abbastanza convinti che restasse una buona opportunità.',
+          'Prima di fare un\u2019offerta, abbiamo voluto verificare alcuni punti con RealXpert. È lì che abbiamo iniziato a vedere la casa un po\u2019 diversamente. I lavori erano più importanti di quanto avessimo immaginato, il prezzo richiesto era difficile da giustificare e, soprattutto, altri immobili sul mercato ci permettevano di capire meglio cosa il nostro budget poteva davvero permetterci di comprare.',
+          'Mettendo tutto insieme, abbiamo capito che il nostro colpo di fulmine ci spingeva ad accettare molte cose che probabilmente avremmo valutato diversamente su un\u2019altra casa. Alla fine abbiamo deciso di non fare un\u2019offerta. Qualche settimana dopo abbiamo trovato un altro immobile che ci corrispondeva di più e in cui i lavori erano molto più limitati. Col senno di poi, tra la differenza di prezzo e i lavori che avevamo sottovalutato, questa decisione ci ha probabilmente evitato di spendere oltre CHF 100\u2019000 di troppo.',
+        ] },
+      { name: 'Sophie Hofer', role: 'Proprietaria, acquirente · Canton Berna', photo: 'uploads/DDBB2751-9B0F-46CF-9CB7-E59D1B87C012.PNG',
+        tag: 'Acquisto · Trattativa', headline: 'Non cedere alla pressione e risparmiare CHF 30\u2019000', paras: [
+          'Avevamo notato questa casa da un po\u2019. Era già in vendita da diversi mesi, poi l\u2019annuncio era stato rimesso in evidenza con nuove foto. Alla fine siamo andati a visitarla e, questa volta, ci ha davvero conquistati. Ci vedevamo bene a viverci ed eravamo pronti ad andare avanti.',
+          'Alla fine della visita, l\u2019agente ci ha spiegato che diverse persone erano interessate e che probabilmente dovevamo posizionarci rapidamente se non volevamo perdere l\u2019immobile. Sul momento, questo ci ha inevitabilmente messo un po\u2019 di pressione. Il nostro primo istinto sarebbe stato fare un\u2019offerta abbastanza vicina al prezzo richiesto per massimizzare le nostre possibilità.',
+          'Alla fine abbiamo preferito non precipitarci e guardare la situazione con più freddezza. Il fatto che la casa fosse sul mercato da tempo, che fosse stata rimessa in evidenza e che il venditore cercasse chiaramente di procedere ci ha fatto capire che forse avevamo più margine di quanto pensassimo all\u2019inizio. RealXpert ci ha aiutati a strutturare questo ragionamento e a definire fin dove eravamo disposti ad arrivare.',
+          'Abbiamo quindi aspettato e fatto un\u2019offerta più bassa. Le altre persone interessate alla fine non sono andate oltre e la discussione con il venditore è ripresa in condizioni molto migliori per noi. Dopo qualche scambio, abbiamo ottenuto ancora CHF 30\u2019000 in meno rispetto all\u2019importo che eravamo disposti a pagare qualche giorno prima.',
+          'Ciò che ci ha colpiti è quanto fossimo vicini ad accettare un prezzo più alto solo per paura che qualcun altro comprasse prima di noi. Oggi abbiamo la casa e i CHF 30\u2019000 risparmiati ci hanno permesso di finanziare buona parte dei lavori che volevamo fare fin dal nostro arrivo.',
+        ] },
+      { name: 'Stefano Mariani', role: 'Proprietario, acquirente · Canton Ticino', photo: 'uploads/temoignage-3.png',
+        tag: 'Acquisto · Offerta', headline: 'Fare un\u2019offerta al prezzo giusto, senza farsi travolgere dal colpo di fulmine', paras: [
+          'Dopo diversi mesi di ricerca, avevamo finalmente trovato una casa che ci piaceva davvero. Il problema era che, al momento di fare un\u2019offerta, non sapevamo affatto fino a che punto spingerci. Avevamo paura di trattare troppo al ribasso e perdere la casa, ma allo stesso tempo non volevamo farci travolgere e pagarla troppo solo perché ce ne eravamo innamorati.',
+          'Abbiamo potuto valutare meglio la situazione, verificare se il prezzo richiesto fosse davvero giusto e soprattutto fissarci un prezzo da proporre e un limite da non superare. Questo ci ha aiutati a uscire dall\u2019emozione del momento e a fare un\u2019offerta con un\u2019idea molto più chiara di quanto l\u2019immobile valesse davvero per noi.',
+          'Alla fine abbiamo iniziato con un\u2019offerta inferiore a quella che pensavamo di fare all\u2019inizio. Dopo diversi scambi con l\u2019agente che rappresentava il venditore, abbiamo trovato un accordo a un prezzo inferiore a quello esposto. Alla fine, la differenza rispetto a quanto eravamo disposti a proporre all\u2019inizio rappresentava comunque diverse decine di migliaia di franchi. Eravamo ovviamente molto contenti di aver potuto trattare a quel livello, ma soprattutto di aver firmato sapendo perché accettavamo quel prezzo e senza avere la sensazione di aver pagato di più solo per paura di perdere la casa.',
+        ] },
+    ];
+    const testiOpen = this.state.testiOpen || {};
+    const testimonials = testiData.map((t, i) => {
+      const open = !!testiOpen[i];
+      return { name: t.name, role: t.role, photo: t.photo, tag: t.tag, headline: t.headline,
+        visible: open ? t.paras : [t.paras[0]],
+        moreLabel: open ? 'Comprimi ↑' : 'Leggi la testimonianza →',
+        toggle: () => this.setState(s => ({ testiOpen: Object.assign({}, s.testiOpen, { [i]: !(s.testiOpen || {})[i] }) })),
+      };
+    });
+    return {
+      testimonials,
+      buyValFmt: 'CHF ' + fmt(buyVal),
+      buyGainFmt: fmt(buyVal * 0.05),
+      setBuy: (e) => this.setState({ buyVal: Number(e.target.value) }),
+      steps,
+    };
+  }
+}
+</script>
+</body>
+</html>

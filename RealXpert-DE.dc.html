@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #0c1f2c; background: #ffffff; -webkit-font-smoothing: antialiased; }
+  a { color: #0b7d5f; text-decoration: none; }
+  a:hover { color: #086048; }
+  p { line-height: 1.65; }
+  @keyframes rx-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.09); } }
+  img { max-width: 100%; }
+  @media (max-width: 900px) {
+    [data-r="sheet"] { width: 100% !important; max-width: 460px !important; }
+    [data-r="sheet"] h2 { font-size: 23px !important; line-height: 1.2 !important; }
+    [data-r="sheet"] input[type="text"], [data-r="sheet"] input[type="email"], [data-r="sheet"] input[type="tel"], [data-r="sheet"] input[type="password"] { font-size: 16px !important; padding: 14px 15px !important; }
+    [data-r="sheet"] button, [data-r="sheet"] [aria-label="Fermer"], [data-r="sheet"] [aria-label="Close"], [data-r="sheet"] [aria-label="Schliessen"], [data-r="sheet"] [aria-label="Chiudi"] { min-height: 44px; }
+    [data-r="sheet"] [aria-label] svg { width: 26px; height: 26px; }
+    [data-r="sheet"] a[href="#top"] { display: inline-flex !important; align-items: center; min-height: 40px; }
+  }
+  @media (max-width: 520px) {
+    [data-r="sheet"] { max-width: 100% !important; }
+    [data-r="sheet"] h2 { font-size: 21.5px !important; }
+    [data-r="sheet"] [data-r="pad"] { padding: 22px 18px 34px !important; }
+  }
+  @media (max-width: 1180px) {
+    [data-r="navdesk"] { display: none !important; }
+    [data-r="burger"] { display: inline-flex !important; }
+    [data-r="langmob"] { display: block !important; margin-left: auto !important; }
+    [data-r="drawer"] { display: block !important; }
+    [data-r="hdr"] { padding: 15px 18px !important; }
+    [data-r="qmark"] { display: none !important; }
+    [data-r="logo"] { height: 54px !important; }
+  }
+  @media (min-width: 901px) and (max-width: 1180px) {
+    [data-r="sheet"] h2 { font-size: 26px !important; line-height: 1.15 !important; }
+    [data-r="sheet"] h3 { font-size: 17px !important; }
+    [data-r="sheet"] p { font-size: 15px !important; }
+    [data-r="sheet"] [aria-label] { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+    [data-r="pad"] { padding-left: 24px !important; padding-right: 24px !important; }
+    [data-r="g3"] { gap: 20px !important; }
+    section { padding-left: 26px !important; padding-right: 26px !important; padding-top: 70px !important; padding-bottom: 70px !important; }
+    h1 { font-size: 40px !important; line-height: 1.12 !important; }
+    h2 { font-size: 36px !important; line-height: 1.16 !important; }
+    h3 { font-size: 22px !important; }
+    section p { font-size: 17px !important; }
+    [data-r="heroh1"] { font-size: 38px !important; text-wrap: balance !important; }
+    [data-r="heroh1"] br { display: none !important; }
+    [data-r="hero"] { padding-top: 130px !important; }
+    [data-r="heroband"] { padding: 28px 30px 26px !important; }
+    [data-r="herobar"] { padding: 22px 26px !important; }
+    [data-r="ptcue"] { display: block !important; }
+    [data-r="ptpromise"] { font-size: 14px !important; }
+    [data-r="ptlabel"] { font-size: 9.5px !important; letter-spacing: 0.05em !important; }
+    [data-r="big"] { font-size: 42px !important; }
+    [data-r="huge"] { font-size: 50px !important; }
+  }
+  @media (max-width: 900px) {
+    section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 58px !important; padding-bottom: 58px !important; }
+    footer { padding: 46px 20px 30px !important; }
+    h1 { font-size: 31px !important; line-height: 1.16 !important; }
+    h2 { font-size: 26px !important; line-height: 1.22 !important; }
+    h3 { font-size: 20px !important; line-height: 1.32 !important; }
+    section p { font-size: 16.5px !important; line-height: 1.62 !important; }
+    [data-r="hero"] { padding: 100px 18px 44px !important; min-height: 0 !important; }
+    [data-r="heroband"] { padding: 24px 20px 22px !important; }
+    [data-r="herobar"] { padding: 16px 14px !important; }
+    [data-r="herostart"] { flex-direction: column !important; align-items: stretch !important; gap: 14px !important; padding: 16px !important; }
+    [data-r="heroex"] { white-space: normal !important; }
+    [data-r="herobtn"] { width: 100% !important; padding: 14px 16px !important; }
+    [data-r="micro"] { display: none !important; }
+    [data-r="g3"], [data-r="g2"], [data-r="g3f"], [data-r="split"], [data-r="split3"], [data-r="g3s"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+    [data-r="heroh1"] { font-size: 30px !important; text-wrap: balance !important; }
+    [data-r="heroh1"] br { display: none !important; }
+    [data-r="g5"] { display: flex !important; grid-template-columns: none !important; justify-content: center !important; gap: 4px !important; }
+    [data-r="ptab"] { flex: 1 1 0 !important; min-width: 0 !important; padding: 0 2px !important; }
+    [data-r="ptab"] > div:first-child { width: 48px !important; height: 48px !important; font-size: 18px !important; }
+    [data-r="ptlabel"] { font-size: 9px !important; letter-spacing: 0.03em !important; margin: 12px 0 4px !important; }
+    [data-r="ptpromise"] { display: none !important; }
+    [data-r="ptcue"] { display: block !important; }
+    [data-r="pillline"] { top: 23px !important; left: 8% !important; right: 8% !important; }
+    [data-r="pillwrap"] { margin-bottom: 20px !important; }
+    [data-r="pillhead"] { margin-bottom: 22px !important; }
+    [data-r="g3s"] > div { border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.12) !important; padding: 26px 4px !important; }
+    [data-r="hide"] { display: none !important; }
+    [data-r="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-r="padall"] { padding: 26px 20px !important; }
+    [data-r="calc"] { padding: 26px 18px !important; }
+    [data-r="tabs"] { flex-direction: column !important; }
+    [data-r="accrow"] { flex-wrap: wrap !important; gap: 12px !important; padding: 18px !important; }
+    [data-r="big"] { font-size: 33px !important; }
+    [data-r="huge"] { font-size: 40px !important; }
+    [data-r="mid"] { font-size: 19px !important; }
+    [data-r="mock"] { height: 260px !important; }
+    [data-r="banner"] { aspect-ratio: 16/10 !important; }
+    [data-r="portrait"] { aspect-ratio: 4/3 !important; }
+    [data-r="gapsm"] { gap: 26px !important; }
+    [data-r="quote"] { padding: 28px 22px !important; }
+    [data-r="minh"] { min-height: 260px !important; }
+  }
+  @media (max-width: 520px) {
+    h1 { font-size: 27px !important; }
+    [data-r="heroh1"] { font-size: 5.9vw !important; }
+    [data-r="ptab"] > div:first-child { width: 40px !important; height: 40px !important; font-size: 16px !important; border-width: 2px !important; }
+    [data-r="ptlabel"] { font-size: 8px !important; }
+    [data-r="pillline"] { top: 19px !important; left: 7% !important; right: 7% !important; }
+    h2 { font-size: 23px !important; }
+    [data-r="huge"] { font-size: 34px !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden; background:#ffffff;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="position:absolute; top:0; left:0; right:0; z-index:50; background:transparent;">
+    <div data-r="hdr" style="max-width:1600px; margin:0 auto; padding:26px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="RealXpert-DE.dc.html#top" style="display:block;">
+        <img src="uploads/logo-realxpert-white.png" alt="RealXpert — Ihr Schweizer Immobilienexperte" data-r="logo" style="display:block; height:72px; width:auto;" />
+      </a>
+      <nav data-r="navdesk" style="display:flex; flex:1; align-items:center; justify-content:space-between; gap:24px; margin-left:20px;">
+        <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:38px;">
+          <a href="RealXpert-DE.dc.html#top" style="font-size:20px; font-weight:600; color:#ffffff; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Unsere Lösung</a>
+          <a href="Vendre - DE.dc.html#top" style="font-size:20px; font-weight:600; color:#ffffff; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Verkaufen</a>
+          <a href="Acheter - DE.dc.html#top" style="font-size:20px; font-weight:600; color:#ffffff; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Kaufen</a>
+          <a href="A%20propos%20-%20DE.dc.html#top" style="font-size:20px; font-weight:600; color:#ffffff; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Über uns</a>
+          <a href="Nos%20partenaires%20-%20DE.dc.html#top" style="font-size:20px; font-weight:600; color:#ffffff; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Unsere Partner</a>
+          <a href="Nous%20contacter%20-%20DE.dc.html#top" style="font-size:20px; font-weight:600; color:#ffffff; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Kontakt</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:18px;">
+        <div style="position:relative;">
+          <span onClick="{{ toggleLang }}" style="font-size:16.5px; font-weight:700; color:#ffffff; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">{{ langCurrent }} <span style="font-size:10px;">▾</span></span>
+          <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute; top:100%; right:0; margin-top:10px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.4); min-width:150px; z-index:60;">
+              <sc-for list="{{ langList }}" as="l" hint-placeholder-count="4">
+                <div onClick="{{ l.select }}" style="{{ l.style }}" style-hover="background:#e3edfb; color:#1d4fb0;" style-active="transform:scale(0.95); background:#d6e4f7;">{{ l.label }}</div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:stretch; gap:7px;">
+        <a href="#top" onClick="{{ openPanel }}" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:700; font-size:15.5px; padding:9px 20px; border-radius:10px; white-space:nowrap; text-align:center;">Kostenlos testen</a>
+        <a href="#top" onClick="{{ openLogin }}" style="font-size:15px; font-weight:600; color:#ffffff; opacity:0.9; display:inline-flex; align-items:center; justify-content:center; gap:7px; cursor:pointer;" style-hover="opacity:1;" style-active="transform:scale(0.94);">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Mein Konto
+        </a>
+        </div>
+        </div>
+      </nav>
+      <div data-r="langmob" style="display:none; position:relative; flex:0 0 auto; margin-right:14px;">
+        <span onClick="{{ toggleLang }}" style="font-size:16.5px; font-weight:700; color:#ffffff; cursor:pointer; display:inline-flex; align-items:center; gap:6px; min-height:44px; white-space:nowrap;">{{ langCurrent }} <span style="font-size:10px;">▾</span></span>
+        <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; right:0; margin-top:6px; background:#fff; border:1px solid #e2e8ee; border-radius:12px; padding:6px; box-shadow:0 20px 44px -20px rgba(20,40,70,0.4); min-width:120px; z-index:80;">
+            <sc-for list="{{ langList }}" as="l" hint-placeholder-count="3">
+              <div onClick="{{ l.select }}" style="{{ l.style }}" style-active="background:#cfe2fa; color:#1d4fb0;">{{ l.label }}</div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <button data-r="burger" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none; align-items:center; justify-content:center; width:48px; height:48px; flex:0 0 auto; border:none; background:transparent; color:#ffffff; cursor:pointer; padding:0;" style-active="transform:scale(0.94);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+      </button>
+    </div>
+    <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+      <div data-r="drawer" style="display:none; background:#ffffff; border-top:1px solid #e2e8ee; box-shadow:0 26px 50px -20px rgba(10,25,45,0.45); padding:8px 20px 22px;">
+        <a href="RealXpert-DE.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Unsere Lösung</a>
+        <a href="Vendre - DE.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Verkaufen</a>
+        <a href="Acheter - DE.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Kaufen</a>
+        <a href="A%20propos%20-%20DE.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Über uns</a>
+        <a href="Nos%20partenaires%20-%20DE.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Unsere Partner</a>
+        <a href="Nous%20contacter%20-%20DE.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Kontakt</a>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+          <a href="#top" onClick="{{ openPanel }}" style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; font-weight:800; font-size:16px; padding:14px 20px; border-radius:12px; text-align:center;">Kostenlos testen</a>
+          <a href="#top" onClick="{{ openLogin }}" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:15.5px; font-weight:700; color:#0c1f2c; padding:12px; border:1px solid #dce3ea; border-radius:12px; cursor:pointer;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Mein Konto
+          </a>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/SLIDER - Estimation-bien-immobilier.ch 4-c0aafd49.jpg'); background-size:cover; background-position:center bottom; padding:165px 32px 60px; min-height:100vh;">
+    <div style="max-width:1240px; margin:0 auto;">
+
+      <!-- bandeau bleu (encadré) -->
+      <div data-r="heroband" style="background:linear-gradient(180deg,rgba(43,60,86,0.93) 0%,rgba(43,60,86,0.88) 100%); border-radius:6px 6px 0 0; padding:34px 48px 30px;">
+        <h1 style="font-size:52px; font-weight:800; line-height:1.08; letter-spacing:-0.025em; margin:0 0 18px; color:#ffffff;" data-r="heroh1">Verkaufen oder kaufen Sie Ihre Immobilie <br>zum besten Preis</h1>
+        <p style="font-size:18px; line-height:1.5; color:#ffffff; font-weight:700; margin:0;">Prüfen Sie vor jeder wichtigen Entscheidung mit RealXpert, dass Sie die richtigen Entscheidungen treffen, um Fehler zu vermeiden, die Sie Zehntausende Franken kosten können.</p>
+      </div>
+
+      <!-- barre blanche de démarrage -->
+      <div data-r="herobar" style="background:#ffffff; border-radius:0 0 6px 6px; padding:26px 48px;">
+        <div data-r="herostart" style="display:flex; align-items:center; gap:14px; background:#ffffff; border:1px solid #e2e8ee; border-radius:16px; padding:10px 10px 10px 24px; box-shadow:0 16px 40px -24px rgba(20,40,70,0.4);">
+          <div style="flex:1; min-width:0;">
+            <div style="font-size:17px; font-weight:800; color:#0c1f2c;">Stellen Sie Ihre erste Frage, um teure Fehler zu vermeiden</div>
+            <div data-r="heroex" style="font-size:15px; color:#8a97a3; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Z. B.: {{ heroPlaceholder }}</div>
+          </div>
+          <span data-r="micro" style="color:#6a7b86; flex:0 0 auto; display:flex; align-items:center;" aria-label="Micro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </span>
+          <button onClick="{{ openPanel }}" data-r="herobtn" style="flex:0 0 auto; background:#fbc002; color:#ffffff; border:none; font-family:inherit; padding:11px 28px; border-radius:11px; cursor:pointer; text-align:center; box-shadow:0 8px 18px -4px rgba(0,0,0,0.45); text-shadow:0 1px 1px rgba(0,0,0,0.18);">
+            <span style="display:block; font-size:16px; font-weight:800;">Das Gespräch beginnen →</span>
+            <span style="display:block; font-size:11px; font-weight:600; opacity:0.95; margin-top:1px;">Kostenlos und unverbindlich testen</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="comment" style="background:#ffffff; padding:84px 32px;">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 56px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">So funktioniert es</span>
+        <h2 style="font-size:54px; font-weight:800; line-height:1.1; letter-spacing:-0.025em; margin:12px 0 16px; color:#0c1f2c;">RealXpert begleitet Sie in 3 einfachen Schritten</h2>
+      </div>
+      <div data-r="g3" style="position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:32px;">
+        <div data-r="hide" style="position:absolute; top:44px; left:16.66%; right:16.66%; height:2px; background:repeating-linear-gradient(90deg,#c9e6db 0,#c9e6db 8px,transparent 8px,transparent 16px);"></div>
+        <sc-for list="{{ steps }}" as="step" hint-placeholder-count="3">
+          <div style="position:relative; text-align:center; padding:0 12px;">
+            <div style="width:88px; height:88px; border-radius:50%; background:#4a72b8; color:#fff; display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:800; margin:0 auto 24px; box-shadow:0 14px 30px -12px rgba(74,114,184,0.6); border:6px solid #ffffff;">{{ step.n }}</div>
+            <h3 style="font-size:21px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.25;">{{ step.title }}</h3>
+            <p style="font-size:15.5px; color:#5a6f73; margin:0; max-width:320px; margin-left:auto; margin-right:auto;">{{ step.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section style="background:#eaf3fb; padding:88px 32px;">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="text-align:center; max-width:900px; margin:0 auto 44px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2b7fd6;">Die Fallen, die es zu vermeiden gilt</span>
+        <h2 style="font-size:54px; font-weight:800; line-height:1.1; letter-spacing:-0.025em; margin:12px 0 20px; color:#0c2740;">Warum ist es so leicht, bei einem Immobilienprojekt Fehler zu machen?</h2>
+        <p style="font-size:19px; color:#33536f; margin:0; line-height:1.6; font-weight:500;">In jeder Phase müssen zahlreiche Entscheidungen getroffen werden, und jede kann erhebliche finanzielle Folgen haben. Zwischen der Flut an Informationen, widersprüchlichen Meinungen und den grossen Beträgen ist es nicht immer leicht zu wissen, <strong style="color:#0c2740;">welche Richtung einzuschlagen ist</strong>, <strong style="color:#0c2740;">was zu prüfen ist</strong> und <strong style="color:#0c2740;">wem man vertrauen kann</strong>.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px; max-width:820px; margin:0 auto;">
+        <sc-for list="{{ pitfalls }}" as="p" hint-placeholder-count="4">
+          <div data-r="pad" style="background:#fff; border:1px solid #d5e6f5; border-radius:18px; padding:24px 28px; display:flex; align-items:flex-start; gap:20px; box-shadow:0 18px 40px -24px rgba(20,70,120,0.4);">
+            <span style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex:0 0 auto; box-shadow:0 10px 22px -6px rgba(47,71,176,0.7);">{{ p.n }}</span>
+            <div>
+              <h3 style="font-size:19px; font-weight:800; margin:0 0 6px; color:#0c2740; line-height:1.3;">{{ p.title }}</h3>
+              <p style="font-size:15.5px; line-height:1.6; color:#4a5f74; margin:0;">{{ p.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="max-width:820px; margin:16px auto 0;">
+        <div data-r="pad" style="background:linear-gradient(120deg,#3a5fc0 0%,#2f47b0 100%); border-radius:18px; padding:30px 34px; box-shadow:0 24px 50px -26px rgba(30,50,140,0.6);">
+          <h3 style="font-size:20px; font-weight:800; margin:0 0 6px; color:#ffffff;">Ein einziger Fehler kann Sie Zehntausende Franken kosten</h3>
+          <p style="font-size:16px; line-height:1.6; color:#eaf1fb; margin:0;">Eine unzureichende Analyse, eine falsche Einschätzung oder schlecht erkannte Risiken können Sie mehrere Zehntausend Franken kosten und den Erfolg Ihres Projekts gefährden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COST (en haut, fond blanc) ============ -->
+  <section id="risque" style="background:#ffffff; padding:82px 32px;">
+    <div style="max-width:1120px; margin:0 auto; text-align:center;">
+      <h2 style="font-size:50px; font-weight:800; line-height:1.12; letter-spacing:-0.025em; margin:0 0 22px; color:#0c1f2c;">Lassen Sie sich von einer falschen Immobilienentscheidung nicht teuer zu stehen kommen</h2>
+      <p style="font-size:19px; line-height:1.65; color:#42555b; max-width:760px; margin:0 auto 10px;"><strong style="color:#0c1f2c;">Ein Immobilienprojekt umfasst mehrere Hunderttausend, ja mehrere Millionen Franken.</strong></p>
+      <p style="font-size:17px; line-height:1.65; color:#5a6f73; max-width:720px; margin:0 auto 38px;">Ein Fehler beim Preis, bei der Strategie, bei der Wahl einer Agentur, während der Verhandlungen oder in einer anderen Situation kann Sie mehrere Zehntausend Franken kosten.</p>
+
+      <!-- visuel équation : un seul panneau, lu d'un trait -->
+      <!-- calculateur simple -->
+      <div data-r="calc" style="background:linear-gradient(120deg,#5b8fd4 0%,#3a5fc0 42%,#2f47b0 100%); border-radius:24px; box-shadow:0 30px 60px -26px rgba(30,50,140,0.6); padding:42px 46px; margin:0 auto 30px; max-width:820px; text-align:center;">
+
+        <div style="font-size:20px; font-weight:800; color:#ffffff;">Wie hoch ist der Wert der Immobilie?</div>
+        <div data-r="big" style="font-size:46px; font-weight:800; color:#ffffff; line-height:1; margin:12px 0 26px;">{{ propValFmt }}</div>
+
+        <input type="range" min="400000" max="9000000" step="50000" value="{{ propVal }}" onInput="{{ setProp }}" style="width:100%; max-width:620px; accent-color:#ffffff; cursor:pointer;" />
+
+        <div style="height:1px; background:rgba(255,255,255,0.25); margin:34px 0 30px;"></div>
+
+        <div data-r="mid" style="font-size:19px; font-weight:800; color:#eaf1fb;">Eine falsche Entscheidung von nur 5% würde Sie kosten</div>
+        <div data-r="huge" style="font-size:62px; font-weight:800; color:#ffffff; line-height:1; letter-spacing:-0.02em; margin-top:12px;">CHF {{ lossFmt }}</div>
+      </div>
+
+      <p style="font-size:20px; line-height:1.5; color:#0c1f2c; font-weight:700; max-width:740px; margin:0 auto;">Eine falsche Entscheidung kann Sie weit mehr als 5% kosten. Die Kosten eines Fehlers sind oft weit höher als die einer guten Beratung.</p>
+      <div style="margin-top:36px;">
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">Prüfen, bevor ich entscheide →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QU'EST-CE QUE REALXPERT ============ -->
+  <section style="background:#ffffff; padding:56px 32px;">
+    <div style="max-width:1080px; margin:0 auto; display:flex; align-items:center; gap:26px;">
+      <span style="flex:1; height:2px; background:linear-gradient(90deg,transparent,#4a72b8);"></span>
+      <span style="width:11px; height:11px; transform:rotate(45deg); background:#4a72b8; flex:0 0 auto; box-shadow:0 0 0 6px rgba(74,114,184,0.14);"></span>
+      <span style="flex:1; height:2px; background:linear-gradient(90deg,#4a72b8,transparent);"></span>
+    </div>
+  </section>
+
+  <!-- ============ QU'EST-CE QUE REALXPERT ============ -->
+  <section style="background:#ffffff; padding:56px 32px 88px;">
+    <div style="max-width:1080px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 18px;">
+        <h2 style="font-size:clamp(30px,5vw,46px); font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:0; color:#0c1f2c; text-wrap:pretty;">Was ist RealXpert?</h2>
+      </div>
+      <p style="text-align:center; font-size:clamp(17px,2.2vw,20px); font-weight:800; color:#4a72b8; margin:0 auto 52px; max-width:700px; text-wrap:pretty;">Ihr Immobilienexperte, rund um die Uhr verfügbar</p>
+
+      <div data-r="gapsm" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:52px; align-items:start;">
+        <img src="uploads/pasted-1784748293419-0.png" alt="Paar, das sein Immobilienprojekt prüft" data-r="portrait" style="width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 24px 50px -28px rgba(20,70,120,0.5);" />
+
+        <div style="display:flex; flex-direction:column; gap:26px; max-width:56ch;">
+          <p style="font-size:clamp(18px,2.3vw,21px); line-height:1.6; color:#0c1f2c; font-weight:700; margin:0; text-wrap:pretty;">RealXpert ist ein Immobilienexperte für den Schweizer Immobilienmarkt, rund um die Uhr verfügbar, der Sie bei allen wichtigen Entscheidungen Ihres Projekts begleitet, wenn viel Geld auf dem Spiel steht.</p>
+          <p style="font-size:17.5px; line-height:1.78; color:#42555b; margin:0; text-wrap:pretty;">Er analysiert Ihre Situation und ermöglicht Ihnen, <strong style="color:#0c1f2c; font-weight:700;">jede Entscheidung zu prüfen, bevor Sie sich festlegen</strong>, damit Sie die richtigen Entscheidungen zum richtigen Zeitpunkt treffen und <strong style="color:#0c1f2c; font-weight:700;">Fehler vermeiden, die Sie Zehntausende Franken kosten können</strong>, ohne dass Sie es überhaupt merken.</p>
+          <p style="font-size:17.5px; line-height:1.78; color:#42555b; margin:0; text-wrap:pretty;">RealXpert wurde <strong style="color:#0c1f2c; font-weight:700;">von Experten des Schweizer Immobilienmarkts konzipiert und strukturiert</strong>, ausgehend von ihrer Expertise und den Entscheidungen, mit denen Käufer und Verkäufer tatsächlich konfrontiert sind. Die künstliche Intelligenz <strong style="color:#0c1f2c; font-weight:700;">macht diese Expertise für alle jederzeit zugänglich, mit überprüften und aktuellen Informationen</strong>, auf Ihre Situation zugeschnittenen Analysen und konkreten Empfehlungen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMENT AIDE CONCRÈTE ============ -->
+  <section id="aide" style="background:#eaf3fb; padding:88px 32px;">
+    <div style="max-width:900px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 46px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Ein direkter Einfluss auf Ihr Ergebnis</span>
+        <h2 style="font-size:52px; font-weight:800; line-height:1.1; letter-spacing:-0.025em; margin:12px 0 18px; color:#0c1f2c;">Wie RealXpert Ihnen hilft, die richtigen Entscheidungen zu treffen und den besten Preis zu erzielen</h2>
+        <p style="font-size:18px; line-height:1.6; color:#42556a; margin:0;">Bei einer Immobilie von mehreren Hunderttausend Franken zählt jede Entscheidung. Indem RealXpert Ihnen hilft, zum richtigen Zeitpunkt zu entscheiden, kann es den Unterschied ausmachen zwischen einer erfolgreichen Transaktion und Zehntausenden Franken, die liegen bleiben.</p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <sc-for list="{{ valuePoints }}" as="v" hint-placeholder-count="4">
+          <div style="display:flex; align-items:flex-start; gap:18px; background:#fff; border:1px solid #d5e6f5; border-radius:18px; padding:30px 34px; box-shadow:0 18px 40px -26px rgba(20,70,120,0.4);">
+            <span style="width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; flex:0 0 auto; margin-top:2px; box-shadow:0 10px 22px -6px rgba(47,71,176,0.7);">✓</span>
+            <div>
+              <h3 style="font-size:21px; font-weight:800; margin:0 0 7px; color:#0c1f2c; line-height:1.3;">{{ v.title }}</h3>
+              <p style="font-size:16.5px; line-height:1.6; color:#5a6f73; margin:0;">{{ v.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="text-align:center; margin-top:38px;">
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">Besser entscheiden für mein Projekt →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUR QUOI REPOSENT ============ -->
+  <section id="sources" style="background:#ffffff; padding:88px 32px;">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="max-width:840px; margin:0 auto 40px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Quellen & Methode</span>
+        <h2 style="font-size:46px; font-weight:800; line-height:1.12; letter-spacing:-0.025em; margin:12px 0 20px; color:#0c1f2c;">Worauf beruhen die Analysen und Empfehlungen von RealXpert?</h2>
+        <p style="font-size:18px; line-height:1.7; color:#42555b; margin:0;">Wenn eine Entscheidung erhebliche finanzielle Folgen haben kann, müssen die Empfehlungen auf einer soliden Grundlage beruhen. RealXpert vereint mehrere Expertisequellen in einem einzigen Analysesystem.</p>
+      </div>
+
+      <!-- image feature -->
+      <div data-r="banner" style="width:100%; aspect-ratio:16/4; border-radius:14px; overflow:hidden; margin-bottom:34px; box-shadow:0 30px 70px -38px rgba(20,50,90,0.45);">
+        <img src="uploads/ChatGPT Image 23 juil. 2026, 21_37_29.png" alt="Analyse des Schweizer Immobilienmarkts" style="width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block;" />
+      </div>
+
+      <!-- pillars éditoriaux -->
+      <div>
+        <sc-for list="{{ pillars5 }}" as="p" hint-placeholder-count="5">
+          <div data-r="split" style="display:grid; grid-template-columns:0.5fr 1.5fr; gap:20px 40px; padding:30px 0; border-top:1px solid #e8eef4; align-items:start;">
+            <span style="font-size:14px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#4a72b8; line-height:1.4;">{{ p.kicker }}</span>
+            <div>
+              <h3 style="font-size:23px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.28;">{{ p.title }}</h3>
+              <p style="font-size:16.5px; line-height:1.7; color:#5a6f73; margin:0;">{{ p.short }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="border-top:2px solid #0c1f2c; padding-top:28px; margin-top:8px; text-align:center;">
+        <p style="font-size:20px; line-height:1.6; color:#0c1f2c; font-weight:700; margin:0 auto 30px; max-width:840px;">So verfügen Sie über geprüfte Informationen, spezialisierte Expertise und auf Ihren Kontext zugeschnittene Empfehlungen, um Ihre Immobilienentscheidungen unter den bestmöglichen Bedingungen zu treffen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAS CONCRETS ============ -->
+  <section id="situations" style="background:#eaf3fb; padding:88px 32px;">
+    <div style="max-width:1160px; margin:0 auto;">
+      <div style="text-align:center; max-width:800px; margin:0 auto 36px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Konkrete Fälle</span>
+        <h2 style="font-size:46px; font-weight:800; line-height:1.12; letter-spacing:-0.025em; margin:12px 0 18px; color:#0c1f2c;">In welchen konkreten Situationen sollten Sie RealXpert nutzen?</h2>
+        <p style="font-size:18px; line-height:1.65; color:#42555b; margin:0;">Hier einige Beispiele für Fragen, die Sie stellen könnten. Jede beantwortet RealXpert mit echter Schweizer Immobilienexpertise, gestützt auf spezialisierte, geprüfte und laufend aktualisierte Daten.</p>
+      </div>
+
+      <!-- onglets -->
+      <div data-r="tabs" style="display:flex; gap:12px; justify-content:center; margin-bottom:28px;">
+        <button onClick="{{ setVendreCase }}" style="{{ tabVendreStyle }}">🏡 Ich verkaufe meine Immobilie</button>
+        <button onClick="{{ setAcheterCase }}" style="{{ tabAcheterStyle }}">🔑 Ich kaufe eine Immobilie</button>
+      </div>
+
+      <div data-r="pad" style="max-width:900px; margin:0 auto 30px; background:#fff; box-shadow:0 24px 60px -38px rgba(20,70,120,0.5); padding:8px 48px; border-top:3px solid #2f47b0;">
+        <div style="text-align:center; padding:32px 0;">
+          <div style="font-size:12.5px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#2f47b0; margin-bottom:12px;">Einige Beispiele aus Hunderten von Themen</div>
+          <h3 style="font-size:32px; font-weight:800; line-height:1.2; letter-spacing:-0.02em; margin:0 0 18px; color:#0c1f2c;">RealXpert beantwortet all Ihre Fragen – fundiert und in der Tiefe</h3>
+          <div style="display:flex; align-items:center; gap:18px; max-width:640px; margin:0 auto 18px;">
+            <span style="flex:1; height:1px; background:linear-gradient(90deg,transparent,#c3d3e6);"></span>
+            <span style="width:8px; height:8px; transform:rotate(45deg); background:#4a72b8; flex:0 0 auto; box-shadow:0 0 0 5px rgba(74,114,184,0.14);"></span>
+            <span style="flex:1; height:1px; background:linear-gradient(90deg,#c3d3e6,transparent);"></span>
+          </div>
+          <p style="font-size:18px; line-height:1.6; color:#33475a; font-weight:600; margin:0 auto 14px; max-width:700px;">Die folgenden Fragen sind nur einige Beispiele unter Tausenden weiteren zu Hunderten von Themen.</p>
+          <p style="font-size:16px; line-height:1.7; color:#5a6f73; margin:0 auto; max-width:700px;">Ob es bei Ihrem Projekt um den Verkauf oder den Kauf geht: RealXpert deckt den gesamten Ablauf ab und geht bis ins kleinste Detail, um Sie zu begleiten und Ihnen zu helfen, die besten Entscheidungen für Ihr finanziell bedeutendes Projekt zu treffen.</p>
+        </div>
+      </div>
+
+      <!-- accordéon -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <sc-for list="{{ caseTopics }}" as="t" hint-placeholder-count="6">
+          <div style="background:#fff; border:1px solid #e2ebf3; border-radius:16px; overflow:hidden; box-shadow:0 14px 34px -26px rgba(20,70,120,0.4);">
+            <div onClick="{{ t.toggle }}" data-r="accrow" style="display:flex; align-items:center; gap:16px; padding:22px 26px; cursor:pointer;">
+              <span style="width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; flex:0 0 auto; box-shadow:0 8px 18px -6px rgba(47,71,176,0.7);">{{ t.n }}</span>
+              <span style="flex:1; font-size:18.5px; font-weight:800; color:#0c1f2c; line-height:1.3;">{{ t.title }}</span>
+              <span data-r="hide" style="font-size:12.5px; font-weight:700; color:#4a72b8; background:#eef4fb; border-radius:100px; padding:5px 12px; white-space:nowrap; flex:0 0 auto;">{{ t.badge }}</span>
+              <span style="font-size:22px; color:#4a72b8; font-weight:400; flex:0 0 auto; line-height:1; width:20px; text-align:center;">{{ t.sign }}</span>
+            </div>
+            <sc-if value="{{ t.open }}" hint-placeholder-val="{{ false }}">
+              <div style="margin:0 20px 20px; background:#f5f9fd; border:1px solid #e4edf6; border-radius:14px; overflow:hidden;">
+                <!-- barre appli -->
+                <div style="display:flex; align-items:center; gap:10px; padding:12px 18px; background:#fff; border-bottom:1px solid #eef3f8;">
+                  <span style="width:26px; height:26px; border-radius:8px; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;">R</span>
+                  <span style="font-size:13.5px; font-weight:800; color:#0c1f2c;">RealXpert</span>
+                  <span style="font-size:11.5px; font-weight:700; color:#0b7d5f; display:flex; align-items:center; gap:6px; margin-left:auto;"><span style="width:7px; height:7px; border-radius:50%; background:#10a37f;"></span>Online</span>
+                </div>
+                <!-- fil de discussion -->
+                <div style="padding:20px 20px 8px;">
+                  <div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:18px;">
+                    <span style="width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex:0 0 auto;">R</span>
+                    <div style="background:#fff; border:1.5px solid #cdddef; border-radius:4px 16px 16px 16px; padding:13px 18px; max-width:80%; box-shadow:0 12px 26px -16px rgba(20,70,120,0.45);">
+                      <div style="font-size:12px; font-weight:800; color:#2f47b0; margin-bottom:4px;">RealXpert</div>
+                      <p style="font-size:14.5px; line-height:1.55; color:#22333f; margin:0;">{{ t.lead }}</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:14px; margin:2px 4px 16px;">
+                    <span style="flex:1; height:1px; background:#d5e2f0;"></span>
+                    <span style="font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#8aa2bd; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Zum Beispiel könnten Sie fragen …</span>
+                    <span style="flex:1; height:1px; background:#d5e2f0;"></span>
+                  </div>
+                  <sc-for list="{{ t.questions }}" as="q" hint-placeholder-count="5">
+                    <div style="display:flex; justify-content:flex-end; margin-bottom:11px;">
+                      <div style="background:linear-gradient(135deg,#3f7fd6,#2f5fc0); border-radius:16px 4px 16px 16px; padding:11px 17px; max-width:82%; box-shadow:0 14px 26px -12px rgba(47,95,192,0.55);">
+                        <span style="font-size:14.5px; line-height:1.5; color:#fff; font-weight:600;">{{ q }}</span>
+                      </div>
+                    </div>
+                  </sc-for>
+                  <div style="display:flex; gap:10px; align-items:center; margin-top:14px;">
+                    <span style="width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex:0 0 auto;">R</span>
+                    <div style="background:#fff; border:1.5px solid #cdddef; border-radius:16px; padding:11px 16px; display:flex; align-items:center; gap:8px; box-shadow:0 12px 26px -16px rgba(20,70,120,0.45);">
+                      <span style="width:7px; height:7px; border-radius:50%; background:#9db8d6;"></span>
+                      <span style="width:7px; height:7px; border-radius:50%; background:#9db8d6;"></span>
+                      <span style="width:7px; height:7px; border-radius:50%; background:#9db8d6;"></span>
+                      <span style="font-size:13px; color:#6b8199; font-weight:600; margin-left:4px;">RealXpert analysiert Ihre Situation …</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- barre de saisie -->
+                <div style="display:flex; align-items:center; gap:10px; padding:12px 16px; margin:6px 14px 14px; background:#fff; border:1px solid #e2ebf3; border-radius:100px;">
+                  <span style="flex:1; font-size:13.5px; color:#9aabbc;">Stellen Sie Ihre eigene Frage zu diesem Thema …</span>
+                  <span style="width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; flex:0 0 auto;">➤</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- apport -->
+      <div data-r="padall" style="background:linear-gradient(120deg,#3a5fc0,#2f47b0); padding:32px 38px; margin-top:22px; box-shadow:0 26px 54px -26px rgba(30,50,140,0.55);">
+        <h3 style="font-size:19px; font-weight:800; margin:0 0 10px; color:#fff;">Was RealXpert Ihnen bringt</h3>
+        <p style="font-size:16.5px; line-height:1.65; color:#eaf1fb; margin:0;">{{ caseApport }}</p>
+      </div>
+
+      <!-- autres situations supprimé -->
+      <div style="text-align:center; margin-top:38px;">
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">Jetzt meine Fragen stellen →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COPILOTE (tabs) ============ -->
+  <section id="accompagnement" style="background:#ffffff; padding:84px 32px;">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="text-align:center; max-width:900px; margin:0 auto 30px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">RealXpert-Bereich</span>
+        <h2 style="font-size:40px; font-weight:800; line-height:1.15; letter-spacing:-0.025em; margin:12px 0 18px; color:#0c1f2c;">Alles, was Sie brauchen, um Ihr Immobilienprojekt souverän voranzubringen</h2>
+        <p style="display:none;"></p>
+      </div>
+
+      <div data-r="pillwrap" style="margin-bottom:48px;">
+        <div data-r="pillhead" style="text-align:center; margin-bottom:44px;">
+          <span style="display:inline-flex; align-items:center; gap:12px; font-size:22px; font-weight:800; letter-spacing:0.02em; color:#4a72b8;" data-r="mid">Ihr RealXpert-Bereich</span>
+          <div data-r="ptcue" style="display:none; font-size:13.5px; font-weight:600; color:#5a6f8a; margin-top:8px;">Tippen Sie auf eine Zahl, um den passenden Bereich anzuzeigen</div>
+        </div>
+        <div data-r="g5" style="position:relative; display:grid; grid-template-columns:repeat(5,1fr);">
+          <div data-r="pillline" style="position:absolute; top:29px; left:10%; right:10%; height:2px; background:#dbe6f2; z-index:0;"></div>
+          <sc-for list="{{ pillTabs }}" as="t" hint-placeholder-count="5">
+            <div onClick="{{ t.go }}" data-r="ptab" style="position:relative; z-index:1; text-align:center; padding:0 16px; cursor:pointer;">
+              <div style="{{ t.nodeStyle }}">{{ t.n }}</div>
+              <div data-r="ptlabel" style="font-size:10.5px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; margin:22px 0 10px; color:{{ t.labelColor }};">{{ t.label }}</div>
+              <div data-r="ptpromise" style="font-size:17px; font-weight:800; line-height:1.28; letter-spacing:-0.015em; color:{{ t.promiseColor }};">{{ t.promise }}</div>
+              <div style="height:3px; width:{{ t.underline }}; margin:12px auto 0; border-radius:3px; background:linear-gradient(90deg,#6fa8ff,#2f5aa8); transition:width .3s ease;"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border-radius:22px; background:linear-gradient(150deg,#2f5aa8,#1d3c6e); padding:24px; position:relative; box-shadow:0 44px 96px -42px rgba(20,50,90,0.5);">
+        <span style="position:absolute; top:-15px; left:28px; z-index:2; font-size:12.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#6fa8ff,#3f74d6); padding:9px 18px; border-radius:100px; box-shadow:0 12px 26px -8px rgba(29,60,110,0.55);">{{ active.n }} · {{ active.label }}</span>
+        <sc-if value="{{ active.img }}" hint-placeholder-val="">
+          <img src="{{ active.img }}" alt="{{ active.tag }}" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid #eef3f9; box-shadow:0 20px 44px -24px rgba(20,50,90,0.4);" />
+        </sc-if>
+        <sc-if value="{{ active.noImg }}" hint-placeholder-val="{{ true }}">
+          <div data-r="mock" style="height:520px; border-radius:12px; background:#fff; border:1px solid #eef3f9; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:ui-monospace,monospace; font-size:14px; color:#7c93b0;">{{ active.imgLabel }}</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="max-width:900px; margin:56px auto 0;">
+        <div style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#2f5aa8; margin-bottom:8px;">{{ active.label }}</div>
+        <h3 style="font-size:28px; font-weight:800; line-height:1.2; letter-spacing:-0.02em; margin:0 0 18px; color:#0c1f2c;">{{ active.promise }}</h3>
+        <p style="font-size:17px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ active.lead }}</p>
+        <sc-if value="{{ active.expanded }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <sc-for list="{{ active.detail }}" as="p" hint-placeholder-count="2">
+              <p style="font-size:17px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ p }}</p>
+            </sc-for>
+            <sc-if value="{{ active.hasBullets }}" hint-placeholder-val="{{ false }}">
+              <div style="margin:2px 0 14px;">
+                <sc-for list="{{ active.bullets }}" as="b" hint-placeholder-count="6">
+                  <div style="display:flex; align-items:flex-start; gap:11px; padding:5px 0;">
+                    <span style="width:7px; height:7px; border-radius:50%; background:#4a72b8; flex:0 0 auto; margin-top:8px;"></span>
+                    <span style="font-size:16px; line-height:1.55; color:#42556a;">{{ b }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-for list="{{ active.detailTail }}" as="p" hint-placeholder-count="1">
+              <p style="font-size:17px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ p }}</p>
+            </sc-for>
+          </div>
+        </sc-if>
+        <span onClick="{{ active.toggleMore }}" style="display:inline-flex; align-items:center; gap:7px; font-size:15.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px; margin-bottom:22px;">{{ active.moreLabel }} <span style="font-size:13px;">{{ active.moreArrow }}</span></span>
+        <div style="background:#f2f7fd; border-left:4px solid #2f5aa8; border-radius:0 8px 8px 0; padding:18px 24px; margin-top:8px;">
+          <div style="font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#2f5aa8; margin-bottom:6px;">Was das für Sie ändert</div>
+          <p style="font-size:16.5px; line-height:1.65; color:#22333f; margin:0; font-weight:600;">{{ active.change }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIFFERENCES IA ============ -->
+  <section id="difference" style="background:#eaf3fb; padding:88px 32px;">
+    <div style="max-width:1160px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 14px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Der Unterschied</span>
+        <h2 style="font-size:44px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:12px 0 20px; color:#0c1f2c;">Was ist der Unterschied zwischen RealXpert, allgemeinen KI und der KI von Immobilienportalen?</h2>
+      </div>
+      <p style="text-align:center; font-size:20px; font-weight:800; color:#4a72b8; margin:0 auto 40px;">Nicht jede KI erfüllt dieselbe Rolle</p>
+
+      <div style="display:flex; flex-direction:column; gap:16px; max-width:900px; margin:0 auto;">
+        <sc-for list="{{ diffBlocks }}" as="d" hint-placeholder-count="3">
+          <div style="background:#fff; border:1px solid #dbe7f4; border-radius:18px; overflow:hidden; box-shadow:0 20px 48px -32px rgba(20,70,120,0.5);">
+            <div onClick="{{ d.toggle }}" data-r="pad" style="display:flex; align-items:flex-start; gap:20px; padding:30px 34px; cursor:pointer;">
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:12.5px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:{{ d.accent }}; margin-bottom:8px;">{{ d.kicker }}</div>
+                <h3 style="font-size:24px; font-weight:800; line-height:1.28; letter-spacing:-0.015em; margin:0; color:#0c1f2c;">{{ d.titleMain }}</h3>
+                <div style="font-size:21px; font-weight:800; line-height:1.35; margin:8px 0 0; color:{{ d.accent }};">{{ d.titleSub }}</div>
+                <sc-if value="{{ d.collapsed }}" hint-placeholder-val="{{ true }}">
+                  <p style="font-size:16px; line-height:1.6; color:#6a7d92; margin:12px 0 0;">{{ d.teaser }} …</p>
+                </sc-if>
+              </div>
+              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:400; flex:0 0 auto;">{{ d.sign }}</span>
+            </div>
+            <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
+              <div data-r="pad" style="padding:0 34px 32px 34px;">
+                <sc-for list="{{ d.paras }}" as="p" hint-placeholder-count="4">
+                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ p }}</p>
+                </sc-for>
+                <div style="display:inline-flex; align-items:center; gap:7px; font-size:14.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px;" onClick="{{ d.toggle }}">Einklappen ↑</div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="text-align:center; margin-top:40px;">
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">RealXpert kostenlos testen →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TÉMOIGNAGES ============ -->
+  <section style="background:#ffffff; padding:96px 32px;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 60px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#4a72b8;">Erfahrungsberichte</span>
+        <h2 style="font-size:44px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:14px 0 20px; color:#0c1f2c;">Wenn die richtigen Entscheidungen den Unterschied machen</h2>
+        <p style="font-size:18px; line-height:1.7; color:#42556a; margin:0;">Erfahren Sie, wie Verkäufer und Käufer RealXpert bei den wichtigen Entscheidungen genutzt haben, um ihre Interessen besser zu vertreten und Fehler zu vermeiden, die sie teuer hätten zu stehen kommen können.</p>
+      </div>
+
+      <div data-r="g3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:start;">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <div data-r="pad" style="position:relative; background:#fff; border:1.5px solid #bcd4ee; border-radius:22px; padding:44px 38px 34px; box-shadow:0 30px 70px -42px rgba(20,50,90,0.55), 0 0 0 6px rgba(90,160,255,0.06); display:flex; flex-direction:column;">
+            <div data-r="qmark" style="position:absolute; top:28px; right:34px; font-family:Georgia,serif; font-size:88px; line-height:0.6; color:#eef3f9;">”</div>
+            <span style="display:inline-flex; align-self:flex-start; align-items:center; gap:7px; font-size:11.5px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:{{ t.tagColor }}; background:{{ t.tagBg }}; padding:6px 13px; border-radius:100px; margin-bottom:22px;">{{ t.tag }}</span>
+            <h3 style="position:relative; font-size:21px; font-weight:800; line-height:1.35; letter-spacing:-0.01em; color:#0c1f2c; margin:0 0 18px;">{{ t.headline }}</h3>
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <sc-for list="{{ t.visible }}" as="p" hint-placeholder-count="1">
+                <p style="font-size:15px; line-height:1.78; color:#3a4d5c; margin:0;">{{ p }}</p>
+              </sc-for>
+            </div>
+            <span onClick="{{ t.toggle }}" style="align-self:flex-start; margin-top:16px; font-size:14.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px;">{{ t.moreLabel }}</span>
+            <div style="margin-top:30px; padding-top:24px; border-top:1px solid #eef3f8; display:flex; align-items:center; gap:15px;">
+              <span style="width:56px; height:56px; border-radius:50%; overflow:hidden; flex:0 0 auto; background:#dfeaf7; display:block; box-shadow:0 8px 20px -8px rgba(20,50,90,0.4);">
+                <img src="{{ t.photo }}" alt="{{ t.name }}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;" />
+              </span>
+              <div>
+                <div style="font-size:16px; font-weight:800; color:#0c1f2c;">{{ t.name }}</div>
+                <div style="font-size:13px; color:#7a8b9a; margin-top:2px;">{{ t.role }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BON MOMENT ============ -->
+  <section style="background:#eaf3fb; padding:92px 32px;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div style="text-align:center; max-width:840px; margin:0 auto 52px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#4a72b8;">Der richtige Moment, um RealXpert zu nutzen</span>
+        <h2 style="font-size:44px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:14px 0 20px; color:#0c1f2c;">Bevor Sie sich festlegen, stellen Sie sicher, dass Sie die richtigen Entscheidungen treffen</h2>
+        <p style="font-size:17.5px; line-height:1.75; color:#42556a; margin:0 auto; max-width:720px;">Bei einem Immobilienprojekt tauchen ständig Zweifel auf: eine neue Meinung, eine Schätzung, ein Angebot, eine bevorstehende Entscheidung. Jedes Mal wird RealXpert zu Ihrem Orientierungspunkt: Schildern Sie, was Sie beschäftigt, verstehen Sie, was wirklich zählt, und wissen Sie, welche Richtung Sie bevorzugen sollten, bevor Sie handeln.</p>
+      </div>
+
+      <div data-r="g2" style="display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:36px;">
+        <div data-r="minh" style="position:relative; border-radius:20px; overflow:hidden; min-height:340px; display:flex; box-shadow:0 30px 66px -38px rgba(0,0,0,0.6);">
+          <img src="uploads/Image vendeur.png" alt="Verkaufen" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,31,52,0.05) 0%,rgba(12,31,52,0.45) 52%,rgba(12,31,52,0.88) 100%);"></div>
+          <div data-r="pad" style="position:relative; margin-top:auto; padding:34px 36px;">
+            <span style="display:inline-block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#5aa0ff,#2f5aa8); padding:6px 14px; border-radius:100px; margin-bottom:16px;">Wenn Sie verkaufen</span>
+            <h3 style="font-size:23px; font-weight:800; color:#fff; margin:0 0 10px; line-height:1.3;">Verkaufen Sie, indem Sie den Wert Ihrer Immobilie verteidigen und Fehlentscheidungen vermeiden</h3>
+            <p style="font-size:15.5px; line-height:1.7; color:#dde8f5; margin:0;">Vom Preis über die Strategie und die Wahl des Maklers bis zur Verhandlung: Überprüfen Sie Ihre Entscheidungen zum richtigen Zeitpunkt, um Fehlentscheidungen zu vermeiden und Ihre Chancen auf den bestmöglichen Preis zu maximieren.</p>
+          </div>
+        </div>
+
+        <div data-r="minh" style="position:relative; border-radius:20px; overflow:hidden; min-height:340px; display:flex; box-shadow:0 30px 66px -38px rgba(0,0,0,0.6);">
+          <img src="uploads/bon-moment-achat.png" alt="Kaufen" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,31,52,0.05) 0%,rgba(12,31,52,0.45) 52%,rgba(12,31,52,0.88) 100%);"></div>
+          <div data-r="pad" style="position:relative; margin-top:auto; padding:34px 36px;">
+            <span style="display:inline-block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#ff5a3c,#e01f3d); padding:6px 14px; border-radius:100px; margin-bottom:16px;">Wenn Sie kaufen</span>
+            <h3 style="font-size:23px; font-weight:800; color:#fff; margin:0 0 10px; line-height:1.3;">Kaufen Sie, ohne Angst, zu viel zu bezahlen oder die falschen Entscheidungen zu treffen</h3>
+            <p style="font-size:15.5px; line-height:1.7; color:#dde8f5; margin:0;">Analysieren Sie die Immobilie, prüfen Sie die wichtigen Punkte und wissen Sie, wie weit Sie gehen können, um Ihre Interessen zu schützen, nicht zu viel zu bezahlen und unter den besten Bedingungen zu kaufen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div data-r="quote" style="max-width:920px; margin:0 auto; background:#fff; border:1px solid #e0e9f3; border-radius:20px; padding:48px 54px; box-shadow:0 30px 66px -40px rgba(20,70,120,0.5); position:relative;">
+        <div data-r="qmark" style="position:absolute; top:32px; left:44px; font-family:Georgia,serif; font-size:80px; line-height:0.6; color:#eef3f9;">“</div>
+        <p style="position:relative; font-size:22px; line-height:1.5; font-weight:800; letter-spacing:-0.01em; color:#0c1f2c; margin:0 0 18px;">Sobald ein Zweifel auftaucht, prüfen Sie, bevor Sie sich festlegen.</p>
+        <p style="font-size:16.5px; line-height:1.8; color:#42556a; margin:0;">Solange die Entscheidung nicht getroffen ist, können Sie Ihre Optionen noch vergleichen, die richtigen Fragen stellen und die Richtung ändern. Ist man einmal gebunden, kann eine falsche Entscheidung Zeit und Zehntausende Franken kosten oder sogar unumkehrbar sein. Besser zum richtigen Zeitpunkt prüfen, als die Folgen danach zu tragen.</p>
+      </div>
+
+      <div style="text-align:center; margin-top:40px;">
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">Prüfen, bevor ich entscheide →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUISSE / MARCHÉ LOCAL ============ -->
+  <section id="suisse" style="background:#ffffff; padding:88px 32px;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div data-r="split3" style="display:grid; grid-template-columns:1fr 1px 1fr; gap:56px; align-items:center;">
+        <div>
+          <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Überall in der Schweiz</span>
+          <h2 style="font-size:38px; font-weight:800; line-height:1.16; letter-spacing:-0.025em; margin:12px 0 18px; color:#0c1f2c;">Expertise in der ganzen Schweiz, zugeschnitten auf Ihren lokalen Markt</h2>
+          <p style="font-size:17px; line-height:1.7; color:#42556a; margin:0 0 12px;">RealXpert begleitet Sie in allen 26 Schweizer Kantonen und berücksichtigt die lokalen Besonderheiten jedes Marktes: Preise, Nachfrage, Steuern, regionale Gepflogenheiten, kommunale Dynamiken und die in Ihrer Region tätigen Fachleute.</p>
+          <p style="font-size:17px; line-height:1.7; color:#42556a; margin:0;">Weil ein Immobilienprojekt in Genf, Lausanne, Zürich, Lugano, Sitten oder in einer ländlicheren Gemeinde nicht auf dieselbe Weise entschieden wird, passt RealXpert seine Analysen an Ihren lokalen Markt an.</p>
+        </div>
+
+        <div data-r="hide" style="width:1px; height:100%; background:#e2e8ee;"></div>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <sc-for list="{{ localPoints }}" as="l" hint-placeholder-count="5">
+            <div style="display:flex; align-items:flex-start; gap:16px;">
+              <span style="width:30px; height:30px; border-radius:9px; background:linear-gradient(135deg,#5aa0ff,#2f5aa8); color:#fff; display:flex; align-items:center; justify-content:center; flex:0 0 auto; margin-top:2px; box-shadow:0 8px 18px -8px rgba(47,90,168,0.6);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <div>
+                <div style="font-size:16.5px; font-weight:800; color:#0c1f2c; margin-bottom:2px;">{{ l.title }}</div>
+                <div style="font-size:15px; line-height:1.55; color:#5a6f73;">{{ l.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- carte suisse -->
+      <div style="margin-top:48px;">
+        <img src="uploads/carte-suisse-transparent.png" alt="Karte der Schweiz — Expertise in allen 26 Kantonen" style="display:block; width:100%; max-width:900px; height:auto; margin:0 auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHIFFRES / DONNÉES ============ -->
+  <section id="donnees" style="background:#0a1f44; padding:84px 32px;">
+    <div style="max-width:1240px; margin:0 auto;">
+      <div style="text-align:center; max-width:820px; margin:0 auto 56px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#8fb4f0;">Konkrete Daten</span>
+        <h2 style="font-size:46px; font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:12px 0 0; color:#ffffff;">Stützen Sie Ihre Entscheidungen auf konkrete Immobiliendaten</h2>
+      </div>
+      <div data-r="g3s" style="display:grid; grid-template-columns:repeat(3,1fr);">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="6">
+          <div style="{{ s.cellStyle }}">
+            <div data-r="big" style="font-size:52px; font-weight:800; letter-spacing:-0.03em; color:#ffffff; line-height:1;">{{ s.num }}</div>
+            <div style="font-size:15px; font-weight:600; letter-spacing:0.02em; line-height:1.45; color:#9cb6dc; margin-top:14px;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONFIDENTIALITÉ & SÉCURITÉ ============ -->
+  <section style="background:#ffffff; padding:88px 32px;">
+    <div style="max-width:1080px; margin:0 auto;">
+
+      <div style="max-width:800px; margin:0 auto 56px; text-align:center;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">Datenschutz &amp; Sicherheit</span>
+        <h2 style="font-size:46px; font-weight:800; line-height:1.12; letter-spacing:-0.025em; margin:12px 0 18px; color:#0c1f2c;">Sprechen Sie mit Vertrauen über Ihr Projekt</h2>
+        <p style="font-size:18px; line-height:1.62; color:#4a5b6b; margin:0; text-wrap:pretty;">Um Ihnen Empfehlungen zu geben, die wirklich auf Ihre Situation zugeschnitten sind, muss RealXpert Ihr Projekt verstehen. Sie können die für die Analyse erforderlichen Informationen mit Vertrauen teilen: Ihre personenbezogenen Daten sind geschützt und Ihre Austausche werden vertraulich behandelt.</p>
+      </div>
+
+      <div style="max-width:1000px; margin:0 auto;">
+        <div data-r="split" style="display:grid; grid-template-columns:0.5fr 1.5fr; gap:20px 56px; padding:32px 0; border-top:1px solid #e8eef4; align-items:start; position:relative;">
+          <span data-r="hide" style="position:absolute; left:16px; top:73px; bottom:-31px; width:2px; background:#d3e0ee;"></span>
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
+              <span style="width:34px; height:34px; border-radius:50%; background:#1d4fb0; color:#ffffff; font-size:15px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-shadow:0 6px 14px -6px rgba(29,79,176,0.55);">1</span>
+            </div>
+            <span style="display:block; font-size:14.5px; font-weight:800; letter-spacing:0.055em; text-transform:uppercase; color:#2f63b5; line-height:1.45; padding-top:7px;">Ihre Identität ist geschützt</span>
+          </div>
+          <div>
+            <h3 style="font-size:23px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.28; text-wrap:pretty;">Ihre Identität bleibt von der Analyse Ihres Projekts getrennt</h3>
+            <p style="font-size:16.5px; line-height:1.7; color:#5a6f73; margin:0; text-wrap:pretty;">Die Daten, mit denen Sie identifiziert werden können, werden separat verwaltet und nicht an das Modell der künstlichen Intelligenz übermittelt, um Ihr Projekt zu analysieren.</p>
+          </div>
+        </div>
+        <div data-r="split" style="display:grid; grid-template-columns:0.5fr 1.5fr; gap:20px 56px; padding:32px 0; border-top:1px solid #e8eef4; align-items:start; position:relative;">
+          <span data-r="hide" style="position:absolute; left:16px; top:73px; bottom:-31px; width:2px; background:#d3e0ee;"></span>
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
+              <span style="width:34px; height:34px; border-radius:50%; background:#1d4fb0; color:#ffffff; font-size:15px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-shadow:0 6px 14px -6px rgba(29,79,176,0.55);">2</span>
+            </div>
+            <span style="display:block; font-size:14.5px; font-weight:800; letter-spacing:0.055em; text-transform:uppercase; color:#2f63b5; line-height:1.45; padding-top:7px;">Ihre Daten werden in der Schweiz gespeichert</span>
+          </div>
+          <div>
+            <h3 style="font-size:23px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.28; text-wrap:pretty;">Ihre Daten werden in der Schweiz gehostet und geschützt</h3>
+            <p style="font-size:16.5px; line-height:1.7; color:#5a6f73; margin:0; text-wrap:pretty;">Die von RealXpert aufbewahrten Daten werden in der Schweiz gehostet und durch angemessene Sicherheitsmassnahmen geschützt.</p>
+          </div>
+        </div>
+        <div data-r="split" style="display:grid; grid-template-columns:0.5fr 1.5fr; gap:20px 56px; padding:32px 0; border-top:1px solid #e8eef4; align-items:start; position:relative;">
+          <span data-r="hide" style="position:absolute; left:16px; top:73px; bottom:-31px; width:2px; background:#d3e0ee;"></span>
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
+              <span style="width:34px; height:34px; border-radius:50%; background:#1d4fb0; color:#ffffff; font-size:15px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-shadow:0 6px 14px -6px rgba(29,79,176,0.55);">3</span>
+            </div>
+            <span style="display:block; font-size:14.5px; font-weight:800; letter-spacing:0.055em; text-transform:uppercase; color:#2f63b5; line-height:1.45; padding-top:7px;">Ihre Informationen bleiben vertraulich</span>
+          </div>
+          <div>
+            <h3 style="font-size:23px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.28; text-wrap:pretty;">Ihre Informationen dienen ausschliesslich den gewählten Diensten</h3>
+            <p style="font-size:16.5px; line-height:1.7; color:#5a6f73; margin:0; text-wrap:pretty;">Die Informationen, die Sie mit RealXpert teilen, werden ausschliesslich verwendet, um Ihnen die Analysen, Empfehlungen und Dienstleistungen bereitzustellen, die Sie nutzen möchten. Ihre personenbezogenen Daten werden nicht an Dritte verkauft.</p>
+          </div>
+        </div>
+        <div data-r="split" style="display:grid; grid-template-columns:0.5fr 1.5fr; gap:20px 56px; padding:32px 0; border-top:1px solid #e8eef4; align-items:start; position:relative;">
+          <span data-r="hide" style="position:absolute; left:16px; top:73px; bottom:-31px; width:2px; background:#d3e0ee;"></span>
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
+              <span style="width:34px; height:34px; border-radius:50%; background:#1d4fb0; color:#ffffff; font-size:15px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-shadow:0 6px 14px -6px rgba(29,79,176,0.55);">4</span>
+            </div>
+            <span style="display:block; font-size:14.5px; font-weight:800; letter-spacing:0.055em; text-transform:uppercase; color:#2f63b5; line-height:1.45; padding-top:7px;">Sie behalten die Kontrolle</span>
+          </div>
+          <div>
+            <h3 style="font-size:23px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.28; text-wrap:pretty;">Sie können Ihre Daten jederzeit verwalten</h3>
+            <p style="font-size:16.5px; line-height:1.7; color:#5a6f73; margin:0; text-wrap:pretty;">Sie entscheiden, welche Informationen Sie mit RealXpert teilen möchten. Sie können jederzeit auf Ihre personenbezogenen Daten zugreifen und deren Änderung oder Löschung verlangen.</p>
+          </div>
+        </div>
+        <div data-r="split" style="display:grid; grid-template-columns:0.5fr 1.5fr; gap:20px 56px; padding:32px 0; border-top:1px solid #e8eef4; align-items:start; position:relative;">
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center;">
+              <span style="width:34px; height:34px; border-radius:50%; background:#1d4fb0; color:#ffffff; font-size:15px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-shadow:0 6px 14px -6px rgba(29,79,176,0.55);">5</span>
+            </div>
+            <span style="display:block; font-size:14.5px; font-weight:800; letter-spacing:0.055em; text-transform:uppercase; color:#2f63b5; line-height:1.45; padding-top:7px;">Ihre Daten sind geregelt</span>
+          </div>
+          <div>
+            <h3 style="font-size:23px; font-weight:800; margin:0 0 10px; color:#0c1f2c; line-height:1.28; text-wrap:pretty;">Ihre Bearbeitung erfüllt die anwendbaren Anforderungen des DSG und der DSGVO</h3>
+            <p style="font-size:16.5px; line-height:1.7; color:#5a6f73; margin:0; text-wrap:pretty;">Der Schutz Ihrer Daten ist ein integraler Bestandteil der Konzeption von RealXpert. Ihre Bearbeitung erfüllt die anwendbaren Anforderungen des Bundesgesetzes über den Datenschutz (DSG) und, soweit anwendbar, der Datenschutz-Grundverordnung (DSGVO).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" style="background:#f4f8fc; padding:88px 32px;">
+    <div style="max-width:980px; margin:0 auto;">
+      <div style="text-align:center; margin:0 0 48px;">
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#4a72b8;">FAQ</span>
+        <h2 style="font-size:46px; font-weight:800; line-height:1.12; letter-spacing:-0.025em; margin:12px 0 0; color:#0c1f2c;">Häufige Fragen</h2>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+          <div onClick="{{ f.toggle }}" data-r="pad" style="background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:24px 28px; cursor:pointer; box-shadow:0 12px 30px -24px rgba(20,50,90,0.5);">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:20px;">
+              <span style="font-size:19px; font-weight:800; color:#0c1f2c; line-height:1.35;">{{ f.q }}</span>
+              <span style="font-size:28px; color:#0c1f2c; font-weight:400; flex:0 0 auto; line-height:1;">{{ f.sign }}</span>
+            </div>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <div style="margin:14px 0 0; max-width:760px;">
+                <sc-for list="{{ f.paras }}" as="p" hint-placeholder-count="2">
+                  <p style="font-size:15.5px; line-height:1.7; color:#5a6f73; margin:0 0 10px;">{{ p }}</p>
+                </sc-for>
+                <sc-if value="{{ f.hasBullets }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin:4px 0 10px;">
+                    <sc-for list="{{ f.bullets }}" as="b" hint-placeholder-count="4">
+                      <div style="display:flex; align-items:flex-start; gap:11px; padding:4px 0;">
+                        <span style="width:6px; height:6px; border-radius:50%; background:#10a37f; flex:0 0 auto; margin-top:8px;"></span>
+                        <span style="font-size:15px; line-height:1.55; color:#5a6f73;">{{ b }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-for list="{{ f.tail }}" as="p" hint-placeholder-count="1">
+                  <p style="font-size:15.5px; line-height:1.7; color:#5a6f73; margin:0 0 10px;">{{ p }}</p>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="text-align:center; margin-top:44px;">
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">RealXpert kostenlos testen →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#16305c; color:#a9bfd8; padding:60px 32px 36px;">
+    <div style="max-width:1180px; margin:0 auto;">
+      <div data-r="g3f" style="display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:56px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.12);">
+
+        <div>
+          <div style="font-size:18px; font-weight:800; color:#fff; margin-bottom:12px;">Newsletter abonnieren</div>
+          <p style="font-size:14px; line-height:1.6; margin:0 0 20px; max-width:400px;">Erhalten Sie die neuesten Trends des Schweizer Immobilienmarkts und praktische Tipps, um zum besten Preis zu verkaufen oder zu kaufen.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; max-width:440px;">
+            <input type="email" placeholder="Ihre E-Mail-Adresse" style="flex:1; min-width:200px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); border-radius:10px; padding:13px 16px; font-family:inherit; font-size:14.5px; color:#fff; outline:none;" />
+            <button style="background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:10px; cursor:pointer; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.7;" style-active="transform:scale(0.94);">Jetzt abonnieren</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:#fff; margin-bottom:18px;">RealXpert</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="A propos - DE.dc.html" style="color:#a9bfd8; font-size:14px;">RealXpert entdecken</a>
+            <a href="Vendre - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Verkaufen</a>
+            <a href="Acheter - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Kaufen</a>
+            <a href="A propos - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Über uns</a>
+            <a href="Nos partenaires - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Unsere Partner</a>
+            <a href="Nous contacter - DE.dc.html" style="color:#a9bfd8; font-size:14px;">Kontakt</a>
+            <a href="Politique de confidentialite - DE.dc.html#top" style="color:#a9bfd8; font-size:14px;">Datenschutzerklärung</a>
+            <a href="Conditions generales - DE.dc.html#top" style="color:#a9bfd8; font-size:14px;">Allgemeine Geschäftsbedingungen</a>
+          </div>
+        </div>
+
+        <div>
+          <img src="uploads/logo-realxpert-white.png" alt="RealXpert" style="display:block; height:46px; width:auto; margin-bottom:18px;" />
+          <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Kundenservice</div>
+          <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Geöffnet Montag bis Freitag<br>von 8:30 bis 18:30 Uhr · In der ganzen Schweiz</p>
+          <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
+          <a href="Nous contacter - DE.dc.html" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Kontakt aufnehmen →</a>
+        </div>
+
+      </div>
+      <p style="font-size:13px; margin:24px 0 0; color:#7690b0;">2026 © RealXpert — Schweizer Immobilienexpertise. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <!-- ============ RIGHT SIDE PANEL : INSCRIPTION ============ -->
+  <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; inset:0; z-index:200; display:flex; justify-content:flex-end;">
+      <div onClick="{{ closePanel }}" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); backdrop-filter:blur(2px);"></div>
+      <div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#ffffff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
+        <div data-r="pad" style="padding:30px 34px 40px;">
+
+          <div style="display:flex; justify-content:flex-end; margin-bottom:6px;">
+            <button onClick="{{ closePanel }}" aria-label="Schließen" style="background:none; border:none; cursor:pointer; color:#8a97a3; padding:6px; line-height:0; border-radius:8px;" style-hover="background:#eef2f6; color:#0c1f2c;" style-active="transform:scale(0.9);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+
+          <h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Kostenlos weitermachen mit RealXpert</h2>
+          <p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Treffen Sie Entscheidungen, die Sie Zehntausende Franken kosten können, nicht mehr allein.</p>
+
+          <div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Kostenlos starten</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Unverbindlich</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Erste persönliche Beratung</div>
+          </div>
+
+          <div style="height:1px; background:#e2e8ee; margin:24px 0 18px;"></div>
+          <p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Nur noch 30 Sekunden, um Ihr Projekt jederzeit wiederzufinden und jede wichtige Entscheidung zu prüfen, bevor Sie sich festlegen.</p>
+
+          <div style="display:flex; flex-direction:column; gap:13px;">
+            <div style="display:flex; gap:11px;">
+              <input type="text" placeholder="Vorname" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+              <input type="text" placeholder="Nachname" style="flex:1; min-width:0; font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+            </div>
+            <input type="email" placeholder="E-Mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+            <input type="tel" placeholder="Telefon" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+            <input type="password" placeholder="Passwort" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+
+            <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-top:2px;"><input type="checkbox" style="flex:0 0 auto; width:17px; height:17px; margin:2px 0 0; accent-color:#1d4fb0; cursor:pointer;"><span style="font-size:14px; line-height:1.5; color:#5a6b78;">Ich möchte die RealXpert-Ratschläge erhalten, um mein Immobilienprojekt besser umzusetzen.</span></label><button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;" style-hover="filter:brightness(1.04);" style-active="transform:scale(0.985);">Meine erste Beratung erhalten →</button><p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:0; text-align:center;">Indem Sie fortfahren, akzeptieren Sie unsere <a href="Conditions generales - DE.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Allgemeinen Geschäftsbedingungen</a> und bestätigen, unsere <a href="Politique de confidentialite - DE.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Datenschutzerklärung</a> zur Kenntnis genommen zu haben.</p>
+          </div>
+
+          <p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Sie haben bereits ein Konto? <a href="#top" style="color:#1d4fb0; font-weight:700;">Anmelden</a></p>
+
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ RIGHT SIDE PANEL : CONNEXION ============ -->
+  <sc-if value="{{ loginOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; inset:0; z-index:200; display:flex; justify-content:flex-end;">
+      <div onClick="{{ closeLogin }}" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); backdrop-filter:blur(2px);"></div>
+      <div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#ffffff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
+        <div data-r="pad" style="padding:30px 34px 40px;">
+
+          <div style="display:flex; justify-content:flex-end; margin-bottom:6px;">
+            <button onClick="{{ closeLogin }}" aria-label="Schließen" style="background:none; border:none; cursor:pointer; color:#8a97a3; padding:6px; line-height:0; border-radius:8px;" style-hover="background:#eef2f6; color:#0c1f2c;" style-active="transform:scale(0.9);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+
+          <h2 style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;">Setzen Sie Ihr Immobilienprojekt fort</h2>
+          <p style="font-size:15px; line-height:1.5; color:#5a6b78; margin:0 0 20px;">Melden Sie sich erneut an, um Ihr Projekt fortzusetzen und sicherzustellen, dass Sie die richtigen Entscheidungen treffen.</p>
+
+          <div style="display:flex; flex-direction:column; gap:9px; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Finden Sie Ihr Projekt genau dort wieder, wo Sie aufgehört haben</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Prüfen Sie jede wichtige Entscheidung, bevor Sie sich festlegen</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:600; color:#0c1f2c;"><span style="flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:#e3edfb; color:#1d4fb0; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>Treffen Sie die richtigen Entscheidungen zum richtigen Zeitpunkt</div>
+          </div>
+
+          <div style="height:1px; background:#eef2f6; margin:28px 0 16px;"></div>
+          <p style="font-size:14.5px; line-height:1.5; color:#5a6b78; margin:0 0 18px;">Geben Sie Ihre Zugangsdaten ein, um Ihr Projekt fortzusetzen</p>
+
+          <div style="display:flex; flex-direction:column; gap:13px;">
+            <input type="email" placeholder="E-Mail" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+            <input type="password" placeholder="Passwort" style="font-family:inherit; font-size:15px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:11px; padding:13px 15px;" style-focus="border-color:#4a72b8; background:#fff;">
+            <div style="display:flex; justify-content:flex-end; margin-top:-4px;">
+              <a href="#top" style="font-size:13.5px; color:#1d4fb0; font-weight:600;">Passwort vergessen?</a>
+            </div>
+
+            <button style="width:100%; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;" style-hover="filter:brightness(1.04);" style-active="transform:scale(0.985);">Mein Projekt fortsetzen →</button>
+          </div>
+
+          <p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Noch kein Konto? <a href="#top" onClick="{{ openPanel }}" style="color:#1d4fb0; font-weight:700; cursor:pointer;">Kostenlos starten</a></p>
+
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#10a37f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Couleurs&quot;}}">
+class Component extends DCLogic {
+  state = { openFaq: -1, intent: 'vendre', propVal: 1000000, pct: 5, activeCase: 'vendre', openTopic: 0, pillar: 0, pillarExpanded: {}, openDiff: -1, hoverCity: -1, panelOpen: false };
+
+  componentDidMount() {
+    this._heroQ = [
+      'Ich möchte meine Immobilie verkaufen – womit soll ich beginnen?',
+      'Woran erkenne ich, ob diese Immobilie den geforderten Preis wirklich wert ist?',
+      'Ich habe mehrere Schätzungen erhalten – woran erkenne ich, welche am zutreffendsten ist?',
+      'Was muss ich prüfen, bevor ich diese Immobilie kaufe?',
+      'Ich habe ein Kaufangebot erhalten – soll ich es annehmen oder verhandeln?',
+      'Wie viel soll ich bieten, ohne zu viel zu bezahlen?',
+    ];
+    this._heroTimer = setInterval(() => {
+      this.setState(s => ({ heroQ: ((s.heroQ || 0) + 1) % this._heroQ.length }));
+    }, 4000);
+  }
+  componentWillUnmount() { if (this._heroTimer) clearInterval(this._heroTimer); }
+
+  renderVals() {
+    const heroQuestions = this._heroQ || [
+      'Ich möchte meine Immobilie verkaufen – womit soll ich beginnen?',
+    ];
+    const heroPlaceholder = heroQuestions[(this.state.heroQ || 0) % heroQuestions.length];
+    const accent = this.props.accentColor ?? '#10a37f';
+    const fmt = (n) => Math.round(n).toLocaleString('de-CH');
+    const propVal = this.state.propVal;
+    const pct = this.state.pct;
+    const loss = propVal * pct / 100;
+    const propValFmt = 'CHF ' + fmt(propVal);
+    const lossFmt = fmt(loss);
+    const barWidth = (pct / 20 * 100) + '%';
+    const setProp = (e) => this.setState({ propVal: Number(e.target.value) });
+    const setPct = (e) => this.setState({ pct: Number(e.target.value) });
+    const heroChecks = ['Drei Fragen oder weniger für den Einstieg', '100% kostenlos', 'Unverbindlich'];
+    const trust = [
+      { stat: '6 Kantone', label: 'Die ganze Westschweiz abgedeckt' },
+      { stat: '24/7', label: 'Verfügbar ab Ihrer ersten Frage' },
+      { stat: 'CHF 50\u2019000', label: "Was ein Fehler von 5% kosten kann" },
+    ];
+    const heroReco = [
+      'Positionieren Sie sich zum Zielpreis, um zu interessieren, ohne den Verkauf zu blockieren',
+      'Vergleichen Sie mehrere Agenturen, bevor Sie einen Auftrag unterschreiben',
+      'Bereiten Sie Fotos, Inserat und Besichtigungen vor der Veröffentlichung vor',
+    ];
+    const onChip = 'font-family:inherit; font-size:14px; font-weight:700; padding:9px 18px; border-radius:100px; cursor:pointer; border:1.5px solid #10a37f; background:#10a37f; color:#fff;';
+    const offChip = 'font-family:inherit; font-size:14px; font-weight:700; padding:9px 18px; border-radius:100px; cursor:pointer; border:1.5px solid #d7e2de; background:#fff; color:#3a4c52;';
+    const isVendre = this.state.intent === 'vendre';
+    const vendreStyle = isVendre ? onChip : offChip;
+    const acheterStyle = !isVendre ? onChip : offChip;
+    const setVendre = () => this.setState({ intent: 'vendre' });
+    const setAcheter = () => this.setState({ intent: 'acheter' });
+    const inputPlaceholder = isVendre
+      ? 'Z. B.: „Ich möchte meine Wohnung in Lausanne verkaufen – womit beginne ich?“'
+      : 'Z. B.: „Ist dieser Preis für diese Wohnung in Genf gerechtfertigt?“';
+
+    const whatCards = [
+      { title: 'Eine zu 100% Schweizer Expertise', body: 'Ausschliesslich der Schweizer Immobilienwelt gewidmet, kennt RealXpert die Realitäten des Marktes, der Steuern und der lokalen Gepflogenheiten.' },
+      { title: 'Verlässliche und aktuelle Informationen', body: 'Geprüfte und aktualisierte Daten, neutral präsentiert, ohne kommerziellen Druck oder versteckte Interessen.' },
+      { title: 'Sie entscheiden – mit Zuversicht', body: 'Sie verstehen Ihre Optionen und die Folgen jeder Entscheidung und gehen mit klaren Anhaltspunkten voran, bevor Sie sich festlegen.' },
+    ];
+    const pitfalls = [
+      { n: '1', icon: '🤔', title: 'Zahlreiche Fragen, die man sich stellen muss', body: 'Preis, Strategie, Finanzierung, Steuern, Verhandlung, Agentur, Timing … In jeder Phase tauchen neue Fragen auf, und jede kann erhebliche Folgen für Ihr Projekt haben.' },
+      { n: '2', icon: '📚', title: 'Eine Flut verfügbarer Informationen', body: 'Internet, Immobilienportale, Makler, Banken, Angehörige, Medien, allgemeine KI: Die Quellen sind zahlreich, doch ihre Meinungen weisen nicht immer in dieselbe Richtung.' },
+      { n: '3', icon: '🌫️', title: 'Schwer zu wissen, was man glauben soll', body: 'Nicht alle Informationen sind gleichwertig und lassen sich nicht zwingend auf Ihre Situation übertragen. Es ist schwierig, wirklich relevante Ratschläge von solchen zu unterscheiden, die in die Irre führen können.' },
+      { n: '4', icon: '⚠️', title: 'Schwer, alle Risiken vorherzusehen', body: 'Wenn bestimmte Angaben fehlen, Risiken falsch eingeschätzt oder Folgen missverstanden werden, steigt die Gefahr, die falsche Wahl zu treffen.' },
+    ];
+    const valuePoints = [
+      { num: '01', title: 'Seien Sie sicher, vor einer Entscheidung nichts zu übersehen', body: 'Eine fehlende Information, ein falsch eingeschätztes Risiko oder ein übersehenes Detail können erhebliche Folgen haben. RealXpert hilft Ihnen, vor jeder wichtigen Entscheidung die wirklich massgeblichen Punkte zu erkennen.' },
+      { num: '02', title: 'Erkennen Sie die beste Entscheidung für Ihre Situation', body: 'Jetzt verkaufen oder warten? Ein Angebot annehmen oder verhandeln? RealXpert vergleicht die Optionen, ihre Vorteile, Grenzen und Folgen, um Ihnen zur besten Wahl zu verhelfen.' },
+      { num: '03', title: 'Treffen Sie Ihre Entscheidungen gestützt auf Schweizer Immobilienexpertise', body: 'Bei jeder Frage profitieren Sie von spezialisierter Expertise zum Schweizer Immobilienmarkt, um auf verlässlicher, auf Ihr Projekt und Ihre Region zugeschnittener Grundlage zu entscheiden.' },
+      { num: '04', title: 'Vermeiden Sie Fehler, die Sie jahrelang bereuen könnten', body: 'Bevor Sie sich festlegen, hilft Ihnen RealXpert, die Folgen jeder Entscheidung zu verstehen, Risiken vorwegzunehmen und Ihre Interessen bestmöglich zu schützen, um Ihre Transaktion erfolgreich abzuschliessen.' },
+    ];
+    const trackSteps = [
+      { icon: '✓', c1: '#22c483', c2: '#0b9d78', label: 'Immobilienbewertung', status: 'Abgeschlossen', tagColor: '#0b7d5f', tagBg: '#e7f6f0' },
+      { icon: '2', c1: '#4a9bff', c2: '#2f5ed0', label: 'Verkaufsstrategie', status: 'Laufend', tagColor: '#2f5ed0', tagBg: '#e7f0fc' },
+      { icon: '3', c1: '#8b5cf6', c2: '#6a2fd0', label: 'Wahl des Auftrags', status: 'Bevorstehend', tagColor: '#6a2fd0', tagBg: '#f0eafd' },
+      { icon: '4', c1: '#f7971e', c2: '#e0730f', label: 'Verhandlung & Unterzeichnung', status: 'Bevorstehend', tagColor: '#b26a10', tagBg: '#fdf0e0' },
+    ];
+    const casesData = {
+      vendre: {
+        intro: 'Anfangs denken Sie vielleicht, Sie müssten nur den Wert Ihrer Immobilie kennen. Doch sehr schnell bringt jede Antwort neue Entscheidungen zum Vorschein.',
+        apport: 'Ein Zweifel an Ihrem Preis oder an einem erhaltenen Angebot kann Sie Zehntausende Franken kosten. Statt allein zu zögern, ohne zu wissen, wem Sie glauben sollen, stellen Sie Ihre Frage jederzeit. RealXpert klärt Ihre Situation, zeigt Ihnen, was wirklich zählt, und nennt Ihnen den nächsten Schritt – mit voller Zuversicht.',
+        topics: [
+          { n: '1', title: 'Die Bewertung Ihrer Immobilie', questions: ['Wie hoch ist ihr tatsächlicher Wert auf dem aktuellen Markt?', 'Genügt eine Online-Schätzung oder braucht es einen Fachmann?', 'Warum schlagen mehrere Agenturen unterschiedliche Werte vor?', 'Anhand welcher Referenzen und Merkmale lässt sich ihre Stimmigkeit prüfen?', 'Welcher Preis verteidigt den Wert der Immobilie, ohne den Verkauf zu blockieren?'] },
+          { n: '2', title: 'Die Wahl Ihrer Immobilienagentur', questions: ['Allein verkaufen oder den Verkauf einer Agentur anvertrauen?', 'Klassische Agentur oder Pauschalagentur in Ihrer Situation?', 'Eine einzige Agentur beiziehen oder mehrere vergleichen?', 'Wie beurteilt man die Qualität eines Maklers über den genannten Preis hinaus?', 'Welche Leistungen sind inbegriffen und welche Kosten bleiben bei Ihnen?'] },
+          { n: '3', title: 'Ihre Verkaufsstrategie', questions: ['Exklusivauftrag oder einfacher Auftrag?', 'Welche Auftragsdauer akzeptieren und welche Klauseln prüfen?', 'Wie positionieren Sie Ihre Immobilie gegenüber konkurrierenden Objekten?', 'Welche Arbeiten oder Verbesserungen fördern den Verkauf wirklich?', 'Wie bereitet man Fotos, Inserat, Besichtigungen und Präsentation vor?'] },
+          { n: '4', title: 'Die Begleitung Ihres Verkaufs', questions: ['Was bedeutet ein Mangel an Anfragen oder Besichtigungen?', 'Liegt das Problem am Preis, an der Präsentation, an der Strategie oder am Markt?', 'Wann sollte man den Preis anpassen, ohne die Immobilie abzuwerten?', 'Wie prüft man, ob die Agentur die vorgesehenen Massnahmen umsetzt?', 'Was tun, wenn der Auftrag ohne Ergebnis ausläuft?'] },
+          { n: '5', title: 'Ihre Verhandlung und die Unterzeichnung', questions: ['Woran erkennt man, ob ein Angebot wirklich attraktiv ist?', 'Annehmen, ablehnen oder ein Gegenangebot formulieren?', 'Wie vergleicht man zwei Angebote mit unterschiedlichen Preisen und Bedingungen?', 'Welche Punkte zur Finanzierung des Käufers sind zu prüfen?', 'Wie läuft die Unterzeichnung beim Notar ab?', 'Welche Gebühren, Provisionen und Grundstückgewinnsteuer sind in Ihrem Kanton einzuplanen?'] },
+        ],
+      },
+      acheter: {
+        intro: 'Vielleicht haben Sie damit begonnen, einige Inserate anzusehen. Doch bevor Sie die richtige Immobilie finden und sich festlegen, müssen zahlreiche Entscheidungen in der richtigen Reihenfolge getroffen werden.',
+        apport: 'Ein Zweifel am Preis einer Immobilie oder an Ihrem Verhandlungsspielraum kann Sie Zehntausende Franken kosten. Statt allein zu zögern, ohne zu wissen, wem Sie glauben sollen, stellen Sie Ihre Frage jederzeit. RealXpert klärt Ihre Situation, zeigt Ihnen, was wirklich zählt, und nennt Ihnen den nächsten Schritt – mit voller Zuversicht.',
+        topics: [
+          { n: '1', title: 'Ihr Budget und Ihre Finanzierung', questions: ['Welches Budget können Sie tatsächlich für Ihren Kauf aufwenden?', 'Sind Eigenmittel, Nebenkosten, kalkulatorische Zinssätze und künftige Kosten berücksichtigt?', 'Welche monatliche Belastung bleibt mit Ihrer Lebensweise vereinbar?', 'Welche Kriterien sind unverzichtbar und welche verhandelbar?', 'Lage, Fläche, Zustand, Entwicklungspotenzial oder Wiederverkäuflichkeit?'] },
+          { n: '2', title: 'Die Suche nach Ihrer Immobilie', questions: ['Ist der Markt in der Region eher käufer- oder verkäuferfreundlich?', 'Ist der durchschnittliche Preis pro m² für die gesuchte Objektart aussagekräftig?', 'Warum haben zwei Objekte derselben Gemeinde sehr unterschiedliche Werte?', 'Sollte man die Suche ausweiten oder einzelne Kriterien anpassen?', 'Wie unterscheidet man einen ambitionierten Preis von einem marktkonformen?'] },
+          { n: '3', title: 'Die Analyse der Immobilie, die Sie interessiert', questions: ['Ist der geforderte Preis durch Lage, Zustand und Fläche gerechtfertigt?', 'Welche Unterlagen sollte man anfordern und prüfen?', 'Welche sichtbaren Arbeiten und welche weniger offensichtlichen Kosten sind einzuplanen?', 'Gibt es Dienstbarkeiten, Beschränkungen, Lasten oder künftige Projekte, die man kennen sollte?', 'Erschweren bestimmte Merkmale die Finanzierung oder den Wiederverkauf?'] },
+          { n: '4', title: 'Ihre Besichtigungen', questions: ['Was sollte man vor Ort über das Ästhetische hinaus prüfen?', 'Wie beurteilt man Lärm, Lichtverhältnisse, Umgebung, Gebäude und Gemeinschaftsflächen?', 'Welche Fragen stellt man dem Makler oder dem Eigentümer?', 'Welche Antworten sollten Sie dazu bewegen, genauer nachzuhaken?', 'Braucht es eine zweite Besichtigung oder die Meinung eines Fachmanns vor dem Angebot?'] },
+          { n: '5', title: 'Ihr Angebot und Ihre Verhandlung', questions: ['Welchen Betrag bieten angesichts des geforderten Preises und des geschätzten Werts?', 'Gibt es einen realistischen Verhandlungsspielraum?', 'Wie berücksichtigt man andere Käufer, den Zeitrahmen und die Situation des Verkäufers?', 'Nur den Preis verhandeln oder auch Fristen, Arbeiten, Ausstattung und Bedingungen?', 'Wie gibt man ein Angebot ab, ohne eine schlecht kontrollierte Verpflichtung einzugehen?'] },
+          { n: '6', title: 'Ihre Unterzeichnung und die Schlüsselübergabe', questions: ['Welche Finanzierungsbedingungen sollte man vor der Unterzeichnung bestätigen?', 'Welche Erwerbs- und Notarkosten sind in Ihrem Kanton einzuplanen?', 'Was ist im Entwurf des Kaufvertrags zu prüfen?', 'Wann werden die Mittel überwiesen und wann werden Sie Eigentümer?', 'Welche Schritte folgen nach der Unterzeichnung und der Schlüsselübergabe?'] },
+        ],
+      },
+    };
+    const ac = this.state.activeCase;
+    const cur = casesData[ac];
+    const tabOn = 'font-family:inherit; font-size:16px; font-weight:800; padding:14px 26px; border-radius:100px; cursor:pointer; border:none; background:linear-gradient(135deg,#5aa0ff,#2f47b0); color:#fff; box-shadow:0 12px 26px -8px rgba(47,71,176,0.6);';
+    const tabOff = 'font-family:inherit; font-size:16px; font-weight:800; padding:14px 26px; border-radius:100px; cursor:pointer; border:1px solid #cdddec; background:#fff; color:#42556a;';
+    const tabVendreStyle = ac === 'vendre' ? tabOn : tabOff;
+    const tabAcheterStyle = ac === 'acheter' ? tabOn : tabOff;
+    const setVendreCase = () => this.setState({ activeCase: 'vendre', openTopic: 0 });
+    const setAcheterCase = () => this.setState({ activeCase: 'acheter', openTopic: 0 });
+    const caseIntro = cur.intro;
+    const caseApport = cur.apport;
+    const caseTopics = cur.topics.map((t, i) => ({
+      n: t.n, title: t.title, questions: t.questions,
+      lead: 'Hier einige Beispielfragen zu diesem Thema. Stellen Sie Ihre eigene: Ich analysiere sie und antworte mit der gesamten Schweizer Immobilienexpertise, die Sie brauchen.',
+      badge: 'Beispiele',
+      open: this.state.openTopic === i,
+      sign: this.state.openTopic === i ? '\u2212' : '+',
+      toggle: () => this.setState(s => ({ openTopic: s.openTopic === i ? -1 : i })),
+    }));
+
+    const copiloteData = [
+      { tag: 'Mein Gespräch', label: 'Mein Gespräch', title: 'Sie haben immer einen Experten, dem Sie Ihre Fragen stellen können', imgLabel: '[ Interface: Gespräch mit RealXpert ]', img: 'uploads/Ma discussion-d3462ffe.jpg',
+        lead: 'Bei einem Immobilienprojekt tauchen Zweifel oft genau dann auf, wenn entschieden werden muss: Ist das der richtige Preis? Soll ich jetzt verkaufen? Ist das die richtige Agentur? Verdient dieses Angebot, angenommen zu werden? Soll ich verhandeln oder warten?',
+        change: 'Sobald ein Zweifel auftaucht, können Sie einen Schritt zurücktreten, Ihre Überlegungen prüfen und die nötigen Anhaltspunkte erhalten, um eine überstürzte Entscheidung zu vermeiden, die Sie Zehntausende Franken kosten könnte.',
+        detail: [
+          'Mit Mein Gespräch können Sie RealXpert jederzeit befragen, ohne überall suchen oder warten zu müssen, bis Sie selbst alle Antworten haben. Sie stellen Ihre Fragen frei, vertiefen die wichtigen Themen und erhalten Empfehlungen, die auf Ihre reale Situation zugeschnitten sind.',
+          'Das Ziel ist nicht nur, Ihnen eine Antwort zu geben, sondern Ihnen zu helfen zu verstehen, was diese Antwort für Ihr Projekt und für die Entscheidung bedeutet, die Sie treffen müssen.',
+        ] },
+      { tag: 'Meine Situation', label: 'Meine Situation', title: 'Sie wissen immer, wo Sie stehen', imgLabel: '[ Interface: Überblick über Ihre Situation ]',
+        lead: 'Ein Immobilienprojekt entwickelt sich schnell. Nach mehreren Gesprächen, Meinungen, Recherchen oder Entscheidungen verliert man leicht den Überblick, übersieht etwas Wichtiges oder entscheidet auf unvollständiger Grundlage.',
+        change: 'Sie verlieren den Überblick über Ihr Projekt nicht mehr. Sie wissen, was bereits analysiert und empfohlen wurde und was noch zu prüfen ist, und treffen Ihre nächsten Entscheidungen mit einem klaren, vollständigen und aktuellen Bild Ihrer Situation.',
+        detail: [
+          'Mit Meine Situation ordnet RealXpert die wesentlichen Informationen Ihres Projekts: Ihre aktuelle Situation, Ihre Ziele, die bereits behandelten Themen, die erhaltenen Empfehlungen und die noch zu prüfenden Punkte.',
+          'So behalten Sie einen klaren, strukturierten Blick auf Ihr Projekt, selbst wenn es sich über mehrere Wochen oder Monate erstreckt.',
+        ] },
+      { tag: 'Meine Entscheidungen', label: 'Meine Entscheidungen', title: 'Sie verlieren nie den Überblick über Ihre wichtigen Entscheidungen', imgLabel: '[ Interface: Verlauf Ihrer Entscheidungen ]',
+        lead: 'Jede Entscheidung kann den weiteren Verlauf Ihres Projekts beeinflussen: jetzt verkaufen, einen Preis festlegen, eine Agentur wählen, einer Strategie zustimmen, ein Angebot verhandeln oder Ihren Zeitplan ändern.',
+        change: 'Sie verlieren den Überblick über Ihre wichtigen Entscheidungen nicht mehr. Ihr Projekt bleibt im Einklang mit den bereits getroffenen Entscheidungen, und Sie gehen mit aktuellen Empfehlungen voran, die auf Ihre reale Situation und die gewählte Richtung zugeschnitten sind.',
+        detail: [
+          'Mit Meine Entscheidungen behalten Sie einen klaren Überblick über die bereits getroffenen Entscheidungen. So bleibt RealXpert über die Entwicklung Ihres Projekts informiert – wie ein Immobilienexperte, den Sie bei jeder wichtigen Entscheidung auf dem Laufenden halten.',
+          'Je besser RealXpert die tatsächliche Entwicklung Ihres Projekts kennt, desto präziser und passender sind seine Empfehlungen für Ihre Situation.',
+        ] },
+      { tag: 'Meine Schritte', label: 'Meine Schritte', title: 'Sie wissen immer, was als Nächstes zu tun ist', imgLabel: '[ Interface: nächste Schritte Ihres Projekts ]',
+        lead: 'Bei einem Immobilienprojekt ist es nicht immer offensichtlich, welche Entscheidung zuerst zu treffen, welcher Schritt jetzt vorzubereiten oder was besser noch abzuwarten ist.',
+        change: 'Sie wissen stets, welche Richtung einzuschlagen ist, in welcher Reihenfolge Sie vorgehen und was Sie prüfen sollten, bevor Sie fortfahren – um überstürzte Entscheidungen, vergessene Schritte und teure Fehler zu vermeiden.',
+        detail: [
+          'Soll man zuerst die Immobilie schätzen? Agenturen vergleichen? Die Unterlagen vorbereiten? Die Finanzierung prüfen? Mit dem Verkauf warten? Ein Angebot verhandeln oder abwarten?',
+          'Mit Meine Schritte hilft Ihnen RealXpert zu verstehen, wo Sie in Ihrem Ablauf stehen und welche Massnahmen als Nächstes zu ergreifen sind, um in der richtigen Reihenfolge voranzukommen.',
+          'Sie wissen, welches der nächste wichtige Schritt ist, warum er zählt und welche Punkte vor dem Weitermachen zu prüfen sind.',
+        ] },
+      { tag: 'Meine Experten', label: 'Meine Immobilienexperten', title: 'Sie wählen Ihren Makler nicht mehr dem Zufall überlassen', imgLabel: '[ Interface: Auswahl von Immobilienexperten ]',
+        lead: 'Bei einem Immobilienverkauf kann die Wahl des Maklers einen entscheidenden Einfluss auf das Endergebnis haben.',
+        change: 'Sie wählen eine Agentur oder einen Makler nicht mehr nach blossem Eindruck, Werbung oder Bekanntheit. Sie können Fachleute vergleichen, die nach Kriterien ausgewählt wurden, die wirklich mit Ihrem Projekt zusammenhängen, um denjenigen zu wählen, der die besten Chancen bietet, Ihre Interessen zu verteidigen, die richtige Strategie umzusetzen und den bestmöglichen Preis zu erzielen.',
+        detail: [
+          'Die Agentur bringt ein Image, Bekanntheit, Mittel und eine Struktur ein. Doch vor Ort ist es der Makler, der den Verkauf tatsächlich durchführt: Er legt die Strategie fest, bringt die Immobilie zur Geltung, qualifiziert die Käufer, führt die Besichtigungen, verhandelt, verteidigt den Preis und begleitet die Schlüsselentscheidungen bis zum Abschluss.',
+          'Zwei Makler können daher für eine ähnliche Immobilie sehr unterschiedliche Ergebnisse erzielen. Das kann innerhalb derselben Agentur gelten, aber auch zwischen einem Makler einer grossen, renommierten Agentur und einem Makler einer eher lokalen Struktur.',
+          'Die beste Wahl ist daher nicht immer die bekannteste Agentur, der sichtbarste Fachmann oder die beruhigendste Präsentation. Der richtige Makler ist derjenige, der wirklich zu Ihrer Situation, Ihrer Immobilie, Ihrem lokalen Markt und dem am besten geeigneten Leistungsmodell passt, um Ihre Interessen zu verteidigen und Ihre Chancen auf den bestmöglichen Preis zu maximieren.',
+          'Mit Meine Immobilienexperten analysiert RealXpert Ihre Situation, die Merkmale Ihrer Immobilie, Ihre Ziele und den Markt Ihrer Region, um die für Ihr Projekt am besten geeigneten Makler zu ermitteln. Die Auswahl berücksichtigt die folgenden Merkmale:',
+        ],
+        bullets: [
+          'ihr Ausbildungsniveau',
+          'ihre tatsächliche Erfahrung',
+          'ihre Kenntnis Ihrer Region',
+          'ihr aktuelles Immobilienportfolio',
+          'ihre Eignung für Ihren Immobilientyp',
+          'ihre jüngsten Verkäufe vergleichbarer Objekte',
+        ],
+        detailTail: [
+          'So werden Sie mit ein bis drei Experten in Verbindung gebracht, die voll und ganz zu Ihrer Situation passen – kostenlos und unverbindlich.',
+        ] },
+    ];
+    const diffData = [
+      { icon: '💬', c1: '#8b9bb4', c2: '#5a6f8c', accent: '#2f7fe0', kicker: 'Allgemeine KI',
+        titleMain: 'Allgemeine KI wie ChatGPT oder Claude',
+        titleSub: 'Was sind ihre Stärken und Grenzen im Immobilienbereich?',
+        teaser: 'Allgemeine KI wie ChatGPT oder Claude ist darauf ausgelegt, eine sehr grosse Vielfalt an Themen zu beantworten',
+        paras: [
+            'Allgemeine KI wie ChatGPT oder Claude ist darauf ausgelegt, eine sehr grosse Vielfalt an Themen zu behandeln. Sie kann sehr nützlich sein, um eine schnelle Erklärung zu erhalten, ein Konzept zu verstehen, Ansätze zu erkunden oder eine erste Orientierung zu bekommen.',
+          'Sie kann sogar sehr treffende, sehr gut formulierte und mitunter sehr präzise Antworten liefern. Doch bei einem Immobilienprojekt liegt genau darin das Risiko: Eine Antwort kann richtig, logisch und überzeugend wirken und dennoch für Ihre tatsächliche Situation ungeeignet sein.',
+          'Eine allgemeine KI kann Sie zu einer Lösung führen, die in der Theorie stimmig erscheint, aber nicht alle für eine gute Entscheidung nötigen Elemente berücksichtigt: Ihre Immobilie, ihre Lage, Ihr Ziel, Ihren Zeitplan, Ihre finanzielle Situation, den lokalen Markt, die Schweizer Regeln, bereits getroffene Entscheidungen oder die konkreten Folgen jeder Option.',
+          'Die Gefahr besteht also nicht nur darin, eine falsche Antwort zu erhalten. Die Gefahr besteht darin, eine Antwort zu erhalten, die überzeugend genug ist, um Ihnen Sicherheit zu geben, obwohl sie nicht auf einer vollständigen Analyse Ihres Projekts beruht.',
+          'Bei einem finanziell bedeutenden Immobilienprojekt kann Sie das dazu bringen, einen falschen Preis festzulegen, eine falsche Strategie zu wählen, unter schlechten Bedingungen zu verhandeln, ein Angebot zu schnell anzunehmen oder eine Entscheidung zu treffen, die Sie mehrere Zehntausend Franken kosten kann.',
+          'Allgemeine KI kann daher für einfache, allgemeine oder punktuelle Fragen nützlich sein. Sie ist jedoch nicht darauf ausgelegt, ein Schweizer Immobilienprojekt in seiner Gesamtheit zu begleiten, Ihren gesamten Kontext einzubeziehen und Sie bei wichtigen Entscheidungen wie Verkaufen, Kaufen, Preisfestsetzung, Agenturwahl, Verhandlung oder Auswahl des richtigen Maklers zu unterstützen.',
+        ] },
+      { icon: '🏢', c1: '#6fb3d6', c2: '#3f7fae', accent: '#2f7fe0', kicker: 'KI von Immobilienportalen',
+        titleMain: 'Die in Immobilienportale integrierte KI',
+        titleSub: 'Was kann sie wirklich für Ihr Projekt tun?',
+        teaser: 'Die in Immobilienportale integrierte KI hat ebenfalls eine andere Rolle',
+        paras: [
+          'Die in Immobilienportale integrierte KI hat ebenfalls eine andere Rolle.',
+          'Sie ist in erster Linie darauf ausgelegt, die Nutzung ihrer Plattform zu erleichtern: Immobilien suchen, Inserate filtern, Suchaufträge erstellen, auf bestimmte allgemeine Informationen zugreifen oder sich in den Diensten des Portals besser zurechtfinden.',
+          'Sie kann Ihnen helfen, bei einer Immobiliensuche Zeit zu sparen oder die Website besser zu nutzen. Ihr Ziel bleibt jedoch an das Erlebnis des Immobilienportals gebunden.',
+          'Sie ist nicht darauf ausgelegt, Ihre persönliche Situation tiefgehend zu analysieren, Ihr gesamtes Projekt zu verstehen, Ihre Optionen neutral zu vergleichen, Ihre Entscheidungen zu verfolgen oder Sie bei einer vollständigen Immobilienstrategie zu begleiten.',
+          'Sie kann Ihnen helfen, Immobilien oder Informationen zu finden, ist aber nicht darauf ausgelegt, Ihnen bei der Entscheidung zu helfen, ob eine Strategie wirklich die richtige für Sie ist, ob ein Angebot angenommen werden sollte, ob der Zeitpunkt günstig ist, ob der Preis stimmig ist oder ob der gewählte Fachmann wirklich zu Ihrer Situation passt.',
+        ] },
+      { icon: 'R', c1: '#6fa8ff', c2: '#2f5aa8', accent: '#2f7fe0', kicker: 'RealXpert-Begleitung',
+        titleMain: 'RealXpert',
+        titleSub: 'Warum ist es für finanziell bedeutende Entscheidungen konzipiert?',
+        teaser: 'RealXpert wurde genau dafür entwickelt',
+        paras: [
+          'RealXpert wurde genau dafür entwickelt.',
+          'RealXpert ist keine allgemeine KI und hat nicht zum Ziel, bloss eine einzelne Frage zu beantworten. Es ist ganz der Schweizer Immobilienwelt gewidmet und darauf ausgelegt, Sie bei den wichtigen Entscheidungen Ihres Projekts zu begleiten.',
+          'Es berücksichtigt Ihre Situation, Ihre Ziele, Ihre Rahmenbedingungen, den Stand Ihres Projekts, die bereits getroffenen Entscheidungen und die Besonderheiten des Schweizer Immobilienmarkts.',
+          'Seine Aufgabe ist es, Ihnen zu helfen zu verstehen, was eine Information wirklich für Ihr Projekt bedeutet. Es zählt nicht nur eine Antwort, sondern die Art, wie diese Antwort auf Ihre Situation, die Ihnen offenstehenden Optionen und die möglichen Folgen jeder Entscheidung zutrifft.',
+          'RealXpert hilft Ihnen, Ihre Überlegungen zu strukturieren, die möglichen Optionen zu vergleichen, Risiken zu erkennen, die zu beachtenden Punkte auszumachen und mit einem klareren Bild dessen voranzugehen, was zu tun ist.',
+          'Das Ziel ist, zu verhindern, dass Sie eine wichtige Entscheidung auf Grundlage einer zu allgemeinen Antwort, einer unvollständigen Analyse oder eines Ratschlags treffen, der richtig scheint, aber nicht wirklich zu Ihrem Projekt passt.',
+          'Mit RealXpert profitieren Sie von einer spezialisierten, strukturierten und auf die Realitäten des Schweizer Immobilienmarkts zugeschnittenen Begleitung, um die richtigen Entscheidungen zum richtigen Zeitpunkt zu treffen, teure Fehler zu begrenzen und Ihre Chancen zu maximieren, Ihr Projekt unter den besten Bedingungen zu verwirklichen.',
+        ] },
+    ];
+    const diffBlocks = diffData.map((d, i) => ({
+      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser, paras: d.paras,
+      open: this.state.openDiff === i,
+      collapsed: this.state.openDiff !== i,
+      sign: this.state.openDiff === i ? '\u2212' : '+',
+      toggle: () => this.setState(s => ({ openDiff: s.openDiff === i ? -1 : i })),
+    }));
+
+    const localPoints = [
+      { title: 'Eine auf Ihre Region zugeschnittene Analyse', body: 'Sie erhalten keine allgemeinen Ratschläge, sondern Empfehlungen, die den tatsächlichen Kontext Ihres Marktes berücksichtigen.' },
+      { title: 'Ein besseres Verständnis des lokalen Marktes', body: 'Preise, Nachfrage, regionale Dynamik und Faktoren, die Ihr Projekt beeinflussen können, werden in die Analyse einbezogen.' },
+      { title: 'Auf kantonale Besonderheiten zugeschnittene Empfehlungen', body: 'Steuern, Finanzierung, Verkaufspraktiken und lokale Eigenheiten können von Kanton zu Kanton stark variieren.' },
+      { title: 'Eine treffendere Entscheidungshilfe', body: 'Sie werden besser dabei begleitet, einen Preis festzulegen, eine Strategie zu wählen, Ihre Optionen zu vergleichen oder eine wichtige Entscheidung vorzubereiten.' },
+    ];
+    const cityData = [
+      { name: 'Basel', x: '54%', y: '20%' }, { name: 'Zürich', x: '66%', y: '30%' },
+      { name: 'Bern', x: '40%', y: '46%' }, { name: 'Luzern', x: '58%', y: '42%' },
+      { name: 'Lausanne', x: '22%', y: '64%' }, { name: 'Genf', x: '10%', y: '78%' },
+      { name: 'Sitten', x: '38%', y: '76%' }, { name: 'Lugano', x: '74%', y: '84%' },
+    ];
+    const hoverCity = this.state.hoverCity;
+    const cities = cityData.map((c, i) => {
+      const on = hoverCity === i;
+      return { name: c.name, x: c.x, y: c.y,
+        enter: () => this.setState({ hoverCity: i }),
+        leave: () => this.setState({ hoverCity: -1 }),
+        dotStyle: 'display:block; width:' + (on ? '18px' : '13px') + '; height:' + (on ? '18px' : '13px') + '; border-radius:50%; background:' + (on ? 'linear-gradient(135deg,#5aa0ff,#2f5aa8)' : '#2f5aa8') + '; border:3px solid #fff; box-shadow:0 6px 16px -4px rgba(47,90,168,0.7); transition:all .2s ease;',
+        labelStyle: 'position:absolute; left:50%; top:-10px; transform:translate(-50%,-100%); white-space:nowrap; font-size:12.5px; font-weight:800; color:#0c1f2c; background:#fff; border:1px solid #dbe7f4; padding:5px 11px; border-radius:100px; box-shadow:0 8px 20px -8px rgba(20,50,90,0.4); opacity:' + (on ? '1' : '0') + '; transition:opacity .2s ease; pointer-events:none;' };
+    });
+    const mapHint = 'Fahren Sie über eine Stadt, um Ihren lokalen Markt zu erkunden';
+
+    const statsRaw = [
+      { num: '+ 4 000', label: 'analysierte Ortschaften' },
+      { num: '+ 100\u2019000', label: 'lokale Immobiliendaten' },
+      { num: '+ 3 500', label: 'analysierte Immobilienagenturen' },
+      { num: '+ 3 000', label: 'analysierte Immobilienmakler' },
+      { num: '+ 5 000', label: 'integrierte Expertise-Datenpunkte' },
+      { num: '+ 200', label: 'interne Analysemodelle' },
+    ];
+    const langNames = { fr: 'Französisch', de: 'Deutsch', en: 'Englisch', it: 'Italienisch' };
+    const langCode = this.state.lang || 'de';
+    const osLang = (typeof navigator !== 'undefined' && navigator.language ? navigator.language.slice(0,2).toLowerCase() : 'fr');
+    const osCode = langNames[osLang] ? osLang : 'de';
+    const baseOrder = ['de', 'fr', 'en', 'it'];
+    const ordered = ['fr','de','en','it'].filter(c => c !== langCode);
+    const langCurrent = langCode.toUpperCase();
+    const langList = ordered.map(c => ({
+      label: c.toUpperCase(),
+      style: 'padding:10px 14px; border-radius:8px; font-size:14.5px; font-weight:' + (c === langCode ? '800' : '600') + '; cursor:pointer; color:' + (c === langCode ? '#1d4fb0' : '#33475f') + '; background:' + (c === langCode ? '#eef4fb' : 'transparent') + ';',
+      select: () => { window.location.href = (c === 'fr' ? 'RealXpert - FR.dc.html' : 'RealXpert-' + c.toUpperCase() + '.dc.html') + '#top'; },
+    }));
+    const langOpen = !!this.state.langOpen;
+    const toggleLang = () => this.setState(s => ({ langOpen: !s.langOpen }));
+
+    const navOpen = !!this.state.navOpen;
+    const toggleNav = () => this.setState(s => ({ navOpen: !s.navOpen }));
+    const closeNav = () => this.setState({ navOpen: false });
+
+    const panelOpen = !!this.state.panelOpen;
+    const openPanel = (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ panelOpen: true, loginOpen: false, navOpen: false }); };
+    const closePanel = () => this.setState({ panelOpen: false });
+
+    const loginOpen = !!this.state.loginOpen;
+    const openLogin = (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ loginOpen: true, panelOpen: false, navOpen: false }); };
+    const closeLogin = () => this.setState({ loginOpen: false });
+
+    const testiData = [
+      { name: 'Matthias Zaugg', role: 'Eigentümer, Verkäufer · Kanton Zürich', photo: 'uploads/temoignage-1.png',
+        tag: 'Verkauf · Bewertung', tagColor: '#fff', tagBg: 'linear-gradient(135deg,#5aa0ff,#2f5aa8)',
+        headline: 'Drei Schätzungen, ein fairer Preis: wissen, welcher zu folgen ist.', paras: [
+        'Ich hatte drei unterschiedliche Schätzungen für mein Haus erhalten und wusste nicht wirklich, welche die richtige war. Eine der Agenturen schlug mir vor, mit einem höheren Preis als die anderen zu starten. Natürlich war das verlockend, aber ich fragte mich, ob das wirklich der Wert meiner Immobilie war oder eine zu hohe Schätzung, nur um den Auftrag zu bekommen. Ich wollte weder zu tief starten und Geld verlieren, noch zu hoch und riskieren, den Verkauf zu blockieren und den Preis danach senken zu müssen.',
+        'Ich konnte viel klarer sehen, verstehen, welche Schätzung am zutreffendsten war, und vor allem, zu welchem Preis es besser war, mein Haus anzubieten. So habe ich nicht einfach die höchste Schätzung gewählt und bin mit einem Preis und einem Makler gestartet, die wirklich zu meiner Situation passten.',
+        'Im Rückblick war es die richtige Wahl: Mein Haus verkaufte sich in drei Monaten, mit sehr wenig Feilschen um den Preis. Genau bei solchen Entscheidungen bin ich froh, mir vor dem Loslegen Zeit zum Nachdenken genommen zu haben.',
+      ] },
+      { name: 'Isabelle Piguet', role: 'Eigentümerin, Verkäuferin · Kanton Genf', photo: 'uploads/temoignage-2.png',
+        tag: 'Verkauf · Maklerwahl', tagColor: '#fff', tagBg: 'linear-gradient(135deg,#22c483,#0b9d78)',
+        headline: 'Über die Agentur hinaus: die Person wählen, die Ihren Verkauf wirklich vertritt.', paras: [
+        'Als ich mich zum Verkauf entschied, dachte ich vor allem, man müsse eine gute Agentur wählen. Ich traf mehrere und, ehrlich gesagt, hatten alle gute Argumente. Zwischen Bekanntheit, Provisionen, angebotenen Leistungen und dem Auftreten des Maklers wusste ich nicht mehr recht, worauf ich meine Wahl stützen sollte.',
+        'Vor allem habe ich verstanden, dass man über den Namen der Agentur hinaus auf die Person schauen musste, die sich tatsächlich um meinen Verkauf kümmern würde: ihre Erfahrung, ihre Kenntnis des Marktes meiner Region, ihre Art, die Immobilie zu präsentieren, die Käufer zu führen und vor allem zu verhandeln. So konnte ich die Optionen anders vergleichen und den Makler wählen, der mir wirklich am besten zu meiner Immobilie und meiner Situation zu passen schien, statt einfach die bekannteste oder günstigste Agentur.',
+        'Erst während des Verkaufs sah ich wirklich den Unterschied. Der Makler setzte eine sehr gute Strategie um, führte die Besichtigungen gut und vor allem die Verhandlung mit den Käufern. Dass ich die Optionen vergleichen und besser verstehen konnte, nach welchen Kriterien zu wählen war, hat mir klar geholfen, mit dem richtigen Makler zu starten. Irgendwann verlangten die Käufer eine deutliche Senkung, und er konnte den Preis verteidigen, ohne das Gespräch scheitern zu lassen. Da verstand ich, dass die paar Tausend Franken, auf die ich anfangs bei der Provision geachtet hatte, letztlich wenig wogen gegenüber den Zehntausenden, die in einer guten Verhandlung auf dem Spiel stehen konnten. Der Verkauf schloss zu einem Preis ab, den ich allein aufrichtig nicht erreicht hätte.',
+      ] },
+      { name: 'Stefano Mariani', role: 'Neuer Eigentümer, Käufer · Kanton Tessin', photo: 'uploads/temoignage-3.png',
+        tag: 'Kauf · Verhandlung', tagColor: '#fff', tagBg: 'linear-gradient(135deg,#f7971e,#e0730f)',
+        headline: 'Ein Angebot zum richtigen Preis machen, ohne sich vom Herzenswunsch mitreissen zu lassen.', paras: [
+        'Nach mehreren Monaten der Suche hatten wir endlich ein Haus gefunden, das uns wirklich gefiel. Das Problem war, dass wir beim Angebot überhaupt nicht wussten, wie weit wir gehen sollten. Wir hatten Angst, zu tief zu verhandeln und das Haus zu verlieren, wollten uns aber zugleich nicht mitreissen lassen und zu viel bezahlen, nur weil wir uns verliebt hatten.',
+        'Wir konnten die Situation besser einschätzen, prüfen, ob der geforderte Preis wirklich fair war, und vor allem einen Angebotspreis sowie eine nicht zu überschreitende Grenze festlegen. Das half uns, aus der Emotion des Moments herauszutreten und ein Angebot mit einer viel klareren Vorstellung davon zu machen, was die Immobilie für uns wirklich wert war.',
+        'Wir starteten schliesslich mit einem Angebot, das unter dem lag, das wir ursprünglich machen wollten. Nach mehreren Gesprächen mit dem Makler, der den Verkäufer vertrat, einigten wir uns auf einen Preis unter dem ausgeschriebenen. Am Ende betrug der Unterschied zu dem, was wir anfangs zu bieten bereit gewesen wären, immer noch mehrere Zehntausend Franken. Wir waren natürlich sehr froh, auf diesem Niveau verhandelt zu haben, vor allem aber unterschrieben zu haben, weil wir wussten, warum wir diesen Preis akzeptierten, und ohne das Gefühl, mehr bezahlt zu haben, nur aus Angst, das Haus zu verlieren.',
+      ] },
+    ];
+
+    const testiOpen = this.state.testiOpen || {};
+    const testimonials = testiData.map((t, i) => {
+      const open = !!testiOpen[i];
+      return { name: t.name, role: t.role, photo: t.photo, tag: t.tag, tagColor: t.tagColor, tagBg: t.tagBg, headline: t.headline,
+        visible: open ? t.paras : [t.paras[0]],
+        moreLabel: open ? 'Einklappen ↑' : 'Erfahrungsbericht lesen →',
+        toggle: () => this.setState(s => ({ testiOpen: Object.assign({}, s.testiOpen, { [i]: !(s.testiOpen || {})[i] }) })),
+      };
+    });
+
+    const ctaStyle = 'display:inline-block; background:linear-gradient(180deg,#2f6bd6,#1d4fb0); color:#ffffff; font-weight:800; font-size:17px; letter-spacing:0.01em; padding:17px 38px; border-radius:12px; box-shadow:0 16px 34px -12px rgba(29,79,176,0.6); transition:transform .2s ease;';
+    const stats = statsRaw.map((s, i) => {
+      const col = i % 3, row = Math.floor(i / 3);
+      let cs = 'text-align:center; padding:34px 24px;';
+      if (col < 2) cs += ' border-right:1px solid rgba(255,255,255,0.12);';
+      if (row === 0) cs += ' border-bottom:1px solid rgba(255,255,255,0.12);';
+      return { num: s.num, label: s.label, cellStyle: cs };
+    });
+
+    const pp = this.state.pillar;
+    const pillTabs = copiloteData.map((d, i) => {
+      const on = i === pp;
+      return { n: i + 1, label: d.label, promise: d.title,
+        go: () => this.setState({ pillar: i }),
+        nodeStyle: 'display:flex; align-items:center; justify-content:center; width:58px; height:58px; border-radius:50%; margin:0 auto; font-size:20px; font-weight:800; transition:all .3s ease; transform-origin:center; ' + (on
+          ? 'background:linear-gradient(135deg,#6fa8ff,#2f5aa8); color:#fff; border:4px solid #fff; box-shadow:0 0 0 2px #3f74d6, 0 16px 30px -10px rgba(47,90,168,0.6); animation:rx-breathe 2.6s ease-in-out infinite;'
+          : 'background:#fff; color:#7d97b6; border:2px solid #cfdcec;'),
+        labelColor: on ? '#3f74d6' : '#9aadc2',
+        promiseColor: on ? '#0c1f2c' : '#4a5d72',
+        underline: on ? '38px' : '0px' };
+    });
+    const cd = copiloteData[pp];
+    const pExpanded = !!this.state.pillarExpanded[pp];
+    const active = {
+      tag: cd.tag, label: cd.label, n: pp + 1, title: cd.title, imgLabel: cd.imgLabel, img: cd.img || '', noImg: !cd.img, lead: cd.lead, change: cd.change,
+      detail: cd.detail, hasBullets: !!cd.bullets, bullets: cd.bullets || [], detailTail: cd.detailTail || [],
+      expanded: pExpanded,
+      moreLabel: pExpanded ? 'Einklappen' : 'Weiterlesen',
+      moreArrow: pExpanded ? '\u2191' : '\u2192', promise: cd.title,
+      toggleMore: () => this.setState(s => ({ pillarExpanded: Object.assign({}, s.pillarExpanded, { [pp]: !s.pillarExpanded[pp] }) })),
+    };
+
+    const pillars5 = [
+      { kicker: 'Spezialisierte Schweizer Daten', title: 'Immobiliendaten von spezialisierten Firmen in der Schweiz', short: 'Die Immobilienmarktdaten stammen von spezialisierten, anerkannten Firmen in der Schweiz und sind, wo verfügbar, von der nationalen Ebene bis zum Quartier aufgeschlüsselt.' },
+      { kicker: 'Geprüfte Immobilienexpertise', title: 'Eine von anerkannten Fachleuten geprüfte Expertise', short: 'Die fachlichen Immobilieninformationen werden unter Mitwirkung zertifizierter, von führenden Schweizer Stellen anerkannter Immobilienexperten erarbeitet, kontrolliert und geprüft.' },
+      { kicker: 'Interne Analysemodelle', title: 'Modelle, entwickelt für die Besonderheiten des Schweizer Marktes', short: 'Sie verknüpfen Ihre Situation, Ihre Ziele, Ihre Rahmenbedingungen und den betreffenden Markt, um jede Frage in eine ganzheitliche, stimmige Betrachtung einzuordnen.' },
+      { kicker: 'Laufend aktuell', title: 'Strukturierte und laufend aktualisierte Informationen', short: 'Daten, Fachwissen und Analyseregeln werden im Takt des Marktes, der beruflichen Praxis und der Schweizer Regulierung geprüft und aktualisiert.' },
+      { kicker: 'Neutralität und Unabhängigkeit', title: 'Eine neutrale und unabhängige Analyse', short: 'Neutrale Analysen ohne fremde Interessen, deren einziges Ziel es ist, Ihnen zu helfen, Ihre Situation zu verstehen, Ihre Optionen zu vergleichen und die vor einer Festlegung zu prüfenden Punkte zu erkennen.' },
+    ];
+    const usageSteps = [
+      { n: '1', title: 'Beginnen Sie mit Ihrer tatsächlichen Situation',
+        lead: 'Erklären Sie, wo Sie stehen, was Sie erreichen möchten und welche Fragen sich derzeit in Ihrem Projekt stellen.', paras: [
+        'Sie können mit sehr wenigen Informationen beginnen. RealXpert stellt die nützlichen Fragen, wenn bestimmte Angaben präzisiert werden müssen, um Ihre Situation besser zu verstehen.',
+        'Es verlangt nicht, dass Sie im Voraus alle Schritte Ihres Projekts kennen oder genau wissen, welche Fragen zu stellen sind. Gerade das Gespräch bringt die wichtigen, zu klärenden Themen zutage.',
+      ] },
+      { n: '2', title: 'Vertiefen Sie die Entscheidungen, die wirklich zählen',
+        lead: 'Auf Grundlage der geteilten Informationen analysiert RealXpert Ihr Projekt als Ganzes.', paras: [
+        'Es berücksichtigt Ihre Ziele, Ihre Rahmenbedingungen, den Stand Ihres Projekts und die bereits getroffenen Entscheidungen. Wenn eine Frage eine andere beeinflusst, verknüpft es die verschiedenen Elemente, um eine isolierte oder zu allgemeine Antwort zu vermeiden.',
+        'So kann RealXpert Ihnen helfen, die möglichen Optionen, ihre Vorteile, Grenzen, Risiken und Folgen für den weiteren Verlauf Ihres Projekts zu verstehen.',
+      ] },
+      { n: '3', title: 'Erhalten Sie Empfehlungen und wissen Sie, wie Sie vorgehen',
+        lead: 'RealXpert beschränkt sich nicht darauf, Ihnen eine Information zu übermitteln.', paras: [
+        'Es hilft Ihnen zu erkennen, was in Ihrer Situation wirklich zählt, welche Punkte noch zu prüfen sind, welche Entscheidungen anstehen und in welcher Reihenfolge vorzugehen ist.',
+        'So verfügen Sie über konkrete Empfehlungen, um besser zu verstehen:',
+      ], bullets: [
+        'die Optionen, die Ihnen offenstehen;',
+        'die möglichen Folgen jeder Entscheidung;',
+        'die vorwegzunehmenden Risiken;',
+        'die Informationen, die Ihnen fehlen;',
+        'die als Nächstes zu ergreifenden Massnahmen.',
+      ], footer: 'Sie bleiben frei in Ihrer endgültigen Entscheidung, treffen sie aber mit mehr Verständnis, Abstand und Orientierung.' },
+      { n: '4', title: 'Kommen Sie zurück, wann immer sich Ihr Projekt weiterentwickelt',
+        lead: 'Ein Immobilienprojekt wird nicht auf einmal entschieden.', paras: [
+        'Eine neue Schätzung, ein Agenturvorschlag, eine entdeckte Immobilie, ein erhaltenes Angebot, eine Verhandlung, eine finanzielle Information oder eine veränderte Situation können die zu treffenden Entscheidungen ändern.',
+        'Sie können bei jedem neuen Schritt zu RealXpert zurückkehren, die neuen Angaben teilen und das Gespräch fortsetzen, ohne Ihr Projekt von vorn beginnen zu müssen.',
+        'So entwickeln sich die Analysen und Empfehlungen mit Ihrer Situation weiter, bis hin zu den wichtigsten Entscheidungen Ihres Verkaufs oder Kaufs.',
+      ] },
+    ];
+    const decisionSteps = [
+      { n: '1', text: 'Fragen zum richtigen Zeitpunkt stellen und verlässliche Antworten erhalten' },
+      { n: '2', text: 'Verstehen, was jede Entscheidung wirklich für das Projekt bedeutet' },
+      { n: '3', text: 'Die Optionen, ihre Vorteile und ihre Risiken vergleichen' },
+      { n: '4', text: 'Über die richtigen Anhaltspunkte verfügen, bevor man sich festlegt' },
+    ];
+    const steps = [
+      { n: '1', title: 'Stellen Sie Ihre Fragen', body: 'Schildern Sie einfach Ihre Situation und fragen Sie alles, was Sie für Ihren Verkauf oder Kauf verstehen, prüfen oder entscheiden möchten' },
+      { n: '2', title: 'Erhalten Sie auf Ihre Situation zugeschnittene Empfehlungen', body: 'RealXpert analysiert Ihre Situation, vertieft die wichtigen Punkte und liefert Ihnen Empfehlungen, die auf Ihr Projekt zugeschnitten sind' },
+      { n: '3', title: 'Treffen Sie die besten Entscheidungen', body: 'Vergleichen Sie Ihre Optionen, erkennen Sie die zu beachtenden Punkte und gehen Sie mit besseren Anhaltspunkten voran, um Ihre Transaktion unter den bestmöglichen Bedingungen erfolgreich abzuschliessen' },
+    ];
+    const doubts = [
+      'Womit soll ich beginnen?',
+      'Ist jetzt der richtige Zeitpunkt zu handeln?',
+      'Welche Optionen stehen mir offen?',
+      'An wen kann ich mich für eine gute Beratung wenden?',
+      'Wo finde ich verlässliche Informationen?',
+      'Wie vergleiche ich die verschiedenen Lösungen?',
+      'Welche Fallen und Fehler gilt es zu vermeiden?',
+      'Und vor allem: Wie kann ich sicher sein, die richtigen Entscheidungen zu treffen?',
+    ];
+    const pillars = [
+      { title: 'Versteht Ihre Situation', body: 'Es berücksichtigt Ihre Ziele, Rahmenbedingungen und bereits getroffenen Entscheidungen, um jede Frage in ihren Kontext einzuordnen.' },
+      { title: 'Analysen & Empfehlungen', body: 'Vergleichen Sie Ihre Optionen, verstehen Sie ihre Risiken und wissen Sie, welche Richtung zu bevorzugen ist – und warum.' },
+      { title: 'Geprüfte Schweizer Daten', body: 'Markt, Preise, Steuern und Finanzierung spezifisch für die Schweiz, aktualisiert und ohne kommerziellen Druck präsentiert.' },
+      { title: 'Entwickelt sich mit Ihrem Projekt', body: 'Neues Angebot, Schätzung, Verhandlung: Setzen Sie das Gespräch fort, ohne von vorn zu beginnen.' },
+    ];
+    const benefits = [
+      { title: 'Ein klarer Blick auf Ihre Situation', body: 'Verstehen Sie, worum es geht und welche Entscheidungen vorrangig zu treffen sind.' },
+      { title: 'Massgeschneiderte Empfehlungen', body: 'Antworten, die Ihr tatsächliches Projekt berücksichtigen.' },
+      { title: 'Ein klarer Vergleich Ihrer Optionen', body: 'Vorteile, Grenzen, Risiken und Folgen jeder Entscheidung.' },
+      { title: 'Die zu prüfenden Aufmerksamkeitspunkte', body: 'Fehlende Informationen, Widersprüche und kostspielige Risiken.' },
+      { title: 'Die nächsten zu treffenden Entscheidungen', body: 'Was als Nächstes zu tun ist, in welcher Reihenfolge und was vorher zu prüfen ist.' },
+      { title: 'Analysen, die sich weiterentwickeln', body: 'Fügen Sie ein Angebot oder eine Schätzung hinzu, um die Ratschläge zu aktualisieren.' },
+      { title: 'Ein ganzheitlich verfolgtes Projekt', body: 'Finden Sie alles wieder, ohne Ihre Überlegungen von vorn zu beginnen.' },
+      { title: 'Mehr Zuversicht vor der Entscheidung', body: 'Sie bleiben frei, entscheiden aber mit mehr Abstand.' },
+    ];
+    const cases = [
+      { title: 'Sie möchten verkaufen', intro: 'Bewerten, die Verkaufsart wählen, die richtige Strategie festlegen und verhandeln – jede Antwort bringt neue Entscheidungen zum Vorschein.', items: [
+        'Ihre Immobilie korrekt zum fairen Marktpreis bewerten',
+        'Allein verkaufen oder einer Agentur anvertrauen: welche Option?',
+        'Exklusiv- oder einfacher Auftrag, Dauer und zu prüfende Klauseln',
+        'Während der Vermarktung reagieren und den Preis anpassen',
+        'Angebote vergleichen, verhandeln und beim Notar abschliessen',
+      ] },
+      { title: 'Sie möchten kaufen', intro: 'Vom realistischen Budget bis zur Schlüsselübergabe müssen zahlreiche Entscheidungen in der richtigen Reihenfolge getroffen werden.', items: [
+        'Ein realistisches Budget und Kriterien festlegen',
+        'Den lokalen Markt verstehen und Ihre Suche organisieren',
+        'Eine Immobilie und ihren Preis analysieren, bevor Sie sich festlegen',
+        'Besichtigungen vorbereiten und die richtigen Fragen stellen',
+        'Ein Angebot machen, verhandeln und den Erwerb absichern',
+      ] },
+    ];
+    const compare = [
+      { title: 'ChatGPT / Claude', border: '#e8efec', bg: '#ffffff', titleColor: '#0c1f2c', textColor: '#5a6f73', body: 'Allgemeine KI, nützlich zum Erklären, aber nicht auf Schweizer Immobilien spezialisiert und nicht darauf ausgelegt, Ihr Projekt über die Zeit zu begleiten.' },
+      { title: 'IA des portails', border: '#e8efec', bg: '#ffffff', titleColor: '#0c1f2c', textColor: '#5a6f73', body: 'Für die Immobiliensuche und die Nutzung der Plattform gedacht – nicht dafür, Ihre Situation zu analysieren oder Ihre Optionen neutral zu vergleichen.' },
+      { title: 'RealXpert', border: '#10a37f', bg: '#0c1f2c', titleColor: '#ffffff', textColor: '#bfeada', body: 'Ganz der Schweizer Immobilienwelt gewidmet: Es analysiert Ihre Situation, strukturiert Ihre Optionen und hilft Ihnen, konkret zu entscheiden – wie ein Experte.' },
+    ];
+    const faqData = [
+      { q: 'Wann sollte ich RealXpert in meinem Immobilienprojekt nutzen?', paras: [
+        'Sie können RealXpert nutzen, sobald in Ihrem Immobilienprojekt eine Frage, ein Zweifel oder eine wichtige Entscheidung auftaucht.',
+        'Das kann sein, bevor Sie einen Preis festlegen, eine Agentur wählen, einen Auftrag unterschreiben, ein Angebot analysieren, verhandeln, ein Kaufangebot abgeben, Ihre Finanzierung prüfen oder einfach verstehen, was der nächste Schritt ist.',
+        'Der beste Zeitpunkt, RealXpert zu nutzen, ist oft, bevor Sie sich festlegen, wenn Sie Ihre Optionen noch vergleichen, Risiken erkennen und eine später schwer oder teuer zu korrigierende Entscheidung vermeiden können.',
+      ] },
+      { q: 'Kann ich RealXpert auch nutzen, wenn mein Projekt noch nicht klar ist?', paras: [
+        'Ja. Sie brauchen kein perfekt definiertes Projekt, um zu beginnen.',
+        'Sie können einfach Ihre Situation, Ihre Idee, Ihre Ziele oder Ihre ersten Fragen schildern. RealXpert hilft Ihnen dann, Ihr Projekt zu klären, fehlende Informationen zu erkennen, die anstehenden Entscheidungen zu verstehen und zu wissen, wo Sie beginnen.',
+        'Gerade wenn das Projekt noch unklar ist, kann RealXpert Ihnen helfen, Ihre Überlegungen zu strukturieren und zu vermeiden, in die falsche Richtung zu starten.',
+      ] },
+      { q: 'Ist RealXpert nützlich, wenn ich mein Projekt bereits begonnen habe?', paras: [
+        'Ja. RealXpert kann Sie auch begleiten, wenn Ihr Projekt bereits fortgeschritten ist.',
+        'Sie können ihm mitteilen, was bereits geschehen ist: eine erhaltene Schätzung, eine kontaktierte Agentur, ein vorgeschlagener Auftrag, ein Kaufangebot, eine besichtigte Immobilie, eine laufende Verhandlung oder eine bereits getroffene Entscheidung.',
+        'RealXpert hilft Ihnen dann, wieder einen klaren Blick auf Ihre Situation zu gewinnen, die wichtigen Punkte zu prüfen und die nächsten Entscheidungen auf Grundlage des bereits Vorhandenen vorzubereiten.',
+      ] },
+      { q: 'Trifft RealXpert die Entscheidungen für mich?', paras: [
+        'Nein. RealXpert entscheidet nie für Sie.',
+        'Seine Aufgabe ist es, Ihnen die Analysen, Empfehlungen, zu beachtenden Punkte und Informationen zu liefern, die Sie brauchen, um Ihre Entscheidungen mit mehr Klarheit, Abstand und Zuversicht zu treffen.',
+        'Sie bleiben stets frei in Ihrer endgültigen Entscheidung. RealXpert hilft Ihnen, die möglichen Folgen jeder Option zu verstehen, doch Sie wählen die Richtung.',
+      ] },
+      { q: 'Ersetzt RealXpert einen Makler, eine Agentur oder einen Immobilienexperten?', paras: [
+        'Nein. RealXpert ersetzt keinen Immobilienfachmann, wenn ein menschliches Eingreifen nötig ist.',
+        'Es hilft Ihnen, Ihre Situation besser zu verstehen, Ihre Entscheidungen vorzubereiten, Ihre Optionen zu vergleichen, die richtigen Fragen zu stellen und die wichtigen Punkte zu prüfen, bevor Sie sich festlegen.',
+        'Wenn Ihr Projekt das Eingreifen eines Fachmanns erfordert, kann RealXpert Ihnen auch helfen, die für Ihre Immobilie, Ihre Region und Ihre Ziele am besten geeigneten Makler oder Immobilienexperten zu ermitteln.',
+      ] },
+      { q: 'Kann RealXpert mir helfen, wenn ich bereits eine Agentur oder einen Makler habe?', paras: [
+        'Ja. RealXpert kann Ihnen helfen, die erhaltenen Empfehlungen besser zu verstehen, bestimmte Punkte zu prüfen, Ihrer Agentur die richtigen Fragen zu stellen oder die Ihnen vorgeschlagenen Optionen zu vergleichen.',
+        'Zum Beispiel können Sie RealXpert nutzen, um eine Schätzung zu analysieren, einen Auftrag zu verstehen, eine Verkaufsstrategie zu vergleichen, einen Preisvorschlag zu prüfen oder ein Gespräch mit Ihrem Makler vorzubereiten.',
+        'Das Ziel ist nicht, den von Ihnen gewählten Fachmann zu ersetzen, sondern Ihnen mehr Abstand zu verschaffen, um zu verstehen, ob die vorgeschlagenen Entscheidungen mit Ihrer Situation und Ihren Zielen im Einklang stehen.',
+      ] },
+      { q: 'Kann RealXpert mir helfen, zum besten Preis zu verkaufen?', paras: [
+        'RealXpert garantiert keinen endgültigen Verkaufspreis, denn dieser hängt vom Markt, von der Immobilie, den Käufern, der Strategie, der Verhandlung und der Qualität der Verkaufsabwicklung ab.',
+        'Es hilft Ihnen jedoch, bessere Entscheidungen zu treffen, um Ihre Chancen auf das bestmögliche Ergebnis zu maximieren.',
+        'Es kann Ihnen insbesondere helfen, den Wert Ihrer Immobilie besser zu verstehen, einen stimmigen Preis festzulegen, die richtige Strategie zu wählen, Agenturen zu vergleichen, den richtigen Makler auszuwählen, die erhaltenen Angebote zu analysieren und Fehler zu vermeiden, die Ihren Endpreis mindern können.',
+      ] },
+      { q: 'Kann RealXpert mir helfen, zum besten Preis zu kaufen?', paras: [
+        'Ja. RealXpert kann Ihnen helfen, eine Immobilie vor einem Angebot zu analysieren, zu verstehen, ob der geforderte Preis stimmig ist, mehrere Gelegenheiten zu vergleichen und die Faktoren zu erkennen, die eine Verhandlung rechtfertigen können.',
+        'Es kann Ihnen auch helfen, Ihre Kaufkraft zu prüfen, die zu erwartenden Kosten zu verstehen, die Risiken einer Immobilie zu analysieren, eine Besichtigung vorzubereiten, ein Angebot zu formulieren oder zu entscheiden, ob es besser ist, voranzugehen, zu verhandeln oder abzusehen.',
+        'Das Ziel ist nicht nur, günstiger zu kaufen, sondern zum richtigen Preis zu kaufen – mit einem besseren Verständnis des tatsächlichen Werts der Immobilie, Ihrer finanziellen Rahmenbedingungen und etwaiger Risiken.',
+      ] },
+      { q: 'Sind die Empfehlungen von RealXpert neutral und unabhängig?', paras: [
+        'Ja. RealXpert ist darauf ausgelegt, Ihnen neutrale und unabhängige Analysen zu liefern.',
+        'Sein Ziel ist nicht, Sie zu einer Agentur, einer Bank, einem Makler oder einer bestimmten Lösung zu drängen. Seine Aufgabe ist es, Ihnen zu helfen, Ihre Optionen zu verstehen, die Möglichkeiten zu vergleichen und die für Ihre Situation am besten geeignete Entscheidung zu treffen.',
+        'Es bleibt Ihnen überlassen, den erhaltenen Empfehlungen zu folgen oder nicht.',
+      ] },
+      { q: 'Ist die Vermittlung an Immobilienexperten verpflichtend?', paras: [
+        'Nein. Die Vermittlung an Immobilienexperten ist freiwillig.',
+        'RealXpert kann Ihnen helfen, Fachleute zu ermitteln, die zu Ihrer Immobilie, Ihrer Region, Ihren Zielen und Ihrer Situation passen, doch es bleibt Ihnen völlig frei, sie zu kontaktieren, zu vergleichen oder nicht weiterzuverfolgen.',
+        'Diese Vermittlung soll Ihnen die Suche erleichtern und Ihnen ermöglichen, nach besseren Kriterien zu wählen – unverbindlich.',
+      ] },
+      { q: 'Welche Informationen muss ich angeben, um gute Empfehlungen zu erhalten?', paras: [
+        'Sie können mit sehr wenigen Informationen beginnen: einer Frage, einem Zweifel, einer Verkaufs- oder Kaufidee oder einfach einer Situation, die Sie klären möchten.',
+        'Je besser RealXpert Ihren Kontext versteht, desto präziser und passender können seine Empfehlungen sein. Insbesondere können Sie teilen:',
+      ], bullets: [
+        'die Art der betreffenden Immobilie;',
+        'ihre Lage;',
+        'Ihr Ziel;',
+        'Ihren Zeitrahmen;',
+        'Ihre finanzielle oder familiäre Situation, sofern sie das Projekt beeinflusst;',
+        'eine erhaltene Schätzung;',
+        'ein Kaufangebot;',
+        'ein Agenturvorschlag;',
+        'einen Auftrag;',
+        'eine bereits getroffene Entscheidung;',
+        'einen Punkt, den Sie prüfen möchten.',
+      ], tail: [
+        'Sie können diese Informationen nach und nach ergänzen, während Ihr Projekt voranschreitet.',
+      ] },
+      { q: 'Sind meine Informationen vertraulich?', paras: [
+        'Die Informationen, die Sie mit RealXpert teilen, dienen dazu, Ihre Situation zu verstehen, die Entwicklung Ihres Projekts zu verfolgen und Ihnen passende Empfehlungen zu geben.',
+        'Sie können Ihre Immobilie, Ihr Budget, Ihre Ziele, Ihre Entscheidungen oder Ihre persönliche Situation betreffen. Sie werden daher sorgfältig behandelt und ausschliesslich im Rahmen der Analyse Ihres Immobilienprojekts verwendet.',
+        'Ihre Daten werden in der Schweiz gehostet und gemäss den geltenden Datenschutzanforderungen verarbeitet.',
+        'Die bei Ihrer Registrierung angegebenen persönlichen Daten – wie Vorname, Name, E-Mail-Adresse, Telefonnummer oder Passwort – werden separat im Registrierungsbereich erhoben. Sie werden niemals an das KI-Analysesystem von RealXpert weitergegeben. Mit dem KI-Analysesystem analysiert RealXpert ausschliesslich die Informationen, die Sie im Rahmen Ihres Immobilienprojekts zu teilen wählen.',
+        'Für weitere Einzelheiten zur Erhebung, Nutzung, Aufbewahrung und zum Schutz Ihrer Daten können Sie unsere Datenschutzerklärung einsehen.',
+      ] },
+      { q: 'Garantiert RealXpert, dass ich immer die richtige Entscheidung treffe oder den besten Preis erziele?', paras: [
+        'Nein. Kein Werkzeug, keine KI und kein Experte kann garantieren, dass eine Entscheidung stets perfekt ist oder ein bestimmter Endpreis erzielt wird.',
+        'Ein Immobilienprojekt hängt von vielen Faktoren ab: dem Markt, der Immobilie, der Nachfrage, den Käufern, der Finanzierung, der Strategie, den Fristen, der Verhandlung und den in jeder Phase getroffenen Entscheidungen.',
+        'RealXpert hilft Ihnen jedoch, das Fehlerrisiko zu verringern, indem es Ihnen ermöglicht, Ihre Situation besser zu verstehen, Ihre Optionen zu vergleichen, die zu beachtenden Punkte zu erkennen und auf klarerer, vollständigerer und besser auf Ihr Projekt zugeschnittener Grundlage zu entscheiden.',
+        'Das Ziel ist, Ihnen zu helfen, überstürzte Entscheidungen, schlechte Wahlen und Fehler zu vermeiden, die Sie teuer zu stehen kommen können.',
+      ] },
+      { q: 'Wie viel kostet die Nutzung von RealXpert?', paras: [
+        'Sie können RealXpert kostenlos zu nutzen beginnen, um den Dienst kennenzulernen, Ihre ersten Fragen zu stellen und einzuschätzen, wie er Ihnen bei Ihrem Immobilienprojekt helfen kann.',
+        'Wenn sich Ihr Projekt hinzieht oder Sie die Begleitfunktionen voll nutzen möchten, kann anschliessend ein kostenpflichtiges Modell erforderlich sein.',
+        'Das Ziel ist, Ihnen Zugang zu einer strukturierten Begleitung zu geben, um bessere Entscheidungen zu treffen, teure Fehler zu vermeiden und Ihre Chancen zu maximieren, Ihren Verkauf oder Kauf unter den besten Bedingungen erfolgreich abzuschliessen.',
+        'Die Kosten von RealXpert sind im Verhältnis zu den Einsätzen eines Immobilienprojekts zu sehen: Eine falsche Entscheidung beim Preis, bei der Strategie, bei der Wahl einer Agentur, bei einer Verhandlung oder einem Kauf kann mehrere Zehntausend Franken ausmachen. RealXpert will Ihnen genau dabei helfen, dieses Risiko zu verringern, indem es Ihnen vor Ihrer Festlegung die richtigen Anhaltspunkte gibt.',
+      ] },
+    ];
+    const faqs = faqData.map((f, i) => ({
+      q: f.q, paras: f.paras, hasBullets: !!f.bullets, bullets: f.bullets || [], tail: f.tail || [],
+      open: this.state.openFaq === i,
+      sign: this.state.openFaq === i ? '\u2212' : '+',
+      toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
+    }));
+
+    return { navOpen, toggleNav, closeNav, accent, testimonials, heroPlaceholder, langCurrent, langList, langOpen, toggleLang, panelOpen, openPanel, closePanel, loginOpen, openLogin, closeLogin, ctaStyle, stats, localPoints, cities, mapHint, diffBlocks, pillTabs, active, tabVendreStyle, tabAcheterStyle, setVendreCase, setAcheterCase, caseIntro, caseApport, caseTopics, valuePoints, pillars5, trackSteps, pitfalls, usageSteps, whatCards, decisionSteps, propValFmt, lossFmt, pct, propVal, barWidth, setProp, setPct, heroChecks, trust, heroReco, vendreStyle, acheterStyle, setVendre, setAcheter, inputPlaceholder, steps, doubts, pillars, benefits, cases, compare, faqs };
+  }
+}
+</script>
+</body>
+</html>
