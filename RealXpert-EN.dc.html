@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script type="module" src="./hero-saisie.js?v=2"></script>
 </head>
 <body>
 <x-dc>
@@ -210,9 +211,12 @@
       <!-- barre blanche de démarrage -->
       <div data-r="herobar" style="background:#ffffff; border-radius:0 0 6px 6px; padding:26px 48px;">
         <div data-r="herostart" style="display:flex; align-items:center; gap:14px; background:#ffffff; border:1px solid #e2e8ee; border-radius:16px; padding:10px 10px 10px 24px; box-shadow:0 16px 40px -24px rgba(20,40,70,0.4);">
-          <div style="flex:1; min-width:0;">
-            <div style="font-size:17px; font-weight:800; color:#0c1f2c;">Ask your first question to avoid costly mistakes</div>
-            <div data-r="heroex" style="font-size:15px; color:#8a97a3; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">E.g. {{ heroPlaceholder }}</div>
+          <div data-r="heroask" style="position:relative; flex:1; min-width:0;">
+            <div data-r="herohint" style="transition:opacity .2s ease;">
+              <div style="font-size:17px; font-weight:800; color:#0c1f2c;">Ask your first question to avoid costly mistakes</div>
+              <div data-r="heroex" style="font-size:15px; color:#8a97a3; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">E.g. {{ heroPlaceholder }}</div>
+            </div>
+            <input data-r="heroinput" type="text" aria-label="Your question" autocomplete="off" style="position:absolute; inset:0; width:100%; height:100%; border:0; outline:none; background:transparent; font-family:inherit; font-size:17px; font-weight:700; color:#0c1f2c; padding:0;">
           </div>
           <span data-r="micro" style="color:#6a7b86; flex:0 0 auto; display:flex; align-items:center;" aria-label="Micro">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
