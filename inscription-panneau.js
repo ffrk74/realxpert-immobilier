@@ -29,7 +29,8 @@ const T = {
   FR: {
     page: 'Ma discussion - FR.dc.html',
     titreEmail: 'Confirmez votre e-mail', titreSms: 'Confirmez votre numéro',
-    sousEmail: 'Nous avons envoyé un code de vérification à', sousSms: 'Nous avons envoyé un code de vérification au',
+    sousEmail: 'Nous avons envoyé un code de vérification à', indesirables: 'Pas reçu ? Regardez dans vos courriers indésirables.',
+    nonConfirme: 'Votre compte n’est pas encore confirmé : nous venons de vous renvoyer un code par e-mail.', sousSms: 'Nous avons envoyé un code de vérification au',
     valider: 'Valider le code', renvoyer: 'Renvoyer le code', renvoye: 'Code renvoyé.',
     patiente: 'Un instant…', fermer: 'Fermer',
     champs: 'Merci de remplir tous les champs.',
@@ -46,7 +47,8 @@ const T = {
   DE: {
     page: 'Ma discussion - DE.dc.html',
     titreEmail: 'E-Mail bestätigen', titreSms: 'Nummer bestätigen',
-    sousEmail: 'Wir haben einen Bestätigungscode gesendet an', sousSms: 'Wir haben einen Bestätigungscode gesendet an',
+    sousEmail: 'Wir haben einen Bestätigungscode gesendet an', indesirables: 'Nicht erhalten? Schauen Sie im Spam-Ordner nach.',
+    nonConfirme: 'Ihr Konto ist noch nicht bestätigt: Wir haben Ihnen soeben einen neuen Code per E-Mail gesendet.', sousSms: 'Wir haben einen Bestätigungscode gesendet an',
     valider: 'Code bestätigen', renvoyer: 'Code erneut senden', renvoye: 'Code erneut gesendet.',
     patiente: 'Einen Moment…', fermer: 'Schliessen',
     champs: 'Bitte füllen Sie alle Felder aus.',
@@ -63,7 +65,8 @@ const T = {
   EN: {
     page: 'Ma discussion - EN.dc.html',
     titreEmail: 'Confirm your email', titreSms: 'Confirm your number',
-    sousEmail: 'We sent a verification code to', sousSms: 'We sent a verification code to',
+    sousEmail: 'We sent a verification code to', indesirables: 'Not received? Please check your junk folder.',
+    nonConfirme: 'Your account is not confirmed yet: we have just sent you a new code by email.', sousSms: 'We sent a verification code to',
     valider: 'Confirm code', renvoyer: 'Send a new code', renvoye: 'New code sent.',
     patiente: 'One moment…', fermer: 'Close',
     champs: 'Please fill in every field.',
@@ -80,7 +83,8 @@ const T = {
   IT: {
     page: 'Ma discussion - IT.dc.html',
     titreEmail: 'Conferma la tua e-mail', titreSms: 'Conferma il tuo numero',
-    sousEmail: 'Abbiamo inviato un codice di verifica a', sousSms: 'Abbiamo inviato un codice di verifica al',
+    sousEmail: 'Abbiamo inviato un codice di verifica a', indesirables: 'Non l’hai ricevuto? Controlla la posta indesiderata.',
+    nonConfirme: 'Il tuo account non è ancora confermato: ti abbiamo appena inviato un nuovo codice via e-mail.', sousSms: 'Abbiamo inviato un codice di verifica al',
     valider: 'Conferma il codice', renvoyer: 'Invia un nuovo codice', renvoye: 'Nuovo codice inviato.',
     patiente: 'Un momento…', fermer: 'Chiudi',
     champs: 'Compila tutti i campi.',
@@ -181,6 +185,7 @@ function afficherBoite() {
   boite.querySelector('[data-role="titre"]').textContent = etape === 'email' ? T.titreEmail : T.titreSms
   boite.querySelector('[data-role="sous"]').textContent =
     (etape === 'email' ? T.sousEmail : T.sousSms) + ' ' + (etape === 'email' ? email : telephone) + '.'
+    + (etape === 'email' ? ' ' + T.indesirables : '')
   boite.querySelector('[data-role="valider"]').textContent = T.valider
   boite.querySelector('[data-role="renvoyer"]').textContent = T.renvoyer
   const champ = boite.querySelector('[data-role="code"]')
@@ -249,7 +254,31 @@ async function connecter(sheet, bouton) {
   occupe(bouton, true, texteBouton)
   const { data, error } = await supabase.auth.signInWithPassword({ email: adresse, password: motdepasse })
   occupe(bouton, false, texteBouton)
-  if (error) return alerteSheet(sheet, T.identifiants)
+  if (error) {
+    // Compte créé mais e-mail jamais confirmé : le mot de passe est bon, il manque le
+    // code. On en renvoie un et on reprend l'inscription à cette étape.
+    if (error.code === 'email_not_confirmed' || /not confirmed/i.test(error.message || '')) {
+      email = adresse
+      await supabase.auth.resend({ type: 'signup', email })
+      etape = 'email'
+      afficherBoite()
+      return dire(T.nonConfirme, 'info')
+    }
+    return alerteSheet(sheet, T.identifiants)
+  }
+  // E-mail confirmé mais pas le numéro : on reprend à l'étape du SMS, sinon la
+  // discussion renverrait vers l'inscription.
+  if (!data.user?.phone_confirmed_at) {
+    email = data.user?.email || adresse
+    telephone = data.user?.user_metadata?.telephone || ''
+    if (telephone) {
+      const { error: erreurNumero } = await supabase.auth.updateUser({ phone: telephone })
+      if (erreurNumero) return alerteSheet(sheet, messageDeLErreur(erreurNumero))
+      etape = 'sms'
+      afficherBoite()
+      return
+    }
+  }
   partirVersLaDiscussion(data.session)
 }
 
@@ -282,9 +311,11 @@ async function validerCode() {
   occupe(bouton, true, T.valider)
 
   if (etape === 'email') {
-    let { error } = await supabase.auth.verifyOtp({ email, token: saisi, type: 'signup' })
-    if (error) ({ error } = await supabase.auth.verifyOtp({ email, token: saisi, type: 'email' }))
+    let { data, error } = await supabase.auth.verifyOtp({ email, token: saisi, type: 'signup' })
+    if (error) ({ data, error } = await supabase.auth.verifyOtp({ email, token: saisi, type: 'email' }))
     if (error) { occupe(bouton, false, T.valider); return dire(T.codeFaux) }
+    // Arrivé par la connexion, le numéro n'a pas été saisi ici : il est dans le compte.
+    telephone = telephone || data?.user?.user_metadata?.telephone || ''
     const { error: erreurNumero } = await supabase.auth.updateUser({ phone: telephone })
     occupe(bouton, false, T.valider)
     if (erreurNumero) return dire(messageDeLErreur(erreurNumero))
