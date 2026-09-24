@@ -17,7 +17,9 @@ const supabase = createClient(
   'sb_publishable_nt9NW_tnbeEes4lRWmEUbA_YaIe6sX2',
 )
 
-const SITE_DISCUSSION = 'https://realxpert-site.vercel.app'
+// La discussion est servie par l'application : c'est là que tourne le moteur de
+// l'experte, et donc toujours sa dernière version.
+const APPLICATION_DISCUSSION = 'https://orchids-realexpert-02.vercel.app/discussion'
 const MEMOIRE_QUESTION = 'realxpert_question_initiale'
 
 const LANGUE = (decodeURIComponent(location.pathname).match(/-\s*(FR|DE|EN|IT)\.dc\.html/i)
@@ -315,7 +317,7 @@ function partirVersLaDiscussion(session) {
   if (session?.access_token) fragment.set('at', session.access_token)
   if (session?.refresh_token) fragment.set('rt', session.refresh_token)
   if (question) fragment.set('q', question)
-  location.href = SITE_DISCUSSION + '/' + encodeURIComponent(T.page) + '#' + fragment.toString()
+  location.href = APPLICATION_DISCUSSION + '#' + fragment.toString()
 }
 
 /* ---------- Les boutons de la maquette ---------- */
