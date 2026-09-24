@@ -1,0 +1,19 @@
+/* Échelle des pages sur ordinateur.
+ *
+ * Les maquettes ont été dessinées grand : elles sont plus justes vues à 80 %. Plutôt
+ * que de réécrire chaque taille, la page est réduite comme le ferait le zoom du
+ * navigateur — sur ordinateur seulement (dès 1024 px) : sur téléphone, le texte
+ * deviendrait trop petit.
+ *
+ * Réduire la page réduit aussi les unités d'écran (vh, vw) : une zone « 100vh » ne
+ * ferait plus que 80 % de la hauteur. Les pages expriment donc ces unités par
+ * --rx-vh et --rx-vw, portées à 1,25 sous zoom pour retrouver la même taille réelle.
+ *
+ * Fichier identique sur les deux sites (realxpert-site, realxpert-immobilier).
+ */
+:root { --rx-echelle: 1; --rx-vh: 1vh; --rx-vw: 1vw; }
+
+@media (min-width: 1024px) {
+  html { zoom: .8; }
+  :root { --rx-echelle: .8; --rx-vh: 1.25vh; --rx-vw: 1.25vw; }
+}

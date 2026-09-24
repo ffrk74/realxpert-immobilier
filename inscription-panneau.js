@@ -11,7 +11,7 @@
 // lui-même au retour d'une connexion Google.
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=3'
+import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=4'
 
 const supabase = createClient(
   'https://mmhutoipdzwkvaufucko.supabase.co',
@@ -145,7 +145,7 @@ function construireBoite() {
   d.style.cssText = 'position:fixed; inset:0; z-index:300; display:flex; justify-content:flex-end;'
   d.innerHTML = `
     <div data-role="voile" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); backdrop-filter:blur(2px);"></div>
-    <div style="position:relative; width:440px; max-width:92vw; height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
+    <div style="position:relative; width:440px; max-width:calc(92 * var(--rx-vw)); height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
       <div style="padding:30px 34px 40px; font-family:inherit;">
         <div style="display:flex; justify-content:flex-end; margin-bottom:6px;">
           <button data-role="fermer" aria-label="${T.fermer}" style="background:none; border:none; cursor:pointer; color:#8a97a3; padding:6px; line-height:0; font-size:22px;">&times;</button>

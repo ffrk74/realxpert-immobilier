@@ -41,6 +41,10 @@ const NOMS = {
 }
 
 const PAR_INDICATIF = [...PAYS].sort((a, b) => b.indicatif.length - a.indicatif.length)
+
+/** Zoom de la page (echelle.css) : les positions mesurées sont à l'écran, celles qu'on
+ *  pose sont dans la page réduite — on convertit, sinon la liste tombe à côté. */
+const zoomPage = () => parseFloat(getComputedStyle(document.documentElement).zoom) || 1
 const chiffres = s => String(s || '').replace(/\D/g, '')
 
 function grouper(national, groupes) {
@@ -146,10 +150,11 @@ export function monterSaisieTelephone(champ, { langue = 'fr', cheminDrapeaux = '
 
   const ouvrir = () => {
     fermer()
+    const z = zoomPage()
     const r = champ.getBoundingClientRect()
     liste = document.createElement('div')
     liste.setAttribute('role', 'listbox')
-    liste.style.cssText = `position:fixed;left:${r.left}px;top:${r.bottom + 6}px;width:${Math.max(240, Math.min(r.width, 340))}px;`
+    liste.style.cssText = `position:fixed;left:${r.left / z}px;top:${r.bottom / z + 6}px;width:${Math.max(240, Math.min(r.width / z, 340))}px;`
       + 'max-height:320px;overflow-y:auto;background:#fff;border:1px solid #dce3ea;border-radius:12px;'
       + 'box-shadow:0 14px 34px rgba(20,50,90,.18);padding:6px;z-index:1000;font-family:inherit;'
     for (const p of paysOrdonnes(langue)) {
@@ -179,11 +184,11 @@ export function monterSaisieTelephone(champ, { langue = 'fr', cheminDrapeaux = '
 
   // Le drapeau occupe les ~50 premiers pixels du champ : un clic là ouvre la liste.
   champ.addEventListener('mousedown', e => {
-    const x = e.clientX - champ.getBoundingClientRect().left
+    const x = (e.clientX - champ.getBoundingClientRect().left) / zoomPage()
     if (x <= 50) { e.preventDefault(); liste ? fermer() : ouvrir() }
   })
   champ.addEventListener('mousemove', e => {
-    const x = e.clientX - champ.getBoundingClientRect().left
+    const x = (e.clientX - champ.getBoundingClientRect().left) / zoomPage()
     champ.style.cursor = x <= 50 ? 'pointer' : 'text'
   })
   champ.addEventListener('keydown', e => {

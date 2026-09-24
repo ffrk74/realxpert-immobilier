@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./echelle.css?v=1">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <script type="module" src="./hero-saisie.js?v=2"></script>
-<script type="module" src="./inscription-panneau.js?v=4"></script>
+<script type="module" src="./inscription-panneau.js?v=5"></script>
 </head>
 <body>
 <x-dc>
@@ -112,7 +113,7 @@
   }
   @media (max-width: 520px) {
     h1 { font-size: 27px !important; }
-    [data-r="heroh1"] { font-size: 5.9vw !important; }
+    [data-r="heroh1"] { font-size: calc(5.9 * var(--rx-vw)) !important; }
     [data-r="ptab"] > div:first-child { width: 40px !important; height: 40px !important; font-size: 16px !important; border-width: 2px !important; }
     [data-r="ptlabel"] { font-size: 8px !important; }
     [data-r="pillline"] { top: 19px !important; left: 7% !important; right: 7% !important; }
@@ -200,7 +201,7 @@
   </header>
 
   <!-- ============ HERO ============ -->
-  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/SLIDER - Estimation-bien-immobilier.ch 4-c0aafd49.webp'); background-size:cover; background-position:center bottom; padding:165px 32px 60px; min-height:100vh;">
+  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/SLIDER - Estimation-bien-immobilier.ch 4-c0aafd49.webp'); background-size:cover; background-position:center bottom; padding:165px 32px 60px; min-height:calc(100 * var(--rx-vh));">
     <div style="max-width:1240px; margin:0 auto;">
 
       <!-- bandeau bleu (encadré) -->
@@ -321,15 +322,15 @@
   <section style="background:#ffffff; padding:56px 32px 88px;">
     <div style="max-width:1080px; margin:0 auto;">
       <div style="text-align:center; max-width:820px; margin:0 auto 18px;">
-        <h2 style="font-size:clamp(30px,5vw,46px); font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:0; color:#0c1f2c; text-wrap:pretty;">Che cos’è RealXpert?</h2>
+        <h2 style="font-size:clamp(30px,calc(5 * var(--rx-vw)),46px); font-weight:800; line-height:1.14; letter-spacing:-0.025em; margin:0; color:#0c1f2c; text-wrap:pretty;">Che cos’è RealXpert?</h2>
       </div>
-      <p style="text-align:center; font-size:clamp(17px,2.2vw,20px); font-weight:800; color:#4a72b8; margin:0 auto 52px; max-width:700px; text-wrap:pretty;">Il vostro esperto immobiliare, disponibile 24 ore su 24, 7 giorni su 7</p>
+      <p style="text-align:center; font-size:clamp(17px,calc(2.2 * var(--rx-vw)),20px); font-weight:800; color:#4a72b8; margin:0 auto 52px; max-width:700px; text-wrap:pretty;">Il vostro esperto immobiliare, disponibile 24 ore su 24, 7 giorni su 7</p>
 
       <div data-r="gapsm" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:52px; align-items:start;">
         <img src="uploads/pasted-1784748293419-0.webp" alt="Coppia che esamina il proprio progetto immobiliare" data-r="portrait" style="width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 24px 50px -28px rgba(20,70,120,0.5);" />
 
         <div style="display:flex; flex-direction:column; gap:26px; max-width:56ch;">
-          <p style="font-size:clamp(18px,2.3vw,21px); line-height:1.6; color:#0c1f2c; font-weight:700; margin:0; text-wrap:pretty;">RealXpert è un esperto immobiliare dedicato all’immobiliare svizzero, disponibile 24 ore su 24 e 7 giorni su 7, che vi accompagna in tutte le decisioni importanti del vostro progetto, quando la posta finanziaria in gioco è elevata.</p>
+          <p style="font-size:clamp(18px,calc(2.3 * var(--rx-vw)),21px); line-height:1.6; color:#0c1f2c; font-weight:700; margin:0; text-wrap:pretty;">RealXpert è un esperto immobiliare dedicato all’immobiliare svizzero, disponibile 24 ore su 24 e 7 giorni su 7, che vi accompagna in tutte le decisioni importanti del vostro progetto, quando la posta finanziaria in gioco è elevata.</p>
           <p style="font-size:17.5px; line-height:1.78; color:#42555b; margin:0; text-wrap:pretty;">Analizza la vostra situazione e vi permette di <strong style="color:#0c1f2c; font-weight:700;">verificare ogni decisione prima di impegnarvi</strong>, per prendere le decisioni giuste al momento giusto ed <strong style="color:#0c1f2c; font-weight:700;">evitare gli errori che possono costarvi decine di migliaia di franchi</strong> senza nemmeno rendervene conto.</p>
           <p style="font-size:17.5px; line-height:1.78; color:#42555b; margin:0; text-wrap:pretty;">RealXpert è stato <strong style="color:#0c1f2c; font-weight:700;">concepito e strutturato da esperti dell’immobiliare svizzero</strong>, a partire dalla loro competenza e dalle decisioni che acquirenti e venditori affrontano realmente. L’intelligenza artificiale <strong style="color:#0c1f2c; font-weight:700;">permette di rendere questa competenza accessibile a tutti, in qualsiasi momento, con informazioni verificate e aggiornate</strong>, analisi adatte alla vostra situazione e raccomandazioni concrete.</p>
         </div>
@@ -909,7 +910,7 @@
   <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; inset:0; z-index:200; display:flex; justify-content:flex-end;">
       <div data-r="voile" onClick="{{ closePanel }}" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); backdrop-filter:blur(2px);"></div>
-      <div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#ffffff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
+      <div data-r="sheet" style="position:relative; width:440px; max-width:calc(92 * var(--rx-vw)); height:100%; background:#ffffff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
         <div data-r="pad" style="padding:30px 34px 40px;">
 
           <div style="display:flex; justify-content:flex-end; margin-bottom:6px;">
@@ -953,7 +954,7 @@
   <sc-if value="{{ loginOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; inset:0; z-index:200; display:flex; justify-content:flex-end;">
       <div data-r="voile" onClick="{{ closeLogin }}" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); backdrop-filter:blur(2px);"></div>
-      <div data-r="sheet" style="position:relative; width:440px; max-width:92vw; height:100%; background:#ffffff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
+      <div data-r="sheet" style="position:relative; width:440px; max-width:calc(92 * var(--rx-vw)); height:100%; background:#ffffff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
         <div data-r="pad" style="padding:30px 34px 40px;">
 
           <div style="display:flex; justify-content:flex-end; margin-bottom:6px;">
