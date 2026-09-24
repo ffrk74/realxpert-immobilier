@@ -11,6 +11,7 @@
 // lui-même au retour d'une connexion Google.
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=3'
 
 const supabase = createClient(
   'https://mmhutoipdzwkvaufucko.supabase.co',
@@ -35,7 +36,7 @@ const T = {
     patiente: 'Un instant…', fermer: 'Fermer',
     champs: 'Merci de remplir tous les champs.',
     email: 'Cette adresse e-mail ne semble pas valide.',
-    telephone: 'Indiquez votre numéro au format international, en commençant par +.',
+    telephone: 'Ce numéro ne correspond pas à un mobile du pays choisi : vérifiez le drapeau et les chiffres.',
     motdepasse: 'Le mot de passe doit faire au moins 8 caractères.',
     code: 'Saisissez le code reçu, tel qu’il vous a été envoyé.',
     codeFaux: 'Ce code est incorrect ou a expiré. Demandez-en un nouveau.',
@@ -53,7 +54,7 @@ const T = {
     patiente: 'Einen Moment…', fermer: 'Schliessen',
     champs: 'Bitte füllen Sie alle Felder aus.',
     email: 'Diese E-Mail-Adresse scheint nicht gültig zu sein.',
-    telephone: 'Bitte geben Sie Ihre Nummer im internationalen Format an, beginnend mit +.',
+    telephone: 'Diese Nummer entspricht keiner Mobilnummer des gewählten Landes: Prüfen Sie Flagge und Ziffern.',
     motdepasse: 'Das Passwort muss mindestens 8 Zeichen haben.',
     code: 'Geben Sie den erhaltenen Code genau so ein, wie er gesendet wurde.',
     codeFaux: 'Dieser Code ist falsch oder abgelaufen. Fordern Sie einen neuen an.',
@@ -71,7 +72,7 @@ const T = {
     patiente: 'One moment…', fermer: 'Close',
     champs: 'Please fill in every field.',
     email: 'That email address does not look valid.',
-    telephone: 'Enter your number in international format, starting with +.',
+    telephone: 'This does not look like a mobile number for the chosen country: check the flag and the digits.',
     motdepasse: 'The password must be at least 8 characters.',
     code: 'Enter the code exactly as it was sent to you.',
     codeFaux: 'That code is wrong or has expired. Ask for a new one.',
@@ -89,7 +90,7 @@ const T = {
     patiente: 'Un momento…', fermer: 'Chiudi',
     champs: 'Compila tutti i campi.',
     email: 'Questo indirizzo e-mail non sembra valido.',
-    telephone: 'Inserisci il numero in formato internazionale, a partire da +.',
+    telephone: 'Questo numero non corrisponde a un cellulare del paese scelto: controlla la bandiera e le cifre.',
     motdepasse: 'La password deve avere almeno 8 caratteri.',
     code: 'Inserisci il codice esattamente come ti è stato inviato.',
     codeFaux: 'Il codice è errato o scaduto. Richiedine uno nuovo.',
@@ -184,7 +185,7 @@ function afficherBoite() {
   if (!document.body.contains(boite)) document.body.appendChild(boite)
   boite.querySelector('[data-role="titre"]').textContent = etape === 'email' ? T.titreEmail : T.titreSms
   boite.querySelector('[data-role="sous"]').textContent =
-    (etape === 'email' ? T.sousEmail : T.sousSms) + ' ' + (etape === 'email' ? email : telephone) + '.'
+    (etape === 'email' ? T.sousEmail : T.sousSms) + ' ' + (etape === 'email' ? email : formaterPourAffichage(telephone)) + '.'
     + (etape === 'email' ? ' ' + T.indesirables : '')
   boite.querySelector('[data-role="valider"]').textContent = T.valider
   boite.querySelector('[data-role="renvoyer"]').textContent = T.renvoyer
@@ -200,8 +201,11 @@ function fermerBoite() {
 }
 
 // Le rendu de la page peut emporter ce qu'il ne connaît pas : on remet la boîte en place.
+// Et le champ téléphone du panneau reçoit son drapeau dès qu'il apparaît.
 new MutationObserver(() => {
   if (etape && boite && !document.body.contains(boite)) document.body.appendChild(boite)
+  const tel = document.querySelector('[data-r="sheet"] input[type="tel"]')
+  if (tel && tel.dataset.rxTel !== '1') monterSaisieTelephone(tel, { langue: LANGUE.toLowerCase() })
 }).observe(document.documentElement, { childList: true, subtree: true })
 
 /* ---------- Le parcours ---------- */
@@ -217,13 +221,14 @@ async function inscrire(sheet, bouton) {
   const prenom = (champs.textes[0]?.value || '').trim()
   const nom = (champs.textes[1]?.value || '').trim()
   const adresse = (champs.email?.value || '').trim()
-  const numero = (champs.telephone?.value || '').replace(/\s/g, '')
+  const saisie = champs.telephone ? monterSaisieTelephone(champs.telephone, { langue: LANGUE.toLowerCase() }) : null
+  const numero = saisie?.e164() || ''
   const motdepasse = champs.motdepasse?.value || ''
   const texteBouton = bouton.textContent
 
   if (!prenom || !nom || !adresse || !numero || !motdepasse) return alerteSheet(sheet, T.champs)
   if (!EMAIL_VALIDE.test(adresse)) return alerteSheet(sheet, T.email)
-  if (!NUMERO_VALIDE.test(numero)) return alerteSheet(sheet, T.telephone)
+  if (!saisie?.valide()) return alerteSheet(sheet, T.telephone)
   if (motdepasse.length < 8) return alerteSheet(sheet, T.motdepasse)
 
   occupe(bouton, true, texteBouton)
