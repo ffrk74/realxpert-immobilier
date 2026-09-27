@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <link rel="icon" type="image/png" href="./favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
@@ -62,7 +62,7 @@
     [data-r="legalhero"] { padding-top: 50px !important; padding-bottom: 42px !important; }
     [data-r="legalbody"] { padding-bottom: 64px !important; }
     footer { padding: 46px 20px 30px !important; }
-    h1 { font-size: 30px !important; line-height: 1.2 !important; }
+    h1 { font-size: 32px !important; line-height: 1.2 !important; }
     section h2 { font-size: 22px !important; line-height: 1.3 !important; margin-top: 40px !important; margin-bottom: 16px !important; }
     section h3 { font-size: 17.5px !important; margin-top: 26px !important; }
     section p { font-size: 16px !important; line-height: 1.72 !important; }
@@ -70,8 +70,14 @@
     [data-r="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
   }
   @media (max-width: 520px) {
-    h1 { font-size: 26px !important; }
+    h1 { font-size: 28px !important; }
     section h2 { font-size: 20.5px !important; }
+  }
+  /* Titres agrandis sur mobile (27.09) : un mot trop long passe à la ligne au lieu de déborder ;
+     en allemand (mots composés), il se coupe avec un trait d'union. */
+  @media (max-width: 900px) {
+    h1, h2, h3 { overflow-wrap: break-word; }
+    html[lang="de"] h1, html[lang="de"] h2, html[lang="de"] h3 { -webkit-hyphens: auto; hyphens: auto; }
   }
 </style>
 </helmet>
