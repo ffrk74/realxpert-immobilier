@@ -9,6 +9,9 @@
 // Secours : l'enregistrement tourne en parallèle ; si la connexion en direct échoue ou ne
 // rend rien, il est transcrit à la fin par l'application (/api/transcribe).
 //
+// « Démarrer la conversation » (clic, ou Entrée dans le champ) coupe le micro net : la
+// question part telle qu'elle est écrite, plus rien ne s'y ajoute ensuite.
+//
 // La page est un gabarit qui se re-rend : écouteurs posés sur le document, état visuel
 // porté par une classe sur <html> et une bulle ajoutée au <body>, que le gabarit ne
 // touche pas.
@@ -160,7 +163,9 @@ let debut = 0
 let horloge = null
 let limite = null
 let direct = null
+let finalisation = null     // la session en cours de validation (arrêt demandé)
 let base = ''               // ce qui était déjà écrit dans le champ avant la dictée
+let generation = 0          // change à chaque coupure : une réponse tardive n'écrit plus rien
 
 function classe(nom) {
   document.documentElement.classList.remove('rx-dictee-ecoute', 'rx-dictee-transcription')
@@ -192,6 +197,8 @@ function toutCouper() {
   clearInterval(horloge); clearTimeout(limite)
   try { direct?.fermer() } catch {}
   direct = null
+  try { finalisation?.fermer() } catch {}
+  finalisation = null
   try { if (enregistreur && enregistreur.state !== 'inactive') enregistreur.stop() } catch {}
   enregistreur = null
   flux?.getTracks().forEach(p => p.stop())
@@ -263,6 +270,7 @@ async function transcrireEnregistrement(audio) {
 
 async function arreter() {
   if (etat !== 'ecoute' && etat !== 'connexion') return
+  const gen = generation
   clearInterval(horloge); clearTimeout(limite)
   const duree = Date.now() - debut
   etat = 'transcription'
@@ -281,16 +289,32 @@ async function arreter() {
     let texte = ''
     const d = direct
     direct = null
+    finalisation = d
     if (d) texte = await d.terminer()
+    finalisation = null
+    if (gen !== generation) return   // coupée entre-temps (« Démarrer la conversation »)
     if (!texte && audio && audio.size > 1000 && duree > 600) texte = await transcrireEnregistrement(audio)
+    if (gen !== generation) return
     if (texte) { ecrire(texte); cacher() } else erreur('rien')
   } catch (e) {
-    erreur(e?.code || 'reseau')
+    if (gen === generation) erreur(e?.code || 'reseau')
   } finally {
-    toutCouper()
-    etat = 'repos'
-    classe(null)
+    if (gen === generation) {
+      toutCouper()
+      etat = 'repos'
+      classe(null)
+    }
   }
+}
+
+/** La question part : le micro se coupe net, sans finalisation. */
+function couper() {
+  if (etat === 'repos') return
+  generation += 1
+  etat = 'repos'
+  toutCouper()
+  classe(null)
+  cacher()
 }
 
 function basculer() {
@@ -300,6 +324,8 @@ function basculer() {
 }
 
 document.addEventListener('click', e => {
+  // « Démarrer la conversation » (Entrée dans le champ passe aussi par ce bouton).
+  if (e.target.closest?.('[data-r="herobtn"]')) { couper(); return }
   if (!e.target.closest?.(MICRO)) return
   e.preventDefault()
   basculer()
