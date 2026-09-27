@@ -332,7 +332,7 @@
 
       <!-- visuel équation : un seul panneau, lu d'un trait -->
       <!-- calculateur simple -->
-      <div data-r="calc" style="background:linear-gradient(120deg,#5b8fd4 0%,#3a5fc0 42%,#2f47b0 100%); border-radius:24px; box-shadow:0 30px 60px -26px rgba(30,50,140,0.6); padding:42px 46px; margin:0 auto 30px; max-width:820px; text-align:center;">
+      <div data-r="calc" style="background:linear-gradient(135deg,#ff5a3c 0%,#e01f3d 100%); border-radius:24px; box-shadow:0 30px 60px -26px rgba(224,31,61,0.6); padding:42px 46px; margin:0 auto 30px; max-width:820px; text-align:center;">
 
         <div style="font-size:20px; font-weight:800; color:#ffffff;">Quelle est la valeur du bien ?</div>
         <div data-r="big" style="font-size:46px; font-weight:800; color:#ffffff; line-height:1; margin:12px 0 26px;">{{ propValFmt }}</div>
@@ -341,13 +341,13 @@
 
         <div style="height:1px; background:rgba(255,255,255,0.25); margin:34px 0 30px;"></div>
 
-        <div data-r="mid" style="font-size:19px; font-weight:800; color:#eaf1fb;">Une mauvaise décision de seulement 5% vous coûterait</div>
+        <div data-r="mid" style="font-size:19px; font-weight:800; color:#fdeceb;">Une mauvaise décision de seulement 5% vous coûterait</div>
         <div data-r="huge" style="font-size:62px; font-weight:800; color:#ffffff; line-height:1; letter-spacing:-0.02em; margin-top:12px;">CHF {{ lossFmt }}</div>
       </div>
 
       <p style="font-size:20px; line-height:1.5; color:#0c1f2c; font-weight:700; max-width:740px; margin:0 auto;">Une mauvaise décision peut vous coûter bien plus que 5%. Le coût d'une erreur est souvent bien supérieur à celui d'un bon conseil.</p>
       <div style="margin-top:36px;">
-        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaStyle }}">Vérifier avant de décider →</a>
+        <a href="#top" onClick="{{ openPanel }}" style="{{ ctaRouge }}">Vérifier avant de décider →</a>
       </div>
     </div>
   </section>
@@ -1369,6 +1369,8 @@ class Component extends DCLogic {
     });
 
     const ctaStyle = 'display:inline-block; background:linear-gradient(180deg,#2f6bd6,#1d4fb0); color:#ffffff; font-weight:800; font-size:17px; letter-spacing:0.01em; padding:17px 38px; border-radius:12px; box-shadow:0 16px 34px -12px rgba(29,79,176,0.6); transition:transform .2s ease;';
+    // Le rouge des boutons « Vérifier avant d'acheter » de la page Acheter (demande de Franck, 27.09).
+    const ctaRouge = ctaStyle.replace('linear-gradient(180deg,#2f6bd6,#1d4fb0)', 'linear-gradient(135deg,#ff5a3c,#e01f3d)').replace('rgba(29,79,176,0.6)', 'rgba(224,31,61,0.7)');
     const stats = statsRaw.map((s, i) => {
       const col = i % 3, row = Math.floor(i / 3);
       let cs = 'text-align:center; padding:34px 24px;';
@@ -1590,7 +1592,7 @@ class Component extends DCLogic {
       toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
     }));
 
-    return { navOpen, toggleNav, closeNav, accent, testimonials, heroPlaceholder, langCurrent, langList, langOpen, toggleLang, panelOpen, openPanel, closePanel, loginOpen, openLogin, closeLogin, ctaStyle, stats, localPoints, cities, mapHint, diffBlocks, pillTabs, active, tabVendreStyle, tabAcheterStyle, setVendreCase, setAcheterCase, caseIntro, caseApport, caseTopics, valuePoints, pillars5, trackSteps, pitfalls, usageSteps, whatCards, decisionSteps, propValFmt, lossFmt, pct, propVal, barWidth, setProp, setPct, heroChecks, trust, heroReco, vendreStyle, acheterStyle, setVendre, setAcheter, inputPlaceholder, steps, doubts, pillars, benefits, cases, compare, faqs };
+    return { navOpen, toggleNav, closeNav, accent, testimonials, heroPlaceholder, langCurrent, langList, langOpen, toggleLang, panelOpen, openPanel, closePanel, loginOpen, openLogin, closeLogin, ctaStyle, ctaRouge, stats, localPoints, cities, mapHint, diffBlocks, pillTabs, active, tabVendreStyle, tabAcheterStyle, setVendreCase, setAcheterCase, caseIntro, caseApport, caseTopics, valuePoints, pillars5, trackSteps, pitfalls, usageSteps, whatCards, decisionSteps, propValFmt, lossFmt, pct, propVal, barWidth, setProp, setPct, heroChecks, trust, heroReco, vendreStyle, acheterStyle, setVendre, setAcheter, inputPlaceholder, steps, doubts, pillars, benefits, cases, compare, faqs };
   }
 }
 </script>
