@@ -128,6 +128,36 @@
     [data-r="huge"] { font-size: 34px !important; }
   }
 
+  /* Accueil sur mobile et tablette — maquette de Franck du 27.09 : le titre directement
+     sur le ciel, sans encadrés ; un champ blanc, micro à gauche, puis le bouton jaune ;
+     la ville apparaît sous le bouton. L'ordinateur garde sa présentation. */
+  @media (max-width: 900px) {
+    [data-r="hero"] { padding: 104px 20px 170px !important; min-height: 0 !important; }
+    [data-r="hero"] > div { max-width: 620px !important; }
+    [data-r="hero"]::before { background-position: 30% bottom !important; }
+    [data-r="heroband"] { background: none !important; padding: 0 !important; border-radius: 0 !important; }
+    [data-r="heroh1"] { font-size: clamp(27px, calc(8.2 * var(--rx-vw)), 44px) !important; line-height: 1.1 !important; letter-spacing: -0.02em !important;
+      text-wrap: wrap !important; margin: 0 0 16px !important; text-shadow: 0 2px 14px rgba(8,45,90,.22); }
+    [data-r="herosous"] { display: none !important; }
+    [data-r="herosousmob"] { display: block !important; font-size: 16.5px !important; line-height: 1.4 !important; letter-spacing: -0.01em; font-weight: 600; color: rgba(255,255,255,.94);
+      margin: 0; text-shadow: 0 1px 10px rgba(8,45,90,.2); }
+    [data-r="herobar"] { background: none !important; padding: 0 !important; border-radius: 0 !important; margin-top: 22px; }
+    [data-r="herostart"] { display: grid !important; grid-template-columns: 50px 1fr; gap: 0 !important; padding: 0 !important; background: none !important;
+      border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+    [data-r="micro"] { display: flex !important; grid-column: 1; grid-row: 1; align-items: center; justify-content: center; background: #fff;
+      border: 1px solid #9aa7b4; border-right: 0; border-radius: 6px 0 0 6px; color: #6a7b86; }
+    [data-r="heroask"] { grid-column: 2; grid-row: 1; display: flex; align-items: center; min-height: 58px; background: #fff;
+      border: 1px solid #9aa7b4; border-left: 0; border-radius: 0 6px 6px 0; padding: 10px 14px 10px 4px; }
+    [data-r="herostart"]:focus-within [data-r="micro"], [data-r="herostart"]:focus-within [data-r="heroask"] { border-color: #1a73c9; }
+    [data-r="heroq"], [data-r="heroex"] { display: none !important; }
+    [data-r="herohintmob"] { display: block !important; font-size: 14.5px; line-height: 1.38; font-weight: 400; color: #6b7580; }
+    [data-r="heroinput"] { font-size: 16px !important; font-weight: 500 !important; padding: 0 14px 0 4px !important; }
+    [data-r="herobtn"] { grid-column: 1 / -1; grid-row: 2; width: 100% !important; margin-top: 9px; padding: 10px 16px !important; border-radius: 6px !important;
+      box-shadow: 0 10px 22px -8px rgba(0,0,0,.4) !important; }
+    [data-r="herobtn"] span:first-child { font-size: 17.5px !important; }
+    [data-r="herobtn"] span:last-child { font-size: 12.5px !important; margin-top: 2px !important; }
+  }
+
   /* Panneaux d'inscription et de connexion : glissent depuis la droite, le voile s'assombrit (au lieu d'apparaître d'un coup). */
   @keyframes rx-panneau-entree { from { transform: translateX(100%); } to { transform: translateX(0); } }
   @keyframes rx-voile-entree { from { opacity: 0; } to { opacity: 1; } }
@@ -214,7 +244,8 @@
       <!-- bandeau bleu (encadré) -->
       <div data-r="heroband" style="background:linear-gradient(180deg,rgba(43,60,86,0.93) 0%,rgba(43,60,86,0.88) 100%); border-radius:6px 6px 0 0; padding:34px 48px 30px;">
         <h1 style="font-size:52px; font-weight:800; line-height:1.08; letter-spacing:-0.025em; margin:0 0 18px; color:#ffffff;" data-r="heroh1">Verkaufen oder kaufen Sie Ihre Immobilie <br>zum besten Preis</h1>
-        <p style="font-size:18px; line-height:1.5; color:#ffffff; font-weight:700; margin:0;">Prüfen Sie vor jeder wichtigen Entscheidung mit RealXpert, dass Sie die richtigen Entscheidungen treffen, um Fehler zu vermeiden, die Sie Zehntausende Franken kosten können.</p>
+        <p data-r="herosous" style="font-size:18px; line-height:1.5; color:#ffffff; font-weight:700; margin:0;">Prüfen Sie vor jeder wichtigen Entscheidung mit RealXpert, dass Sie die richtigen Entscheidungen treffen, um Fehler zu vermeiden, die Sie Zehntausende Franken kosten können.</p>
+        <p data-r="herosousmob" style="display:none;">Sparen Sie Zehntausende Franken, indem Sie jede Immobilienentscheidung mit RealXpert prüfen, bevor Sie sich festlegen</p>
       </div>
 
       <!-- barre blanche de démarrage -->
@@ -222,7 +253,8 @@
         <div data-r="herostart" style="display:flex; align-items:center; gap:14px; background:#ffffff; border:1px solid #e2e8ee; border-radius:16px; padding:10px 10px 10px 24px; box-shadow:0 16px 40px -24px rgba(20,40,70,0.4);">
           <div data-r="heroask" style="position:relative; flex:1; min-width:0;">
             <div data-r="herohint" style="transition:opacity .2s ease;">
-              <div style="font-size:17px; font-weight:800; color:#0c1f2c;">Stellen Sie Ihre erste Frage, um teure Fehler zu vermeiden</div>
+              <div data-r="herohintmob" style="display:none;">Stellen Sie hier Ihre erste Frage,<br>um teure Fehler zu vermeiden…</div>
+              <div data-r="heroq" style="font-size:17px; font-weight:800; color:#0c1f2c;">Stellen Sie Ihre erste Frage, um teure Fehler zu vermeiden</div>
               <div data-r="heroex" style="font-size:15px; color:#8a97a3; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Z. B.: {{ heroPlaceholder }}</div>
             </div>
             <input data-r="heroinput" type="text" aria-label="Ihre Frage" autocomplete="off" style="position:absolute; inset:0; width:100%; height:100%; border:0; outline:none; background:transparent; font-family:inherit; font-size:17px; font-weight:700; color:#0c1f2c; padding:0;">
