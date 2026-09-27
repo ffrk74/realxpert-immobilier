@@ -1,13 +1,19 @@
-// Dictée du champ de l'accueil (choix de Franck, 27.09 : transcription serveur, OpenAI).
+// Dictée du champ de l'accueil (Franck, 27.09 : OpenAI ; « que ça s'écrive au moment où je
+// dicte »).
 //
-// Un clic sur le micro enregistre ; un second clic arrête (au plus une minute). La voix
-// part à l'application, qui la fait transcrire, et le texte arrive dans le champ, où le
-// visiteur peut le corriger avant « Démarrer la conversation ». Même fonctionnement sur
-// téléphone et sur ordinateur, quel que soit le navigateur.
+// Un clic sur le micro : « Un instant… » le temps de la connexion, puis « Je vous écoute… » —
+// le texte s'écrit dans le champ au fil de la parole (dictee-direct.js). Un second clic (ou
+// une minute) : la phrase est validée et sa version finale remplace le brouillon. Le visiteur
+// peut la corriger avant « Démarrer la conversation ».
+//
+// Secours : l'enregistrement tourne en parallèle ; si la connexion en direct échoue ou ne
+// rend rien, il est transcrit à la fin par l'application (/api/transcribe).
 //
 // La page est un gabarit qui se re-rend : écouteurs posés sur le document, état visuel
 // porté par une classe sur <html> et une bulle ajoutée au <body>, que le gabarit ne
 // touche pas.
+
+import { ouvrirDicteeDirecte, ErreurDictee } from './dictee-direct.js?v=1'
 
 const APPLICATION = 'https://orchids-realexpert-02.vercel.app'
 const MICRO = '[data-r="micro"]'
@@ -20,7 +26,7 @@ const TACTILE = matchMedia('(pointer: coarse)').matches
 
 const T = {
   FR: {
-    ecoute: 'Je vous écoute…', finir: TACTILE ? 'Touchez le micro pour terminer' : 'Cliquez sur le micro pour terminer',
+    connexion: 'Un instant…', ecoute: 'Je vous écoute…', finir: TACTILE ? 'Touchez le micro pour terminer' : 'Cliquez sur le micro pour terminer',
     transcription: 'Transcription en cours…', micro: 'Dicter votre question',
     limite: 'Trop de dictées d’affilée : réessayez dans quelques minutes.',
     indisponible: 'La dictée est momentanément indisponible. Vous pouvez écrire votre question.',
@@ -32,7 +38,7 @@ const T = {
     reseau: 'Connexion impossible. Vérifiez votre réseau et réessayez.',
   },
   DE: {
-    ecoute: 'Ich höre zu…', finir: TACTILE ? 'Tippen Sie auf das Mikrofon, um zu beenden' : 'Klicken Sie auf das Mikrofon, um zu beenden',
+    connexion: 'Einen Moment…', ecoute: 'Ich höre zu…', finir: TACTILE ? 'Tippen Sie auf das Mikrofon, um zu beenden' : 'Klicken Sie auf das Mikrofon, um zu beenden',
     transcription: 'Wird umgewandelt…', micro: 'Frage diktieren',
     limite: 'Zu viele Diktate hintereinander: Versuchen Sie es in einigen Minuten erneut.',
     indisponible: 'Das Diktat ist vorübergehend nicht verfügbar. Sie können Ihre Frage schreiben.',
@@ -44,7 +50,7 @@ const T = {
     reseau: 'Keine Verbindung. Prüfen Sie Ihr Netzwerk und versuchen Sie es erneut.',
   },
   EN: {
-    ecoute: 'Listening…', finir: TACTILE ? 'Tap the microphone to finish' : 'Click the microphone to finish',
+    connexion: 'One moment…', ecoute: 'Listening…', finir: TACTILE ? 'Tap the microphone to finish' : 'Click the microphone to finish',
     transcription: 'Transcribing…', micro: 'Dictate your question',
     limite: 'Too many dictations in a row: please try again in a few minutes.',
     indisponible: 'Dictation is temporarily unavailable. You can type your question.',
@@ -56,7 +62,7 @@ const T = {
     reseau: 'Connection failed. Check your network and try again.',
   },
   IT: {
-    ecoute: 'Vi ascolto…', finir: TACTILE ? 'Toccate il microfono per terminare' : 'Cliccate sul microfono per terminare',
+    connexion: 'Un attimo…', ecoute: 'Vi ascolto…', finir: TACTILE ? 'Toccate il microfono per terminare' : 'Cliccate sul microfono per terminare',
     transcription: 'Trascrizione in corso…', micro: 'Dettate la vostra domanda',
     limite: 'Troppe dettature di fila: riprovate tra qualche minuto.',
     indisponible: 'La dettatura è momentaneamente non disponibile. Potete scrivere la vostra domanda.',
@@ -145,14 +151,16 @@ addEventListener('resize', placer)
 const echapper = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
 const erreur = code => montrer(echapper(T[code] || T.indisponible), 6000)
 
-/* ── L'enregistrement ──────────────────────────────────────────────────────── */
-let etat = 'repos'          // repos | ecoute | transcription
+/* ── La dictée ─────────────────────────────────────────────────────────────── */
+let etat = 'repos'          // repos | connexion | ecoute | transcription
 let enregistreur = null
 let flux = null
 let morceaux = []
 let debut = 0
 let horloge = null
 let limite = null
+let direct = null
+let base = ''               // ce qui était déjà écrit dans le champ avant la dictée
 
 function classe(nom) {
   document.documentElement.classList.remove('rx-dictee-ecoute', 'rx-dictee-transcription')
@@ -166,70 +174,120 @@ function formatMime() {
   return ''
 }
 
+/** Le texte dicté, à la suite de ce qui était déjà écrit ; la zone s'allonge (hero-saisie.js). */
+function ecrire(texte) {
+  const champ = document.querySelector(CHAMP)
+  if (!champ) return
+  champ.value = base && texte ? `${base} ${texte}` : (base || texte)
+  champ.dispatchEvent(new Event('input', { bubbles: true }))
+}
+
 function afficherEcoute() {
   const s = Math.floor((Date.now() - debut) / 1000)
   const temps = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
   montrer(`<span class="rx-dictee-point"></span><span><strong>${T.ecoute}</strong> <span class="rx-dictee-temps">${temps}</span><br><span class="rx-dictee-aide">${T.finir}</span></span>`)
 }
 
+function toutCouper() {
+  clearInterval(horloge); clearTimeout(limite)
+  try { direct?.fermer() } catch {}
+  direct = null
+  try { if (enregistreur && enregistreur.state !== 'inactive') enregistreur.stop() } catch {}
+  enregistreur = null
+  flux?.getTracks().forEach(p => p.stop())
+  flux = null
+}
+
+function ecouter() {
+  etat = 'ecoute'
+  debut = Date.now()
+  afficherEcoute()
+  horloge = setInterval(afficherEcoute, 500)
+}
+
 async function demarrer() {
   if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') return erreur('non_supporte')
   try {
-    flux = await navigator.mediaDevices.getUserMedia({ audio: true })
+    flux = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } })
   } catch (e) {
     return erreur(e?.name === 'NotAllowedError' || e?.name === 'SecurityError' ? 'refuse' : 'absent')
   }
+  const fluxCourant = flux
+  base = (document.querySelector(CHAMP)?.value || '').trim()
+
+  // L'enregistrement de secours démarre tout de suite : rien n'est perdu.
   const mime = formatMime()
   enregistreur = new MediaRecorder(flux, mime ? { mimeType: mime } : undefined)
   morceaux = []
   enregistreur.ondataavailable = e => { if (e.data.size > 0) morceaux.push(e.data) }
-  enregistreur.onstop = terminer
   enregistreur.start()
   debut = Date.now()
-  etat = 'ecoute'
+  etat = 'connexion'
   classe('rx-dictee-ecoute')
-  afficherEcoute()
-  horloge = setInterval(afficherEcoute, 500)
+  montrer(`<span class="rx-dictee-point"></span><span><strong>${T.connexion}</strong></span>`)
   limite = setTimeout(arreter, DUREE_MAX)
+
+  try {
+    const d = await ouvrirDicteeDirecte({
+      flux: fluxCourant,
+      langue: LANGUE.toLowerCase(),
+      base: APPLICATION,
+      surBrouillon: texte => { if (etat === 'ecoute' || etat === 'transcription') ecrire(texte) },
+    })
+    // Arrêté pendant la connexion : le secours a pris le relais.
+    if (etat !== 'connexion' || flux !== fluxCourant) { d.fermer(); return }
+    direct = d
+  } catch (e) {
+    if (etat !== 'connexion' || flux !== fluxCourant) return
+    const code = e?.code || 'connexion'
+    if (code === 'limite' || code === 'indisponible') {
+      toutCouper(); etat = 'repos'; classe(null)
+      return erreur(code)
+    }
+    // Pas de direct (réseau, navigateur) : on écoute quand même, le texte viendra à la fin.
+    console.warn('[dictée] direct indisponible, secours :', code)
+  }
+  ecouter()
 }
 
-function arreter() {
+/** Secours : l'enregistrement complet, transcrit à la fin. */
+async function transcrireEnregistrement(audio) {
+  const formulaire = new FormData()
+  formulaire.append('audio', audio, (audio.type || '').includes('mp4') ? 'dictee.mp4' : 'dictee.webm')
+  formulaire.append('language', LANGUE.toLowerCase())
+  const reponse = await fetch(`${APPLICATION}/api/transcribe`, { method: 'POST', body: formulaire })
+  const d = await reponse.json().catch(() => ({}))
+  if (!reponse.ok || !d.success) throw new ErreurDictee(d.code || 'indisponible')
+  return String(d.text || '').trim()
+}
+
+async function arreter() {
+  if (etat !== 'ecoute' && etat !== 'connexion') return
   clearInterval(horloge); clearTimeout(limite)
-  if (enregistreur && enregistreur.state !== 'inactive') enregistreur.stop()
-}
-
-async function terminer() {
   const duree = Date.now() - debut
-  const type = enregistreur?.mimeType || 'audio/webm'
-  flux?.getTracks().forEach(p => p.stop())
-  flux = null
-  enregistreur = null
-  const audio = new Blob(morceaux, { type })
-  if (duree < 600 || audio.size < 1000) { etat = 'repos'; classe(null); return erreur('rien') }
-
   etat = 'transcription'
   classe('rx-dictee-transcription')
   montrer(`<span>${T.transcription}</span>`)
+
+  const rec = enregistreur
+  const audio = await new Promise(ok => {
+    if (!rec || rec.state === 'inactive') return ok(null)
+    rec.onstop = () => ok(new Blob(morceaux, { type: rec.mimeType || 'audio/webm' }))
+    try { rec.stop() } catch { ok(null) }
+  })
+  enregistreur = null
+
   try {
-    const formulaire = new FormData()
-    formulaire.append('audio', audio, type.includes('mp4') ? 'dictee.mp4' : 'dictee.webm')
-    formulaire.append('language', LANGUE.toLowerCase())
-    const reponse = await fetch(`${APPLICATION}/api/transcribe`, { method: 'POST', body: formulaire })
-    const d = await reponse.json().catch(() => ({}))
-    if (!reponse.ok || !d.success) return erreur(d.code || 'indisponible')
-    const texte = String(d.text || '').trim()
-    if (!texte) return erreur('rien')
-    const champ = document.querySelector(CHAMP)
-    if (champ) {
-      const avant = champ.value.trim()
-      champ.value = avant ? `${avant} ${texte}` : texte
-      // hero-saisie.js efface l'indice dès que le champ se remplit.
-      champ.dispatchEvent(new Event('input', { bubbles: true }))
-    }
-    cacher()
-  } catch {
-    erreur('reseau')
+    let texte = ''
+    const d = direct
+    direct = null
+    if (d) texte = await d.terminer()
+    if (!texte && audio && audio.size > 1000 && duree > 600) texte = await transcrireEnregistrement(audio)
+    if (texte) { ecrire(texte); cacher() } else erreur('rien')
+  } catch (e) {
+    erreur(e?.code || 'reseau')
   } finally {
+    toutCouper()
     etat = 'repos'
     classe(null)
   }
@@ -237,7 +295,7 @@ async function terminer() {
 
 function basculer() {
   if (etat === 'transcription') return
-  if (etat === 'ecoute') arreter()
+  if (etat === 'ecoute' || etat === 'connexion') arreter()
   else demarrer()
 }
 
