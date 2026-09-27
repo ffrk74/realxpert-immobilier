@@ -113,11 +113,15 @@ rendreAccessible()
 /* ── La bulle d'état, au-dessus du champ ───────────────────────────────────── */
 const zoomPage = () => parseFloat(getComputedStyle(document.documentElement).zoom) || 1
 let bulle = null
+let bulleVisible = false
 let effacement = null
 
 function placer() {
   const zone = document.querySelector(ZONE)
-  if (!bulle || !zone) return
+  // Une bulle cachée ne revient pas : le défilement et le redimensionnement (barre
+  // d'adresse du téléphone) rappellent placer() — ils remettaient « Transcription en
+  // cours… » à l'écran après l'arrivée du texte.
+  if (!bulle || !bulleVisible || !zone) return
   if (!document.body.contains(bulle)) document.body.appendChild(bulle)
   const z = zoomPage()
   const r = zone.getBoundingClientRect()
@@ -129,11 +133,12 @@ function montrer(html, duree = 0) {
   clearTimeout(effacement)
   if (!bulle) { bulle = document.createElement('div'); bulle.className = 'rx-dictee-bulle'; bulle.setAttribute('role', 'status') }
   bulle.innerHTML = html
+  bulleVisible = true
   document.body.appendChild(bulle)
   placer()
   if (duree) effacement = setTimeout(cacher, duree)
 }
-function cacher() { clearTimeout(effacement); bulle?.remove() }
+function cacher() { clearTimeout(effacement); bulleVisible = false; bulle?.remove() }
 addEventListener('scroll', placer, { passive: true })
 addEventListener('resize', placer)
 

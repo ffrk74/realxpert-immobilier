@@ -29,12 +29,24 @@ document.addEventListener('focusout', e => {
   if (e.target.matches?.(CHAMP)) montrer(e.target, e.target.value.trim() === '')
 })
 
+// Le champ est une zone de texte qui s'allonge avec la phrase (27.09) : vide, elle garde
+// la hauteur de l'indice ; remplie, elle prend la hauteur de son contenu.
+function ajuster(champ) {
+  if (!champ.value) { champ.style.removeProperty('height'); return }
+  champ.style.setProperty('height', 'auto', 'important')
+  champ.style.setProperty('height', `${champ.scrollHeight}px`, 'important')
+}
+
 document.addEventListener('input', e => {
-  if (e.target.matches?.(CHAMP)) montrer(e.target, false)
+  if (!e.target.matches?.(CHAMP)) return
+  montrer(e.target, e.target.value.trim() === '' && document.activeElement !== e.target)
+  ajuster(e.target)
 })
+addEventListener('resize', () => { const champ = document.querySelector(CHAMP); if (champ) ajuster(champ) })
 
 document.addEventListener('keydown', e => {
-  if (!e.target.matches?.(CHAMP) || e.key !== 'Enter') return
+  // Entrée envoie la question ; Maj+Entrée passe à la ligne.
+  if (!e.target.matches?.(CHAMP) || e.key !== 'Enter' || e.shiftKey || e.isComposing) return
   e.preventDefault()
   // La question est retenue pour la suite du parcours, puis on ouvre le panneau
   // comme le ferait le bouton.

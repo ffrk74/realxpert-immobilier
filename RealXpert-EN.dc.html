@@ -11,8 +11,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
-<script type="module" src="./hero-saisie.js?v=2"></script>
-<script type="module" src="./dictee.js?v=1"></script>
+<script type="module" src="./hero-saisie.js?v=3"></script>
+<script type="module" src="./dictee.js?v=2"></script>
 <script type="module" src="./parallaxe.js?v=3"></script>
 <script type="module" src="./inscription-panneau.js?v=6"></script>
 <script type="module" src="./haut-de-page.js?v=2"></script>
@@ -175,6 +175,13 @@
     h1, h2, h3 { overflow-wrap: break-word; }
     html[lang="de"] h1, html[lang="de"] h2, html[lang="de"] h3 { -webkit-hyphens: auto; hyphens: auto; }
   }
+  /* Champ de l'accueil (27.09) : une zone de texte qui s'allonge avec la phrase, tapée ou dictée.
+     Vide, elle recouvre l'indice ; remplie, elle prend sa place et grandit ligne par ligne
+     (hauteur réglée par hero-saisie.js). */
+  [data-r="heroinput"] { resize: none; overflow: hidden; line-height: 1.45; display: block; }
+  [data-r="heroask"]:has([data-r="heroinput"]:not(:placeholder-shown)) [data-r="herohint"] { display: none !important; }
+  [data-r="heroask"]:has([data-r="heroinput"]:not(:placeholder-shown)) [data-r="heroinput"] { position: relative !important; inset: auto !important; }
+  [data-r="heroinput"]::placeholder { color: transparent; }
 </style>
 </helmet>
 
@@ -271,7 +278,7 @@
               <div data-r="heroq" style="font-size:17px; font-weight:800; color:#0c1f2c;">Ask your first question to avoid costly mistakes</div>
               <div data-r="heroex" style="font-size:15px; color:#8a97a3; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">E.g. {{ heroPlaceholder }}</div>
             </div>
-            <input data-r="heroinput" type="text" aria-label="Your question" autocomplete="off" style="position:absolute; inset:0; width:100%; height:100%; border:0; outline:none; background:transparent; font-family:inherit; font-size:17px; font-weight:700; color:#0c1f2c; padding:0;">
+            <textarea data-r="heroinput" rows="1" placeholder=" " enterkeyhint="send" aria-label="Your question" autocomplete="off" style="position:absolute; inset:0; width:100%; height:100%; border:0; outline:none; background:transparent; font-family:inherit; font-size:17px; font-weight:700; color:#0c1f2c; padding:0; resize:none; overflow:hidden; line-height:1.45;"></textarea>
           </div>
           <button onClick="{{ openPanel }}" data-r="herobtn" style="flex:0 0 auto; background:#fbc002; color:#ffffff; border:none; font-family:inherit; padding:11px 28px; border-radius:11px; cursor:pointer; text-align:center; box-shadow:0 8px 18px -4px rgba(0,0,0,0.45); text-shadow:0 1px 1px rgba(0,0,0,0.18);">
             <span style="display:block; font-size:16px; font-weight:800;">Start the conversation →</span>
