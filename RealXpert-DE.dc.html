@@ -164,6 +164,9 @@
   [data-r="sheet"] { animation: rx-panneau-entree .4s cubic-bezier(.22,.8,.3,1) both; }
   [data-r="voile"] { animation: rx-voile-entree .3s ease both; }
   @media (prefers-reduced-motion: reduce) { [data-r="sheet"], [data-r="voile"] { animation: none; } }
+  /* Chiffres de « Des données concrètes » : plus grands sur mobile et tablette (maquette de Franck, 27.09). */
+  @media (max-width: 900px) { [data-r="g3s"] [data-r="big"] { font-size: 46px !important; letter-spacing: -0.02em !important; } }
+  @media (max-width: 520px) { [data-r="g3s"] [data-r="big"] { font-size: 42px !important; } }
 </style>
 </helmet>
 
@@ -1277,11 +1280,11 @@ class Component extends DCLogic {
     const mapHint = 'Fahren Sie über eine Stadt, um Ihren lokalen Markt zu erkunden';
 
     const statsRaw = [
-      { num: '+ 4 000', label: 'analysierte Ortschaften' },
+      { num: '+ 4\u2019000', label: 'analysierte Ortschaften' },
       { num: '+ 100\u2019000', label: 'lokale Immobiliendaten' },
-      { num: '+ 3 500', label: 'analysierte Immobilienagenturen' },
-      { num: '+ 3 000', label: 'analysierte Immobilienmakler' },
-      { num: '+ 5 000', label: 'integrierte Expertise-Datenpunkte' },
+      { num: '+ 3\u2019500', label: 'analysierte Immobilienagenturen' },
+      { num: '+ 3\u2019000', label: 'analysierte Immobilienmakler' },
+      { num: '+ 5\u2019000', label: 'integrierte Expertise-Datenpunkte' },
       { num: '+ 200', label: 'interne Analysemodelle' },
     ];
     const langNames = { fr: 'Französisch', de: 'Deutsch', en: 'Englisch', it: 'Italienisch' };

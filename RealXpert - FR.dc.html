@@ -164,6 +164,9 @@
   [data-r="sheet"] { animation: rx-panneau-entree .4s cubic-bezier(.22,.8,.3,1) both; }
   [data-r="voile"] { animation: rx-voile-entree .3s ease both; }
   @media (prefers-reduced-motion: reduce) { [data-r="sheet"], [data-r="voile"] { animation: none; } }
+  /* Chiffres de « Des données concrètes » : plus grands sur mobile et tablette (maquette de Franck, 27.09). */
+  @media (max-width: 900px) { [data-r="g3s"] [data-r="big"] { font-size: 46px !important; letter-spacing: -0.02em !important; } }
+  @media (max-width: 520px) { [data-r="g3s"] [data-r="big"] { font-size: 42px !important; } }
 </style>
 </helmet>
 
@@ -1284,11 +1287,11 @@ class Component extends DCLogic {
     const mapHint = 'Survolez une ville pour explorer votre marché local';
 
     const statsRaw = [
-      { num: '+ 4 000', label: 'localités analysées' },
+      { num: '+ 4\u2019000', label: 'localités analysées' },
       { num: '+ 100\u2019000', label: 'données immobilières locales' },
-      { num: '+ 3 500', label: 'agences immobilières analysées' },
-      { num: '+ 3 000', label: 'courtiers immobiliers analysés' },
-      { num: '+ 5 000', label: 'points d\u2019expertise intégrés' },
+      { num: '+ 3\u2019500', label: 'agences immobilières analysées' },
+      { num: '+ 3\u2019000', label: 'courtiers immobiliers analysés' },
+      { num: '+ 5\u2019000', label: 'points d\u2019expertise intégrés' },
       { num: '+ 200', label: 'modèles d\u2019analyse internes' },
     ];
     const langNames = { fr: 'Français', de: 'Allemand', en: 'Anglais', it: 'Italien' };
