@@ -202,11 +202,13 @@ export function monterSaisieTelephone(champ, { langue = 'fr', cheminDrapeaux = '
   window.addEventListener('resize', fermer)
 
   // Un gabarit qui réécrit l'attribut style (styles de focus, rendu) effacerait le
-  // drapeau : on le repeint dès qu'il disparaît. Pas de boucle — une fois repeint, la
-  // condition ne tient plus.
+  // drapeau, et remettrait son propre texte indicatif (« Téléphone ») à la place de
+  // l'exemple : on repeint dès que l'un ou l'autre disparaît. Pas de boucle — une fois
+  // repeint, la condition ne tient plus.
   new MutationObserver(() => {
-    if (!champ.style.backgroundImage.includes(`${pays.iso}.png`) || champ.style.paddingLeft !== '58px') peindre()
-  }).observe(champ, { attributes: true, attributeFilter: ['style'] })
+    const exempleEfface = exempleEnPlaceholder && champ.placeholder !== analyser(pays.exemple, pays).affichage
+    if (!champ.style.backgroundImage.includes(`${pays.iso}.png`) || champ.style.paddingLeft !== '58px' || exempleEfface) peindre()
+  }).observe(champ, { attributes: true, attributeFilter: ['style', 'placeholder'] })
 
   peindre()
   reformater()

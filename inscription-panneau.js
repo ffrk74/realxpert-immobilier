@@ -11,7 +11,7 @@
 // lui-même au retour d'une connexion Google.
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=4'
+import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=5'
 
 const supabase = createClient(
   'https://mmhutoipdzwkvaufucko.supabase.co',
@@ -205,7 +205,7 @@ function fermerBoite() {
 new MutationObserver(() => {
   if (etape && boite && !document.body.contains(boite)) document.body.appendChild(boite)
   const tel = document.querySelector('[data-r="sheet"] input[type="tel"]')
-  if (tel && tel.dataset.rxTel !== '1') monterSaisieTelephone(tel, { langue: LANGUE.toLowerCase() })
+  if (tel && tel.dataset.rxTel !== '1') monterSaisieTelephone(tel, { langue: LANGUE.toLowerCase(), exempleEnPlaceholder: true })
 }).observe(document.documentElement, { childList: true, subtree: true })
 
 /* ---------- Le parcours ---------- */
@@ -221,7 +221,7 @@ async function inscrire(sheet, bouton) {
   const prenom = (champs.textes[0]?.value || '').trim()
   const nom = (champs.textes[1]?.value || '').trim()
   const adresse = (champs.email?.value || '').trim()
-  const saisie = champs.telephone ? monterSaisieTelephone(champs.telephone, { langue: LANGUE.toLowerCase() }) : null
+  const saisie = champs.telephone ? monterSaisieTelephone(champs.telephone, { langue: LANGUE.toLowerCase(), exempleEnPlaceholder: true }) : null
   const numero = saisie?.e164() || ''
   const motdepasse = champs.motdepasse?.value || ''
   const texteBouton = bouton.textContent
