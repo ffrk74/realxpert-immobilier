@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="./echelle.css?v=1">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Performance (27.09) : React servi par le site (mêmes fichiers, mêmes empreintes qu'unpkg), demandé dès le début. -->
+<link rel="preload" as="script" href="./vendor/react.production.min.js">
+<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
+<script>window.__resources = Object.assign(window.__resources || {}, { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" });</script>
+<link rel="preload" as="image" href="uploads/LA BONNE.webp" fetchpriority="high">
 <script src="./support.js"></script>
 <script type="module" src="./inscription-panneau.js?v=6"></script>
 <script type="module" src="./haut-de-page.js?v=2"></script>
@@ -292,7 +297,7 @@
         </div>
       </div>
       <div data-r="si-img" style="grid-column:2; grid-row:1 / span 2; border-radius:18px; overflow:hidden; box-shadow:0 34px 74px -38px rgba(20,40,70,0.5); aspect-ratio:16/13;">
-        <img src="uploads/5739C7A9-B6D4-4B72-A492-C3D2F39150D2.webp" alt="Käufer allein mit seiner Entscheidung" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <img loading="lazy" decoding="async" src="uploads/5739C7A9-B6D4-4B72-A492-C3D2F39150D2.webp" alt="Käufer allein mit seiner Entscheidung" style="width:100%; height:100%; object-fit:cover; display:block;" />
       </div>
     </div>
   </section>
@@ -333,7 +338,7 @@
             <span onClick="{{ t.toggle }}" style="align-self:flex-start; margin-top:16px; font-size:14.5px; font-weight:800; color:#c22f24; cursor:pointer; border-bottom:2px solid #f0cfca; padding-bottom:2px;">{{ t.moreLabel }}</span>
             <div style="margin-top:30px; padding-top:24px; border-top:1px solid #f4eae9; display:flex; align-items:center; gap:15px;">
               <span style="width:56px; height:56px; border-radius:50%; overflow:hidden; flex:0 0 auto; background:#f3e3e0; display:block; box-shadow:0 8px 20px -8px rgba(90,20,20,0.4);">
-                <img src="{{ t.photo }}" alt="{{ t.name }}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;" />
+                <img loading="lazy" decoding="async" src="{{ t.photo }}" alt="{{ t.name }}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;" />
               </span>
               <div>
                 <div style="font-size:16px; font-weight:800; color:#0c1f2c;">{{ t.name }}</div>
@@ -425,7 +430,7 @@
         </div>
 
         <div>
-          <img src="uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.webp" alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />
+          <img loading="lazy" decoding="async" src="uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.webp" alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />
           <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Kundenservice</div>
           <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Geöffnet Montag bis Freitag<br>von 8:30 bis 18:30 Uhr · In der ganzen Schweiz</p>
           <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>

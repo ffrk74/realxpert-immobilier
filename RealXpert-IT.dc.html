@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="./echelle.css?v=1">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Performance (27.09) : React servi par le site (mêmes fichiers, mêmes empreintes qu'unpkg), demandé dès le début. -->
+<link rel="preload" as="script" href="./vendor/react.production.min.js">
+<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
+<script>window.__resources = Object.assign(window.__resources || {}, { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" });</script>
+<link rel="preload" as="image" href="uploads/SLIDER - Estimation-bien-immobilier.ch 4-c0aafd49.webp" fetchpriority="high">
 <script src="./support.js"></script>
 <script type="module" src="./hero-saisie.js?v=3"></script>
 <script type="module" src="./dictee.js?v=3"></script>
@@ -384,7 +389,7 @@
       <p style="text-align:center; font-size:clamp(17px,calc(2.2 * var(--rx-vw)),20px); font-weight:800; color:#4a72b8; margin:0 auto 52px; max-width:700px; text-wrap:pretty;">Il vostro esperto immobiliare, disponibile 24 ore su 24, 7 giorni su 7</p>
 
       <div data-r="gapsm" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:52px; align-items:start;">
-        <img src="uploads/pasted-1784748293419-0.webp" alt="Coppia che esamina il proprio progetto immobiliare" data-r="portrait" style="width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 24px 50px -28px rgba(20,70,120,0.5);" />
+        <img loading="lazy" decoding="async" src="uploads/pasted-1784748293419-0.webp" alt="Coppia che esamina il proprio progetto immobiliare" data-r="portrait" style="width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 24px 50px -28px rgba(20,70,120,0.5);" />
 
         <div style="display:flex; flex-direction:column; gap:26px; max-width:56ch;">
           <p style="font-size:clamp(18px,calc(2.3 * var(--rx-vw)),21px); line-height:1.6; color:#0c1f2c; font-weight:700; margin:0; text-wrap:pretty;">RealXpert è un esperto immobiliare dedicato all’immobiliare svizzero, disponibile 24 ore su 24 e 7 giorni su 7, che vi accompagna in tutte le decisioni importanti del vostro progetto, quando la posta finanziaria in gioco è elevata.</p>
@@ -432,7 +437,7 @@
 
       <!-- image feature -->
       <div data-r="banner" style="width:100%; aspect-ratio:16/4; border-radius:14px; overflow:hidden; margin-bottom:34px; box-shadow:0 30px 70px -38px rgba(20,50,90,0.45);">
-        <img src="uploads/ChatGPT Image 23 juil. 2026, 21_37_29.webp" alt="Analisi del mercato immobiliare svizzero" style="width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block;" />
+        <img loading="lazy" decoding="async" src="uploads/ChatGPT Image 23 juil. 2026, 21_37_29.webp" alt="Analisi del mercato immobiliare svizzero" style="width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block;" />
       </div>
 
       <!-- pillars éditoriaux -->
@@ -586,7 +591,7 @@
       <div style="border-radius:22px; background:linear-gradient(150deg,#2f5aa8,#1d3c6e); padding:24px; position:relative; box-shadow:0 44px 96px -42px rgba(20,50,90,0.5);">
         <span style="position:absolute; top:-15px; left:28px; z-index:2; font-size:12.5px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#6fa8ff,#3f74d6); padding:9px 18px; border-radius:100px; box-shadow:0 12px 26px -8px rgba(29,60,110,0.55);">{{ active.n }} · {{ active.label }}</span>
         <sc-if value="{{ active.img }}" hint-placeholder-val="">
-          <img src="{{ active.img }}" alt="{{ active.tag }}" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid #eef3f9; box-shadow:0 20px 44px -24px rgba(20,50,90,0.4);" />
+          <img loading="lazy" decoding="async" src="{{ active.img }}" alt="{{ active.tag }}" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid #eef3f9; box-shadow:0 20px 44px -24px rgba(20,50,90,0.4);" />
         </sc-if>
         <sc-if value="{{ active.noImg }}" hint-placeholder-val="{{ true }}">
           <div data-r="mock" style="height:520px; border-radius:12px; background:#fff; border:1px solid #eef3f9; display:flex; align-items:center; justify-content:center;">
@@ -691,7 +696,7 @@
             <span onClick="{{ t.toggle }}" style="align-self:flex-start; margin-top:16px; font-size:14.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px;">{{ t.moreLabel }}</span>
             <div style="margin-top:30px; padding-top:24px; border-top:1px solid #eef3f8; display:flex; align-items:center; gap:15px;">
               <span style="width:56px; height:56px; border-radius:50%; overflow:hidden; flex:0 0 auto; background:#dfeaf7; display:block; box-shadow:0 8px 20px -8px rgba(20,50,90,0.4);">
-                <img src="{{ t.photo }}" alt="{{ t.name }}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;" />
+                <img loading="lazy" decoding="async" src="{{ t.photo }}" alt="{{ t.name }}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;" />
               </span>
               <div>
                 <div style="font-size:16px; font-weight:800; color:#0c1f2c;">{{ t.name }}</div>
@@ -715,7 +720,7 @@
 
       <div data-r="g2" style="display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:36px;">
         <div data-r="minh" style="position:relative; border-radius:20px; overflow:hidden; min-height:340px; display:flex; box-shadow:0 30px 66px -38px rgba(0,0,0,0.6);">
-          <img src="uploads/Image vendeur.webp" alt="Vendere" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="uploads/Image vendeur.webp" alt="Vendere" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,31,52,0.05) 0%,rgba(12,31,52,0.45) 52%,rgba(12,31,52,0.88) 100%);"></div>
           <div data-r="pad" style="position:relative; margin-top:auto; padding:34px 36px;">
             <span style="display:inline-block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#5aa0ff,#2f5aa8); padding:6px 14px; border-radius:100px; margin-bottom:16px;">Se vendete</span>
@@ -725,7 +730,7 @@
         </div>
 
         <div data-r="minh" style="position:relative; border-radius:20px; overflow:hidden; min-height:340px; display:flex; box-shadow:0 30px 66px -38px rgba(0,0,0,0.6);">
-          <img src="uploads/bon-moment-achat.webp" alt="Comprare" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="uploads/bon-moment-achat.webp" alt="Comprare" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,31,52,0.05) 0%,rgba(12,31,52,0.45) 52%,rgba(12,31,52,0.88) 100%);"></div>
           <div data-r="pad" style="position:relative; margin-top:auto; padding:34px 36px;">
             <span style="display:inline-block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#ff5a3c,#e01f3d); padding:6px 14px; border-radius:100px; margin-bottom:16px;">Se comprate</span>
@@ -777,7 +782,7 @@
 
       <!-- carte suisse -->
       <div style="margin-top:48px;">
-        <img src="uploads/carte-suisse-transparent.webp" alt="Cartina della Svizzera — competenza in tutti i 26 cantoni" style="display:block; width:100%; max-width:900px; height:auto; margin:0 auto;" />
+        <img loading="lazy" decoding="async" src="uploads/carte-suisse-transparent.webp" alt="Cartina della Svizzera — competenza in tutti i 26 cantoni" style="display:block; width:100%; max-width:900px; height:auto; margin:0 auto;" />
       </div>
     </div>
   </section>
@@ -951,7 +956,7 @@
         </div>
 
         <div>
-          <img src="uploads/logo-realxpert-white.webp" alt="RealXpert" style="display:block; height:46px; width:auto; margin-bottom:18px;" />
+          <img loading="lazy" decoding="async" src="uploads/logo-realxpert-white.webp" alt="RealXpert" style="display:block; height:46px; width:auto; margin-bottom:18px;" />
           <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Servizio clienti</div>
           <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Aperto dal lunedì al venerdì<br>dalle 8:30 alle 18:30 · In tutta la Svizzera</p>
           <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
