@@ -155,7 +155,7 @@ function construireBoite() {
         <p data-role="message" style="display:none; font-size:14.5px; line-height:1.5; border-radius:11px; padding:12px 14px; margin:0 0 16px;"></p>
         <input data-role="code" type="text" inputmode="numeric" maxlength="8" autocomplete="one-time-code"
           style="width:100%; box-sizing:border-box; font-family:inherit; font-size:27px; font-weight:800; letter-spacing:9px; text-align:center; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:12px; padding:15px 10px;">
-        <button data-role="valider" style="width:100%; margin-top:16px; background:linear-gradient(180deg,#efb84a,#e0a02f); color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer;"></button>
+        <button data-role="valider" style="width:100%; margin-top:16px; background:#ffb90d; color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer;"></button>
         <p style="text-align:center; margin:18px 0 0;">
           <button data-role="renvoyer" style="background:none; border:none; font-family:inherit; font-size:14px; font-weight:700; color:#1d4fb0; cursor:pointer;"></button>
         </p>
