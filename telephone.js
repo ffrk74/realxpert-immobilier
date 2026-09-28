@@ -111,8 +111,11 @@ function paysOrdonnes(langue) {
  * drapeau ouvre la liste des pays, posée hors du gabarit.
  */
 export function monterSaisieTelephone(champ, { langue = 'fr', cheminDrapeaux = 'uploads/drapeaux/', exempleEnPlaceholder = false } = {}) {
-  if (!champ || champ.dataset.rxTel === '1') return champ?._rxTel
-  champ.dataset.rxTel = '1'
+  // Repère gardé en mémoire (propriété de l'élément), jamais en attribut : un gabarit qui
+  // recrée le champ en recopiant ses attributs recopiait aussi la marque, et le nouveau
+  // champ restait sans drapeau ni mise en forme (28.09).
+  if (!champ) return undefined
+  if (champ._rxTel) return champ._rxTel
   const noms = NOMS[langue] || NOMS.fr
   let pays = PAYS[0]
 

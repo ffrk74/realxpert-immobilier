@@ -11,7 +11,7 @@
 // lui-même au retour d'une connexion Google.
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=5'
+import { monterSaisieTelephone, formaterPourAffichage } from './telephone.js?v=6'
 
 const supabase = createClient(
   'https://mmhutoipdzwkvaufucko.supabase.co',
@@ -205,7 +205,7 @@ function fermerBoite() {
 new MutationObserver(() => {
   if (etape && boite && !document.body.contains(boite)) document.body.appendChild(boite)
   const tel = document.querySelector('[data-r="sheet"] input[type="tel"]')
-  if (tel && tel.dataset.rxTel !== '1') monterSaisieTelephone(tel, { langue: LANGUE.toLowerCase(), exempleEnPlaceholder: true })
+  if (tel && !tel._rxTel) monterSaisieTelephone(tel, { langue: LANGUE.toLowerCase(), exempleEnPlaceholder: true })
 }).observe(document.documentElement, { childList: true, subtree: true })
 
 /* ---------- Le parcours ---------- */
