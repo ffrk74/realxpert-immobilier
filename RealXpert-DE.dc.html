@@ -14,7 +14,8 @@
 <link rel="preload" as="script" href="./vendor/react.production.min.js">
 <link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
 <script>window.__resources = Object.assign(window.__resources || {}, { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" });</script>
-<link rel="preload" as="image" href="uploads/SLIDER - Estimation-bien-immobilier.ch 4-c0aafd49.webp" fetchpriority="high">
+<link rel="preload" as="image" href="uploads/accueil-lausanne.webp" media="(min-width: 901px)" fetchpriority="high">
+<link rel="preload" as="image" href="uploads/accueil-lausanne-mobile.webp" media="(max-width: 900px)" fetchpriority="high">
 <script src="./support.js"></script>
 <script type="module" src="./hero-saisie.js?v=3"></script>
 <script type="module" src="./dictee.js?v=6"></script>
@@ -191,7 +192,9 @@
   [style*="#ffb90d"] { text-shadow: 0 1px 2px rgba(0,0,0,.18); }
   /* Ciel plus bleu (Franck, 28.09) : un dégradé bleu multiplié sur le haut de la photo, pour un
      ciel aussi profond que celui de la page Vendre. Il s'efface avant l'horizon : la ville n'est
-     pas touchée. Même calque que la parallaxe (parallaxe.js), il suit donc le défilement. */
+     pas touchée. Même calque que la parallaxe (parallaxe.js), il suit donc le défilement.
+     Sur mobile, la même photo avec plus de ciel au-dessus (accueil-lausanne-mobile.webp) : la
+     ville reste sous le bouton, la flèche de la cathédrale ne passe pas derrière le texte. */
   [data-r="hero"]::before {
     background-image: linear-gradient(180deg, rgb(32,178,236) 0%, rgb(38,182,236) 24%, rgb(140,210,244) 44%, rgb(255,255,255) 60%), var(--rx-fond-heros) !important;
     background-size: 100% 100%, cover !important;
@@ -199,7 +202,12 @@
     background-repeat: no-repeat !important;
     background-blend-mode: multiply, normal;
   }
-  @media (max-width: 900px) { [data-r="hero"]::before { background-position: 0 0, 30% bottom !important; } }
+  @media (max-width: 900px) {
+    [data-r="hero"]::before {
+      background-image: linear-gradient(180deg, rgb(32,178,236) 0%, rgb(38,182,236) 30%, rgb(140,210,244) 52%, rgb(255,255,255) 68%), url('uploads/accueil-lausanne-mobile.webp') !important;
+      background-position: 0 0, 30% bottom !important;
+    }
+  }
 </style>
 </helmet>
 
@@ -274,7 +282,7 @@
   </header>
 
   <!-- ============ HERO ============ -->
-  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/SLIDER - Estimation-bien-immobilier.ch 4-c0aafd49.webp'); background-size:cover; background-position:center bottom; padding:64px 32px 60px; min-height:calc(100 * var(--rx-vh) - 101px);">
+  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/accueil-lausanne.webp'); background-size:cover; background-position:center bottom; padding:64px 32px 60px; min-height:calc(100 * var(--rx-vh) - 101px);">
     <div style="max-width:1240px; margin:0 auto;">
 
       <!-- bandeau bleu (encadré) -->
