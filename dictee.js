@@ -81,16 +81,16 @@ const T = {
 /* ── Apparence ─────────────────────────────────────────────────────────────── */
 const style = document.createElement('style')
 style.textContent = `
-  /* Le micro en inversé (Franck, 28.09) : pastille ronde noire, icône blanche, dans la zone
-     de saisie. Rouge pendant l'écoute. L'icône elle-même porte la pastille : le gabarit
+  /* Le micro en inversé (Franck, 28.09) : pastille ronde bleu foncé (#2C67C5, au lieu du noir),
+     icône blanche, dans la zone de saisie. Rouge pendant l'écoute. L'icône elle-même porte la pastille : le gabarit
      n'a pas à changer. */
   ${MICRO} { cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; }
   ${MICRO} svg { box-sizing: content-box; width: 18px; height: 18px; padding: 9px; border-radius: 50%;
-    background: #111111; color: #ffffff !important; transition: background .15s ease, transform .15s ease; }
-  ${MICRO}:hover svg { background: #333333; }
+    background: #2C67C5; color: #ffffff !important; transition: background .15s ease, transform .15s ease; }
+  ${MICRO}:hover svg { background: #2458A8; }
   ${MICRO}:focus-visible svg { box-shadow: 0 0 0 3px rgba(26,115,201,.35); }
   html.rx-dictee-ecoute ${MICRO} svg { background: #e0312b; animation: rx-dictee-pouls 1.1s ease-in-out infinite; }
-  html.rx-dictee-transcription ${MICRO} svg { background: #111111; animation: rx-dictee-attente 1s ease-in-out infinite; }
+  html.rx-dictee-transcription ${MICRO} svg { background: #2C67C5; animation: rx-dictee-attente 1s ease-in-out infinite; }
   @keyframes rx-dictee-pouls { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
   @keyframes rx-dictee-attente { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
   @keyframes rx-dictee-clignote { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
