@@ -20,9 +20,25 @@ function montrer(champ, visible) {
   if (indice) indice.style.opacity = visible ? '1' : '0'
 }
 
+// Vide, le champ recouvre toute la case (les deux lignes de l'indice) : sans réglage, le
+// curseur apparaissait tout en haut de la case (Franck, 28.09). Tant que rien n'est écrit,
+// il se place au milieu, à hauteur du micro ; dès la première lettre, tapée ou dictée, le
+// texte part du haut et la zone s'allonge (voir ajuster).
+function centrer(champ) {
+  if (champ.value) { champ.style.removeProperty('padding-top'); return }
+  const style = getComputedStyle(champ)
+  const ligne = parseFloat(style.lineHeight) || (parseFloat(style.fontSize) || 16) * 1.45
+  champ.style.setProperty('box-sizing', 'border-box', 'important')
+  champ.style.setProperty('padding-top', `${Math.max(0, (champ.clientHeight - ligne) / 2)}px`, 'important')
+}
+
 document.addEventListener('focusin', e => {
-  if (e.target.matches?.(CHAMP)) montrer(e.target, false)
+  if (!e.target.matches?.(CHAMP)) return
+  montrer(e.target, false)
+  centrer(e.target)
 })
+// Au toucher, avant même le focus : le curseur naît déjà à la bonne hauteur.
+document.addEventListener('pointerdown', e => { if (e.target.matches?.(CHAMP)) centrer(e.target) }, true)
 
 document.addEventListener('focusout', e => {
   // L'indice ne revient que si le visiteur n'a rien laissé.
@@ -32,7 +48,8 @@ document.addEventListener('focusout', e => {
 // Le champ est une zone de texte qui s'allonge avec la phrase (27.09) : vide, elle garde
 // la hauteur de l'indice ; remplie, elle prend la hauteur de son contenu.
 function ajuster(champ) {
-  if (!champ.value) { champ.style.removeProperty('height'); return }
+  if (!champ.value) { champ.style.removeProperty('height'); centrer(champ); return }
+  champ.style.removeProperty('padding-top')
   champ.style.setProperty('height', 'auto', 'important')
   champ.style.setProperty('height', `${champ.scrollHeight}px`, 'important')
 }
