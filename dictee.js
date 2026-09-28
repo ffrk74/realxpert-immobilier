@@ -104,11 +104,38 @@ style.textContent = `
   .rx-dictee-aide { color: #6a7b86; }
   /* Sur ordinateur la page est vue à 80 % (echelle.css) : la bulle garde une taille lisible. */
   @media (min-width: 1024px) { .rx-dictee-bulle { font-size: 16.5px; padding: 12px 16px; } }
+  /* Première visite (Franck, 28.09) : la pastille rebondit trois fois pour se faire remarquer. */
+  @keyframes rx-micro-rebond {
+    0%, 100% { transform: translateY(0); }
+    18% { transform: translateY(-9px); }
+    34% { transform: translateY(0); }
+    48% { transform: translateY(-4px); }
+    62% { transform: translateY(0); }
+  }
+  html.rx-micro-invite ${MICRO} svg { animation: rx-micro-rebond 1.3s ease-in-out .9s 3; }
   @media (prefers-reduced-motion: reduce) {
-    html.rx-dictee-ecoute ${MICRO} svg, html.rx-dictee-transcription ${MICRO} svg, .rx-dictee-point { animation: none; }
+    html.rx-dictee-ecoute ${MICRO} svg, html.rx-dictee-transcription ${MICRO} svg, .rx-dictee-point,
+    html.rx-micro-invite ${MICRO} svg { animation: none; }
   }
 `
 document.head.appendChild(style)
+
+/* ── Première visite : le micro se fait remarquer, une seule fois ──────────── */
+// Le navigateur retient que l'invitation a été vue ; elle s'arrête dès que le visiteur
+// touche la page (clic, saisie) ou au bout de quelques secondes.
+const CLE_INVITATION = 'rx-micro-invitation-vue'
+let premiereVisite = false
+try {
+  premiereVisite = !localStorage.getItem(CLE_INVITATION)
+  if (premiereVisite) localStorage.setItem(CLE_INVITATION, new Date().toISOString())
+} catch { /* stockage indisponible (navigation privée) : pas d'invitation */ }
+if (premiereVisite) {
+  const finir = () => document.documentElement.classList.remove('rx-micro-invite')
+  document.documentElement.classList.add('rx-micro-invite')
+  setTimeout(finir, 6000)
+  document.addEventListener('pointerdown', finir, { once: true })
+  document.addEventListener('keydown', finir, { once: true })
+}
 
 // Le micro devient un vrai bouton pour le clavier et les lecteurs d'écran (reposé
 // après chaque rendu du gabarit).
