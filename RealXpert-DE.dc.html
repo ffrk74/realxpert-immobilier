@@ -151,16 +151,16 @@
     [data-r="herosousmob"] { display: block !important; font-size: 16.5px !important; line-height: 1.4 !important; letter-spacing: -0.01em; font-weight: 600; color: #d8eefc;
       margin: 0; text-shadow: 0 1px 10px rgba(8,45,90,.2); }
     [data-r="herobar"] { background: none !important; padding: 0 !important; border-radius: 0 !important; margin-top: 22px; }
-    [data-r="herostart"] { display: grid !important; grid-template-columns: 50px 1fr; gap: 0 !important; padding: 0 !important; background: none !important;
+    [data-r="herostart"] { display: grid !important; grid-template-columns: 60px 1fr; gap: 0 !important; padding: 0 !important; background: none !important;
       border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
     [data-r="micro"] { display: flex !important; grid-column: 1; grid-row: 1; align-items: center; justify-content: center; background: #fff;
       border: 1px solid #9aa7b4; border-right: 0; border-radius: 6px 0 0 6px; color: #6a7b86; }
     [data-r="heroask"] { grid-column: 2; grid-row: 1; display: flex; align-items: center; min-height: 58px; background: #fff;
-      border: 1px solid #9aa7b4; border-left: 0; border-radius: 0 6px 6px 0; padding: 10px 14px 10px 4px; }
+      border: 1px solid #9aa7b4; border-left: 0; border-radius: 0 6px 6px 0; padding: 10px 20px 10px 6px; }
     [data-r="herostart"]:focus-within [data-r="micro"], [data-r="herostart"]:focus-within [data-r="heroask"] { border-color: #1a73c9; }
     [data-r="heroq"], [data-r="heroex"] { display: none !important; }
     [data-r="herohintmob"] { display: block !important; font-size: 14.5px; line-height: 1.38; font-weight: 700; color: #6b7580; }
-    [data-r="heroinput"] { font-size: 16px !important; font-weight: 500 !important; padding: 0 14px 0 4px !important; }
+    [data-r="heroinput"] { font-size: 16px !important; font-weight: 500 !important; padding: 0 20px 0 6px !important; }
     [data-r="herobtn"] { grid-column: 1 / -1; grid-row: 2; width: 100% !important; margin-top: 9px; padding: 10px 16px !important; border-radius: 6px !important;
       box-shadow: 0 10px 22px -8px rgba(0,0,0,.4) !important; }
     [data-r="herobtn"] span:first-child { font-size: 17.5px !important; }
@@ -187,7 +187,7 @@
      (hauteur réglée par hero-saisie.js). */
   [data-r="heroinput"] { resize: none; overflow: hidden; line-height: 1.45; display: block; }
   [data-r="heroask"]:has([data-r="heroinput"]:not(:placeholder-shown)) [data-r="herohint"] { display: none !important; }
-  [data-r="heroask"]:has([data-r="heroinput"]:not(:placeholder-shown)) [data-r="heroinput"] { position: relative !important; inset: auto !important; }
+  [data-r="heroask"]:has([data-r="heroinput"]:not(:placeholder-shown)) [data-r="heroinput"] { position: relative !important; inset: auto !important; padding: 0 !important; }
   [data-r="heroinput"]::placeholder { color: transparent; }
   /* Appels à l'action en #FFB90D (Franck, 28.09) : une ombre de texte légère aide le blanc à se lire sur l'orange. */
   [style*="#ffb90d"] { text-shadow: 0 1px 2px rgba(0,0,0,.18); }
