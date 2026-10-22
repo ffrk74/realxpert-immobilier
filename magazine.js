@@ -1,5 +1,6 @@
 // La liseuse du magazine RealXpert, page « Immo Magazine » du site (22.10.2026) : les pages du PDF (images
-// WebP 800/1400 dans /uploads/magazine) se tournent comme celles d'un magazine, avec page-flip (StPageFlip,
+// WebP 800/1400 dans /uploads/magazine/<langue>/, un magazine par langue depuis le 22.10 au soir — outil :
+// « RealXpert Book/outils/pages-site.sh ») se tournent comme celles d'un magazine, avec page-flip (StPageFlip,
 // licence MIT, /vendor/page-flip.browser.js). Même liseuse que celle de l'ERP (/book), avec ses corrections :
 //   • double page sur un écran plus large que haut, une seule page sinon (téléphone tenu droit) ;
 //   • la zone du livre fait EXACTEMENT la taille du livre : page-flip dessine les couvertures qui tournent
@@ -17,7 +18,9 @@ const LARGEURS = [800, 1400]
 const CHARGEMENTS_SIMULTANES = 3
 const DUREE_GLISSEMENT = 650
 const NIVEAUX_ZOOM = [1, 1.6, 2.4]
-const image = (n, largeur) => `/uploads/magazine/p${String(n).padStart(2, '0')}-${largeur}.webp`
+// Le magazine de la langue de la page (data-langue de #rx-magazine), fixé au montage.
+let langueMagazine = 'fr'
+const image = (n, largeur) => `/uploads/magazine/${langueMagazine}/p${String(n).padStart(2, '0')}-${largeur}.webp`
 const jeu = n => LARGEURS.map(l => `${image(n, l)} ${l}w`).join(', ')
 
 const TEXTES = {
@@ -94,6 +97,7 @@ function visibles(i, portrait) {
 
 function monter(racine) {
   const langue = TEXTES[racine.dataset.langue] ? racine.dataset.langue : 'fr'
+  langueMagazine = langue
   const T = TEXTES[langue]
   const pleinEcranPossible = !!document.fullscreenEnabled
   racine.innerHTML = `

@@ -16,7 +16,8 @@ const { PAGES, DOMAINE, referencement, ligne, canonique, echapper } = require('.
 
 const LOCALES = { fr: 'fr_CH', de: 'de_CH', en: 'en_GB', it: 'it_CH' }
 const LANGUES_HTML = { fr: 'fr-CH', de: 'de-CH', en: 'en', it: 'it-CH' }
-const IMAGES = { 'immo-magazine': '/uploads/magazine/p01-1400.webp' }
+// Image de partage : la couverture du magazine de la langue de la page ({l}).
+const IMAGES = { 'immo-magazine': '/uploads/magazine/{l}/p01-1400.webp' }
 const LOGO = '/uploads/logo-realxpert-color-trim.webp'
 
 function lirePage(fichier) {
@@ -65,7 +66,7 @@ module.exports = async (req, res) => {
       ref.description ? `<meta property="og:description" content="${echapper(ref.description)}">` : '',
       `<meta property="og:url" content="${echapper(url)}">`,
       `<meta property="og:locale" content="${LOCALES[l]}">`,
-      IMAGES[p] ? `<meta property="og:image" content="${origine}${IMAGES[p]}">` : '',
+      IMAGES[p] ? `<meta property="og:image" content="${origine}${IMAGES[p].replace('{l}', l)}">` : '',
       `<script type="application/ld+json">${JSON.stringify(donnees).replace(/</g, '\\u003c')}</script>`,
     ].filter(Boolean).join('\n')
     page = html.replace(/<title>[\s\S]*?<\/title>\s*/i, '').replace(/<head>/i, `<head>\n${tete}`)
