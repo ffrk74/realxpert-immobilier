@@ -146,7 +146,8 @@ LIBELLE_MENU = {"fr": "Magazine", "de": "Magazin", "en": "Magazine", "it": "Maga
 LIBELLE_PIED = {"fr": "Immo Magazine", "de": "Immo Magazin", "en": "Immo Magazine", "it": "Immo Magazine"}
 
 def ajouter_liens_magazine(s, langue):
-    """Après chaque lien « Nos partenaires » (menu, menu mobile, pied de page) : un lien vers le magazine."""
+    """Après le lien « Nos partenaires » du pied de page : un lien vers le magazine. Jamais dans le menu du haut
+    (Franck, 22.10.2026 : « retirer ce lien dans les 4 langues »)."""
     cible = CHEMIN[f"Immo Magazine - {langue.upper()}.dc.html"]
     if f'href="{cible}' in s: return s
     lignes, sortie = s.split("\n"), []
@@ -154,7 +155,7 @@ def ajouter_liens_magazine(s, langue):
     for ligne in lignes:
         sortie.append(ligne)
         m = motif.search(ligne)
-        if m and ligne.rstrip().endswith("</a>"):
+        if m and ligne.rstrip().endswith("</a>") and not m.group(1):  # le pied de page : liens sans ancre
             copie = motif.sub(f'href="{cible}' + (m.group(1) or "") + '"', ligne)
             pied = "#top" not in m.group(0)  # les liens du pied de page n'ont pas d'ancre
             copie = re.sub(r">[^<>]*</a>\s*$", ">" + (LIBELLE_PIED if pied else LIBELLE_MENU)[langue] + "</a>", copie)
