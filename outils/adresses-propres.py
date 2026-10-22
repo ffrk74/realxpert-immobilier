@@ -24,11 +24,13 @@ PAGES = [
     ("accueil", {"fr": "RealXpert - FR", "de": "RealXpert-DE", "en": "RealXpert-EN", "it": "RealXpert-IT"},
      {"fr": "/fr", "de": "/de", "en": "/en", "it": "/it"},
      {"fr": "Accueil", "de": "Startseite", "en": "Home", "it": "Home"}),
-    ("vendre", "Vendre", {"fr": "/fr/vendre", "de": "/de/verkaufen", "en": "/en/sell", "it": "/it/vendere"},
+    ("vendre", "Vendre", {"fr": "/fr/ia-immobiliere-suisse-vente", "de": "/de/schweizer-immobilien-ki-verkauf",
+                          "en": "/en/swiss-real-estate-ai-home-selling", "it": "/it/ia-immobiliare-svizzera-vendita"},
      {"fr": "Vendre", "de": "Verkaufen", "en": "Sell", "it": "Vendere"}),
-    ("acheter", "Acheter", {"fr": "/fr/acheter", "de": "/de/kaufen", "en": "/en/buy", "it": "/it/acquistare"},
+    ("acheter", "Acheter", {"fr": "/fr/ia-immobiliere-suisse-achat", "de": "/de/schweizer-immobilien-ki-kauf",
+                            "en": "/en/swiss-real-estate-ai-home-buying", "it": "/it/ia-immobiliare-svizzera-acquisto"},
      {"fr": "Acheter", "de": "Kaufen", "en": "Buy", "it": "Acquistare"}),
-    ("a-propos", "A propos", {"fr": "/fr/a-propos", "de": "/de/ueber-uns", "en": "/en/about-us", "it": "/it/chi-siamo"},
+    ("a-propos", "A propos", {"fr": "/fr/a-propos-de-realxpert", "de": "/de/ueber-realxpert", "en": "/en/about-realxpert", "it": "/it/chi-siamo-realxpert"},
      {"fr": "À propos", "de": "Über uns", "en": "About us", "it": "Chi siamo"}),
     ("partenaires", "Nos partenaires", {"fr": "/fr/nos-partenaires", "de": "/de/unsere-partner", "en": "/en/our-partners", "it": "/it/i-nostri-partner"},
      {"fr": "Nos partenaires", "de": "Unsere Partner", "en": "Our partners", "it": "I nostri partner"}),
@@ -43,6 +45,17 @@ PAGES = [
      {"fr": "/fr/conditions-generales", "de": "/de/agb", "en": "/en/terms-and-conditions", "it": "/it/condizioni-generali"},
      {"fr": "Conditions générales", "de": "AGB", "en": "Terms and conditions", "it": "Condizioni generali"}),
 ]
+
+# Adresses propres du 22.10.2026 remplacées le même jour par celles du document SEO (« Prompt COMPLET SEO
+# pour CLAUDE DESIGN ») : les liens internes sont mis à jour et les anciennes adresses redirigées.
+ANCIENNES = {
+    "/fr/vendre": "/fr/ia-immobiliere-suisse-vente", "/de/verkaufen": "/de/schweizer-immobilien-ki-verkauf",
+    "/en/sell": "/en/swiss-real-estate-ai-home-selling", "/it/vendere": "/it/ia-immobiliare-svizzera-vendita",
+    "/fr/acheter": "/fr/ia-immobiliere-suisse-achat", "/de/kaufen": "/de/schweizer-immobilien-ki-kauf",
+    "/en/buy": "/en/swiss-real-estate-ai-home-buying", "/it/acquistare": "/it/ia-immobiliare-svizzera-acquisto",
+    "/fr/a-propos": "/fr/a-propos-de-realxpert", "/de/ueber-uns": "/de/ueber-realxpert",
+    "/en/about-us": "/en/about-realxpert", "/it/chi-siamo": "/it/chi-siamo-realxpert",
+}
 
 def fichier(base, langue):
     return (base[langue] if isinstance(base, dict) else f"{base} - {langue.upper()}") + ".dc.html"
@@ -152,6 +165,8 @@ def liens_propres(s):
     for f, chemin in CHEMIN.items():
         for forme in (f, f.replace(" ", "%20")):
             s = re.sub(r'href="' + re.escape(forme) + r'(#[^"]*)?"', lambda m: f'href="{chemin}{m.group(1) or ""}"', s)
+    for ancienne, nouvelle in ANCIENNES.items():
+        s = re.sub(r'href="' + re.escape(ancienne) + r'(#[^"]*)?"', lambda m: f'href="{nouvelle}{m.group(1) or ""}"', s)
     # Accueil : le sélecteur de langue du gabarit construit le nom du fichier.
     s = s.replace("(c === 'fr' ? 'RealXpert - FR.dc.html' : 'RealXpert-' + c.toUpperCase() + '.dc.html')", "('/' + c)")
     return s
@@ -185,8 +200,10 @@ ecrire("index.html", idx)
 ecrire("outils/pages.json", json.dumps(TABLE, ensure_ascii=False, indent=1) + "\n")
 config = {
     "cleanUrls": False,
-    "redirects": [{"source": "/" + t["fichier"].replace(" ", "%20"), "destination": t["chemin"], "permanent": True} for t in TABLE],
-    "rewrites": [{"source": t["chemin"], "destination": f"/api/page?p={t['page']}&l={t['langue']}"} for t in TABLE],
+    "redirects": [{"source": "/" + t["fichier"].replace(" ", "%20"), "destination": t["chemin"], "permanent": True} for t in TABLE]
+                 + [{"source": a, "destination": n, "permanent": True} for a, n in ANCIENNES.items()],
+    "rewrites": [{"source": t["chemin"], "destination": f"/api/page?p={t['page']}&l={t['langue']}"} for t in TABLE]
+                + [{"source": "/sitemap.xml", "destination": "/api/sitemap"}],
     "functions": {"api/page.js": {"includeFiles": "{*.dc.html,outils/pages.json}"}},
 }
 ecrire("vercel.json", json.dumps(config, ensure_ascii=False, indent=2) + "\n")

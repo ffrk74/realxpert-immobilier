@@ -1,0 +1,8 @@
+# Site public RealXpert (document SEO du 22.10.2026) : toutes les pages publiques sont ouvertes aux moteurs de
+# recherche ; les fonctions du serveur et les outils du dépôt ne sont pas des pages.
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /outils/
+
+Sitemap: https://www.realxpert.ch/sitemap.xml

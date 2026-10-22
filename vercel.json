@@ -23,62 +23,62 @@
     },
     {
       "source": "/Vendre%20-%20FR.dc.html",
-      "destination": "/fr/vendre",
+      "destination": "/fr/ia-immobiliere-suisse-vente",
       "permanent": true
     },
     {
       "source": "/Vendre%20-%20DE.dc.html",
-      "destination": "/de/verkaufen",
+      "destination": "/de/schweizer-immobilien-ki-verkauf",
       "permanent": true
     },
     {
       "source": "/Vendre%20-%20EN.dc.html",
-      "destination": "/en/sell",
+      "destination": "/en/swiss-real-estate-ai-home-selling",
       "permanent": true
     },
     {
       "source": "/Vendre%20-%20IT.dc.html",
-      "destination": "/it/vendere",
+      "destination": "/it/ia-immobiliare-svizzera-vendita",
       "permanent": true
     },
     {
       "source": "/Acheter%20-%20FR.dc.html",
-      "destination": "/fr/acheter",
+      "destination": "/fr/ia-immobiliere-suisse-achat",
       "permanent": true
     },
     {
       "source": "/Acheter%20-%20DE.dc.html",
-      "destination": "/de/kaufen",
+      "destination": "/de/schweizer-immobilien-ki-kauf",
       "permanent": true
     },
     {
       "source": "/Acheter%20-%20EN.dc.html",
-      "destination": "/en/buy",
+      "destination": "/en/swiss-real-estate-ai-home-buying",
       "permanent": true
     },
     {
       "source": "/Acheter%20-%20IT.dc.html",
-      "destination": "/it/acquistare",
+      "destination": "/it/ia-immobiliare-svizzera-acquisto",
       "permanent": true
     },
     {
       "source": "/A%20propos%20-%20FR.dc.html",
-      "destination": "/fr/a-propos",
+      "destination": "/fr/a-propos-de-realxpert",
       "permanent": true
     },
     {
       "source": "/A%20propos%20-%20DE.dc.html",
-      "destination": "/de/ueber-uns",
+      "destination": "/de/ueber-realxpert",
       "permanent": true
     },
     {
       "source": "/A%20propos%20-%20EN.dc.html",
-      "destination": "/en/about-us",
+      "destination": "/en/about-realxpert",
       "permanent": true
     },
     {
       "source": "/A%20propos%20-%20IT.dc.html",
-      "destination": "/it/chi-siamo",
+      "destination": "/it/chi-siamo-realxpert",
       "permanent": true
     },
     {
@@ -180,6 +180,66 @@
       "source": "/Conditions%20generales%20-%20IT.dc.html",
       "destination": "/it/condizioni-generali",
       "permanent": true
+    },
+    {
+      "source": "/fr/vendre",
+      "destination": "/fr/ia-immobiliere-suisse-vente",
+      "permanent": true
+    },
+    {
+      "source": "/de/verkaufen",
+      "destination": "/de/schweizer-immobilien-ki-verkauf",
+      "permanent": true
+    },
+    {
+      "source": "/en/sell",
+      "destination": "/en/swiss-real-estate-ai-home-selling",
+      "permanent": true
+    },
+    {
+      "source": "/it/vendere",
+      "destination": "/it/ia-immobiliare-svizzera-vendita",
+      "permanent": true
+    },
+    {
+      "source": "/fr/acheter",
+      "destination": "/fr/ia-immobiliere-suisse-achat",
+      "permanent": true
+    },
+    {
+      "source": "/de/kaufen",
+      "destination": "/de/schweizer-immobilien-ki-kauf",
+      "permanent": true
+    },
+    {
+      "source": "/en/buy",
+      "destination": "/en/swiss-real-estate-ai-home-buying",
+      "permanent": true
+    },
+    {
+      "source": "/it/acquistare",
+      "destination": "/it/ia-immobiliare-svizzera-acquisto",
+      "permanent": true
+    },
+    {
+      "source": "/fr/a-propos",
+      "destination": "/fr/a-propos-de-realxpert",
+      "permanent": true
+    },
+    {
+      "source": "/de/ueber-uns",
+      "destination": "/de/ueber-realxpert",
+      "permanent": true
+    },
+    {
+      "source": "/en/about-us",
+      "destination": "/en/about-realxpert",
+      "permanent": true
+    },
+    {
+      "source": "/it/chi-siamo",
+      "destination": "/it/chi-siamo-realxpert",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -200,51 +260,51 @@
       "destination": "/api/page?p=accueil&l=it"
     },
     {
-      "source": "/fr/vendre",
+      "source": "/fr/ia-immobiliere-suisse-vente",
       "destination": "/api/page?p=vendre&l=fr"
     },
     {
-      "source": "/de/verkaufen",
+      "source": "/de/schweizer-immobilien-ki-verkauf",
       "destination": "/api/page?p=vendre&l=de"
     },
     {
-      "source": "/en/sell",
+      "source": "/en/swiss-real-estate-ai-home-selling",
       "destination": "/api/page?p=vendre&l=en"
     },
     {
-      "source": "/it/vendere",
+      "source": "/it/ia-immobiliare-svizzera-vendita",
       "destination": "/api/page?p=vendre&l=it"
     },
     {
-      "source": "/fr/acheter",
+      "source": "/fr/ia-immobiliere-suisse-achat",
       "destination": "/api/page?p=acheter&l=fr"
     },
     {
-      "source": "/de/kaufen",
+      "source": "/de/schweizer-immobilien-ki-kauf",
       "destination": "/api/page?p=acheter&l=de"
     },
     {
-      "source": "/en/buy",
+      "source": "/en/swiss-real-estate-ai-home-buying",
       "destination": "/api/page?p=acheter&l=en"
     },
     {
-      "source": "/it/acquistare",
+      "source": "/it/ia-immobiliare-svizzera-acquisto",
       "destination": "/api/page?p=acheter&l=it"
     },
     {
-      "source": "/fr/a-propos",
+      "source": "/fr/a-propos-de-realxpert",
       "destination": "/api/page?p=a-propos&l=fr"
     },
     {
-      "source": "/de/ueber-uns",
+      "source": "/de/ueber-realxpert",
       "destination": "/api/page?p=a-propos&l=de"
     },
     {
-      "source": "/en/about-us",
+      "source": "/en/about-realxpert",
       "destination": "/api/page?p=a-propos&l=en"
     },
     {
-      "source": "/it/chi-siamo",
+      "source": "/it/chi-siamo-realxpert",
       "destination": "/api/page?p=a-propos&l=it"
     },
     {
@@ -326,6 +386,10 @@
     {
       "source": "/it/condizioni-generali",
       "destination": "/api/page?p=conditions&l=it"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
     }
   ],
   "functions": {

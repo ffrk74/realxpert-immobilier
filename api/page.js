@@ -6,39 +6,18 @@
 // autres langues et balises de partage. Ces informations viennent de la table site_referencement de la
 // base des comptes (lecture publique), modifiée depuis l'ERP (rubrique « Référencement ») ; elles sont
 // relues au plus toutes les 60 s, et le CDN garde la page 60 s : une modification est en ligne en ~2 min.
+// Données structurées schema.org (organisation, site, page) ajoutées le 22.10.2026 (document SEO).
 // Si la base ne répond pas, la page part quand même (avec les dernières valeurs connues, sinon un titre
 // de secours). Table des pages : outils/pages.json (écrite par outils/adresses-propres.py).
 
 const fs = require('fs')
 const path = require('path')
-const PAGES = require('../outils/pages.json')
+const { PAGES, DOMAINE, referencement, ligne, canonique, echapper } = require('./_referencement')
 
-const BASE = 'https://mmhutoipdzwkvaufucko.supabase.co'
-const CLE_PUBLIQUE = 'sb_publishable_nt9NW_tnbeEes4lRWmEUbA_YaIe6sX2' // clé publique (lecture seule, RLS)
-const DOMAINE = 'https://www.realxpert.ch'
 const LOCALES = { fr: 'fr_CH', de: 'de_CH', en: 'en_GB', it: 'it_CH' }
+const LANGUES_HTML = { fr: 'fr-CH', de: 'de-CH', en: 'en', it: 'it-CH' }
 const IMAGES = { 'immo-magazine': '/uploads/magazine/p01-1400.webp' }
-
-let memoire = { lu: 0, lignes: null }
-
-async function referencement() {
-  if (memoire.lignes && Date.now() - memoire.lu < 60000) return memoire.lignes
-  try {
-    const r = await fetch(`${BASE}/rest/v1/site_referencement?select=page,langue,nom,titre,description,canonique`, {
-      headers: { apikey: CLE_PUBLIQUE },
-      signal: AbortSignal.timeout(2500),
-    })
-    if (!r.ok) throw new Error(`base ${r.status}`)
-    memoire = { lu: Date.now(), lignes: await r.json() }
-  } catch (e) {
-    console.error('[page] référencement indisponible :', e.message)
-    // Dernières valeurs connues ; à défaut, nouvel essai dans 10 s.
-    memoire = { lu: Date.now() - 50000, lignes: memoire.lignes || [] }
-  }
-  return memoire.lignes
-}
-
-const echapper = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const LOGO = '/uploads/logo-realxpert-color-trim.webp'
 
 function lirePage(fichier) {
   for (const dossier of [process.cwd(), path.join(__dirname, '..')]) {
@@ -59,20 +38,27 @@ module.exports = async (req, res) => {
   let page = html
   try {
     const lignes = await referencement()
-    const ligne = (pg, lg) => lignes.find(x => x.page === pg && x.langue === lg) || {}
-    const ref = ligne(p, l)
-    const canonique = c => c.canonique || DOMAINE + c.chemin
+    const ref = ligne(lignes, p, l)
     const titre = ref.titre || `${ref.nom || def.nom} · RealXpert`
-    const url = ref.canonique || DOMAINE + def.chemin
+    const url = canonique(lignes, p, l)
     const freres = PAGES.filter(x => x.page === p)
-    // L'image de partage est servie par ce site, quel que soit le domaine canonique.
+    // Les images (partage, logo) sont servies par ce site, quel que soit le domaine canonique.
     const origine = `https://${req.headers['x-forwarded-host'] || req.headers.host || 'realxpert-immobilier.vercel.app'}`
+    // Données structurées (schema.org) : l'organisation, le site et la page.
+    const donnees = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        { '@type': 'Organization', '@id': `${DOMAINE}/#organisation`, name: 'RealXpert', url: `${DOMAINE}/`, logo: origine + LOGO, telephone: '+41227523050', areaServed: 'CH' },
+        { '@type': 'WebSite', '@id': `${DOMAINE}/#site`, url: `${DOMAINE}/`, name: 'RealXpert', inLanguage: Object.values(LANGUES_HTML), publisher: { '@id': `${DOMAINE}/#organisation` } },
+        { '@type': 'WebPage', '@id': url, url, name: titre, ...(ref.description ? { description: ref.description } : {}), inLanguage: LANGUES_HTML[l], isPartOf: { '@id': `${DOMAINE}/#site` }, about: { '@id': `${DOMAINE}/#organisation` } },
+      ],
+    }
     const tete = [
       `<title>${echapper(titre)}</title>`,
       ref.description ? `<meta name="description" content="${echapper(ref.description)}">` : '',
       `<link rel="canonical" href="${echapper(url)}">`,
-      ...freres.map(f => `<link rel="alternate" hreflang="${f.langue}" href="${echapper(canonique({ ...f, ...ligne(p, f.langue) }))}">`),
-      `<link rel="alternate" hreflang="x-default" href="${echapper(canonique({ ...freres.find(f => f.langue === 'fr'), ...ligne(p, 'fr') }))}">`,
+      ...freres.map(f => `<link rel="alternate" hreflang="${f.langue}" href="${echapper(canonique(lignes, p, f.langue))}">`),
+      `<link rel="alternate" hreflang="x-default" href="${echapper(canonique(lignes, p, 'fr'))}">`,
       '<meta property="og:type" content="website">',
       '<meta property="og:site_name" content="RealXpert">',
       `<meta property="og:title" content="${echapper(titre)}">`,
@@ -80,6 +66,7 @@ module.exports = async (req, res) => {
       `<meta property="og:url" content="${echapper(url)}">`,
       `<meta property="og:locale" content="${LOCALES[l]}">`,
       IMAGES[p] ? `<meta property="og:image" content="${origine}${IMAGES[p]}">` : '',
+      `<script type="application/ld+json">${JSON.stringify(donnees).replace(/</g, '\\u003c')}</script>`,
     ].filter(Boolean).join('\n')
     page = html.replace(/<title>[\s\S]*?<\/title>\s*/i, '').replace(/<head>/i, `<head>\n${tete}`)
   } catch (e) {

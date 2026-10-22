@@ -31,84 +31,84 @@
   "page": "vendre",
   "langue": "fr",
   "fichier": "Vendre - FR.dc.html",
-  "chemin": "/fr/vendre",
+  "chemin": "/fr/ia-immobiliere-suisse-vente",
   "nom": "Vendre"
  },
  {
   "page": "vendre",
   "langue": "de",
   "fichier": "Vendre - DE.dc.html",
-  "chemin": "/de/verkaufen",
+  "chemin": "/de/schweizer-immobilien-ki-verkauf",
   "nom": "Verkaufen"
  },
  {
   "page": "vendre",
   "langue": "en",
   "fichier": "Vendre - EN.dc.html",
-  "chemin": "/en/sell",
+  "chemin": "/en/swiss-real-estate-ai-home-selling",
   "nom": "Sell"
  },
  {
   "page": "vendre",
   "langue": "it",
   "fichier": "Vendre - IT.dc.html",
-  "chemin": "/it/vendere",
+  "chemin": "/it/ia-immobiliare-svizzera-vendita",
   "nom": "Vendere"
  },
  {
   "page": "acheter",
   "langue": "fr",
   "fichier": "Acheter - FR.dc.html",
-  "chemin": "/fr/acheter",
+  "chemin": "/fr/ia-immobiliere-suisse-achat",
   "nom": "Acheter"
  },
  {
   "page": "acheter",
   "langue": "de",
   "fichier": "Acheter - DE.dc.html",
-  "chemin": "/de/kaufen",
+  "chemin": "/de/schweizer-immobilien-ki-kauf",
   "nom": "Kaufen"
  },
  {
   "page": "acheter",
   "langue": "en",
   "fichier": "Acheter - EN.dc.html",
-  "chemin": "/en/buy",
+  "chemin": "/en/swiss-real-estate-ai-home-buying",
   "nom": "Buy"
  },
  {
   "page": "acheter",
   "langue": "it",
   "fichier": "Acheter - IT.dc.html",
-  "chemin": "/it/acquistare",
+  "chemin": "/it/ia-immobiliare-svizzera-acquisto",
   "nom": "Acquistare"
  },
  {
   "page": "a-propos",
   "langue": "fr",
   "fichier": "A propos - FR.dc.html",
-  "chemin": "/fr/a-propos",
+  "chemin": "/fr/a-propos-de-realxpert",
   "nom": "À propos"
  },
  {
   "page": "a-propos",
   "langue": "de",
   "fichier": "A propos - DE.dc.html",
-  "chemin": "/de/ueber-uns",
+  "chemin": "/de/ueber-realxpert",
   "nom": "Über uns"
  },
  {
   "page": "a-propos",
   "langue": "en",
   "fichier": "A propos - EN.dc.html",
-  "chemin": "/en/about-us",
+  "chemin": "/en/about-realxpert",
   "nom": "About us"
  },
  {
   "page": "a-propos",
   "langue": "it",
   "fichier": "A propos - IT.dc.html",
-  "chemin": "/it/chi-siamo",
+  "chemin": "/it/chi-siamo-realxpert",
   "nom": "Chi siamo"
  },
  {
