@@ -171,6 +171,13 @@ def liens_propres(s):
     s = s.replace("(c === 'fr' ? 'RealXpert - FR.dc.html' : 'RealXpert-' + c.toUpperCase() + '.dc.html')", "('/' + c)")
     return s
 
+# Pied de page : le logo blanc détouré de l'accueil partout (Franck, 22.10.2026 : « il y a encore des pages où
+# le logo c'est l'ancien pas détouré dans le footer »).
+ANCIEN_LOGO_PIED = ('<img loading="lazy" decoding="async" src="/uploads/Logo RealXpert 3 OFFICIEL FINAL - Horizontal-64d82e6a.webp" '
+                    'alt="RealXpert" style="display:block; height:64px; width:auto; margin-bottom:18px; background:#fff; border-radius:8px; padding:8px 12px;" />')
+LOGO_PIED = ('<img loading="lazy" decoding="async" src="/uploads/logo-realxpert-white.webp" alt="RealXpert" '
+             'style="display:block; height:46px; width:auto; margin-bottom:18px;" />')
+
 def adresses_absolues(s):
     s = re.sub(r'((?:src|href)=")\./', r"\1/", s)
     s = re.sub(r'((?:src|href)=")(uploads|vendor)/', r"\1/\2/", s)
@@ -185,7 +192,7 @@ for t in TABLE:
         print("  ABSENT", nom); continue
     s = lire(nom)
     s = ajouter_liens_magazine(s, t["langue"])
-    s = adresses_absolues(liens_propres(s))
+    s = adresses_absolues(liens_propres(s)).replace(ANCIEN_LOGO_PIED, LOGO_PIED)
     ecrire(nom, s)
 
 # Racine : chaque visiteur va à l'accueil dans sa langue (adresses propres).
