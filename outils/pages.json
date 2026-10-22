@@ -1,0 +1,254 @@
+[
+ {
+  "page": "accueil",
+  "langue": "fr",
+  "fichier": "RealXpert - FR.dc.html",
+  "chemin": "/fr",
+  "nom": "Accueil"
+ },
+ {
+  "page": "accueil",
+  "langue": "de",
+  "fichier": "RealXpert-DE.dc.html",
+  "chemin": "/de",
+  "nom": "Startseite"
+ },
+ {
+  "page": "accueil",
+  "langue": "en",
+  "fichier": "RealXpert-EN.dc.html",
+  "chemin": "/en",
+  "nom": "Home"
+ },
+ {
+  "page": "accueil",
+  "langue": "it",
+  "fichier": "RealXpert-IT.dc.html",
+  "chemin": "/it",
+  "nom": "Home"
+ },
+ {
+  "page": "vendre",
+  "langue": "fr",
+  "fichier": "Vendre - FR.dc.html",
+  "chemin": "/fr/vendre",
+  "nom": "Vendre"
+ },
+ {
+  "page": "vendre",
+  "langue": "de",
+  "fichier": "Vendre - DE.dc.html",
+  "chemin": "/de/verkaufen",
+  "nom": "Verkaufen"
+ },
+ {
+  "page": "vendre",
+  "langue": "en",
+  "fichier": "Vendre - EN.dc.html",
+  "chemin": "/en/sell",
+  "nom": "Sell"
+ },
+ {
+  "page": "vendre",
+  "langue": "it",
+  "fichier": "Vendre - IT.dc.html",
+  "chemin": "/it/vendere",
+  "nom": "Vendere"
+ },
+ {
+  "page": "acheter",
+  "langue": "fr",
+  "fichier": "Acheter - FR.dc.html",
+  "chemin": "/fr/acheter",
+  "nom": "Acheter"
+ },
+ {
+  "page": "acheter",
+  "langue": "de",
+  "fichier": "Acheter - DE.dc.html",
+  "chemin": "/de/kaufen",
+  "nom": "Kaufen"
+ },
+ {
+  "page": "acheter",
+  "langue": "en",
+  "fichier": "Acheter - EN.dc.html",
+  "chemin": "/en/buy",
+  "nom": "Buy"
+ },
+ {
+  "page": "acheter",
+  "langue": "it",
+  "fichier": "Acheter - IT.dc.html",
+  "chemin": "/it/acquistare",
+  "nom": "Acquistare"
+ },
+ {
+  "page": "a-propos",
+  "langue": "fr",
+  "fichier": "A propos - FR.dc.html",
+  "chemin": "/fr/a-propos",
+  "nom": "À propos"
+ },
+ {
+  "page": "a-propos",
+  "langue": "de",
+  "fichier": "A propos - DE.dc.html",
+  "chemin": "/de/ueber-uns",
+  "nom": "Über uns"
+ },
+ {
+  "page": "a-propos",
+  "langue": "en",
+  "fichier": "A propos - EN.dc.html",
+  "chemin": "/en/about-us",
+  "nom": "About us"
+ },
+ {
+  "page": "a-propos",
+  "langue": "it",
+  "fichier": "A propos - IT.dc.html",
+  "chemin": "/it/chi-siamo",
+  "nom": "Chi siamo"
+ },
+ {
+  "page": "partenaires",
+  "langue": "fr",
+  "fichier": "Nos partenaires - FR.dc.html",
+  "chemin": "/fr/nos-partenaires",
+  "nom": "Nos partenaires"
+ },
+ {
+  "page": "partenaires",
+  "langue": "de",
+  "fichier": "Nos partenaires - DE.dc.html",
+  "chemin": "/de/unsere-partner",
+  "nom": "Unsere Partner"
+ },
+ {
+  "page": "partenaires",
+  "langue": "en",
+  "fichier": "Nos partenaires - EN.dc.html",
+  "chemin": "/en/our-partners",
+  "nom": "Our partners"
+ },
+ {
+  "page": "partenaires",
+  "langue": "it",
+  "fichier": "Nos partenaires - IT.dc.html",
+  "chemin": "/it/i-nostri-partner",
+  "nom": "I nostri partner"
+ },
+ {
+  "page": "immo-magazine",
+  "langue": "fr",
+  "fichier": "Immo Magazine - FR.dc.html",
+  "chemin": "/fr/immo-magazine",
+  "nom": "Immo Magazine"
+ },
+ {
+  "page": "immo-magazine",
+  "langue": "de",
+  "fichier": "Immo Magazine - DE.dc.html",
+  "chemin": "/de/immo-magazin",
+  "nom": "Immo Magazin"
+ },
+ {
+  "page": "immo-magazine",
+  "langue": "en",
+  "fichier": "Immo Magazine - EN.dc.html",
+  "chemin": "/en/immo-magazine",
+  "nom": "Immo Magazine"
+ },
+ {
+  "page": "immo-magazine",
+  "langue": "it",
+  "fichier": "Immo Magazine - IT.dc.html",
+  "chemin": "/it/immo-magazine",
+  "nom": "Immo Magazine"
+ },
+ {
+  "page": "contact",
+  "langue": "fr",
+  "fichier": "Nous contacter - FR.dc.html",
+  "chemin": "/fr/contact",
+  "nom": "Contact"
+ },
+ {
+  "page": "contact",
+  "langue": "de",
+  "fichier": "Nous contacter - DE.dc.html",
+  "chemin": "/de/kontakt",
+  "nom": "Kontakt"
+ },
+ {
+  "page": "contact",
+  "langue": "en",
+  "fichier": "Nous contacter - EN.dc.html",
+  "chemin": "/en/contact",
+  "nom": "Contact"
+ },
+ {
+  "page": "contact",
+  "langue": "it",
+  "fichier": "Nous contacter - IT.dc.html",
+  "chemin": "/it/contatti",
+  "nom": "Contatti"
+ },
+ {
+  "page": "confidentialite",
+  "langue": "fr",
+  "fichier": "Politique de confidentialite - FR.dc.html",
+  "chemin": "/fr/politique-de-confidentialite",
+  "nom": "Politique de confidentialité"
+ },
+ {
+  "page": "confidentialite",
+  "langue": "de",
+  "fichier": "Politique de confidentialite - DE.dc.html",
+  "chemin": "/de/datenschutz",
+  "nom": "Datenschutzerklärung"
+ },
+ {
+  "page": "confidentialite",
+  "langue": "en",
+  "fichier": "Politique de confidentialite - EN.dc.html",
+  "chemin": "/en/privacy-policy",
+  "nom": "Privacy policy"
+ },
+ {
+  "page": "confidentialite",
+  "langue": "it",
+  "fichier": "Politique de confidentialite - IT.dc.html",
+  "chemin": "/it/informativa-sulla-privacy",
+  "nom": "Informativa sulla privacy"
+ },
+ {
+  "page": "conditions",
+  "langue": "fr",
+  "fichier": "Conditions generales - FR.dc.html",
+  "chemin": "/fr/conditions-generales",
+  "nom": "Conditions générales"
+ },
+ {
+  "page": "conditions",
+  "langue": "de",
+  "fichier": "Conditions generales - DE.dc.html",
+  "chemin": "/de/agb",
+  "nom": "AGB"
+ },
+ {
+  "page": "conditions",
+  "langue": "en",
+  "fichier": "Conditions generales - EN.dc.html",
+  "chemin": "/en/terms-and-conditions",
+  "nom": "Terms and conditions"
+ },
+ {
+  "page": "conditions",
+  "langue": "it",
+  "fichier": "Conditions generales - IT.dc.html",
+  "chemin": "/it/condizioni-generali",
+  "nom": "Condizioni generali"
+ }
+]

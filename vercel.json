@@ -1,0 +1,336 @@
+{
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/RealXpert%20-%20FR.dc.html",
+      "destination": "/fr",
+      "permanent": true
+    },
+    {
+      "source": "/RealXpert-DE.dc.html",
+      "destination": "/de",
+      "permanent": true
+    },
+    {
+      "source": "/RealXpert-EN.dc.html",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/RealXpert-IT.dc.html",
+      "destination": "/it",
+      "permanent": true
+    },
+    {
+      "source": "/Vendre%20-%20FR.dc.html",
+      "destination": "/fr/vendre",
+      "permanent": true
+    },
+    {
+      "source": "/Vendre%20-%20DE.dc.html",
+      "destination": "/de/verkaufen",
+      "permanent": true
+    },
+    {
+      "source": "/Vendre%20-%20EN.dc.html",
+      "destination": "/en/sell",
+      "permanent": true
+    },
+    {
+      "source": "/Vendre%20-%20IT.dc.html",
+      "destination": "/it/vendere",
+      "permanent": true
+    },
+    {
+      "source": "/Acheter%20-%20FR.dc.html",
+      "destination": "/fr/acheter",
+      "permanent": true
+    },
+    {
+      "source": "/Acheter%20-%20DE.dc.html",
+      "destination": "/de/kaufen",
+      "permanent": true
+    },
+    {
+      "source": "/Acheter%20-%20EN.dc.html",
+      "destination": "/en/buy",
+      "permanent": true
+    },
+    {
+      "source": "/Acheter%20-%20IT.dc.html",
+      "destination": "/it/acquistare",
+      "permanent": true
+    },
+    {
+      "source": "/A%20propos%20-%20FR.dc.html",
+      "destination": "/fr/a-propos",
+      "permanent": true
+    },
+    {
+      "source": "/A%20propos%20-%20DE.dc.html",
+      "destination": "/de/ueber-uns",
+      "permanent": true
+    },
+    {
+      "source": "/A%20propos%20-%20EN.dc.html",
+      "destination": "/en/about-us",
+      "permanent": true
+    },
+    {
+      "source": "/A%20propos%20-%20IT.dc.html",
+      "destination": "/it/chi-siamo",
+      "permanent": true
+    },
+    {
+      "source": "/Nos%20partenaires%20-%20FR.dc.html",
+      "destination": "/fr/nos-partenaires",
+      "permanent": true
+    },
+    {
+      "source": "/Nos%20partenaires%20-%20DE.dc.html",
+      "destination": "/de/unsere-partner",
+      "permanent": true
+    },
+    {
+      "source": "/Nos%20partenaires%20-%20EN.dc.html",
+      "destination": "/en/our-partners",
+      "permanent": true
+    },
+    {
+      "source": "/Nos%20partenaires%20-%20IT.dc.html",
+      "destination": "/it/i-nostri-partner",
+      "permanent": true
+    },
+    {
+      "source": "/Immo%20Magazine%20-%20FR.dc.html",
+      "destination": "/fr/immo-magazine",
+      "permanent": true
+    },
+    {
+      "source": "/Immo%20Magazine%20-%20DE.dc.html",
+      "destination": "/de/immo-magazin",
+      "permanent": true
+    },
+    {
+      "source": "/Immo%20Magazine%20-%20EN.dc.html",
+      "destination": "/en/immo-magazine",
+      "permanent": true
+    },
+    {
+      "source": "/Immo%20Magazine%20-%20IT.dc.html",
+      "destination": "/it/immo-magazine",
+      "permanent": true
+    },
+    {
+      "source": "/Nous%20contacter%20-%20FR.dc.html",
+      "destination": "/fr/contact",
+      "permanent": true
+    },
+    {
+      "source": "/Nous%20contacter%20-%20DE.dc.html",
+      "destination": "/de/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/Nous%20contacter%20-%20EN.dc.html",
+      "destination": "/en/contact",
+      "permanent": true
+    },
+    {
+      "source": "/Nous%20contacter%20-%20IT.dc.html",
+      "destination": "/it/contatti",
+      "permanent": true
+    },
+    {
+      "source": "/Politique%20de%20confidentialite%20-%20FR.dc.html",
+      "destination": "/fr/politique-de-confidentialite",
+      "permanent": true
+    },
+    {
+      "source": "/Politique%20de%20confidentialite%20-%20DE.dc.html",
+      "destination": "/de/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/Politique%20de%20confidentialite%20-%20EN.dc.html",
+      "destination": "/en/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/Politique%20de%20confidentialite%20-%20IT.dc.html",
+      "destination": "/it/informativa-sulla-privacy",
+      "permanent": true
+    },
+    {
+      "source": "/Conditions%20generales%20-%20FR.dc.html",
+      "destination": "/fr/conditions-generales",
+      "permanent": true
+    },
+    {
+      "source": "/Conditions%20generales%20-%20DE.dc.html",
+      "destination": "/de/agb",
+      "permanent": true
+    },
+    {
+      "source": "/Conditions%20generales%20-%20EN.dc.html",
+      "destination": "/en/terms-and-conditions",
+      "permanent": true
+    },
+    {
+      "source": "/Conditions%20generales%20-%20IT.dc.html",
+      "destination": "/it/condizioni-generali",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/fr",
+      "destination": "/api/page?p=accueil&l=fr"
+    },
+    {
+      "source": "/de",
+      "destination": "/api/page?p=accueil&l=de"
+    },
+    {
+      "source": "/en",
+      "destination": "/api/page?p=accueil&l=en"
+    },
+    {
+      "source": "/it",
+      "destination": "/api/page?p=accueil&l=it"
+    },
+    {
+      "source": "/fr/vendre",
+      "destination": "/api/page?p=vendre&l=fr"
+    },
+    {
+      "source": "/de/verkaufen",
+      "destination": "/api/page?p=vendre&l=de"
+    },
+    {
+      "source": "/en/sell",
+      "destination": "/api/page?p=vendre&l=en"
+    },
+    {
+      "source": "/it/vendere",
+      "destination": "/api/page?p=vendre&l=it"
+    },
+    {
+      "source": "/fr/acheter",
+      "destination": "/api/page?p=acheter&l=fr"
+    },
+    {
+      "source": "/de/kaufen",
+      "destination": "/api/page?p=acheter&l=de"
+    },
+    {
+      "source": "/en/buy",
+      "destination": "/api/page?p=acheter&l=en"
+    },
+    {
+      "source": "/it/acquistare",
+      "destination": "/api/page?p=acheter&l=it"
+    },
+    {
+      "source": "/fr/a-propos",
+      "destination": "/api/page?p=a-propos&l=fr"
+    },
+    {
+      "source": "/de/ueber-uns",
+      "destination": "/api/page?p=a-propos&l=de"
+    },
+    {
+      "source": "/en/about-us",
+      "destination": "/api/page?p=a-propos&l=en"
+    },
+    {
+      "source": "/it/chi-siamo",
+      "destination": "/api/page?p=a-propos&l=it"
+    },
+    {
+      "source": "/fr/nos-partenaires",
+      "destination": "/api/page?p=partenaires&l=fr"
+    },
+    {
+      "source": "/de/unsere-partner",
+      "destination": "/api/page?p=partenaires&l=de"
+    },
+    {
+      "source": "/en/our-partners",
+      "destination": "/api/page?p=partenaires&l=en"
+    },
+    {
+      "source": "/it/i-nostri-partner",
+      "destination": "/api/page?p=partenaires&l=it"
+    },
+    {
+      "source": "/fr/immo-magazine",
+      "destination": "/api/page?p=immo-magazine&l=fr"
+    },
+    {
+      "source": "/de/immo-magazin",
+      "destination": "/api/page?p=immo-magazine&l=de"
+    },
+    {
+      "source": "/en/immo-magazine",
+      "destination": "/api/page?p=immo-magazine&l=en"
+    },
+    {
+      "source": "/it/immo-magazine",
+      "destination": "/api/page?p=immo-magazine&l=it"
+    },
+    {
+      "source": "/fr/contact",
+      "destination": "/api/page?p=contact&l=fr"
+    },
+    {
+      "source": "/de/kontakt",
+      "destination": "/api/page?p=contact&l=de"
+    },
+    {
+      "source": "/en/contact",
+      "destination": "/api/page?p=contact&l=en"
+    },
+    {
+      "source": "/it/contatti",
+      "destination": "/api/page?p=contact&l=it"
+    },
+    {
+      "source": "/fr/politique-de-confidentialite",
+      "destination": "/api/page?p=confidentialite&l=fr"
+    },
+    {
+      "source": "/de/datenschutz",
+      "destination": "/api/page?p=confidentialite&l=de"
+    },
+    {
+      "source": "/en/privacy-policy",
+      "destination": "/api/page?p=confidentialite&l=en"
+    },
+    {
+      "source": "/it/informativa-sulla-privacy",
+      "destination": "/api/page?p=confidentialite&l=it"
+    },
+    {
+      "source": "/fr/conditions-generales",
+      "destination": "/api/page?p=conditions&l=fr"
+    },
+    {
+      "source": "/de/agb",
+      "destination": "/api/page?p=conditions&l=de"
+    },
+    {
+      "source": "/en/terms-and-conditions",
+      "destination": "/api/page?p=conditions&l=en"
+    },
+    {
+      "source": "/it/condizioni-generali",
+      "destination": "/api/page?p=conditions&l=it"
+    }
+  ],
+  "functions": {
+    "api/page.js": {
+      "includeFiles": "{*.dc.html,outils/pages.json}"
+    }
+  }
+}

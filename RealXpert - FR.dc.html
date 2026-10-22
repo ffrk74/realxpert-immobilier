@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="icon" type="image/png" href="./favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="shortcut icon" href="./favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="RealXpert">
-<link rel="manifest" href="./site.webmanifest">
-<link rel="stylesheet" href="./echelle.css?v=1">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/echelle.css?v=1">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Performance (27.09) : React servi par le site (mêmes fichiers, mêmes empreintes qu'unpkg), demandé dès le début. -->
-<link rel="preload" as="script" href="./vendor/react.production.min.js">
-<link rel="preload" as="script" href="./vendor/react-dom.production.min.js">
-<script>window.__resources = Object.assign(window.__resources || {}, { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" });</script>
-<link rel="preload" as="image" href="uploads/accueil-lausanne.webp" media="(min-width: 901px)" fetchpriority="high">
-<link rel="preload" as="image" href="uploads/accueil-lausanne-mobile.webp" media="(max-width: 900px)" fetchpriority="high">
-<script src="./support.js"></script>
-<script type="module" src="./hero-saisie.js?v=4"></script>
-<script type="module" src="./dictee.js?v=7"></script>
-<script type="module" src="./parallaxe.js?v=4"></script>
-<script type="module" src="./inscription-panneau.js?v=8"></script>
-<script type="module" src="./haut-de-page.js?v=2"></script>
-<script type="module" src="./menus.js?v=1"></script>
-<script type="module" src="./mot-de-passe.js?v=1"></script>
+<link rel="preload" as="script" href="/vendor/react.production.min.js">
+<link rel="preload" as="script" href="/vendor/react-dom.production.min.js">
+<script>window.__resources = Object.assign(window.__resources || {}, { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/vendor/react-dom.production.min.js" });</script>
+<link rel="preload" as="image" href="/uploads/accueil-lausanne.webp" media="(min-width: 901px)" fetchpriority="high">
+<link rel="preload" as="image" href="/uploads/accueil-lausanne-mobile.webp" media="(max-width: 900px)" fetchpriority="high">
+<script src="/support.js"></script>
+<script type="module" src="/hero-saisie.js?v=4"></script>
+<script type="module" src="/dictee.js?v=7"></script>
+<script type="module" src="/parallaxe.js?v=4"></script>
+<script type="module" src="/inscription-panneau.js?v=8"></script>
+<script type="module" src="/haut-de-page.js?v=2"></script>
+<script type="module" src="/menus.js?v=1"></script>
+<script type="module" src="/mot-de-passe.js?v=1"></script>
 </head>
 <body>
 <x-dc>
@@ -208,7 +208,7 @@
   }
   @media (max-width: 900px) {
     [data-r="hero"]::before {
-      background-image: linear-gradient(180deg, rgb(32,178,236) 0%, rgb(38,182,236) 30%, rgb(140,210,244) 52%, rgb(255,255,255) 68%), url('uploads/accueil-lausanne-mobile.webp') !important;
+      background-image: linear-gradient(180deg, rgb(32,178,236) 0%, rgb(38,182,236) 30%, rgb(140,210,244) 52%, rgb(255,255,255) 68%), url('/uploads/accueil-lausanne-mobile.webp') !important;
       background-position: 0 0, 30% bottom !important;
     }
   }
@@ -220,17 +220,18 @@
   <!-- ============ HEADER ============ -->
   <header style="position:relative; z-index:50; background:#ffffff; border-bottom:1px solid #e8edf3;">
     <div data-r="hdr" style="max-width:1600px; margin:0 auto; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
-      <a href="RealXpert - FR.dc.html#top" style="display:block;">
-        <img src="uploads/logo-realxpert-color-trim.webp" alt="RealXpert — Votre expert immobilier suisse" data-r="logo" style="display:block; height:60px; width:auto;" />
+      <a href="/fr#top" style="display:block;">
+        <img src="/uploads/logo-realxpert-color-trim.webp" alt="RealXpert — Votre expert immobilier suisse" data-r="logo" style="display:block; height:60px; width:auto;" />
       </a>
       <nav data-r="navdesk" style="display:flex; flex:1; align-items:center; justify-content:space-between; gap:24px; margin-left:20px;">
         <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:38px;">
-          <a href="RealXpert%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Notre solution</a>
-          <a href="Vendre - FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Vendre</a>
-          <a href="Acheter%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Acheter</a>
-          <a href="A%20propos%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">À propos</a>
-          <a href="Nos%20partenaires%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Nos partenaires</a>
-          <a href="Nous%20contacter%20-%20FR.dc.html#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Contact</a>
+          <a href="/fr#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Notre solution</a>
+          <a href="/fr/vendre#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Vendre</a>
+          <a href="/fr/acheter#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Acheter</a>
+          <a href="/fr/a-propos#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">À propos</a>
+          <a href="/fr/nos-partenaires#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Nos partenaires</a>
+          <a href="/fr/immo-magazine#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Magazine</a>
+          <a href="/fr/contact#top" style="font-size:20px; font-weight:600; color:#0c1f2c; white-space:nowrap; transition:opacity .12s ease, transform .08s ease;" style-hover="opacity:0.65;" style-active="transform:scale(0.94);">Contact</a>
         </div>
         <div style="display:flex; align-items:center; gap:18px;">
         <div style="position:relative;">
@@ -268,12 +269,13 @@
     </div>
     <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
       <div data-r="drawer" style="display:none; background:#ffffff; border-top:1px solid #e2e8ee; box-shadow:0 26px 50px -20px rgba(10,25,45,0.45); padding:8px 20px 22px;">
-        <a href="RealXpert%20-%20FR.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Notre solution</a>
-        <a href="Vendre - FR.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Vendre</a>
-        <a href="Acheter%20-%20FR.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Acheter</a>
-        <a href="A%20propos%20-%20FR.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">À propos</a>
-        <a href="Nos%20partenaires%20-%20FR.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Nos partenaires</a>
-        <a href="Nous%20contacter%20-%20FR.dc.html#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Contact</a>
+        <a href="/fr#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Notre solution</a>
+        <a href="/fr/vendre#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Vendre</a>
+        <a href="/fr/acheter#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Acheter</a>
+        <a href="/fr/a-propos#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">À propos</a>
+        <a href="/fr/nos-partenaires#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Nos partenaires</a>
+        <a href="/fr/immo-magazine#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Magazine</a>
+        <a href="/fr/contact#top" onClick="{{ closeNav }}" style="display:block; font-size:17px; font-weight:700; color:#0c1f2c; padding:15px 14px; margin:0 -14px; border-radius:10px; border-bottom:1px solid #eef2f6; transition:background .12s ease;" style-hover="background:#eef4fb;" style-active="background:#cfe2fa;">Contact</a>
         <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
           <a href="#top" onClick="{{ openPanel }}" style="background:#ffb90d; color:#fff; font-weight:800; font-size:16px; padding:14px 20px; border-radius:12px; text-align:center;">Essayer gratuitement</a>
           <a href="https://realxpert-site.vercel.app/Mon%20compte%20-%20FR.dc.html" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:15.5px; font-weight:700; color:#0c1f2c; padding:12px; border:1px solid #dce3ea; border-radius:12px; cursor:pointer;">
@@ -286,7 +288,7 @@
   </header>
 
   <!-- ============ HERO ============ -->
-  <section id="top" data-r="hero" style="position:relative; background-image:url('uploads/accueil-lausanne.webp'); background-size:cover; background-position:center bottom; padding:64px 32px 60px; min-height:calc(100 * var(--rx-vh) - 101px);">
+  <section id="top" data-r="hero" style="position:relative; background-image:url('/uploads/accueil-lausanne.webp'); background-size:cover; background-position:center bottom; padding:64px 32px 60px; min-height:calc(100 * var(--rx-vh) - 101px);">
     <div style="max-width:1240px; margin:0 auto;">
 
       <!-- bandeau bleu (encadré) -->
@@ -414,7 +416,7 @@
       <p style="text-align:center; font-size:clamp(17px,calc(2.2 * var(--rx-vw)),20px); font-weight:800; color:#4a72b8; margin:0 auto 52px; max-width:700px; text-wrap:pretty;">Votre expert immobilier, disponible 24h/24 et 7j/7 dans votre poche</p>
 
       <div data-r="gapsm" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:52px; align-items:start;">
-        <img loading="lazy" decoding="async" src="uploads/pasted-1784748293419-0.webp" alt="Couple analysant son projet immobilier" data-r="portrait" style="width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 24px 50px -28px rgba(20,70,120,0.5);" />
+        <img loading="lazy" decoding="async" src="/uploads/pasted-1784748293419-0.webp" alt="Couple analysant son projet immobilier" data-r="portrait" style="width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 24px 50px -28px rgba(20,70,120,0.5);" />
 
         <div style="display:flex; flex-direction:column; gap:26px; max-width:56ch;">
           <p style="font-size:clamp(18px,calc(2.3 * var(--rx-vw)),21px); line-height:1.6; color:#0c1f2c; font-weight:700; margin:0; text-wrap:pretty;">RealXpert est un expert immobilier dédié à l’immobilier suisse, disponible 24h/24 et 7j/7, qui vous accompagne dans toutes les décisions importantes de votre projet, lorsque les enjeux financiers sont importants.</p>
@@ -462,7 +464,7 @@
 
       <!-- image feature -->
       <div data-r="banner" style="width:100%; aspect-ratio:16/4; border-radius:14px; overflow:hidden; margin-bottom:34px; box-shadow:0 30px 70px -38px rgba(20,50,90,0.45);">
-        <img loading="lazy" decoding="async" src="uploads/ChatGPT Image 23 juil. 2026, 21_37_29.webp" alt="Analyse du marché immobilier suisse" style="width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block;" />
+        <img loading="lazy" decoding="async" src="/uploads/ChatGPT Image 23 juil. 2026, 21_37_29.webp" alt="Analyse du marché immobilier suisse" style="width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block;" />
       </div>
 
       <!-- pillars éditoriaux -->
@@ -745,7 +747,7 @@
 
       <div data-r="g2" style="display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:36px;">
         <div data-r="minh" style="position:relative; border-radius:20px; overflow:hidden; min-height:340px; display:flex; box-shadow:0 30px 66px -38px rgba(0,0,0,0.6);">
-          <img loading="lazy" decoding="async" src="uploads/Image vendeur.webp" alt="Vendre" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="/uploads/Image vendeur.webp" alt="Vendre" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,31,52,0.05) 0%,rgba(12,31,52,0.45) 52%,rgba(12,31,52,0.88) 100%);"></div>
           <div data-r="pad" style="position:relative; margin-top:auto; padding:34px 36px;">
             <span style="display:inline-block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#5aa0ff,#2f5aa8); padding:6px 14px; border-radius:100px; margin-bottom:16px;">Si vous vendez</span>
@@ -755,7 +757,7 @@
         </div>
 
         <div data-r="minh" style="position:relative; border-radius:20px; overflow:hidden; min-height:340px; display:flex; box-shadow:0 30px 66px -38px rgba(0,0,0,0.6);">
-          <img loading="lazy" decoding="async" src="uploads/bon-moment-achat.webp" alt="Acheter" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="/uploads/bon-moment-achat.webp" alt="Acheter" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
           <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,31,52,0.05) 0%,rgba(12,31,52,0.45) 52%,rgba(12,31,52,0.88) 100%);"></div>
           <div data-r="pad" style="position:relative; margin-top:auto; padding:34px 36px;">
             <span style="display:inline-block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,#ff5a3c,#e01f3d); padding:6px 14px; border-radius:100px; margin-bottom:16px;">Si vous achetez</span>
@@ -807,7 +809,7 @@
 
       <!-- carte suisse -->
       <div style="margin-top:48px;">
-        <img loading="lazy" decoding="async" src="uploads/carte-suisse-transparent.webp" alt="Carte de la Suisse — expertise dans les 26 cantons" style="display:block; width:100%; max-width:900px; height:auto; margin:0 auto;" />
+        <img loading="lazy" decoding="async" src="/uploads/carte-suisse-transparent.webp" alt="Carte de la Suisse — expertise dans les 26 cantons" style="display:block; width:100%; max-width:900px; height:auto; margin:0 auto;" />
       </div>
     </div>
   </section>
@@ -969,23 +971,24 @@
         <div>
           <div style="font-size:13px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:#fff; margin-bottom:18px;">RealXpert</div>
           <div style="display:flex; flex-direction:column; gap:11px;">
-            <a href="A propos - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Découvrir RealXpert</a>
-            <a href="Vendre - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Vendre</a>
-            <a href="Acheter - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Acheter</a>
-            <a href="A propos - FR.dc.html" style="color:#a9bfd8; font-size:14px;">À propos de nous</a>
-            <a href="Nos partenaires - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Nos partenaires</a>
-            <a href="Nous contacter - FR.dc.html" style="color:#a9bfd8; font-size:14px;">Contact</a>
-            <a href="Politique de confidentialite - FR.dc.html#top" style="color:#a9bfd8; font-size:14px;">Politique de confidentialité</a>
-            <a href="Conditions generales - FR.dc.html#top" style="color:#a9bfd8; font-size:14px;">Conditions générales</a>
+            <a href="/fr/a-propos" style="color:#a9bfd8; font-size:14px;">Découvrir RealXpert</a>
+            <a href="/fr/vendre" style="color:#a9bfd8; font-size:14px;">Vendre</a>
+            <a href="/fr/acheter" style="color:#a9bfd8; font-size:14px;">Acheter</a>
+            <a href="/fr/a-propos" style="color:#a9bfd8; font-size:14px;">À propos de nous</a>
+            <a href="/fr/nos-partenaires" style="color:#a9bfd8; font-size:14px;">Nos partenaires</a>
+            <a href="/fr/immo-magazine" style="color:#a9bfd8; font-size:14px;">Immo Magazine</a>
+            <a href="/fr/contact" style="color:#a9bfd8; font-size:14px;">Contact</a>
+            <a href="/fr/politique-de-confidentialite#top" style="color:#a9bfd8; font-size:14px;">Politique de confidentialité</a>
+            <a href="/fr/conditions-generales#top" style="color:#a9bfd8; font-size:14px;">Conditions générales</a>
           </div>
         </div>
 
         <div>
-          <img loading="lazy" decoding="async" src="uploads/logo-realxpert-white.webp" alt="RealXpert" style="display:block; height:46px; width:auto; margin-bottom:18px;" />
+          <img loading="lazy" decoding="async" src="/uploads/logo-realxpert-white.webp" alt="RealXpert" style="display:block; height:46px; width:auto; margin-bottom:18px;" />
           <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:6px;">Service clientèle</div>
           <p style="font-size:13.5px; line-height:1.6; margin:0 0 14px;">Ouvert du lundi au vendredi<br>de 8h30 à 18h30 · Dans toute la Suisse</p>
           <a href="tel:+41227523050" style="display:block; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;">+41 22 752 30 50</a>
-          <a href="Nous contacter - FR.dc.html" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Nous contacter →</a>
+          <a href="/fr/contact" style="display:inline-block; font-size:14px; font-weight:700; color:#ffffff;">Nous contacter →</a>
         </div>
 
       </div>
@@ -1034,7 +1037,7 @@
 
             <button style="width:100%; background:#ffb90d; color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer; box-shadow:0 12px 26px -10px rgba(224,160,47,0.7); margin-top:2px;" style-hover="filter:brightness(1.04);" style-active="transform:scale(0.985);">Obtenir mes premiers conseils →</button>
 
-            <p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:0; text-align:center;">En continuant, vous acceptez nos <a href="Conditions generales - FR.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Conditions générales</a> et reconnaissez avoir pris connaissance de notre <a href="Politique de confidentialite - FR.dc.html#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Politique de confidentialité</a>.</p>
+            <p style="font-size:12.5px; line-height:1.55; color:#8a97a3; margin:0; text-align:center;">En continuant, vous acceptez nos <a href="/fr/conditions-generales#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Conditions générales</a> et reconnaissez avoir pris connaissance de notre <a href="/fr/politique-de-confidentialite#top" target="_blank" rel="noopener" style="color:#7d8b99; text-decoration:underline;">Politique de confidentialité</a>.</p>
           </div>
 
           <p style="text-align:center; font-size:14px; color:#5a6b78; margin:22px 0 0;">Déjà un compte ? <a href="#top" style="color:#1d4fb0; font-weight:700;">Se connecter</a></p>
@@ -1212,7 +1215,7 @@ class Component extends DCLogic {
     }));
 
     const copiloteData = [
-      { tag: 'Ma discussion', label: 'Ma discussion', title: 'Vous avez toujours un expert à qui poser vos questions', imgLabel: '[ Interface : conversation avec RealXpert ]', img: 'uploads/Ma discussion-d3462ffe.webp',
+      { tag: 'Ma discussion', label: 'Ma discussion', title: 'Vous avez toujours un expert à qui poser vos questions', imgLabel: '[ Interface : conversation avec RealXpert ]', img: '/uploads/Ma discussion-d3462ffe.webp',
         lead: 'Dans un projet immobilier, les doutes apparaissent souvent au moment où il faut décider : est-ce le bon prix ? Faut-il vendre maintenant ? Cette agence est-elle la bonne ? Cette offre mérite-t-elle d\u2019être acceptée ? Dois-je négocier ou attendre ?',
         change: 'Dès qu\u2019un doute apparaît, vous pouvez prendre du recul, vérifier votre raisonnement et obtenir les repères nécessaires pour éviter une décision précipitée qui pourrait vous coûter des dizaines de milliers de francs.',
         detail: [
@@ -1349,7 +1352,7 @@ class Component extends DCLogic {
     const langList = ordered.map(c => ({
       label: c.toUpperCase(),
       style: 'padding:10px 14px; border-radius:8px; font-size:14.5px; font-weight:' + (c === langCode ? '800' : '600') + '; cursor:pointer; color:' + (c === langCode ? '#1d4fb0' : '#33475f') + '; background:' + (c === langCode ? '#eef4fb' : 'transparent') + ';',
-      select: () => { window.location.href = (c === 'fr' ? 'RealXpert - FR.dc.html' : 'RealXpert-' + c.toUpperCase() + '.dc.html') + '#top'; },
+      select: () => { window.location.href = ('/' + c) + '#top'; },
     }));
     const langOpen = !!this.state.langOpen;
     const toggleLang = () => this.setState(s => ({ langOpen: !s.langOpen }));
@@ -1379,21 +1382,21 @@ class Component extends DCLogic {
     const closeLogin = () => fermerEnGlissant('loginOpen');
 
     const testiData = [
-      { name: 'Matthias Zaugg', role: 'Propriétaire, vendeur · Canton de Zurich', photo: 'uploads/temoignage-1.webp',
+      { name: 'Matthias Zaugg', role: 'Propriétaire, vendeur · Canton de Zurich', photo: '/uploads/temoignage-1.webp',
         tag: 'Vente · Estimation', tagColor: '#fff', tagBg: 'linear-gradient(135deg,#5aa0ff,#2f5aa8)',
         headline: 'Trois estimations, un seul juste prix : savoir laquelle suivre.', paras: [
         'J\u2019avais reçu trois estimations différentes pour ma maison et je ne savais pas vraiment laquelle était la bonne. L\u2019une des agences me proposait de partir à un prix plus élevé que les autres. Évidemment, c\u2019était tentant, mais je me demandais si c\u2019était vraiment la valeur de mon bien ou une estimation trop élevée, simplement pour obtenir le mandat. Je ne voulais ni partir trop bas et perdre de l\u2019argent, ni partir trop haut au risque de bloquer la vente et de devoir ensuite baisser le prix.',
         'J\u2019ai pu y voir beaucoup plus clair, comprendre quelle estimation était la plus juste et surtout à quel prix il était préférable de mettre ma maison en vente. Cela m\u2019a permis de ne pas simplement choisir l\u2019estimation la plus élevée et de partir avec un prix et un courtier qui correspondaient réellement à ma situation.',
         'Avec le recul, c\u2019était le bon choix : ma maison s\u2019est vendue en trois mois, avec très peu de négociation sur le prix. C\u2019est exactement le type de décision où je suis content d\u2019avoir pris le temps de bien réfléchir avant de me lancer.',
       ] },
-      { name: 'Isabelle Piguet', role: 'Propriétaire, vendeuse · Canton de Genève', photo: 'uploads/temoignage-2.webp',
+      { name: 'Isabelle Piguet', role: 'Propriétaire, vendeuse · Canton de Genève', photo: '/uploads/temoignage-2.webp',
         tag: 'Vente · Choix du courtier', tagColor: '#fff', tagBg: 'linear-gradient(135deg,#22c483,#0b9d78)',
         headline: 'Au-delà de l\u2019agence : choisir la personne qui défend vraiment votre vente.', paras: [
         'Quand j\u2019ai décidé de vendre, je pensais surtout qu\u2019il fallait choisir une bonne agence. J\u2019en ai rencontré plusieurs et, honnêtement, elles avaient toutes de bons arguments. Entre la notoriété, les commissions, les services proposés et le discours du courtier, je ne savais plus vraiment sur quoi me baser pour faire mon choix.',
         'J\u2019ai surtout compris qu\u2019au-delà du nom de l\u2019agence, il fallait regarder la personne qui allait réellement s\u2019occuper de ma vente : son expérience, sa connaissance du marché de ma région, sa manière de présenter le bien, de gérer les acheteurs et surtout de négocier. Ça m\u2019a permis de comparer les options autrement et de choisir le courtier qui me semblait réellement le plus adapté à mon bien et à ma situation, plutôt que simplement l\u2019agence la plus connue ou la moins chère.',
         'C\u2019est pendant la vente que j\u2019ai vraiment vu la différence. Le courtier a mis en place une très bonne stratégie, bien géré les visites et surtout la négociation avec les acheteurs. Le fait d\u2019avoir pu comparer les options et mieux comprendre sur quels critères choisir m\u2019a clairement aidée à partir avec le bon courtier. À un moment, les acheteurs demandaient une baisse importante et il a su défendre le prix sans faire échouer la discussion. J\u2019ai alors compris que les quelques milliers de francs que je regardais au départ sur la commission pesaient finalement peu face aux dizaines de milliers qui pouvaient se jouer dans une bonne négociation. La vente s\u2019est conclue à un prix que je pense sincèrement ne pas avoir réussi à obtenir seule.',
       ] },
-      { name: 'Stefano Mariani', role: 'Nouveau propriétaire, acheteur · Canton du Tessin', photo: 'uploads/temoignage-3.webp',
+      { name: 'Stefano Mariani', role: 'Nouveau propriétaire, acheteur · Canton du Tessin', photo: '/uploads/temoignage-3.webp',
         tag: 'Achat · Négociation', tagColor: '#fff', tagBg: 'linear-gradient(135deg,#f7971e,#e0730f)',
         headline: 'Faire une offre au bon prix, sans se laisser emporter par le coup de cœur.', paras: [
         'Après plusieurs mois de recherche, nous avions enfin trouvé une maison qui nous plaisait vraiment. Le problème, c\u2019est qu\u2019au moment de faire une offre, nous ne savions pas du tout jusqu\u2019où aller. Nous avions peur de négocier trop bas et de perdre la maison, mais en même temps, nous ne voulions pas nous laisser emporter et la payer trop cher simplement parce que nous avions eu un coup de cœur.',

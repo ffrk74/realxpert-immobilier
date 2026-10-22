@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="shortcut icon" href="./favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,11 +13,11 @@
   // (français par défaut ; allemand, anglais, italien selon le navigateur).
   (function () {
     var langue = ((navigator.languages && navigator.languages[0]) || navigator.language || 'fr').slice(0, 2).toLowerCase();
-    var page = { de: 'RealXpert-DE.dc.html', en: 'RealXpert-EN.dc.html', it: 'RealXpert-IT.dc.html' }[langue] || 'RealXpert - FR.dc.html';
-    location.replace(encodeURI(page) + location.hash);
+    var page = { de: '/de', en: '/en', it: '/it' }[langue] || '/fr';
+    location.replace(page + location.hash);
   })();
 </script>
-<noscript><meta http-equiv="refresh" content="0; url=RealXpert%20-%20FR.dc.html"></noscript>
+<noscript><meta http-equiv="refresh" content="0; url=/fr"></noscript>
 </head>
 <body></body>
 </html>
