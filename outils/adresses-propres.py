@@ -141,6 +141,15 @@ for langue in LANGUES:
     nom = f"Immo Magazine - {langue.upper()}.dc.html"
     ecrire(nom, re.sub(r'magazine\.js\?v=[^"]*', f"magazine.js?v={V_LISEUSE}", lire(nom)))
 
+# Inscription à la newsletter du pied de page (25.10.2026) : newsletter.js sur chaque page, avec son empreinte.
+V_NEWSLETTER = hashlib.sha256(open(os.path.join(ICI, "newsletter.js"), "rb").read()).hexdigest()[:10]
+def script_newsletter(s):
+    if 'newsletter.js' in s: return re.sub(r'newsletter\.js\?v=[^"]*', f"newsletter.js?v={V_NEWSLETTER}", s)
+    for gabarit in ('<script src="/support.js"></script>', '<script src="./support.js"></script>'):
+        if gabarit in s:
+            return s.replace(gabarit, f'{gabarit}\n<script type="module" src="/newsletter.js?v={V_NEWSLETTER}"></script>', 1)
+    return s
+
 # ── 2 à 4. Menus, liens entre pages, adresses absolues ──
 LIBELLE_MENU = {"fr": "Magazine", "de": "Magazin", "en": "Magazine", "it": "Magazine"}
 LIBELLE_PIED = {"fr": "Immo Magazine", "de": "Immo Magazin", "en": "Immo Magazine", "it": "Immo Magazine"}
@@ -192,7 +201,7 @@ for t in TABLE:
     if not os.path.exists(os.path.join(ICI, nom)):
         print("  ABSENT", nom); continue
     s = lire(nom)
-    s = ajouter_liens_magazine(s, t["langue"])
+    s = script_newsletter(ajouter_liens_magazine(s, t["langue"]))
     s = adresses_absolues(liens_propres(s)).replace(ANCIEN_LOGO_PIED, LOGO_PIED)
     ecrire(nom, s)
 
