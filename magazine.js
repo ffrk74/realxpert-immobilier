@@ -45,7 +45,7 @@ const STYLE = `
 .rxm { position: relative; color: #eef3fb; font-family: 'Inter', system-ui, sans-serif; }
 /* Le site est réduit à 80 % sur ordinateur (echelle.css, zoom) : la liseuse est remise à l'échelle réelle,
    sinon page-flip calculerait la position du doigt ou de la souris avec un écart de 20 %. */
-@media (min-width: 1024px) { .rxm, .rxm-zoom { zoom: 1.25; } }
+@media (min-width: 1024px) { .rxm { zoom: 1.25; } }
 .rxm *, .rxm *::before, .rxm *::after { box-sizing: border-box; }
 .rxm button { font: inherit; color: inherit; cursor: pointer; }
 .rxm-outils { display: flex; justify-content: flex-end; gap: 10px; margin: 0 auto 14px; max-width: 1200px; }
@@ -70,20 +70,16 @@ const STYLE = `
 .rxm :focus-visible { outline: 2px solid #8fb4f0; outline-offset: 3px; }
 .rxm:fullscreen { background: #0b1a36; padding: 18px; display: flex; flex-direction: column; justify-content: center; }
 .rxm:fullscreen .rxm-scene { height: calc(100vh - 170px); }
-.rxm-zoom { position: fixed; inset: 0; z-index: 400; display: grid; grid-template-rows: auto minmax(0, 1fr); background: rgba(8,15,30,.97); color: #eef3fb; font-family: 'Inter', system-ui, sans-serif; }
-.rxm-zoom-barre { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px; font-size: 15px; font-weight: 700; }
-.rxm-zoom-barre div { display: flex; gap: 8px; }
-.rxm-zoom-defile { overflow: auto; -webkit-overflow-scrolling: touch; padding: 0 16px calc(env(safe-area-inset-bottom, 0px) + 24px); }
-.rxm-zoom-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 0 auto; }
-.rxm-zoom-pages img { display: block; width: 100%; height: auto; background: #fff; }
-.rxm-zoom-fleche { position: fixed; top: 50%; z-index: 1; width: 52px; height: 52px; margin-top: -26px; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer; background: rgba(255,255,255,.14); color: #fff; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: background .15s ease, opacity .15s ease; }
-.rxm-zoom-fleche:hover:not(:disabled) { background: rgba(255,255,255,.26); }
-.rxm-zoom-fleche:disabled { opacity: .25; cursor: default; }
-.rxm-zoom-fleche svg { width: 26px; height: 26px; }
-.rxm-zoom-fleche[data-zp="-1"] { left: max(10px, env(safe-area-inset-left, 0px)); }
-.rxm-zoom-fleche[data-zp="1"] { right: max(10px, env(safe-area-inset-right, 0px)); }
-@media (max-width: 640px) { .rxm-zoom-fleche { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); margin-top: 0; width: 48px; height: 48px; background: rgba(20,32,56,.85); } }
-@media (min-aspect-ratio: 1/1) { .rxm-zoom-pages img { width: calc(50% - 8px); } .rxm-zoom-pages img:only-child { width: 70%; } }
+/* Mode agrandi (zoom) : la liseuse elle-même occupe l'écran, avec son effet de page tournée ; plus loin que
+   le niveau 1, le livre dépasse l'écran et se parcourt en faisant défiler. */
+.rxm-agr { display: none !important; }
+.rxm--agrandi { position: fixed; inset: 0; z-index: 400; overflow: auto; overscroll-behavior: contain; background: #0b1a36; padding: 0 16px; display: flex; flex-direction: column; }
+.rxm--agrandi .rxm-agr { display: inline-flex !important; }
+.rxm--agrandi [data-action="zoom"], .rxm--agrandi [data-action="plein"] { display: none; }
+.rxm--agrandi .rxm-outils { position: sticky; top: 0; left: 0; z-index: 3; width: 100%; max-width: none; margin: 0; padding: calc(env(safe-area-inset-top, 0px) + 10px) 0 10px; background: linear-gradient(#0b1a36 70%, rgba(11,26,54,0)); }
+.rxm--agrandi .rxm-scene { place-items: start center; flex: none; height: calc((100dvh - 190px) * var(--rxm-niveau, 1)); width: calc(100% * var(--rxm-niveau, 1)); min-height: 0; margin: 0 auto; }
+.rxm--agrandi .rxm-barre { position: sticky; bottom: 0; left: 0; z-index: 3; margin: 12px auto 0; padding: 8px 0 calc(env(safe-area-inset-bottom, 0px) + 12px); background: linear-gradient(rgba(11,26,54,0), #0b1a36 35%); }
+.rxm--agrandi .rxm-astuce { display: none; }
 @media (max-width: 700px) {
   .rxm-outils { margin-bottom: 10px; }
   .rxm-barre { gap: 12px; margin-top: 16px; }
@@ -111,6 +107,9 @@ function monter(racine) {
     <div class="rxm">
       <div class="rxm-outils">
         <button type="button" class="rxm-bouton" data-action="zoom" aria-label="${T.lire}">${icone('zoom')}<span>${T.zoom}</span></button>
+        <button type="button" class="rxm-bouton rxm-agr" data-z="-1" aria-label="${T.reduire}">${icone('moins')}</button>
+        <button type="button" class="rxm-bouton rxm-agr" data-z="1" aria-label="${T.agrandir}">${icone('plus')}</button>
+        <button type="button" class="rxm-bouton rxm-agr" data-z="0" aria-label="${T.fermer}">${icone('fermer')}</button>
         ${pleinEcranPossible ? `<button type="button" class="rxm-bouton" data-action="plein" aria-label="${T.pleinEcran}">${icone('plein')}</button>` : ''}
       </div>
       <div class="rxm-scene" aria-label="${T.magazine}, ${N} ${T.pages.toLowerCase()}"></div>
@@ -132,6 +131,11 @@ function monter(racine) {
   const [precedente, suivante] = racine.querySelectorAll('.rxm-fleche')
 
   let pf = null, bloc = null, imgs = [], enPortrait = false, page = 0
+  // Mode agrandi (zoom) : niveau 0 = livre à la taille de l'écran ; au-delà, livre plus grand que l'écran, que
+  // l'on parcourt en le faisant défiler — les pages se tournent alors aux flèches (souris et doigt défilent).
+  let agrandi = false, niveau = 0
+  // Écran tactile : au-delà du niveau 0, le doigt fait défiler le livre agrandi (les pages se tournent aux flèches).
+  const tactile = window.matchMedia('(pointer: coarse)').matches
   let demandees = new Set(), enCours = 0, etat = 'read', enAttente = 0, sens = 1, aTourne = false
 
   // ── Préchargement : toutes les pages, la plus proche de la page affichée d'abord ──
@@ -166,7 +170,7 @@ function monter(racine) {
     const W = scene.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
     // Page seule (téléphone tenu droit) : la scène suit la page, qui prend la largeur dans la limite de 78 %
     // de la hauteur de l'écran ; double page : la scène a sa hauteur (CSS) et le livre s'y loge.
-    const H = enPortrait ? window.innerHeight * 0.78 : scene.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
+    const H = enPortrait && !agrandi ? window.innerHeight * 0.78 : scene.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
     const largeurPage = Math.min(enPortrait ? W : W / 2, H * RATIO)
     bloc.style.width = `${Math.floor(enPortrait ? largeurPage : largeurPage * 2)}px`
     bloc.style.height = `${Math.floor(largeurPage / RATIO)}px`
@@ -211,8 +215,7 @@ function monter(racine) {
     bloc = document.createElement('div')
     bloc.className = 'rxm-bloc'
     scene.appendChild(bloc)
-    if (enPortrait) scene.style.height = 'auto'
-    else scene.style.height = ''
+    scene.style.height = enPortrait && !agrandi ? 'auto' : ''
     dimensionner()
     bloc.addEventListener('pointerdown', e => {
       const b = bloc.getBoundingClientRect()
@@ -244,6 +247,7 @@ function monter(racine) {
       minWidth: enPortrait ? Math.ceil(bloc.clientWidth / 2) + 1 : 120, maxWidth: 2400, minHeight: 100, maxHeight: 4000,
       startPage: page, showCover: true, usePortrait: true, autoSize: false,
       drawShadow: true, maxShadowOpacity: 0.45, flippingTime: 750, mobileScrollSupport: false, showPageCorners: true,
+      useMouseEvents: !(agrandi && niveau > 0 && tactile),
     })
     pf.loadFromHTML(pages)
     etat = 'read'
@@ -286,99 +290,56 @@ function monter(racine) {
     afficher()
   })
 
-  // Zoom de lecture : la ou les pages affichées en grand. On y feuillette aussi (Franck, 25.10.2026 : « une fois
-  // zoomé on doit pouvoir feuilleter le magazine, idem mobile ») : flèches, clavier, glissé du doigt ; à la
-  // fermeture, le livre s'ouvre à la page lue dans le zoom.
-  let zoom = null, zoomPage = 0, zoomPortrait = false
-  const texteDe = (i, portrait) => {
-    const vues = visibles(i, portrait)
-    return (i === 0 ? T.couverture : `${vues.length > 1 ? T.pages : T.page} ${vues.map(v => v + 1).join('–')}`) + ` / ${N}`
+  // Zoom de lecture (Franck, 25.10.2026 : « une fois zoomé on doit pouvoir feuilleter le magazine, idem
+  // mobile », puis « dommage en zoom de perdre l'effet feuilletage ») : la liseuse elle-même passe en grand,
+  // même livre, même page, mêmes pages qui se tournent (flèches, clavier, coin ou glissé du doigt).
+  const zoomBoutons = () => {
+    racine.querySelector('[data-z="-1"]').disabled = niveau === 0
+    racine.querySelector('[data-z="1"]').disabled = niveau === NIVEAUX_ZOOM.length - 1
   }
-  const fermerZoom = () => {
-    if (!zoom) return
-    zoom.remove(); zoom = null; document.documentElement.style.overflow = ''
-    if (pf && zoomPage !== page) {
-      pf.turnToPage(zoomPage)
-      page = pf.getCurrentPageIndex()
-      suivantes()
-      centrer(page, false)
-      afficher()
-    }
+  // Le livre agrandi est centré dans l'écran (il le dépasse au-delà du niveau 0).
+  const recentrer = () => requestAnimationFrame(() => requestAnimationFrame(() => {
+    boite.scrollLeft = (boite.scrollWidth - boite.clientWidth) / 2
+    boite.scrollTop = 0
+  }))
+  const appliquerZoom = (nouveau, reconstruire) => {
+    niveau = nouveau
+    boite.style.setProperty('--rxm-niveau', String(NIVEAUX_ZOOM[niveau]))
+    zoomBoutons()
+    // Livre reconstruit à chaque niveau : page-flip garde ainsi la page seule sur écran haut (sinon, agrandi
+    // sans reconstruction, il repassait en double page) et, au-delà du niveau 0 sur écran tactile, laisse le
+    // doigt parcourir le livre.
+    if (reconstruire) requestAnimationFrame(() => construire())
+    recentrer()
   }
   const ouvrirZoom = () => {
-    if (zoom) { zoom.remove(); zoom = null }
-    let niveau = 0
-    zoomPage = page
-    zoomPortrait = window.innerWidth < window.innerHeight
-    zoom = document.createElement('div')
-    zoom.className = 'rxm-zoom'
-    zoom.setAttribute('role', 'dialog')
-    zoom.setAttribute('aria-modal', 'true')
-    zoom.setAttribute('aria-label', T.lire)
-    zoom.innerHTML = `
-      <div class="rxm-zoom-barre"><span class="rxm-zoom-position" aria-live="polite"></span><div>
-        <button type="button" class="rxm-bouton" data-z="-1" aria-label="${T.reduire}">${icone('moins')}</button>
-        <button type="button" class="rxm-bouton" data-z="1" aria-label="${T.agrandir}">${icone('plus')}</button>
-        <button type="button" class="rxm-bouton" data-z="0" aria-label="${T.fermer}">${icone('fermer')}</button>
-      </div></div>
-      <div class="rxm-zoom-defile"><div class="rxm-zoom-pages"></div></div>
-      <button type="button" class="rxm-zoom-fleche" data-zp="-1" aria-label="${T.precedente}">${icone('gauche')}</button>
-      <button type="button" class="rxm-zoom-fleche" data-zp="1" aria-label="${T.suivante}">${icone('droite')}</button>`
-    const contenu = zoom.querySelector('.rxm-zoom-pages')
-    const defile = zoom.querySelector('.rxm-zoom-defile')
-    const position = zoom.querySelector('.rxm-zoom-position')
-    const [avant, apres] = zoom.querySelectorAll('.rxm-zoom-fleche')
-    const appliquer = () => {
-      contenu.style.width = `calc(min(100vw - 32px, 1100px) * ${NIVEAUX_ZOOM[niveau]})`
-      zoom.querySelector('[data-z="-1"]').disabled = niveau === 0
-      zoom.querySelector('[data-z="1"]').disabled = niveau === NIVEAUX_ZOOM.length - 1
-    }
-    // Les pages du zoom : une à la fois sur un écran haut, en double page sinon (comme le livre).
-    const montrer = () => {
-      const vues = visibles(zoomPage, zoomPortrait)
-      contenu.innerHTML = vues.map(v => `<img src="${image(v + 1, 1400)}" alt="${T.page} ${v + 1}" width="1400" height="1980">`).join('')
-      position.textContent = texteDe(zoomPage, zoomPortrait)
-      avant.disabled = zoomPage === 0
-      apres.disabled = zoomPage >= N - 1 || (!zoomPortrait && vues.includes(N - 1))
-      defile.scrollTo(0, 0)
-      // Les pages voisines sont chargées d'avance : le feuilletage reste immédiat.
-      for (const i of [pasZoom(1), pasZoom(-1)]) for (const v of visibles(i, zoomPortrait)) new Image().src = image(v + 1, 1400)
-    }
-    const pasZoom = d => zoomPortrait ? Math.max(0, Math.min(N - 1, zoomPage + d))
-      : d > 0 ? (zoomPage === 0 ? 1 : Math.min(N - 1, (zoomPage % 2 === 1 ? zoomPage : zoomPage - 1) + 2))
-      : (zoomPage <= 2 ? 0 : (zoomPage % 2 === 1 ? zoomPage : zoomPage - 1) - 2)
-    const feuilleter = d => {
-      const cible = pasZoom(d)
-      if (cible === zoomPage) return
-      zoomPage = cible
-      montrer()
-    }
-    zoom.addEventListener('click', e => {
-      const f = e.target.closest('[data-zp]')
-      if (f) { feuilleter(Number(f.dataset.zp)); return }
-      const b = e.target.closest('[data-z]')
-      if (!b) return
-      const z = Number(b.dataset.z)
-      if (z === 0) fermerZoom(); else { niveau = Math.max(0, Math.min(NIVEAUX_ZOOM.length - 1, niveau + z)); appliquer() }
-    })
-    // Glissé du doigt vers la gauche ou la droite (sauf quand la page agrandie déborde : on la parcourt alors).
-    let depart = null
-    defile.addEventListener('touchstart', e => { depart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null }, { passive: true })
-    defile.addEventListener('touchend', e => {
-      if (!depart || e.changedTouches.length !== 1) return
-      const dx = e.changedTouches[0].clientX - depart.x, dy = e.changedTouches[0].clientY - depart.y
-      depart = null
-      if (defile.scrollWidth > defile.clientWidth + 4) return
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) feuilleter(dx < 0 ? 1 : -1)
-    }, { passive: true })
-    zoom.feuilleter = feuilleter
-    appliquer()
-    montrer()
-    document.body.appendChild(zoom)
+    if (agrandi) return
+    agrandi = true
+    boite.classList.add('rxm--agrandi')
     document.documentElement.style.overflow = 'hidden'
-    zoom.querySelector('[data-z="0"]').focus()
+    // Le zoom s'ouvre agrandi (×1,6) : « − » revient au livre entier à la taille de l'écran.
+    appliquerZoom(1, true)
+    racine.querySelector('[data-z="0"]').focus()
+  }
+  const fermerZoom = () => {
+    if (!agrandi) return
+    agrandi = false
+    boite.classList.remove('rxm--agrandi')
+    boite.style.removeProperty('--rxm-niveau')
+    niveau = 0
+    document.documentElement.style.overflow = ''
+    requestAnimationFrame(() => construire())
+    boite.scrollIntoView({ block: 'center' })
   }
   racine.querySelector('[data-action="zoom"]').addEventListener('click', ouvrirZoom)
+  racine.querySelector('.rxm-outils').addEventListener('click', e => {
+    const b = e.target.closest('[data-z]')
+    if (!b) return
+    const z = Number(b.dataset.z)
+    if (z === 0) { fermerZoom(); return }
+    const nouveau = Math.max(0, Math.min(NIVEAUX_ZOOM.length - 1, niveau + z))
+    if (nouveau !== niveau) appliquerZoom(nouveau, true)
+  })
   const boutonPlein = racine.querySelector('[data-action="plein"]')
   if (boutonPlein) {
     boutonPlein.addEventListener('click', () => {
@@ -394,14 +355,9 @@ function monter(racine) {
   if (window.__rxmClavier) document.removeEventListener('keydown', window.__rxmClavier)
   window.__rxmClavier = e => {
     if (e.key === 'Escape') { fermerZoom(); return }
-    if (zoom) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); zoom.feuilleter(1) }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); zoom.feuilleter(-1) }
-      return
-    }
     if (!boite.isConnected) return
     const r = boite.getBoundingClientRect()
-    if (r.bottom < 0 || r.top > window.innerHeight) return
+    if (!agrandi && (r.bottom < 0 || r.top > window.innerHeight)) return
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '') && document.activeElement !== curseur) return
     if (e.key === 'ArrowRight') { e.preventDefault(); tourner(1) }
     if (e.key === 'ArrowLeft') { e.preventDefault(); tourner(-1) }
