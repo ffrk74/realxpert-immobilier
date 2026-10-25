@@ -76,6 +76,13 @@ const STYLE = `
 .rxm-zoom-defile { overflow: auto; -webkit-overflow-scrolling: touch; padding: 0 16px calc(env(safe-area-inset-bottom, 0px) + 24px); }
 .rxm-zoom-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 0 auto; }
 .rxm-zoom-pages img { display: block; width: 100%; height: auto; background: #fff; }
+.rxm-zoom-fleche { position: fixed; top: 50%; z-index: 1; width: 52px; height: 52px; margin-top: -26px; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer; background: rgba(255,255,255,.14); color: #fff; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: background .15s ease, opacity .15s ease; }
+.rxm-zoom-fleche:hover:not(:disabled) { background: rgba(255,255,255,.26); }
+.rxm-zoom-fleche:disabled { opacity: .25; cursor: default; }
+.rxm-zoom-fleche svg { width: 26px; height: 26px; }
+.rxm-zoom-fleche[data-zp="-1"] { left: max(10px, env(safe-area-inset-left, 0px)); }
+.rxm-zoom-fleche[data-zp="1"] { right: max(10px, env(safe-area-inset-right, 0px)); }
+@media (max-width: 640px) { .rxm-zoom-fleche { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); margin-top: 0; width: 48px; height: 48px; background: rgba(20,32,56,.85); } }
 @media (min-aspect-ratio: 1/1) { .rxm-zoom-pages img { width: calc(50% - 8px); } .rxm-zoom-pages img:only-child { width: 70%; } }
 @media (max-width: 700px) {
   .rxm-outils { margin-bottom: 10px; }
@@ -279,38 +286,94 @@ function monter(racine) {
     afficher()
   })
 
-  // Zoom de lecture : la ou les pages affichées en grand.
-  let zoom = null
-  const fermerZoom = () => { if (zoom) { zoom.remove(); zoom = null; document.documentElement.style.overflow = '' } }
+  // Zoom de lecture : la ou les pages affichées en grand. On y feuillette aussi (Franck, 25.10.2026 : « une fois
+  // zoomé on doit pouvoir feuilleter le magazine, idem mobile ») : flèches, clavier, glissé du doigt ; à la
+  // fermeture, le livre s'ouvre à la page lue dans le zoom.
+  let zoom = null, zoomPage = 0, zoomPortrait = false
+  const texteDe = (i, portrait) => {
+    const vues = visibles(i, portrait)
+    return (i === 0 ? T.couverture : `${vues.length > 1 ? T.pages : T.page} ${vues.map(v => v + 1).join('–')}`) + ` / ${N}`
+  }
+  const fermerZoom = () => {
+    if (!zoom) return
+    zoom.remove(); zoom = null; document.documentElement.style.overflow = ''
+    if (pf && zoomPage !== page) {
+      pf.turnToPage(zoomPage)
+      page = pf.getCurrentPageIndex()
+      suivantes()
+      centrer(page, false)
+      afficher()
+    }
+  }
   const ouvrirZoom = () => {
-    fermerZoom()
+    if (zoom) { zoom.remove(); zoom = null }
     let niveau = 0
+    zoomPage = page
+    zoomPortrait = window.innerWidth < window.innerHeight
     zoom = document.createElement('div')
     zoom.className = 'rxm-zoom'
     zoom.setAttribute('role', 'dialog')
     zoom.setAttribute('aria-modal', 'true')
     zoom.setAttribute('aria-label', T.lire)
-    const vues = visibles(page, enPortrait)
     zoom.innerHTML = `
-      <div class="rxm-zoom-barre"><span>${indicateur.textContent}</span><div>
+      <div class="rxm-zoom-barre"><span class="rxm-zoom-position" aria-live="polite"></span><div>
         <button type="button" class="rxm-bouton" data-z="-1" aria-label="${T.reduire}">${icone('moins')}</button>
         <button type="button" class="rxm-bouton" data-z="1" aria-label="${T.agrandir}">${icone('plus')}</button>
         <button type="button" class="rxm-bouton" data-z="0" aria-label="${T.fermer}">${icone('fermer')}</button>
       </div></div>
-      <div class="rxm-zoom-defile"><div class="rxm-zoom-pages">${vues.map(v => `<img src="${image(v + 1, 1400)}" alt="${T.page} ${v + 1}" width="1400" height="1980">`).join('')}</div></div>`
+      <div class="rxm-zoom-defile"><div class="rxm-zoom-pages"></div></div>
+      <button type="button" class="rxm-zoom-fleche" data-zp="-1" aria-label="${T.precedente}">${icone('gauche')}</button>
+      <button type="button" class="rxm-zoom-fleche" data-zp="1" aria-label="${T.suivante}">${icone('droite')}</button>`
     const contenu = zoom.querySelector('.rxm-zoom-pages')
+    const defile = zoom.querySelector('.rxm-zoom-defile')
+    const position = zoom.querySelector('.rxm-zoom-position')
+    const [avant, apres] = zoom.querySelectorAll('.rxm-zoom-fleche')
     const appliquer = () => {
       contenu.style.width = `calc(min(100vw - 32px, 1100px) * ${NIVEAUX_ZOOM[niveau]})`
       zoom.querySelector('[data-z="-1"]').disabled = niveau === 0
       zoom.querySelector('[data-z="1"]').disabled = niveau === NIVEAUX_ZOOM.length - 1
     }
+    // Les pages du zoom : une à la fois sur un écran haut, en double page sinon (comme le livre).
+    const montrer = () => {
+      const vues = visibles(zoomPage, zoomPortrait)
+      contenu.innerHTML = vues.map(v => `<img src="${image(v + 1, 1400)}" alt="${T.page} ${v + 1}" width="1400" height="1980">`).join('')
+      position.textContent = texteDe(zoomPage, zoomPortrait)
+      avant.disabled = zoomPage === 0
+      apres.disabled = zoomPage >= N - 1 || (!zoomPortrait && vues.includes(N - 1))
+      defile.scrollTo(0, 0)
+      // Les pages voisines sont chargées d'avance : le feuilletage reste immédiat.
+      for (const i of [pasZoom(1), pasZoom(-1)]) for (const v of visibles(i, zoomPortrait)) new Image().src = image(v + 1, 1400)
+    }
+    const pasZoom = d => zoomPortrait ? Math.max(0, Math.min(N - 1, zoomPage + d))
+      : d > 0 ? (zoomPage === 0 ? 1 : Math.min(N - 1, (zoomPage % 2 === 1 ? zoomPage : zoomPage - 1) + 2))
+      : (zoomPage <= 2 ? 0 : (zoomPage % 2 === 1 ? zoomPage : zoomPage - 1) - 2)
+    const feuilleter = d => {
+      const cible = pasZoom(d)
+      if (cible === zoomPage) return
+      zoomPage = cible
+      montrer()
+    }
     zoom.addEventListener('click', e => {
+      const f = e.target.closest('[data-zp]')
+      if (f) { feuilleter(Number(f.dataset.zp)); return }
       const b = e.target.closest('[data-z]')
       if (!b) return
       const z = Number(b.dataset.z)
       if (z === 0) fermerZoom(); else { niveau = Math.max(0, Math.min(NIVEAUX_ZOOM.length - 1, niveau + z)); appliquer() }
     })
+    // Glissé du doigt vers la gauche ou la droite (sauf quand la page agrandie déborde : on la parcourt alors).
+    let depart = null
+    defile.addEventListener('touchstart', e => { depart = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null }, { passive: true })
+    defile.addEventListener('touchend', e => {
+      if (!depart || e.changedTouches.length !== 1) return
+      const dx = e.changedTouches[0].clientX - depart.x, dy = e.changedTouches[0].clientY - depart.y
+      depart = null
+      if (defile.scrollWidth > defile.clientWidth + 4) return
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) feuilleter(dx < 0 ? 1 : -1)
+    }, { passive: true })
+    zoom.feuilleter = feuilleter
     appliquer()
+    montrer()
     document.body.appendChild(zoom)
     document.documentElement.style.overflow = 'hidden'
     zoom.querySelector('[data-z="0"]').focus()
@@ -331,7 +394,12 @@ function monter(racine) {
   if (window.__rxmClavier) document.removeEventListener('keydown', window.__rxmClavier)
   window.__rxmClavier = e => {
     if (e.key === 'Escape') { fermerZoom(); return }
-    if (zoom || !boite.isConnected) return
+    if (zoom) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); zoom.feuilleter(1) }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); zoom.feuilleter(-1) }
+      return
+    }
+    if (!boite.isConnected) return
     const r = boite.getBoundingClientRect()
     if (r.bottom < 0 || r.top > window.innerHeight) return
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '') && document.activeElement !== curseur) return
