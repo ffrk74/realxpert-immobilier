@@ -1,9 +1,14 @@
 // Branche les deux panneaux de la maquette (inscription et connexion) sur les comptes
 // RealXpert, puis renvoie le visiteur vers sa discussion.
 //
-// Le parcours : identité → code reçu par e-mail → code reçu par SMS → discussion.
-// Les deux étapes de code s'affichent dans un panneau à moi, réinstallé s'il disparaît :
+// Le parcours : identité → e-mail de bienvenue puis code de sécurité par e-mail → code reçu par
+// SMS → discussion. Les étapes de code s'affichent dans un panneau à moi, réinstallé s'il disparaît :
 // la page se re-rend toutes les quatre secondes et peut emporter ce qu'elle ne connaît pas.
+//
+// 26.10.2026 (Franck : inscription jamais aboutie, « mot de passe oublié » qui renvoyait un code) :
+// un numéro déjà rattaché à un autre compte, ou un SMS refusé, ramène à la saisie du numéro avec la
+// raison — plus jamais un écran de code qui attend un SMS parti nulle part ; « Mot de passe oublié ? »
+// envoie un lien qui ouvre la page des comptes (realxpert-site), où l'on choisit le nouveau mot de passe.
 //
 // Les deux sites sont sur des domaines différents : la session ouverte ici n'existe pas
 // là-bas. Elle est donc transmise dans le fragment de l'URL — jamais envoyé au serveur —
@@ -29,9 +34,9 @@ const LANGUE = (decodeURIComponent(location.pathname).match(/-\s*(FR|DE|EN|IT)\.
 const T = {
   FR: {
     page: 'Ma discussion - FR.dc.html',
-    titreEmail: 'Confirmez votre e-mail', titreSms: 'Confirmez votre numéro',
-    sousEmail: 'Nous avons envoyé un code de vérification à', indesirables: 'Pas reçu ? Regardez dans vos courriers indésirables.',
-    nonConfirme: 'Votre compte n’est pas encore confirmé : nous venons de vous renvoyer un code par e-mail.', sousSms: 'Nous avons envoyé un code de vérification au',
+    titreEmail: 'Votre code de sécurité', titreSms: 'Confirmez votre numéro',
+    sousEmail: 'Nous avons envoyé votre code de sécurité à', indesirables: 'Pas reçu ? Regardez dans vos courriers indésirables.',
+    nonConfirme: 'Votre compte n’est pas encore confirmé : nous venons de vous renvoyer un code de sécurité par e-mail.', sousSms: 'Nous avons envoyé un code de sécurité par SMS au',
     valider: 'Valider le code', renvoyer: 'Renvoyer le code', renvoye: 'Code renvoyé.',
     patiente: 'Un instant…', fermer: 'Fermer',
     champs: 'Merci de remplir tous les champs.',
@@ -44,12 +49,24 @@ const T = {
     identifiants: 'E-mail ou mot de passe incorrect.',
     quota: 'Trop de demandes en peu de temps. Patientez quelques minutes.',
     generique: 'Quelque chose n’a pas fonctionné. Réessayez dans un instant.',
+    sousEmailBienvenue: 'Nous venons de vous souhaiter la bienvenue par e-mail, puis de vous envoyer votre code de sécurité à',
+    titreNumero: 'Votre numéro de mobile',
+    sousNumero: 'Votre e-mail est confirmé. Indiquez le mobile sur lequel recevoir votre code de sécurité par SMS.',
+    boutonNumero: 'Recevoir le code par SMS',
+    modifierNumero: 'Changer de numéro',
+    numeroPris: 'Ce numéro de mobile est déjà rattaché à un autre compte RealXpert. Indiquez un autre numéro, ou connectez-vous avec le compte qui l’utilise.',
+    sms: 'Le SMS n’a pas pu partir vers ce numéro. Vérifiez-le, ou indiquez un autre mobile.',
+    titreOublie: 'Réinitialiser votre mot de passe',
+    sousOublie: 'Indiquez l’adresse de votre compte : nous vous envoyons un lien pour choisir un nouveau mot de passe.',
+    boutonOublie: 'Recevoir le lien',
+    adresse: 'Adresse e-mail',
+    oublieEnvoye: 'C’est parti : si un compte existe pour cette adresse, vous allez recevoir un e-mail avec un lien pour choisir un nouveau mot de passe. Pensez à vos courriers indésirables.',
   },
   DE: {
     page: 'Ma discussion - DE.dc.html',
-    titreEmail: 'E-Mail bestätigen', titreSms: 'Nummer bestätigen',
-    sousEmail: 'Wir haben einen Bestätigungscode gesendet an', indesirables: 'Nicht erhalten? Schauen Sie im Spam-Ordner nach.',
-    nonConfirme: 'Ihr Konto ist noch nicht bestätigt: Wir haben Ihnen soeben einen neuen Code per E-Mail gesendet.', sousSms: 'Wir haben einen Bestätigungscode gesendet an',
+    titreEmail: 'Ihr Sicherheitscode', titreSms: 'Nummer bestätigen',
+    sousEmail: 'Wir haben Ihren Sicherheitscode gesendet an', indesirables: 'Nicht erhalten? Schauen Sie im Spam-Ordner nach.',
+    nonConfirme: 'Ihr Konto ist noch nicht bestätigt: Wir haben Ihnen soeben einen neuen Sicherheitscode per E-Mail gesendet.', sousSms: 'Wir haben einen Sicherheitscode per SMS gesendet an',
     valider: 'Code bestätigen', renvoyer: 'Code erneut senden', renvoye: 'Code erneut gesendet.',
     patiente: 'Einen Moment…', fermer: 'Schliessen',
     champs: 'Bitte füllen Sie alle Felder aus.',
@@ -62,12 +79,24 @@ const T = {
     identifiants: 'E-Mail oder Passwort ist falsch.',
     quota: 'Zu viele Anfragen in kurzer Zeit. Bitte warten Sie einige Minuten.',
     generique: 'Etwas hat nicht funktioniert. Bitte gleich noch einmal versuchen.',
+    sousEmailBienvenue: 'Wir haben Sie soeben per E-Mail willkommen geheissen und Ihnen danach Ihren Sicherheitscode gesendet an',
+    titreNumero: 'Ihre Mobilnummer',
+    sousNumero: 'Ihre E-Mail-Adresse ist bestätigt. Geben Sie die Mobilnummer an, auf der Sie Ihren Sicherheitscode per SMS erhalten möchten.',
+    boutonNumero: 'Code per SMS erhalten',
+    modifierNumero: 'Andere Nummer angeben',
+    numeroPris: 'Diese Mobilnummer ist bereits mit einem anderen RealXpert-Konto verknüpft. Geben Sie eine andere Nummer an oder melden Sie sich mit dem Konto an, das sie verwendet.',
+    sms: 'Die SMS konnte nicht an diese Nummer gesendet werden. Prüfen Sie sie oder geben Sie eine andere Mobilnummer an.',
+    titreOublie: 'Passwort zurücksetzen',
+    sousOublie: 'Geben Sie die Adresse Ihres Kontos an: Wir senden Ihnen einen Link, um ein neues Passwort zu wählen.',
+    boutonOublie: 'Link erhalten',
+    adresse: 'E-Mail-Adresse',
+    oublieEnvoye: 'Erledigt: Falls ein Konto zu dieser Adresse besteht, erhalten Sie eine E-Mail mit einem Link, um ein neues Passwort zu wählen. Schauen Sie auch im Spam-Ordner nach.',
   },
   EN: {
     page: 'Ma discussion - EN.dc.html',
-    titreEmail: 'Confirm your email', titreSms: 'Confirm your number',
-    sousEmail: 'We sent a verification code to', indesirables: 'Not received? Please check your junk folder.',
-    nonConfirme: 'Your account is not confirmed yet: we have just sent you a new code by email.', sousSms: 'We sent a verification code to',
+    titreEmail: 'Your security code', titreSms: 'Confirm your number',
+    sousEmail: 'We sent your security code to', indesirables: 'Not received? Please check your junk folder.',
+    nonConfirme: 'Your account is not confirmed yet: we have just sent you a new security code by email.', sousSms: 'We sent a security code by text message to',
     valider: 'Confirm code', renvoyer: 'Send a new code', renvoye: 'New code sent.',
     patiente: 'One moment…', fermer: 'Close',
     champs: 'Please fill in every field.',
@@ -80,12 +109,24 @@ const T = {
     identifiants: 'Wrong email or password.',
     quota: 'Too many requests in a short time. Please wait a few minutes.',
     generique: 'Something did not work. Try again in a moment.',
+    sousEmailBienvenue: 'We have just welcomed you by email, then sent your security code to',
+    titreNumero: 'Your mobile number',
+    sousNumero: 'Your email is confirmed. Give the mobile number on which to receive your security code by text message.',
+    boutonNumero: 'Get the code by text',
+    modifierNumero: 'Use another number',
+    numeroPris: 'This mobile number is already linked to another RealXpert account. Enter another number, or sign in with the account that uses it.',
+    sms: 'The text message could not be sent to this number. Check it, or enter another mobile number.',
+    titreOublie: 'Reset your password',
+    sousOublie: 'Give the address of your account: we will send you a link to choose a new password.',
+    boutonOublie: 'Get the link',
+    adresse: 'Email address',
+    oublieEnvoye: 'Done: if an account exists for this address, you will receive an email with a link to choose a new password. Please check your junk folder too.',
   },
   IT: {
     page: 'Ma discussion - IT.dc.html',
-    titreEmail: 'Conferma la tua e-mail', titreSms: 'Conferma il tuo numero',
-    sousEmail: 'Abbiamo inviato un codice di verifica a', indesirables: 'Non l’hai ricevuto? Controlla la posta indesiderata.',
-    nonConfirme: 'Il tuo account non è ancora confermato: ti abbiamo appena inviato un nuovo codice via e-mail.', sousSms: 'Abbiamo inviato un codice di verifica al',
+    titreEmail: 'Il tuo codice di sicurezza', titreSms: 'Conferma il tuo numero',
+    sousEmail: 'Abbiamo inviato il tuo codice di sicurezza a', indesirables: 'Non l’hai ricevuto? Controlla la posta indesiderata.',
+    nonConfirme: 'Il tuo account non è ancora confermato: ti abbiamo appena inviato un nuovo codice di sicurezza via e-mail.', sousSms: 'Abbiamo inviato un codice di sicurezza via SMS al',
     valider: 'Conferma il codice', renvoyer: 'Invia un nuovo codice', renvoye: 'Nuovo codice inviato.',
     patiente: 'Un momento…', fermer: 'Chiudi',
     champs: 'Compila tutti i campi.',
@@ -98,21 +139,40 @@ const T = {
     identifiants: 'E-mail o password errati.',
     quota: 'Troppe richieste in poco tempo. Attendi qualche minuto.',
     generique: 'Qualcosa non ha funzionato. Riprova tra un istante.',
+    sousEmailBienvenue: 'Ti abbiamo appena dato il benvenuto via e-mail, poi inviato il tuo codice di sicurezza a',
+    titreNumero: 'Il tuo numero di cellulare',
+    sousNumero: 'La tua e-mail è confermata. Indica il cellulare su cui ricevere il codice di sicurezza via SMS.',
+    boutonNumero: 'Ricevi il codice via SMS',
+    modifierNumero: 'Usa un altro numero',
+    numeroPris: 'Questo numero di cellulare è già collegato a un altro account RealXpert. Indica un altro numero, oppure accedi con l’account che lo utilizza.',
+    sms: 'Non è stato possibile inviare l’SMS a questo numero. Controllalo o indica un altro cellulare.',
+    titreOublie: 'Reimposta la password',
+    sousOublie: 'Indica l’indirizzo del tuo account: ti inviamo un link per scegliere una nuova password.',
+    boutonOublie: 'Ricevi il link',
+    adresse: 'Indirizzo e-mail',
+    oublieEnvoye: 'Fatto: se esiste un account per questo indirizzo, riceverai un’e-mail con un link per scegliere una nuova password. Controlla anche la posta indesiderata.',
   },
 }[LANGUE]
 
 const EMAIL_VALIDE = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/
-const NUMERO_VALIDE = /^\+[1-9]\d{7,14}$/
+// La page des comptes, où mène le lien « choisir un nouveau mot de passe » de l'e-mail.
+const PAGE_COMPTES = 'https://realxpert-site.vercel.app/compte.html'
 
+/** Par le code d'erreur d'abord : un numéro déjà rattaché à un autre compte a le même libellé anglais
+ *  (« already been registered ») qu'une adresse déjà prise (26.10). */
 function messageDeLErreur(erreur) {
+  const code = String(erreur?.code || '')
   const brut = (erreur?.message || '').toLowerCase()
-  if (erreur?.status === 429 || brut.includes('rate limit')) return T.quota
-  if (brut.includes('already registered')) return T.existe
-  if (brut.includes('invalid login')) return T.identifiants
-  if (brut.includes('token') || brut.includes('otp')) return T.codeFaux
-  if (brut.includes('password')) return T.motdepasse
+  if (erreur?.status === 429 || code.includes('rate_limit') || brut.includes('rate limit')) return T.quota
+  if (code === 'phone_exists' || brut.includes('phone number has already')) return T.numeroPris
+  if (code === 'sms_send_failed' || brut.includes('sms') || brut.includes('phone change otp')) return T.sms
+  if (brut.includes('error sending')) return T.generique
+  if (code === 'email_exists' || code === 'user_already_exists' || brut.includes('already registered') || brut.includes('already been registered')) return T.existe
+  if (code === 'invalid_credentials' || brut.includes('invalid login')) return T.identifiants
+  if (code === 'otp_expired' || brut.includes('token') || brut.includes('otp')) return T.codeFaux
+  if (code === 'weak_password' || brut.includes('password')) return T.motdepasse
   if (brut.includes('phone')) return T.telephone
-  if (brut.includes('email')) return T.email
+  if (code === 'email_address_invalid' || brut.includes('email')) return T.email
   return T.generique
 }
 
@@ -136,8 +196,12 @@ function champsDuPanneau(sheet) {
 /* ---------- Mon panneau d'étapes, réinstallé s'il disparaît ---------- */
 
 let boite = null
-let etape = null          // 'email' | 'sms'
+let saisieNumero = null
+let etape = null          // 'email' | 'numero' | 'sms' | 'oublie'
 let email = '', telephone = ''
+let apresInscription = false   // code e-mail demandé par l'inscription : la bienvenue est partie juste avant
+
+const STYLE_CHAMP = 'width:100%; box-sizing:border-box; font-family:inherit; font-size:16px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:12px; padding:14px 15px;'
 
 function construireBoite() {
   const d = document.createElement('div')
@@ -155,19 +219,26 @@ function construireBoite() {
         <p data-role="message" style="display:none; font-size:14.5px; line-height:1.5; border-radius:11px; padding:12px 14px; margin:0 0 16px;"></p>
         <input data-role="code" type="text" inputmode="numeric" maxlength="8" autocomplete="one-time-code"
           style="width:100%; box-sizing:border-box; font-family:inherit; font-size:27px; font-weight:800; letter-spacing:9px; text-align:center; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:12px; padding:15px 10px;">
+        <input data-role="tel" type="tel" autocomplete="tel" style="${STYLE_CHAMP}">
+        <input data-role="adresse" type="email" autocomplete="email" placeholder="${T.adresse}" style="${STYLE_CHAMP}">
         <button data-role="valider" style="width:100%; margin-top:16px; background:#ffb90d; color:#fff; border:none; font-family:inherit; font-size:16px; font-weight:800; padding:15px; border-radius:12px; cursor:pointer;"></button>
-        <p style="text-align:center; margin:18px 0 0;">
+        <p data-role="liens" style="text-align:center; margin:18px 0 0; display:flex; flex-direction:column; gap:10px; align-items:center;">
           <button data-role="renvoyer" style="background:none; border:none; font-family:inherit; font-size:14px; font-weight:700; color:#1d4fb0; cursor:pointer;"></button>
+          <button data-role="modifier" style="background:none; border:none; font-family:inherit; font-size:14px; font-weight:700; color:#1d4fb0; cursor:pointer;"></button>
         </p>
       </div>
     </div>`
   d.querySelector('[data-role="fermer"]').onclick = fermerBoite
   d.querySelector('[data-role="voile"]').onclick = fermerBoite
-  d.querySelector('[data-role="valider"]').onclick = validerCode
+  d.querySelector('[data-role="valider"]').onclick = valider
   d.querySelector('[data-role="renvoyer"]').onclick = renvoyerCode
-  d.querySelector('[data-role="code"]').addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); validerCode() }
-  })
+  d.querySelector('[data-role="modifier"]').onclick = () => { etape = 'numero'; afficherBoite(); preremplirNumero() }
+  for (const role of ['code', 'tel', 'adresse']) {
+    d.querySelector(`[data-role="${role}"]`).addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); valider() }
+    })
+  }
+  saisieNumero = monterSaisieTelephone(d.querySelector('[data-role="tel"]'), { langue: LANGUE.toLowerCase(), exempleEnPlaceholder: true })
   return d
 }
 
@@ -180,24 +251,42 @@ function dire(texte, type = 'erreur') {
   p.textContent = texte
 }
 
+const TITRES = { email: 'titreEmail', numero: 'titreNumero', sms: 'titreSms', oublie: 'titreOublie' }
+const BOUTONS = { email: 'valider', numero: 'boutonNumero', sms: 'valider', oublie: 'boutonOublie' }
+
 function afficherBoite() {
   if (!boite) boite = construireBoite()
   if (!document.body.contains(boite)) document.body.appendChild(boite)
-  boite.querySelector('[data-role="titre"]').textContent = etape === 'email' ? T.titreEmail : T.titreSms
+  const voir = (role, oui) => { boite.querySelector(`[data-role="${role}"]`).style.display = oui ? '' : 'none' }
+  boite.querySelector('[data-role="titre"]').textContent = T[TITRES[etape]]
   boite.querySelector('[data-role="sous"]').textContent =
-    (etape === 'email' ? T.sousEmail : T.sousSms) + ' ' + (etape === 'email' ? email : formaterPourAffichage(telephone)) + '.'
-    + (etape === 'email' ? ' ' + T.indesirables : '')
-  boite.querySelector('[data-role="valider"]').textContent = T.valider
+    etape === 'email' ? (apresInscription ? T.sousEmailBienvenue : T.sousEmail) + ' ' + email + '. ' + T.indesirables
+      : etape === 'sms' ? T.sousSms + ' ' + formaterPourAffichage(telephone) + '.'
+        : etape === 'numero' ? T.sousNumero : T.sousOublie
+  boite.querySelector('[data-role="valider"]').textContent = T[BOUTONS[etape]]
   boite.querySelector('[data-role="renvoyer"]').textContent = T.renvoyer
+  boite.querySelector('[data-role="modifier"]').textContent = T.modifierNumero
+  voir('code', etape === 'email' || etape === 'sms')
+  voir('tel', etape === 'numero')
+  voir('adresse', etape === 'oublie')
+  voir('renvoyer', etape === 'email' || etape === 'sms')
+  voir('modifier', etape === 'sms')
   const champ = boite.querySelector('[data-role="code"]')
   champ.value = ''
-  champ.focus()
+  boite.querySelector(`[data-role="${etape === 'numero' ? 'tel' : etape === 'oublie' ? 'adresse' : 'code'}"]`).focus()
   dire('')
 }
 
 function fermerBoite() {
   etape = null
   if (boite && document.body.contains(boite)) boite.remove()
+}
+
+function preremplirNumero() {
+  const champ = boite?.querySelector('[data-role="tel"]')
+  if (!champ || !telephone || champ.value) return
+  champ.value = telephone
+  champ.dispatchEvent(new Event('input'))   // remis en forme, drapeau du pays
 }
 
 // Le rendu de la page peut emporter ce qu'il ne connaît pas : on remet la boîte en place.
@@ -242,7 +331,7 @@ async function inscrire(sheet, bouton) {
   occupe(bouton, false, texteBouton)
   if (error) return alerteSheet(sheet, messageDeLErreur(error))
 
-  email = adresse; telephone = numero
+  email = adresse; telephone = numero; apresInscription = true
   etape = 'email'
   afficherBoite()
 }
@@ -263,28 +352,45 @@ async function connecter(sheet, bouton) {
     // Compte créé mais e-mail jamais confirmé : le mot de passe est bon, il manque le
     // code. On en renvoie un et on reprend l'inscription à cette étape.
     if (error.code === 'email_not_confirmed' || /not confirmed/i.test(error.message || '')) {
-      email = adresse
+      email = adresse; apresInscription = false
       await supabase.auth.resend({ type: 'signup', email })
       etape = 'email'
       afficherBoite()
       return dire(T.nonConfirme, 'info')
     }
-    return alerteSheet(sheet, T.identifiants)
+    return alerteSheet(sheet, messageDeLErreur(error) === T.quota ? T.quota : T.identifiants)
   }
-  // E-mail confirmé mais pas le numéro : on reprend à l'étape du SMS, sinon la
-  // discussion renverrait vers l'inscription.
+  // E-mail confirmé mais pas le numéro : on reprend à l'étape du numéro, prérempli — le client voit
+  // où part le SMS avant de le demander. Sinon la discussion renverrait vers l'inscription.
   if (!data.user?.phone_confirmed_at) {
     email = data.user?.email || adresse
     telephone = data.user?.user_metadata?.telephone || ''
-    if (telephone) {
-      const { error: erreurNumero } = await supabase.auth.updateUser({ phone: telephone })
-      if (erreurNumero) return alerteSheet(sheet, messageDeLErreur(erreurNumero))
-      etape = 'sms'
-      afficherBoite()
-      return
-    }
+    etape = 'numero'
+    afficherBoite()
+    preremplirNumero()
+    return
   }
   partirVersLaDiscussion(data.session)
+}
+
+/** Mot de passe oublié : l'e-mail porte un lien vers la page des comptes, où l'on choisit le nouveau. */
+function ouvrirOublie(sheet) {
+  effacerAlerte(sheet)
+  etape = 'oublie'
+  afficherBoite()
+  const adresse = (champsDuPanneau(sheet).email?.value || '').trim()
+  if (adresse) boite.querySelector('[data-role="adresse"]').value = adresse
+}
+
+async function envoyerLien() {
+  const adresse = boite.querySelector('[data-role="adresse"]').value.trim()
+  const bouton = boite.querySelector('[data-role="valider"]')
+  if (!EMAIL_VALIDE.test(adresse)) return dire(T.email)
+  occupe(bouton, true, T.boutonOublie)
+  const { error } = await supabase.auth.resetPasswordForEmail(adresse, { redirectTo: `${PAGE_COMPTES}?lang=${LANGUE.toLowerCase()}` })
+  occupe(bouton, false, T.boutonOublie)
+  if (error && messageDeLErreur(error) === T.quota) return dire(T.quota)
+  dire(T.oublieEnvoye, 'info')   // même réponse si le compte n'existe pas : on ne révèle rien
 }
 
 function effacerAlerte(sheet) {
@@ -308,6 +414,37 @@ function boutonPrincipal(sheet) {
   return [...sheet.querySelectorAll('button')].find(b => !b.getAttribute('aria-label'))
 }
 
+/** Rattache le numéro au compte (e-mail confirmé) : Supabase envoie alors le code par SMS. Refusé
+ *  (numéro déjà pris, SMS impossible, quota), on revient à la saisie du numéro avec la raison. */
+async function attacherNumero(numero) {
+  telephone = numero || ''
+  if (!telephone) { etape = 'numero'; afficherBoite(); return false }
+  const { error } = await supabase.auth.updateUser({ phone: telephone, data: { telephone } })
+  if (error) {
+    etape = 'numero'; afficherBoite(); preremplirNumero()
+    dire(messageDeLErreur(error))
+    return false
+  }
+  etape = 'sms'
+  afficherBoite()
+  return true
+}
+
+function valider() {
+  if (etape === 'numero') return envoyerNumero()
+  if (etape === 'oublie') return envoyerLien()
+  return validerCode()
+}
+
+async function envoyerNumero() {
+  const bouton = boite.querySelector('[data-role="valider"]')
+  const numero = saisieNumero?.e164() || ''
+  if (!numero || !saisieNumero.valide()) return dire(T.telephone)
+  occupe(bouton, true, T.boutonNumero)
+  const envoye = await attacherNumero(numero)
+  occupe(bouton, false, envoye ? T.valider : T.boutonNumero)
+}
+
 async function validerCode() {
   const champ = boite.querySelector('[data-role="code"]')
   const bouton = boite.querySelector('[data-role="valider"]')
@@ -319,19 +456,18 @@ async function validerCode() {
     let { data, error } = await supabase.auth.verifyOtp({ email, token: saisi, type: 'signup' })
     if (error) ({ data, error } = await supabase.auth.verifyOtp({ email, token: saisi, type: 'email' }))
     if (error) { occupe(bouton, false, T.valider); return dire(T.codeFaux) }
+    if (data?.user?.phone_confirmed_at) return partirVersLaDiscussion(data.session)
     // Arrivé par la connexion, le numéro n'a pas été saisi ici : il est dans le compte.
-    telephone = telephone || data?.user?.user_metadata?.telephone || ''
-    const { error: erreurNumero } = await supabase.auth.updateUser({ phone: telephone })
-    occupe(bouton, false, T.valider)
-    if (erreurNumero) return dire(messageDeLErreur(erreurNumero))
-    etape = 'sms'
-    afficherBoite()
+    const envoye = await attacherNumero(telephone || data?.user?.user_metadata?.telephone || '')
+    occupe(bouton, false, envoye ? T.valider : T.boutonNumero)
     return
   }
 
-  const { error } = await supabase.auth.verifyOtp({ phone: telephone, token: saisi, type: 'phone_change' })
+  const { data, error } = await supabase.auth.verifyOtp({ phone: telephone, token: saisi, type: 'phone_change' })
   occupe(bouton, false, T.valider)
   if (error) return dire(T.codeFaux)
+  // Le numéro confirmé devient celui de la fiche (Mon compte, ERP) : il a pu changer depuis l'inscription.
+  if (data?.user?.id) await supabase.from('profils').update({ telephone }).eq('id', data.user.id)
   const { data: { session } } = await supabase.auth.getSession()
   partirVersLaDiscussion(session)
 }
@@ -339,10 +475,12 @@ async function validerCode() {
 async function renvoyerCode() {
   const bouton = boite.querySelector('[data-role="renvoyer"]')
   bouton.disabled = true
-  if (etape === 'email') await supabase.auth.resend({ type: 'signup', email })
-  else await supabase.auth.updateUser({ phone: telephone })
-  dire(T.renvoye, 'info')
+  const { error } = etape === 'email'
+    ? await supabase.auth.resend({ type: 'signup', email })
+    : await supabase.auth.updateUser({ phone: telephone })
   setTimeout(() => { bouton.disabled = false }, 30000)
+  if (error) return dire(messageDeLErreur(error))
+  dire(T.renvoye, 'info')
 }
 
 /** La session et la question passent par le fragment : il n'atteint jamais un serveur. */
@@ -359,6 +497,20 @@ function partirVersLaDiscussion(session) {
 /* ---------- Les boutons de la maquette ---------- */
 
 document.addEventListener('click', e => {
+  // « Mot de passe oublié ? » de la maquette (un lien vers le haut de page) : le vrai circuit.
+  const lien = e.target.closest?.('a')
+  const sheetDuLien = lien?.closest('[data-r="sheet"]')
+  if (lien && sheetDuLien && /oubli|vergessen|forgot|dimenticat/i.test(lien.textContent || '')) {
+    e.preventDefault()
+    return ouvrirOublie(sheetDuLien)
+  }
+  // « Déjà un compte ? Se connecter » du panneau d'inscription (un lien vers le haut de page, sans
+  // effet) : la connexion de la page des comptes, comme « Mon compte » du menu.
+  if (lien && sheetDuLien && /^\s*(se connecter|anmelden|log in|sign in|accedi)\s*$/i.test(lien.textContent || '')) {
+    e.preventDefault()
+    location.href = `${PAGE_COMPTES}?lang=${LANGUE.toLowerCase()}&mode=connexion`
+    return
+  }
   const bouton = e.target.closest?.('button')
   if (!bouton || bouton.getAttribute('aria-label')) return
   const sheet = bouton.closest('[data-r="sheet"]')
