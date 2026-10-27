@@ -10,6 +10,13 @@
 // raison — plus jamais un écran de code qui attend un SMS parti nulle part ; « Mot de passe oublié ? »
 // envoie un lien qui ouvre la page des comptes (realxpert-site), où l'on choisit le nouveau mot de passe.
 //
+// 27.10.2026 (Franck : « le mode debug avec la petite coccinelle […] pour bypasser le contrôle d'intégrité du
+// numéro de téléphone et finaliser l'inscription de mes personnages de test ») — comme la page des comptes :
+// « ?debug=1 » allume le mode essai sur ce navigateur (« ?debug=0 » l'éteint). Supabase n'accepte un numéro
+// que sur UN compte : en mode essai, un numéro déjà pris bascule tout seul sur un numéro d'essai unique
+// (+41 00 …, jamais attribué), et le 🐞 de l'étape du numéro fait de même à la demande. Le code SMS part
+// sur le vrai mobile saisi — seulement s'il est déclaré mobile d'essai côté serveur (telephones_essai).
+//
 // Les deux sites sont sur des domaines différents : la session ouverte ici n'existe pas
 // là-bas. Elle est donc transmise dans le fragment de l'URL — jamais envoyé au serveur —
 // puis effacée de la barre d'adresse à l'arrivée. C'est le procédé qu'emploie Supabase
@@ -54,6 +61,7 @@ const T = {
     boutonNumero: 'Recevoir le code par SMS',
     modifierNumero: 'Changer de numéro',
     numeroPris: 'Ce numéro de mobile est déjà rattaché à un autre compte RealXpert. Indiquez un autre numéro, ou connectez-vous avec le compte qui l’utilise.',
+    essaiBouton: 'Mode essai : rattacher un numéro d’essai unique (+41 00 …) — le code SMS part sur le mobile saisi', essaiSms: 'Mode essai — numéro d’essai {essai}.',
     sms: 'Le SMS n’a pas pu partir vers ce numéro. Vérifiez-le, ou indiquez un autre mobile.',
     titreOublie: 'Réinitialiser votre mot de passe',
     sousOublie: 'Indiquez l’adresse de votre compte : nous vous envoyons un lien pour choisir un nouveau mot de passe.',
@@ -83,6 +91,7 @@ const T = {
     boutonNumero: 'Code per SMS erhalten',
     modifierNumero: 'Andere Nummer angeben',
     numeroPris: 'Diese Mobilnummer ist bereits mit einem anderen RealXpert-Konto verknüpft. Geben Sie eine andere Nummer an oder melden Sie sich mit dem Konto an, das sie verwendet.',
+    essaiBouton: 'Testmodus: eine eindeutige Testnummer (+41 00 …) verknüpfen — der SMS-Code geht an die eingegebene Mobilnummer', essaiSms: 'Testmodus — Testnummer {essai}.',
     sms: 'Die SMS konnte nicht an diese Nummer gesendet werden. Prüfen Sie sie oder geben Sie eine andere Mobilnummer an.',
     titreOublie: 'Passwort zurücksetzen',
     sousOublie: 'Geben Sie die Adresse Ihres Kontos an: Wir senden Ihnen einen Link, um ein neues Passwort zu wählen.',
@@ -112,6 +121,7 @@ const T = {
     boutonNumero: 'Get the code by text',
     modifierNumero: 'Use another number',
     numeroPris: 'This mobile number is already linked to another RealXpert account. Enter another number, or sign in with the account that uses it.',
+    essaiBouton: 'Test mode: attach a unique test number (+41 00 …) — the SMS code goes to the mobile entered', essaiSms: 'Test mode — test number {essai}.',
     sms: 'The text message could not be sent to this number. Check it, or enter another mobile number.',
     titreOublie: 'Reset your password',
     sousOublie: 'Give the address of your account: we will send you a link to choose a new password.',
@@ -141,6 +151,7 @@ const T = {
     boutonNumero: 'Ricevi il codice via SMS',
     modifierNumero: 'Usa un altro numero',
     numeroPris: 'Questo numero di cellulare è già collegato a un altro account RealXpert. Indica un altro numero, oppure accedi con l’account che lo utilizza.',
+    essaiBouton: 'Modalità prova: collegare un numero di prova unico (+41 00 …) — il codice SMS va al cellulare inserito', essaiSms: 'Modalità prova — numero di prova {essai}.',
     sms: 'Non è stato possibile inviare l’SMS a questo numero. Controllalo o indica un altro cellulare.',
     titreOublie: 'Reimposta la password',
     sousOublie: 'Indica l’indirizzo del tuo account: ti inviamo un link per scegliere una nuova password.',
@@ -195,6 +206,17 @@ let boite = null
 let saisieNumero = null
 let etape = null          // 'email' | 'numero' | 'sms' | 'oublie'
 let email = '', telephone = ''
+let mobileEssai = ''      // mode essai : le vrai mobile qui reçoit le code du numéro d'essai
+
+/** Le mode essai, allumé sur ce navigateur par « ?debug=1 » (« ?debug=0 » l'éteint), comme la page des comptes. */
+const DEBUG = (() => {
+  const demande = new URLSearchParams(location.search).get('debug')
+  try {
+    if (demande === '1') localStorage.setItem('rx-debug', '1')
+    if (demande === '0') localStorage.removeItem('rx-debug')
+    return localStorage.getItem('rx-debug') === '1'
+  } catch { return demande === '1' }
+})()
 
 const STYLE_CHAMP = 'width:100%; box-sizing:border-box; font-family:inherit; font-size:16px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:12px; padding:14px 15px;'
 
@@ -206,7 +228,8 @@ function construireBoite() {
     <div data-role="voile" style="position:absolute; inset:0; background:rgba(10,25,45,0.55); backdrop-filter:blur(2px);"></div>
     <div style="position:relative; width:440px; max-width:calc(92 * var(--rx-vw)); height:100%; background:#fff; box-shadow:-24px 0 60px -20px rgba(10,25,45,0.5); overflow-y:auto;">
       <div style="padding:30px 34px 40px; font-family:inherit;">
-        <div style="display:flex; justify-content:flex-end; margin-bottom:6px;">
+        <div style="display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:6px;">
+          <button data-role="essai" type="button" title="${T.essaiBouton}" aria-label="${T.essaiBouton}" style="display:none; width:36px; height:36px; border-radius:50%; border:1px dashed #d98a1c; background:#fff8ec; font-size:17px; line-height:1; cursor:pointer;">🐞</button>
           <button data-role="fermer" aria-label="${T.fermer}" style="background:none; border:none; cursor:pointer; color:#8a97a3; padding:6px; line-height:0; font-size:22px;">&times;</button>
         </div>
         <h2 data-role="titre" style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;"></h2>
@@ -228,6 +251,7 @@ function construireBoite() {
   d.querySelector('[data-role="valider"]').onclick = valider
   d.querySelector('[data-role="renvoyer"]').onclick = renvoyerCode
   d.querySelector('[data-role="modifier"]').onclick = () => { etape = 'numero'; afficherBoite(); preremplirNumero() }
+  d.querySelector('[data-role="essai"]').onclick = () => attacherNumeroEssai(saisieNumero?.e164() || telephone)
   for (const role of ['code', 'tel', 'adresse']) {
     d.querySelector(`[data-role="${role}"]`).addEventListener('keydown', e => {
       if (e.key === 'Enter') { e.preventDefault(); valider() }
@@ -256,7 +280,7 @@ function afficherBoite() {
   boite.querySelector('[data-role="titre"]').textContent = T[TITRES[etape]]
   boite.querySelector('[data-role="sous"]').textContent =
     etape === 'email' ? T.sousEmail + ' ' + email + '. ' + T.indesirables
-      : etape === 'sms' ? T.sousSms + ' ' + formaterPourAffichage(telephone) + '.'
+      : etape === 'sms' ? T.sousSms + ' ' + formaterPourAffichage(mobileEssai || telephone) + '.' + (mobileEssai ? ' ' + T.essaiSms.replace('{essai}', telephone) : '')
         : etape === 'numero' ? T.sousNumero : T.sousOublie
   boite.querySelector('[data-role="valider"]').textContent = T[BOUTONS[etape]]
   boite.querySelector('[data-role="renvoyer"]').textContent = T.renvoyer
@@ -266,6 +290,7 @@ function afficherBoite() {
   voir('adresse', etape === 'oublie')
   voir('renvoyer', etape === 'email' || etape === 'sms')
   voir('modifier', etape === 'sms')
+  voir('essai', DEBUG && etape === 'numero')
   const champ = boite.querySelector('[data-role="code"]')
   champ.value = ''
   boite.querySelector(`[data-role="${etape === 'numero' ? 'tel' : etape === 'oublie' ? 'adresse' : 'code'}"]`).focus()
@@ -413,13 +438,36 @@ function boutonPrincipal(sheet) {
  *  (numéro déjà pris, SMS impossible, quota), on revient à la saisie du numéro avec la raison. */
 async function attacherNumero(numero) {
   telephone = numero || ''
+  mobileEssai = ''
   if (!telephone) { etape = 'numero'; afficherBoite(); return false }
   const { error } = await supabase.auth.updateUser({ phone: telephone, data: { telephone } })
+  // Mode essai : le numéro appartient déjà à un autre compte (un persona précédent) — numéro d'essai.
+  if (error && DEBUG && (error.code === 'phone_exists' || /phone number has already/i.test(error.message || ''))) {
+    return attacherNumeroEssai(numero)
+  }
   if (error) {
     etape = 'numero'; afficherBoite(); preremplirNumero()
     dire(messageDeLErreur(error))
     return false
   }
+  etape = 'sms'
+  afficherBoite()
+  return true
+}
+
+/** Mode essai : un numéro d'essai unique pour ce compte ; le code part sur le vrai mobile (s'il est déclaré
+ *  mobile d'essai côté serveur — sinon le SMS est refusé et l'on revient à la saisie avec la raison). */
+async function attacherNumeroEssai(reel) {
+  if (!reel || reel.startsWith('+4100')) { etape = 'numero'; afficherBoite(); preremplirNumero(); dire(T.telephone); return false }
+  const essai = '+4100' + String(Math.floor(Math.random() * 1e7)).padStart(7, '0')
+  const { error } = await supabase.auth.updateUser({ phone: essai, data: { telephone: reel } })
+  if (error) {
+    telephone = reel
+    etape = 'numero'; afficherBoite(); preremplirNumero()
+    dire(messageDeLErreur(error))
+    return false
+  }
+  telephone = essai; mobileEssai = reel
   etape = 'sms'
   afficherBoite()
   return true
@@ -462,7 +510,7 @@ async function validerCode() {
   occupe(bouton, false, T.valider)
   if (error) return dire(T.codeFaux)
   // Le numéro confirmé devient celui de la fiche (Mon compte, ERP) : il a pu changer depuis l'inscription.
-  if (data?.user?.id) await supabase.from('profils').update({ telephone }).eq('id', data.user.id)
+  if (data?.user?.id) await supabase.from('profils').update({ telephone: mobileEssai || telephone }).eq('id', data.user.id)
   const { data: { session } } = await supabase.auth.getSession()
   partirVersLaDiscussion(session)
 }
