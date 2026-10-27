@@ -680,12 +680,12 @@
                   <p style="font-size:16px; line-height:1.6; color:#6a7d92; margin:12px 0 0;">{{ d.teaser }} …</p>
                 </sc-if>
               </div>
-              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:400; flex:0 0 auto;">{{ d.sign }}</span>
+              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; flex:0 0 auto;"><sc-if value="{{ d.collapsed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="display:block;"><path d="M7 1.5v11M1.5 7h11"></path></svg></sc-if><sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="display:block;"><path d="M1.5 7h11"></path></svg></sc-if></span>
             </div>
             <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
               <div data-r="pad" style="padding:0 34px 32px 34px;">
                 <sc-for list="{{ d.paras }}" as="p" hint-placeholder-count="4">
-                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ p }}</p>
+                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;"><sc-for list="{{ p.segs }}" as="s" hint-placeholder-count="3"><span style="font-weight:{{ s.fw }}; color:{{ s.c }};">{{ s.t }}</span></sc-for></p>
                 </sc-for>
                 <div style="display:inline-flex; align-items:center; gap:7px; font-size:14.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px;" onClick="{{ d.toggle }}">Comprimi ↑</div>
               </div>
@@ -1263,43 +1263,44 @@ class Component extends DCLogic {
         titleSub: 'Quali sono i loro vantaggi e i loro limiti nell’immobiliare?',
         teaser: 'Le IA generaliste come ChatGPT o Claude sono concepite per rispondere a una grandissima varietà di argomenti',
         paras: [
-            'Le IA generaliste come ChatGPT o Claude sono concepite per trattare una grandissima varietà di argomenti. Possono essere molto utili per ottenere una spiegazione rapida, capire un concetto, esplorare piste o avere un primo orientamento.',
-          'Possono persino fornire risposte molto pertinenti, ben formulate e talvolta molto precise. Ma in un progetto immobiliare il rischio nasce proprio da qui: una risposta può sembrare giusta, logica e convincente pur essendo inadatta alla vostra situazione reale.',
-          'Un’IA generalista può orientarvi verso una soluzione che in teoria appare coerente, ma che non tiene conto di tutti gli elementi necessari a una buona decisione: il vostro immobile, la sua posizione, il vostro obiettivo, il vostro calendario, la vostra situazione finanziaria, il mercato locale, le regole svizzere, le decisioni già prese o le conseguenze concrete di ogni opzione.',
-          'Il pericolo non è quindi solo ottenere una risposta sbagliata. Il pericolo è ottenere una risposta abbastanza convincente da darvi fiducia, pur non basandosi su un’analisi completa del vostro progetto.',
-          'In un progetto immobiliare ad alta posta finanziaria, questo può portarvi a fissare un prezzo sbagliato, scegliere una strategia sbagliata, trattare in cattive condizioni, accettare un’offerta troppo in fretta o prendere una decisione che può costarvi diverse decine di migliaia di franchi.',
-          'Le IA generaliste possono quindi essere utili per domande semplici, generali o occasionali. Ma non sono concepite per seguire un progetto immobiliare svizzero nella sua globalità, integrare l’intero vostro contesto e accompagnarvi in decisioni importanti come vendere, comprare, fissare un prezzo, scegliere un’agenzia, trattare o selezionare l’agente giusto.',
+            'Le IA generaliste come ChatGPT o Claude sono concepite per trattare una **grandissima varietà di argomenti**. Possono essere molto utili per ottenere una spiegazione rapida, capire un concetto, esplorare piste o avere un **primo orientamento**.',
+          'Possono persino fornire risposte molto pertinenti, ben formulate e talvolta molto precise. Ma in un progetto immobiliare **il rischio nasce proprio da qui**: una risposta può sembrare giusta, logica e convincente pur essendo **inadatta alla vostra situazione reale**.',
+          'Un’IA generalista può orientarvi verso una soluzione che **in teoria appare coerente**, ma che **non tiene conto di tutti gli elementi necessari a una buona decisione**: il vostro immobile, la sua posizione, il vostro obiettivo, il vostro calendario, la vostra situazione finanziaria, il mercato locale, le regole svizzere, le decisioni già prese o le conseguenze concrete di ogni opzione.',
+          'Il pericolo non è quindi solo ottenere una risposta sbagliata. Il pericolo è ottenere una risposta **abbastanza convincente da darvi fiducia**, pur **non basandosi su un’analisi completa del vostro progetto**.',
+          'In un progetto immobiliare **ad alta posta finanziaria**, questo può portarvi a fissare un prezzo sbagliato, scegliere una strategia sbagliata, negoziare in condizioni sfavorevoli, accettare un’offerta troppo in fretta o prendere una decisione che può **costarvi diverse decine di migliaia di franchi**.',
+          'Le IA generaliste possono quindi essere utili per **domande semplici, generali o occasionali**. Ma **non sono concepite per seguire un progetto immobiliare svizzero nella sua globalità**, integrare l’intero vostro contesto e accompagnarvi in decisioni importanti come vendere, comprare, fissare un prezzo, scegliere un’agenzia, negoziare o selezionare l’agente giusto.',
         ] },
       { icon: '🏢', c1: '#6fb3d6', c2: '#3f7fae', accent: '#2f7fe0', kicker: 'IA dei portali immobiliari',
         titleMain: 'Le IA integrate nei portali immobiliari',
         titleSub: 'Cosa possono fare davvero per il vostro progetto?',
         teaser: 'Anche le IA integrate nei portali immobiliari hanno un ruolo diverso',
         paras: [
-          'Anche le IA integrate nei portali immobiliari hanno un ruolo diverso.',
-          'Sono concepite principalmente per facilitare l’uso della loro piattaforma: cercare immobili, filtrare annunci, creare avvisi, accedere ad alcune informazioni generali o navigare meglio tra i servizi offerti dal portale.',
-          'Possono aiutarvi a risparmiare tempo in una ricerca immobiliare o a usare meglio il sito. Ma il loro obiettivo resta legato all’esperienza del portale immobiliare.',
-          'Non sono pensate per analizzare a fondo la vostra situazione personale, comprendere l’intero vostro progetto, confrontare le vostre opzioni in modo neutrale, seguire le vostre decisioni o accompagnarvi in una strategia immobiliare completa.',
-          'Possono aiutarvi a trovare immobili o informazioni, ma non sono concepite per aiutarvi a decidere se una strategia sia davvero quella giusta per voi, se un’offerta vada accettata, se il momento sia opportuno, se il prezzo sia coerente o se il professionista scelto sia davvero adatto alla vostra situazione.',
+          'Anche le IA integrate nei portali immobiliari hanno **un ruolo diverso**.',
+          'Sono concepite principalmente per **facilitare l’uso della loro piattaforma**: cercare immobili, filtrare annunci, creare avvisi, accedere ad alcune informazioni generali o navigare meglio tra i servizi offerti dal portale.',
+          'Possono aiutarvi a **risparmiare tempo** in una ricerca immobiliare o a usare meglio il sito. Ma il loro obiettivo **resta legato all’esperienza del portale immobiliare**.',
+          'Non sono pensate per **analizzare a fondo la vostra situazione personale**, comprendere l’intero vostro progetto, **confrontare le vostre opzioni in modo neutrale**, seguire le vostre decisioni o accompagnarvi in una **strategia immobiliare completa**.',
+          'Possono aiutarvi a trovare immobili o informazioni, ma **non sono concepite per aiutarvi a decidere** se una strategia sia davvero quella giusta per voi, se un’offerta vada accettata, se il momento sia opportuno, se il prezzo sia coerente o se il professionista scelto sia davvero adatto alla vostra situazione.',
         ] },
       { icon: 'R', c1: '#6fa8ff', c2: '#2f5aa8', accent: '#2f7fe0', kicker: 'Accompagnamento RealXpert',
         titleMain: 'RealXpert',
         titleSub: 'Perché è concepito per le decisioni ad alta posta finanziaria?',
         teaser: 'RealXpert è stato concepito proprio per questo',
         paras: [
-          'RealXpert è stato concepito proprio per questo.',
-          'RealXpert non è un’IA generalista e non ha lo scopo di rispondere semplicemente a una singola domanda. È interamente dedicato all’immobiliare svizzero e concepito per accompagnarvi nelle decisioni importanti del vostro progetto.',
-          'Tiene conto della vostra situazione, dei vostri obiettivi, dei vostri vincoli, dello stato di avanzamento del vostro progetto, delle decisioni già prese e delle specificità del mercato immobiliare svizzero.',
-          'Il suo ruolo è aiutarvi a capire cosa significhi davvero un’informazione per il vostro progetto. Non conta solo una risposta, ma il modo in cui quella risposta si applica alla vostra situazione, alle opzioni che vi si presentano e alle possibili conseguenze di ogni decisione.',
-          'RealXpert vi aiuta a strutturare il vostro ragionamento, confrontare le scelte possibili, individuare i rischi, riconoscere i punti di attenzione e procedere con una visione più chiara di ciò che va fatto.',
-          'L’obiettivo è evitarvi di prendere una decisione importante sulla base di una risposta troppo generica, di un’analisi incompleta o di un consiglio che sembra giusto ma che non corrisponde davvero al vostro progetto.',
-          'Con RealXpert beneficiate di un accompagnamento specializzato, strutturato e adatto alle realtà dell’immobiliare svizzero, per prendere le decisioni giuste al momento giusto, limitare gli errori costosi e massimizzare le possibilità di riuscire nel vostro progetto nelle migliori condizioni.',
+          'RealXpert è stato concepito **proprio per questo**.',
+          'RealXpert **non è un’IA generalista** e non ha lo scopo di rispondere semplicemente a una singola domanda. È **interamente dedicato all’immobiliare svizzero** e concepito per accompagnarvi nelle **decisioni importanti del vostro progetto**.',
+          'Tiene conto **della vostra situazione, dei vostri obiettivi, dei vostri vincoli**, dello stato di avanzamento del vostro progetto, delle decisioni già prese e delle **specificità del mercato immobiliare svizzero**.',
+          'Il suo ruolo è aiutarvi a **capire cosa significhi davvero un’informazione per il vostro progetto**. Non conta solo una risposta, ma **il modo in cui quella risposta si applica alla vostra situazione**, alle opzioni che vi si presentano e alle possibili conseguenze di ogni decisione.',
+          'RealXpert vi aiuta a **strutturare il vostro ragionamento**, confrontare le scelte possibili, **individuare i rischi**, riconoscere i punti di attenzione e procedere con **una visione più chiara** di ciò che va fatto.',
+          'L’obiettivo è evitarvi di prendere **una decisione importante** sulla base di una risposta troppo generica, di un’analisi incompleta o di un consiglio che sembra giusto ma che **non corrisponde davvero al vostro progetto**.',
+          'Con RealXpert beneficiate di un **accompagnamento specializzato, strutturato e adatto alle realtà dell’immobiliare svizzero**, per **prendere le decisioni giuste al momento giusto**, **limitare gli errori costosi** e massimizzare le possibilità di realizzare il vostro progetto nelle migliori condizioni.',
         ] },
     ];
     const diffBlocks = diffData.map((d, i) => ({
-      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser, paras: d.paras,
+      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser,
+      // Les termes clés sont balisés **ainsi** dans les textes : chaque paragraphe devient une suite de segments.
+      paras: d.paras.map(texte => ({ segs: texte.split(/\*\*(.+?)\*\*/).map((t, k) => ({ t, fw: k % 2 ? 700 : 'inherit', c: k % 2 ? '#0c1f2c' : 'inherit' })) })),
       open: this.state.openDiff === i,
       collapsed: this.state.openDiff !== i,
-      sign: this.state.openDiff === i ? '\u2212' : '+',
       toggle: () => this.setState(s => ({ openDiff: s.openDiff === i ? -1 : i })),
     }));
 

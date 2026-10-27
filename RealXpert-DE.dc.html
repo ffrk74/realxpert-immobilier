@@ -680,12 +680,12 @@
                   <p style="font-size:16px; line-height:1.6; color:#6a7d92; margin:12px 0 0;">{{ d.teaser }} …</p>
                 </sc-if>
               </div>
-              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:400; flex:0 0 auto;">{{ d.sign }}</span>
+              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; flex:0 0 auto;"><sc-if value="{{ d.collapsed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="display:block;"><path d="M7 1.5v11M1.5 7h11"></path></svg></sc-if><sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="display:block;"><path d="M1.5 7h11"></path></svg></sc-if></span>
             </div>
             <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
               <div data-r="pad" style="padding:0 34px 32px 34px;">
                 <sc-for list="{{ d.paras }}" as="p" hint-placeholder-count="4">
-                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ p }}</p>
+                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;"><sc-for list="{{ p.segs }}" as="s" hint-placeholder-count="3"><span style="font-weight:{{ s.fw }}; color:{{ s.c }};">{{ s.t }}</span></sc-for></p>
                 </sc-for>
                 <div style="display:inline-flex; align-items:center; gap:7px; font-size:14.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px;" onClick="{{ d.toggle }}">Einklappen ↑</div>
               </div>
@@ -1263,43 +1263,44 @@ class Component extends DCLogic {
         titleSub: 'Was sind ihre Stärken und Grenzen im Immobilienbereich?',
         teaser: 'Allgemeine KI wie ChatGPT oder Claude ist darauf ausgelegt, eine sehr grosse Vielfalt an Themen zu beantworten',
         paras: [
-            'Allgemeine KI wie ChatGPT oder Claude ist darauf ausgelegt, eine sehr grosse Vielfalt an Themen zu behandeln. Sie kann sehr nützlich sein, um eine schnelle Erklärung zu erhalten, ein Konzept zu verstehen, Ansätze zu erkunden oder eine erste Orientierung zu bekommen.',
-          'Sie kann sogar sehr treffende, sehr gut formulierte und mitunter sehr präzise Antworten liefern. Doch bei einem Immobilienprojekt liegt genau darin das Risiko: Eine Antwort kann richtig, logisch und überzeugend wirken und dennoch für Ihre tatsächliche Situation ungeeignet sein.',
-          'Eine allgemeine KI kann Sie zu einer Lösung führen, die in der Theorie stimmig erscheint, aber nicht alle für eine gute Entscheidung nötigen Elemente berücksichtigt: Ihre Immobilie, ihre Lage, Ihr Ziel, Ihren Zeitplan, Ihre finanzielle Situation, den lokalen Markt, die Schweizer Regeln, bereits getroffene Entscheidungen oder die konkreten Folgen jeder Option.',
-          'Die Gefahr besteht also nicht nur darin, eine falsche Antwort zu erhalten. Die Gefahr besteht darin, eine Antwort zu erhalten, die überzeugend genug ist, um Ihnen Sicherheit zu geben, obwohl sie nicht auf einer vollständigen Analyse Ihres Projekts beruht.',
-          'Bei einem finanziell bedeutenden Immobilienprojekt kann Sie das dazu bringen, einen falschen Preis festzulegen, eine falsche Strategie zu wählen, unter schlechten Bedingungen zu verhandeln, ein Angebot zu schnell anzunehmen oder eine Entscheidung zu treffen, die Sie mehrere Zehntausend Franken kosten kann.',
-          'Allgemeine KI kann daher für einfache, allgemeine oder punktuelle Fragen nützlich sein. Sie ist jedoch nicht darauf ausgelegt, ein Schweizer Immobilienprojekt in seiner Gesamtheit zu begleiten, Ihren gesamten Kontext einzubeziehen und Sie bei wichtigen Entscheidungen wie Verkaufen, Kaufen, Preisfestsetzung, Agenturwahl, Verhandlung oder Auswahl des richtigen Maklers zu unterstützen.',
+            'Allgemeine KI wie ChatGPT oder Claude ist darauf ausgelegt, eine **sehr grosse Vielfalt an Themen** zu behandeln. Sie kann sehr nützlich sein, um eine schnelle Erklärung zu erhalten, ein Konzept zu verstehen, Ansätze zu erkunden oder eine **erste Orientierung** zu bekommen.',
+          'Sie kann sogar sehr treffende, sehr gut formulierte und mitunter sehr präzise Antworten liefern. Doch bei einem Immobilienprojekt **liegt genau darin das Risiko**: Eine Antwort kann richtig, logisch und überzeugend wirken und dennoch **für Ihre tatsächliche Situation ungeeignet** sein.',
+          'Eine allgemeine KI kann Sie zu einer Lösung führen, die **in der Theorie stimmig** erscheint, aber **nicht alle für eine gute Entscheidung nötigen Elemente berücksichtigt**: Ihre Immobilie, ihre Lage, Ihr Ziel, Ihren Zeitplan, Ihre finanzielle Situation, den lokalen Markt, die Schweizer Regeln, bereits getroffene Entscheidungen oder die konkreten Folgen jeder Option.',
+          'Die Gefahr besteht also nicht nur darin, eine falsche Antwort zu erhalten. Die Gefahr besteht darin, eine Antwort zu erhalten, die **überzeugend genug ist, um Ihnen Sicherheit zu geben**, obwohl sie **nicht auf einer vollständigen Analyse Ihres Projekts beruht**.',
+          'Bei einem **finanziell bedeutenden** Immobilienprojekt kann Sie das dazu bringen, einen falschen Preis festzulegen, eine falsche Strategie zu wählen, unter schlechten Bedingungen zu verhandeln, ein Angebot zu schnell anzunehmen oder eine Entscheidung zu treffen, die Sie **mehrere Zehntausend Franken kosten** kann.',
+          'Allgemeine KI kann daher für **einfache, allgemeine oder punktuelle Fragen** nützlich sein. Sie ist jedoch **nicht darauf ausgelegt, ein Schweizer Immobilienprojekt in seiner Gesamtheit zu begleiten**, Ihren gesamten Kontext einzubeziehen und Sie bei wichtigen Entscheidungen wie Verkaufen, Kaufen, Preisfestsetzung, Agenturwahl, Verhandlung oder Auswahl des richtigen Maklers zu unterstützen.',
         ] },
       { icon: '🏢', c1: '#6fb3d6', c2: '#3f7fae', accent: '#2f7fe0', kicker: 'KI von Immobilienportalen',
         titleMain: 'Die in Immobilienportale integrierte KI',
         titleSub: 'Was kann sie wirklich für Ihr Projekt tun?',
         teaser: 'Die in Immobilienportale integrierte KI hat ebenfalls eine andere Rolle',
         paras: [
-          'Die in Immobilienportale integrierte KI hat ebenfalls eine andere Rolle.',
-          'Sie ist in erster Linie darauf ausgelegt, die Nutzung ihrer Plattform zu erleichtern: Immobilien suchen, Inserate filtern, Suchaufträge erstellen, auf bestimmte allgemeine Informationen zugreifen oder sich in den Diensten des Portals besser zurechtfinden.',
-          'Sie kann Ihnen helfen, bei einer Immobiliensuche Zeit zu sparen oder die Website besser zu nutzen. Ihr Ziel bleibt jedoch an das Erlebnis des Immobilienportals gebunden.',
-          'Sie ist nicht darauf ausgelegt, Ihre persönliche Situation tiefgehend zu analysieren, Ihr gesamtes Projekt zu verstehen, Ihre Optionen neutral zu vergleichen, Ihre Entscheidungen zu verfolgen oder Sie bei einer vollständigen Immobilienstrategie zu begleiten.',
-          'Sie kann Ihnen helfen, Immobilien oder Informationen zu finden, ist aber nicht darauf ausgelegt, Ihnen bei der Entscheidung zu helfen, ob eine Strategie wirklich die richtige für Sie ist, ob ein Angebot angenommen werden sollte, ob der Zeitpunkt günstig ist, ob der Preis stimmig ist oder ob der gewählte Fachmann wirklich zu Ihrer Situation passt.',
+          'Die in Immobilienportale integrierte KI hat ebenfalls **eine andere Rolle**.',
+          'Sie ist in erster Linie darauf ausgelegt, **die Nutzung ihrer Plattform zu erleichtern**: Immobilien suchen, Inserate filtern, Suchaufträge erstellen, auf bestimmte allgemeine Informationen zugreifen oder sich in den Diensten des Portals besser zurechtfinden.',
+          'Sie kann Ihnen helfen, bei einer Immobiliensuche **Zeit zu sparen** oder die Website besser zu nutzen. Ihr Ziel bleibt jedoch **an das Erlebnis des Immobilienportals gebunden**.',
+          'Sie ist nicht darauf ausgelegt, **Ihre persönliche Situation tiefgehend zu analysieren**, Ihr gesamtes Projekt zu verstehen, **Ihre Optionen neutral zu vergleichen**, Ihre Entscheidungen zu verfolgen oder Sie bei einer **vollständigen Immobilienstrategie** zu begleiten.',
+          'Sie kann Ihnen helfen, Immobilien oder Informationen zu finden, ist aber **nicht darauf ausgelegt, Ihnen bei der Entscheidung zu helfen**, ob eine Strategie wirklich die richtige für Sie ist, ob ein Angebot angenommen werden sollte, ob der Zeitpunkt günstig ist, ob der Preis stimmig ist oder ob der gewählte Fachmann wirklich zu Ihrer Situation passt.',
         ] },
       { icon: 'R', c1: '#6fa8ff', c2: '#2f5aa8', accent: '#2f7fe0', kicker: 'RealXpert-Begleitung',
         titleMain: 'RealXpert',
         titleSub: 'Warum ist es für finanziell bedeutende Entscheidungen konzipiert?',
         teaser: 'RealXpert wurde genau dafür entwickelt',
         paras: [
-          'RealXpert wurde genau dafür entwickelt.',
-          'RealXpert ist keine allgemeine KI und hat nicht zum Ziel, bloss eine einzelne Frage zu beantworten. Es ist ganz der Schweizer Immobilienwelt gewidmet und darauf ausgelegt, Sie bei den wichtigen Entscheidungen Ihres Projekts zu begleiten.',
-          'Es berücksichtigt Ihre Situation, Ihre Ziele, Ihre Rahmenbedingungen, den Stand Ihres Projekts, die bereits getroffenen Entscheidungen und die Besonderheiten des Schweizer Immobilienmarkts.',
-          'Seine Aufgabe ist es, Ihnen zu helfen zu verstehen, was eine Information wirklich für Ihr Projekt bedeutet. Es zählt nicht nur eine Antwort, sondern die Art, wie diese Antwort auf Ihre Situation, die Ihnen offenstehenden Optionen und die möglichen Folgen jeder Entscheidung zutrifft.',
-          'RealXpert hilft Ihnen, Ihre Überlegungen zu strukturieren, die möglichen Optionen zu vergleichen, Risiken zu erkennen, die zu beachtenden Punkte auszumachen und mit einem klareren Bild dessen voranzugehen, was zu tun ist.',
-          'Das Ziel ist, zu verhindern, dass Sie eine wichtige Entscheidung auf Grundlage einer zu allgemeinen Antwort, einer unvollständigen Analyse oder eines Ratschlags treffen, der richtig scheint, aber nicht wirklich zu Ihrem Projekt passt.',
-          'Mit RealXpert profitieren Sie von einer spezialisierten, strukturierten und auf die Realitäten des Schweizer Immobilienmarkts zugeschnittenen Begleitung, um die richtigen Entscheidungen zum richtigen Zeitpunkt zu treffen, teure Fehler zu begrenzen und Ihre Chancen zu maximieren, Ihr Projekt unter den besten Bedingungen zu verwirklichen.',
+          'RealXpert wurde **genau dafür** entwickelt.',
+          'RealXpert **ist keine allgemeine KI** und hat nicht zum Ziel, bloss eine einzelne Frage zu beantworten. Es ist **ganz der Schweizer Immobilienwelt gewidmet** und darauf ausgelegt, Sie bei den **wichtigen Entscheidungen Ihres Projekts** zu begleiten.',
+          'Es berücksichtigt **Ihre Situation, Ihre Ziele, Ihre Rahmenbedingungen**, den Stand Ihres Projekts, die bereits getroffenen Entscheidungen und die **Besonderheiten des Schweizer Immobilienmarkts**.',
+          'Seine Aufgabe ist es, Ihnen zu helfen **zu verstehen, was eine Information wirklich für Ihr Projekt bedeutet**. Entscheidend ist nicht nur die Antwort an sich, sondern **wie sie sich auf Ihre Situation anwenden lässt** – auf die Ihnen offenstehenden Optionen und auf die möglichen Folgen jeder Entscheidung.',
+          'RealXpert hilft Ihnen, **Ihre Überlegungen zu strukturieren**, die möglichen Optionen zu vergleichen, **Risiken zu erkennen**, die zu beachtenden Punkte auszumachen und mit **einem klareren Bild** davon voranzukommen, was zu tun ist.',
+          'Das Ziel ist, zu verhindern, dass Sie **eine wichtige Entscheidung** auf Grundlage einer zu allgemeinen Antwort, einer unvollständigen Analyse oder eines Ratschlags treffen, der richtig scheint, aber **nicht wirklich zu Ihrem Projekt passt**.',
+          'Mit RealXpert profitieren Sie von einer **spezialisierten, strukturierten und auf die Realitäten des Schweizer Immobilienmarkts zugeschnittenen Begleitung**, um **die richtigen Entscheidungen zum richtigen Zeitpunkt** zu treffen, **teure Fehler zu begrenzen** und Ihre Chancen zu maximieren, Ihr Projekt unter den besten Bedingungen zu verwirklichen.',
         ] },
     ];
     const diffBlocks = diffData.map((d, i) => ({
-      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser, paras: d.paras,
+      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser,
+      // Les termes clés sont balisés **ainsi** dans les textes : chaque paragraphe devient une suite de segments.
+      paras: d.paras.map(texte => ({ segs: texte.split(/\*\*(.+?)\*\*/).map((t, k) => ({ t, fw: k % 2 ? 700 : 'inherit', c: k % 2 ? '#0c1f2c' : 'inherit' })) })),
       open: this.state.openDiff === i,
       collapsed: this.state.openDiff !== i,
-      sign: this.state.openDiff === i ? '\u2212' : '+',
       toggle: () => this.setState(s => ({ openDiff: s.openDiff === i ? -1 : i })),
     }));
 

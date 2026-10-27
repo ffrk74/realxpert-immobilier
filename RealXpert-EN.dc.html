@@ -680,12 +680,12 @@
                   <p style="font-size:16px; line-height:1.6; color:#6a7d92; margin:12px 0 0;">{{ d.teaser }} …</p>
                 </sc-if>
               </div>
-              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:400; flex:0 0 auto;">{{ d.sign }}</span>
+              <span style="width:38px; height:38px; border-radius:50%; background:#f0f5fb; color:#2f5aa8; display:flex; align-items:center; justify-content:center; flex:0 0 auto;"><sc-if value="{{ d.collapsed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="display:block;"><path d="M7 1.5v11M1.5 7h11"></path></svg></sc-if><sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" style="display:block;"><path d="M1.5 7h11"></path></svg></sc-if></span>
             </div>
             <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
               <div data-r="pad" style="padding:0 34px 32px 34px;">
                 <sc-for list="{{ d.paras }}" as="p" hint-placeholder-count="4">
-                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;">{{ p }}</p>
+                  <p style="font-size:16.5px; line-height:1.72; color:#42556a; margin:0 0 14px;"><sc-for list="{{ p.segs }}" as="s" hint-placeholder-count="3"><span style="font-weight:{{ s.fw }}; color:{{ s.c }};">{{ s.t }}</span></sc-for></p>
                 </sc-for>
                 <div style="display:inline-flex; align-items:center; gap:7px; font-size:14.5px; font-weight:800; color:#2f5aa8; cursor:pointer; border-bottom:2px solid #cdddef; padding-bottom:2px;" onClick="{{ d.toggle }}">Collapse ↑</div>
               </div>
@@ -1263,43 +1263,44 @@ class Component extends DCLogic {
         titleSub: 'What are their strengths and limits in real estate?',
         teaser: 'General-purpose AI such as ChatGPT or Claude is designed to answer a very wide range of topics',
         paras: [
-            'General-purpose AI such as ChatGPT or Claude is built to handle a very wide range of topics. It can be very useful for a quick explanation, understanding a concept, exploring options or getting a first insight.',
-          'It can even provide answers that are highly relevant, very well phrased and sometimes very precise. But in a real estate project, that is exactly where the risk lies: an answer can seem correct, logical and convincing while being unsuited to your actual situation.',
-          'A general-purpose AI may steer you toward a solution that looks sound in theory but doesn\u2019t account for everything a good decision requires: your property, its location, your objective, your timeline, your financial situation, the local market, Swiss rules, the decisions already made or the concrete consequences of each option.',
-          'The danger, then, isn\u2019t only getting a wrong answer. The danger is getting an answer convincing enough to make you confident, even though it isn\u2019t based on a full analysis of your project.',
-          'In a high-stakes real estate project, this can lead you to set the wrong price, choose the wrong strategy, negotiate on poor terms, accept an offer too quickly or make a decision that can cost you several tens of thousands of francs.',
-          'General-purpose AI can therefore be useful for simple, general or one-off questions. But it isn\u2019t designed to follow a Swiss real estate project as a whole, integrate your full context and guide you through major decisions such as selling, buying, setting a price, choosing an agency, negotiating or selecting the right broker.',
+            'General-purpose AI such as ChatGPT or Claude is built to handle a **very wide range of topics**. It can be very useful for a quick explanation, understanding a concept, exploring options or getting a **first insight**.',
+          'It can even provide answers that are highly relevant, very well phrased and sometimes very precise. But in a real estate project, **that is exactly where the risk lies**: an answer can seem correct, logical and convincing while being **unsuited to your actual situation**.',
+          'A general-purpose AI may steer you toward a solution that looks **sound in theory** but **doesn\u2019t account for everything a good decision requires**: your property, its location, your objective, your timeline, your financial situation, the local market, Swiss rules, the decisions already made or the concrete consequences of each option.',
+          'The danger, then, isn\u2019t only getting a wrong answer. The danger is getting an answer **convincing enough to make you confident**, even though it **isn\u2019t based on a full analysis of your project**.',
+          'In a **high-stakes** real estate project, this can lead you to set the wrong price, choose the wrong strategy, negotiate on poor terms, accept an offer too quickly or make a decision that can **cost you several tens of thousands of francs**.',
+          'General-purpose AI can therefore be useful for **simple, general or one-off questions**. But it **isn\u2019t designed to follow a Swiss real estate project as a whole**, integrate your full context and guide you through major decisions such as selling, buying, setting a price, choosing an agency, negotiating or selecting the right broker.',
         ] },
       { icon: '🏢', c1: '#6fb3d6', c2: '#3f7fae', accent: '#2f7fe0', kicker: 'Real estate portal AI',
         titleMain: 'The AI built into real estate portals',
         titleSub: 'What can it really do for your project?',
         teaser: 'The AI built into real estate portals also plays a different role',
         paras: [
-          'The AI built into real estate portals also plays a different role.',
-          'It is mainly designed to make their platform easier to use: searching for properties, filtering listings, creating alerts, accessing certain general information or navigating the portal\u2019s services more easily.',
-          'It can help you save time in a property search or use the site better. But its purpose remains tied to the real estate portal\u2019s own experience.',
-          'It isn\u2019t built to analyse your personal situation in depth, understand your project as a whole, compare your options neutrally, track your decisions or guide you through a complete real estate strategy.',
-          'It can help you find properties or information, but it isn\u2019t designed to help you decide whether a strategy is really right for you, whether an offer should be accepted, whether the timing is right, whether the price is sound or whether the chosen professional truly fits your situation.',
+          'The AI built into real estate portals also plays **a different role**.',
+          'It is mainly designed to **make the platform easier to use**: searching for properties, filtering listings, creating alerts, accessing certain general information or navigating the portal\u2019s services more easily.',
+          'It can help you **save time** in a property search or use the site better. But its purpose remains **tied to the real estate portal\u2019s own experience**.',
+          'It isn\u2019t built to **analyse your personal situation in depth**, understand your project as a whole, **compare your options neutrally**, track your decisions or guide you through a **complete real estate strategy**.',
+          'It can help you find properties or information, but it **isn\u2019t designed to help you decide** whether a strategy is really right for you, whether an offer should be accepted, whether the timing is right, whether the price is sound or whether the chosen professional truly fits your situation.',
         ] },
       { icon: 'R', c1: '#6fa8ff', c2: '#2f5aa8', accent: '#2f7fe0', kicker: 'RealXpert guidance',
         titleMain: 'RealXpert',
         titleSub: 'Why is it built for high-stakes financial decisions?',
         teaser: 'RealXpert was built precisely for this',
         paras: [
-          'RealXpert was built precisely for this.',
-          'RealXpert is not a general-purpose AI and its aim isn\u2019t simply to answer an isolated question. It is entirely dedicated to Swiss real estate and built to guide you through the important decisions of your project.',
-          'It takes into account your situation, your objectives, your constraints, how far your project has progressed, the decisions already made and the specifics of the Swiss real estate market.',
-          'Its role is to help you understand what a piece of information really means for your project. What matters isn\u2019t just an answer, but how that answer applies to your situation, the options open to you and the possible consequences of each decision.',
-          'RealXpert helps you structure your thinking, compare the possible choices, identify risks, spot the points to watch and move forward with a clearer view of what needs to be done.',
-          'The goal is to keep you from making an important decision based on an overly general answer, an incomplete analysis or advice that seems right but doesn\u2019t truly match your project.',
-          'With RealXpert, you benefit from specialised, structured guidance tailored to the realities of Swiss real estate, so you make the right decisions at the right time, limit costly mistakes and maximise your chances of succeeding in the best conditions.',
+          'RealXpert was built **precisely for this**.',
+          'RealXpert **is not a general-purpose AI** and its aim isn\u2019t simply to answer an isolated question. It is **entirely dedicated to Swiss real estate** and built to guide you through the **important decisions of your project**.',
+          'It takes into account **your situation, your objectives, your constraints**, how far your project has progressed, the decisions already made and the **specifics of the Swiss real estate market**.',
+          'Its role is to help you **understand what a piece of information really means for your project**. What matters isn\u2019t just an answer, but **how that answer applies to your situation**, the options open to you and the possible consequences of each decision.',
+          'RealXpert helps you **structure your thinking**, compare the possible choices, **identify risks**, spot the points to watch and move forward with **a clearer view** of what needs to be done.',
+          'The goal is to keep you from making **an important decision** based on an overly general answer, an incomplete analysis or advice that seems right but **doesn\u2019t truly match your project**.',
+          'With RealXpert, you benefit from **specialised, structured guidance tailored to the realities of Swiss real estate**, so you **make the right decisions at the right time**, **limit costly mistakes** and maximise your chances of carrying out your project in the best conditions.',
         ] },
     ];
     const diffBlocks = diffData.map((d, i) => ({
-      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser, paras: d.paras,
+      icon: d.icon, c1: d.c1, c2: d.c2, accent: d.accent, kicker: d.kicker, titleMain: d.titleMain, titleSub: d.titleSub, teaser: d.teaser,
+      // Les termes clés sont balisés **ainsi** dans les textes : chaque paragraphe devient une suite de segments.
+      paras: d.paras.map(texte => ({ segs: texte.split(/\*\*(.+?)\*\*/).map((t, k) => ({ t, fw: k % 2 ? 700 : 'inherit', c: k % 2 ? '#0c1f2c' : 'inherit' })) })),
       open: this.state.openDiff === i,
       collapsed: this.state.openDiff !== i,
-      sign: this.state.openDiff === i ? '\u2212' : '+',
       toggle: () => this.setState(s => ({ openDiff: s.openDiff === i ? -1 : i })),
     }));
 
