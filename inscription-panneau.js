@@ -16,6 +16,9 @@
 // que sur UN compte : en mode essai, un numéro déjà pris bascule tout seul sur un numéro d'essai unique
 // (+41 00 …, jamais attribué), et le 🐞 de l'étape du numéro fait de même à la demande. Le code SMS part
 // sur le vrai mobile saisi — seulement s'il est déclaré mobile d'essai côté serveur (telephones_essai).
+// Puis (Franck : « quand c'est mon téléphone ou celui de Marc, juste une petite détection auto avec un petit
+// symbole de debug ») : un mobile d'essai saisi (est_mobile_essai, base des comptes) suffit — le numéro
+// d'essai est pris d'office, sans « ?debug=1 », et un 🐞 le signale sur l'écran du code SMS.
 //
 // Les deux sites sont sur des domaines différents : la session ouverte ici n'existe pas
 // là-bas. Elle est donc transmise dans le fragment de l'URL — jamais envoyé au serveur —
@@ -230,6 +233,7 @@ function construireBoite() {
       <div style="padding:30px 34px 40px; font-family:inherit;">
         <div style="display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:6px;">
           <button data-role="essai" type="button" title="${T.essaiBouton}" aria-label="${T.essaiBouton}" style="display:none; width:36px; height:36px; border-radius:50%; border:1px dashed #d98a1c; background:#fff8ec; font-size:17px; line-height:1; cursor:pointer;">🐞</button>
+          <span data-role="essai-actif" title="${T.essaiSms.replace('{essai}', '').replace(/[ —.]+$/, '')}" style="display:none; width:36px; height:36px; border-radius:50%; border:1px dashed #d98a1c; background:#fff8ec; font-size:17px; line-height:34px; text-align:center; box-sizing:border-box; cursor:default;">🐞</span>
           <button data-role="fermer" aria-label="${T.fermer}" style="background:none; border:none; cursor:pointer; color:#8a97a3; padding:6px; line-height:0; font-size:22px;">&times;</button>
         </div>
         <h2 data-role="titre" style="font-size:26px; font-weight:800; line-height:1.15; letter-spacing:-0.02em; color:#0c1f2c; margin:0 0 10px;"></h2>
@@ -291,6 +295,7 @@ function afficherBoite() {
   voir('renvoyer', etape === 'email' || etape === 'sms')
   voir('modifier', etape === 'sms')
   voir('essai', DEBUG && etape === 'numero')
+  voir('essai-actif', !!mobileEssai && etape === 'sms')
   const champ = boite.querySelector('[data-role="code"]')
   champ.value = ''
   boite.querySelector(`[data-role="${etape === 'numero' ? 'tel' : etape === 'oublie' ? 'adresse' : 'code'}"]`).focus()
@@ -440,6 +445,8 @@ async function attacherNumero(numero) {
   telephone = numero || ''
   mobileEssai = ''
   if (!telephone) { etape = 'numero'; afficherBoite(); return false }
+  // Un mobile d'essai (Franck, Marc…) : numéro d'essai d'office, le code part sur ce mobile.
+  if (await estMobileEssai(telephone)) return attacherNumeroEssai(telephone)
   const { error } = await supabase.auth.updateUser({ phone: telephone, data: { telephone } })
   // Mode essai : le numéro appartient déjà à un autre compte (un persona précédent) — numéro d'essai.
   if (error && DEBUG && (error.code === 'phone_exists' || /phone number has already/i.test(error.message || ''))) {
@@ -453,6 +460,15 @@ async function attacherNumero(numero) {
   etape = 'sms'
   afficherBoite()
   return true
+}
+
+/** Le numéro saisi est-il un mobile d'essai (table telephones_essai) ? Oui ou non, jamais la liste ; en cas
+ *  de doute, non — le parcours ordinaire reprend. */
+async function estMobileEssai(numero) {
+  try {
+    const { data } = await supabase.rpc('est_mobile_essai', { p_numero: numero })
+    return data === true
+  } catch { return false }
 }
 
 /** Mode essai : un numéro d'essai unique pour ce compte ; le code part sur le vrai mobile (s'il est déclaré
