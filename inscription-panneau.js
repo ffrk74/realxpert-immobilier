@@ -20,6 +20,13 @@
 // symbole de debug ») : un mobile d'essai saisi (est_mobile_essai, base des comptes) suffit — le numéro
 // d'essai est pris d'office, sans « ?debug=1 », et un 🐞 le signale sur l'écran du code SMS.
 //
+// 27.10.2026 (Franck : « la sécurité e-mail puis du SMS, deux choses bien cloisonnées ») — un e-mail confirmé
+// l'est pour de bon : l'étape de son code ne revient jamais. Refermer le panneau puis recliquer sur « Obtenir mes
+// premiers conseils » (même formulaire vide), se reconnecter, ou s'inscrire à nouveau avec la même adresse et le
+// même mot de passe : tout reprend au code SMS — celui déjà demandé s'il y en a un, renvoyable au rythme permis
+// par Supabase (compte à rebours sur le bouton). Supabase n'accepte que le DERNIER code SMS : un code précédent
+// de moins de 10 minutes est vérifié par la fonction valider-code-sms (base des comptes).
+//
 // Les deux sites sont sur des domaines différents : la session ouverte ici n'existe pas
 // là-bas. Elle est donc transmise dans le fragment de l'URL — jamais envoyé au serveur —
 // puis effacée de la barre d'adresse à l'arrivée. C'est le procédé qu'emploie Supabase
@@ -48,6 +55,8 @@ const T = {
     sousEmail: 'Nous avons envoyé votre code de sécurité à', indesirables: 'Pas reçu ? Regardez dans vos courriers indésirables.',
     nonConfirme: 'Votre compte n’est pas encore confirmé : nous venons de vous renvoyer un code de sécurité par e-mail.', sousSms: 'Nous avons envoyé un code de sécurité par SMS au',
     valider: 'Valider le code', renvoyer: 'Renvoyer le code', renvoye: 'Code renvoyé.',
+    renvoyerDans: 'Renvoyer le code ({n} s)', essais: 'Trop de codes erronés. Patientez quelques minutes avant de réessayer.',
+    reprise: 'Votre adresse e-mail est déjà confirmée : il ne reste que votre numéro. Saisissez le code reçu par SMS — même un code précédent, s’il date de moins de 10 minutes — ou demandez-en un nouveau.',
     patiente: 'Un instant…', fermer: 'Fermer',
     champs: 'Merci de remplir tous les champs.',
     email: 'Cette adresse e-mail ne semble pas valide.',
@@ -78,6 +87,8 @@ const T = {
     sousEmail: 'Wir haben Ihren Sicherheitscode gesendet an', indesirables: 'Nicht erhalten? Schauen Sie im Spam-Ordner nach.',
     nonConfirme: 'Ihr Konto ist noch nicht bestätigt: Wir haben Ihnen soeben einen neuen Sicherheitscode per E-Mail gesendet.', sousSms: 'Wir haben einen Sicherheitscode per SMS gesendet an',
     valider: 'Code bestätigen', renvoyer: 'Code erneut senden', renvoye: 'Code erneut gesendet.',
+    renvoyerDans: 'Code erneut senden ({n} s)', essais: 'Zu viele falsche Codes. Bitte warten Sie einige Minuten, bevor Sie es erneut versuchen.',
+    reprise: 'Ihre E-Mail-Adresse ist bereits bestätigt: Es fehlt nur noch Ihre Nummer. Geben Sie den per SMS erhaltenen Code ein – auch einen früheren, sofern er weniger als 10 Minuten alt ist – oder fordern Sie einen neuen an.',
     patiente: 'Einen Moment…', fermer: 'Schliessen',
     champs: 'Bitte füllen Sie alle Felder aus.',
     email: 'Diese E-Mail-Adresse scheint nicht gültig zu sein.',
@@ -108,6 +119,8 @@ const T = {
     sousEmail: 'We sent your security code to', indesirables: 'Not received? Please check your junk folder.',
     nonConfirme: 'Your account is not confirmed yet: we have just sent you a new security code by email.', sousSms: 'We sent a security code by text message to',
     valider: 'Confirm code', renvoyer: 'Send a new code', renvoye: 'New code sent.',
+    renvoyerDans: 'Send a new code ({n} s)', essais: 'Too many incorrect codes. Please wait a few minutes before trying again.',
+    reprise: 'Your email address is already confirmed: only your number remains. Enter the code you received by SMS — even an earlier one, if it is less than 10 minutes old — or request a new one.',
     patiente: 'One moment…', fermer: 'Close',
     champs: 'Please fill in every field.',
     email: 'That email address does not look valid.',
@@ -138,6 +151,8 @@ const T = {
     sousEmail: 'Abbiamo inviato il tuo codice di sicurezza a', indesirables: 'Non l’hai ricevuto? Controlla la posta indesiderata.',
     nonConfirme: 'Il tuo account non è ancora confermato: ti abbiamo appena inviato un nuovo codice di sicurezza via e-mail.', sousSms: 'Abbiamo inviato un codice di sicurezza via SMS al',
     valider: 'Conferma il codice', renvoyer: 'Invia un nuovo codice', renvoye: 'Nuovo codice inviato.',
+    renvoyerDans: 'Invia un nuovo codice ({n} s)', essais: 'Troppi codici errati. Attendi qualche minuto prima di riprovare.',
+    reprise: 'Il tuo indirizzo e-mail è già confermato: manca solo il numero. Inserisci il codice ricevuto via SMS — anche uno precedente, se ha meno di 10 minuti — oppure richiedine uno nuovo.',
     patiente: 'Un momento…', fermer: 'Chiudi',
     champs: 'Compila tutti i campi.',
     email: 'Questo indirizzo e-mail non sembra valido.',
@@ -288,6 +303,7 @@ function afficherBoite() {
         : etape === 'numero' ? T.sousNumero : T.sousOublie
   boite.querySelector('[data-role="valider"]').textContent = T[BOUTONS[etape]]
   boite.querySelector('[data-role="renvoyer"]').textContent = T.renvoyer
+  majRenvoi()
   boite.querySelector('[data-role="modifier"]').textContent = T.modifierNumero
   voir('code', etape === 'email' || etape === 'sms')
   voir('tel', etape === 'numero')
@@ -306,6 +322,29 @@ function fermerBoite() {
   etape = null
   if (boite && document.body.contains(boite)) boite.remove()
 }
+
+/* ---------- Le renvoi du code SMS, au rythme permis par Supabase ---------- */
+
+// Supabase n'envoie pas deux codes au même numéro à moins d'une minute d'écart : le bouton le montre.
+let renvoiPossibleA = 0
+let minuteurRenvoi = null
+function bloquerRenvoi(secondes) {
+  renvoiPossibleA = Date.now() + secondes * 1000
+  clearInterval(minuteurRenvoi)
+  minuteurRenvoi = setInterval(majRenvoi, 1000)
+  majRenvoi()
+}
+function majRenvoi() {
+  const bouton = boite?.querySelector('[data-role="renvoyer"]')
+  const reste = Math.ceil((renvoiPossibleA - Date.now()) / 1000)
+  if (reste <= 0) { clearInterval(minuteurRenvoi); minuteurRenvoi = null }
+  if (!bouton || etape !== 'sms') return
+  bouton.disabled = reste > 0
+  bouton.style.opacity = reste > 0 ? '0.55' : ''
+  bouton.textContent = reste > 0 ? T.renvoyerDans.replace('{n}', reste) : T.renvoyer
+}
+/** « … after 42 seconds » : le délai que Supabase impose encore avant un nouveau code. */
+const delaiImpose = erreur => Number((erreur?.message || '').match(/after (\d+) seconds?/i)?.[1] || 0)
 
 function preremplirNumero() {
   const champ = boite?.querySelector('[data-role="tel"]')
@@ -340,21 +379,50 @@ async function inscrire(sheet, bouton) {
   const motdepasse = champs.motdepasse?.value || ''
   const texteBouton = bouton.textContent
 
+  // Une inscription déjà engagée ici (e-mail confirmé) reprend au code SMS, formulaire rempli ou non : jamais un
+  // nouveau code e-mail. Une AUTRE adresse saisie, c'est un autre compte : la session gardée est fermée ici.
+  occupe(bouton, true, texteBouton)
+  const enCours = await inscriptionInachevee()
+  occupe(bouton, false, texteBouton)
+  if (enCours) {
+    if (!adresse || adresse.toLowerCase() === String(enCours.email || '').toLowerCase()) return reprendreAuSms(enCours)
+    await supabase.auth.signOut({ scope: 'local' })
+  }
+
   if (!prenom || !nom || !adresse || !numero || !motdepasse) return alerteSheet(sheet, T.champs)
   if (!EMAIL_VALIDE.test(adresse)) return alerteSheet(sheet, T.email)
   if (!saisie?.valide()) return alerteSheet(sheet, T.telephone)
   if (motdepasse.length < 8) return alerteSheet(sheet, T.motdepasse)
 
   occupe(bouton, true, texteBouton)
-  const { error } = await supabase.auth.signUp({
+  const { data: inscription, error } = await supabase.auth.signUp({
     email: adresse, password: motdepasse,
     options: { data: {
       prenom, nom, langue: LANGUE.toLowerCase(), telephone: numero,
       consent_conseils: !!champs.consent?.checked,
     } },
   })
+  if (error) { occupe(bouton, false, texteBouton); return alerteSheet(sheet, messageDeLErreur(error)) }
+
+  // Adresse déjà inscrite et confirmée (Supabase ne le dit pas : le compte rendu n'a aucune identité) : avec le
+  // bon mot de passe, l'inscription reprend où elle en est — au code SMS, jamais à celui de l'e-mail.
+  if (inscription?.user && Array.isArray(inscription.user.identities) && inscription.user.identities.length === 0) {
+    const { data: connexion, error: refus } = await supabase.auth.signInWithPassword({ email: adresse, password: motdepasse })
+    occupe(bouton, false, texteBouton)
+    if (refus) {
+      if (refus.code === 'email_not_confirmed' || /not confirmed/i.test(refus.message || '')) {
+        email = adresse
+        await supabase.auth.resend({ type: 'signup', email })
+        etape = 'email'
+        afficherBoite()
+        return dire(T.nonConfirme, 'info')
+      }
+      return alerteSheet(sheet, T.existe)
+    }
+    if (connexion.user?.phone_confirmed_at) return partirVersLaDiscussion(connexion.session)
+    return reprendreAuSms(connexion.user)
+  }
   occupe(bouton, false, texteBouton)
-  if (error) return alerteSheet(sheet, messageDeLErreur(error))
 
   email = adresse; telephone = numero
   etape = 'email'
@@ -385,14 +453,10 @@ async function connecter(sheet, bouton) {
     }
     return alerteSheet(sheet, messageDeLErreur(error) === T.quota ? T.quota : T.identifiants)
   }
-  // E-mail confirmé mais pas le numéro : on reprend à l'étape du numéro, prérempli — le client voit
-  // où part le SMS avant de le demander. Sinon la discussion renverrait vers l'inscription.
+  // E-mail confirmé mais pas le numéro : l'inscription reprend au code SMS (27.10.2026), jamais à l'e-mail.
   if (!data.user?.phone_confirmed_at) {
     email = data.user?.email || adresse
-    telephone = data.user?.user_metadata?.telephone || ''
-    etape = 'numero'
-    afficherBoite()
-    preremplirNumero()
+    await reprendreAuSms(data.user)
     return
   }
   partirVersLaDiscussion(data.session)
@@ -439,6 +503,47 @@ function boutonPrincipal(sheet) {
   return [...sheet.querySelectorAll('button')].find(b => !b.getAttribute('aria-label'))
 }
 
+/** L'inscription engagée sur cet appareil : e-mail confirmé, numéro pas encore. Relue sur le serveur (le numéro
+ *  en attente de code n'est pas dans la session gardée). */
+async function inscriptionInachevee() {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) return null
+  const { data: { user } } = await supabase.auth.getUser()
+  return user?.email_confirmed_at && !user.phone_confirmed_at ? user : null
+}
+
+/** Reprise d'une inscription dont l'e-mail est confirmé : jamais l'étape de l'e-mail, toujours celle du SMS. Un
+ *  code déjà demandé attend sa saisie (renvoi au rythme permis) ; sinon il part au numéro donné à l'inscription. */
+async function reprendreAuSms(user) {
+  email = user.email || email
+  const reel = String(user.user_metadata?.telephone || '')
+  const enAttente = String(user.new_phone || '').replace(/\D/g, '')
+  if (!enAttente) return attacherNumero(reel)
+  telephone = '+' + enAttente
+  mobileEssai = enAttente.startsWith('4100') ? reel : ''
+  etape = 'sms'
+  afficherBoite()
+  dire(T.reprise, 'info')
+  return true
+}
+
+const FONCTION_CODE_SMS = 'https://mmhutoipdzwkvaufucko.supabase.co/functions/v1/valider-code-sms'
+/** Un code SMS refusé par Supabase (il n'accepte que le dernier) : est-ce un code précédent encore valable ?
+ *  `true` (numéro confirmé), `'essais'` (trop de codes faux), sinon `false`. */
+async function validerCodeAnterieur(code) {
+  try {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return false
+    const r = await fetch(FONCTION_CODE_SMS, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    })
+    const j = await r.json().catch(() => ({}))
+    return j.ok === true ? true : j.raison === 'essais' ? 'essais' : false
+  } catch { return false }
+}
+
 /** Rattache le numéro au compte (e-mail confirmé) : Supabase envoie alors le code par SMS. Refusé
  *  (numéro déjà pris, SMS impossible, quota), on revient à la saisie du numéro avec la raison. */
 async function attacherNumero(numero) {
@@ -459,6 +564,7 @@ async function attacherNumero(numero) {
   }
   etape = 'sms'
   afficherBoite()
+  bloquerRenvoi(60)
   return true
 }
 
@@ -486,6 +592,7 @@ async function attacherNumeroEssai(reel) {
   telephone = essai; mobileEssai = reel
   etape = 'sms'
   afficherBoite()
+  bloquerRenvoi(60)
   return true
 }
 
@@ -522,21 +629,33 @@ async function validerCode() {
     return
   }
 
-  const { data, error } = await supabase.auth.verifyOtp({ phone: telephone, token: saisi, type: 'phone_change' })
+  const { error } = await supabase.auth.verifyOtp({ phone: telephone, token: saisi, type: 'phone_change' })
+  if (error) {
+    // Supabase n'accepte que le dernier code : un code précédent encore valable est vérifié à part.
+    const verdict = await validerCodeAnterieur(saisi)
+    if (verdict !== true) { occupe(bouton, false, T.valider); return dire(verdict === 'essais' ? T.essais : T.codeFaux) }
+    await supabase.auth.refreshSession()
+  }
   occupe(bouton, false, T.valider)
-  if (error) return dire(T.codeFaux)
-  // Le numéro confirmé devient celui de la fiche (Mon compte, ERP) : il a pu changer depuis l'inscription.
-  if (data?.user?.id) await supabase.from('profils').update({ telephone: mobileEssai || telephone }).eq('id', data.user.id)
   const { data: { session } } = await supabase.auth.getSession()
+  // Le numéro confirmé devient celui de la fiche (Mon compte, ERP) : il a pu changer depuis l'inscription.
+  if (session?.user?.id) await supabase.from('profils').update({ telephone: mobileEssai || telephone }).eq('id', session.user.id)
   partirVersLaDiscussion(session)
 }
 
 async function renvoyerCode() {
   const bouton = boite.querySelector('[data-role="renvoyer"]')
   bouton.disabled = true
-  const { error } = etape === 'email'
-    ? await supabase.auth.resend({ type: 'signup', email })
-    : await supabase.auth.updateUser({ phone: telephone })
+  if (etape === 'sms') {
+    // Un nouveau code ; les précédents restent valables 10 minutes (valider-code-sms).
+    const { error } = await supabase.auth.updateUser({ phone: telephone })
+    const attente = delaiImpose(error)
+    if (attente) return bloquerRenvoi(attente)
+    if (error) { bouton.disabled = false; return dire(messageDeLErreur(error)) }
+    bloquerRenvoi(60)
+    return dire(T.renvoye, 'info')
+  }
+  const { error } = await supabase.auth.resend({ type: 'signup', email })
   setTimeout(() => { bouton.disabled = false }, 30000)
   if (error) return dire(messageDeLErreur(error))
   dire(T.renvoye, 'info')
