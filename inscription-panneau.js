@@ -49,7 +49,6 @@ const T = {
     identifiants: 'E-mail ou mot de passe incorrect.',
     quota: 'Trop de demandes en peu de temps. Patientez quelques minutes.',
     generique: 'Quelque chose n’a pas fonctionné. Réessayez dans un instant.',
-    sousEmailBienvenue: 'Nous venons de vous souhaiter la bienvenue par e-mail, puis de vous envoyer votre code de sécurité à',
     titreNumero: 'Votre numéro de mobile',
     sousNumero: 'Votre e-mail est confirmé. Indiquez le mobile sur lequel recevoir votre code de sécurité par SMS.',
     boutonNumero: 'Recevoir le code par SMS',
@@ -79,7 +78,6 @@ const T = {
     identifiants: 'E-Mail oder Passwort ist falsch.',
     quota: 'Zu viele Anfragen in kurzer Zeit. Bitte warten Sie einige Minuten.',
     generique: 'Etwas hat nicht funktioniert. Bitte gleich noch einmal versuchen.',
-    sousEmailBienvenue: 'Wir haben Sie soeben per E-Mail willkommen geheissen und Ihnen danach Ihren Sicherheitscode gesendet an',
     titreNumero: 'Ihre Mobilnummer',
     sousNumero: 'Ihre E-Mail-Adresse ist bestätigt. Geben Sie die Mobilnummer an, auf der Sie Ihren Sicherheitscode per SMS erhalten möchten.',
     boutonNumero: 'Code per SMS erhalten',
@@ -109,7 +107,6 @@ const T = {
     identifiants: 'Wrong email or password.',
     quota: 'Too many requests in a short time. Please wait a few minutes.',
     generique: 'Something did not work. Try again in a moment.',
-    sousEmailBienvenue: 'We have just welcomed you by email, then sent your security code to',
     titreNumero: 'Your mobile number',
     sousNumero: 'Your email is confirmed. Give the mobile number on which to receive your security code by text message.',
     boutonNumero: 'Get the code by text',
@@ -139,7 +136,6 @@ const T = {
     identifiants: 'E-mail o password errati.',
     quota: 'Troppe richieste in poco tempo. Attendi qualche minuto.',
     generique: 'Qualcosa non ha funzionato. Riprova tra un istante.',
-    sousEmailBienvenue: 'Ti abbiamo appena dato il benvenuto via e-mail, poi inviato il tuo codice di sicurezza a',
     titreNumero: 'Il tuo numero di cellulare',
     sousNumero: 'La tua e-mail è confermata. Indica il cellulare su cui ricevere il codice di sicurezza via SMS.',
     boutonNumero: 'Ricevi il codice via SMS',
@@ -199,7 +195,6 @@ let boite = null
 let saisieNumero = null
 let etape = null          // 'email' | 'numero' | 'sms' | 'oublie'
 let email = '', telephone = ''
-let apresInscription = false   // code e-mail demandé par l'inscription : la bienvenue est partie juste avant
 
 const STYLE_CHAMP = 'width:100%; box-sizing:border-box; font-family:inherit; font-size:16px; color:#0c1f2c; background:#f7f9fb; border:1px solid #dce3ea; border-radius:12px; padding:14px 15px;'
 
@@ -260,7 +255,7 @@ function afficherBoite() {
   const voir = (role, oui) => { boite.querySelector(`[data-role="${role}"]`).style.display = oui ? '' : 'none' }
   boite.querySelector('[data-role="titre"]').textContent = T[TITRES[etape]]
   boite.querySelector('[data-role="sous"]').textContent =
-    etape === 'email' ? (apresInscription ? T.sousEmailBienvenue : T.sousEmail) + ' ' + email + '. ' + T.indesirables
+    etape === 'email' ? T.sousEmail + ' ' + email + '. ' + T.indesirables
       : etape === 'sms' ? T.sousSms + ' ' + formaterPourAffichage(telephone) + '.'
         : etape === 'numero' ? T.sousNumero : T.sousOublie
   boite.querySelector('[data-role="valider"]').textContent = T[BOUTONS[etape]]
@@ -331,7 +326,7 @@ async function inscrire(sheet, bouton) {
   occupe(bouton, false, texteBouton)
   if (error) return alerteSheet(sheet, messageDeLErreur(error))
 
-  email = adresse; telephone = numero; apresInscription = true
+  email = adresse; telephone = numero
   etape = 'email'
   afficherBoite()
 }
@@ -352,7 +347,7 @@ async function connecter(sheet, bouton) {
     // Compte créé mais e-mail jamais confirmé : le mot de passe est bon, il manque le
     // code. On en renvoie un et on reprend l'inscription à cette étape.
     if (error.code === 'email_not_confirmed' || /not confirmed/i.test(error.message || '')) {
-      email = adresse; apresInscription = false
+      email = adresse
       await supabase.auth.resend({ type: 'signup', email })
       etape = 'email'
       afficherBoite()
